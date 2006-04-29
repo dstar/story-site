@@ -1,0 +1,8 @@
+<% for column in Target.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @target.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @target %> |
+<%= link_to 'Back', :action => 'list' %>

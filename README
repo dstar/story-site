@@ -1,0 +1,80 @@
+Notes:
+
+There _shouldn't_ be any problems simply unzipping this and loading the
+database dump. Let me know if there are. Also, I cleared out some old
+stuff that I've figured out better ways of doing; haven't done a
+thorough test on everything, so if something breaks, I'd like to know.
+
+The front page is located at /app/views/stories/playground.rhtml; many
+things are dynamically loaded in this template, including the ten most
+recent news posts. News posts are in a paginated archive, and all news
+information is available at /blog/list or /blog/archive in the browser.
+(List is not paginated, archive is.) This can be changed to /news/ in
+/config/routes.rb if you wish.
+
+Categories could be added to the news posts, if you want. Also, the
+fragment that's used to render the news on the main page can easily be
+copy&pasted to the story show page (/app/views/stories/show.rhtml) to
+display the ten most recent news entries there. There is currently no
+provision for different text on the main page vs. the story page; if you
+want dynamic text here, that can be added to the database rather easily.
+
+Subdomains should be functional, and stories do match the current
+directory structure, at least as far as I can tell from my end. Of note
+is that subdomains don't necessarily match story short_names; for the
+most part they do, but for e.g. Pandora's Box, the subdomain is pandora,
+but the story short_name is pandoras_box. http://pandora.pele.cx:3000/
+will display the story page for Pandora's box.
+
+Edit links for paragraphs are in, and comments display below the
+paragraph edit area. Paragraphs do not split on edit; this would require
+redoing the order numbering for all paragraphs that come after the one
+being edited in the chapter (would be the Right Thing(TM), but I'm lazy
+at the moment). Also, paragraphs cannot be deleted at this time. (Well,
+sorta...go to paragraphs/list and you can delete them.)
+
+It's possible to add version control if you want it on a per-paragraph
+basis; I haven't done so at this time. I believe that it's one table and
+a line of code, or something like that. Lemme know if you want it.
+
+textfiles are available from "text/<storyname><chapter#>.txt"
+
+TODO:
+
+* tweak various things for sessions and session data to actually _work_
+  properly in terms of restricting access, and saving comments, etc.
+
+* textfile reading for chapters still needs to be done. Should be
+  relatively easy to do; it needs to join consecutive non-blank lines,
+  convert # to <hr/>, and split paragraph entries on blank lines, as
+  well as delete consecutive blank lines.
+
+* textfile dumping has any HTML markup that is present still there, for
+  various reasons, mostly me being lazy and not writing the code to
+  convert <hr/> to #
+
+* finish getting the stats pages done and up; these are mostly
+  standalone. Would be nice to somehow recalculate the chapter-level
+  wordcounts on paragraph editing, or something like that. At the
+  moment, all we have is a "list all targets, and their status" page, at
+  /targets; this is going to change a great deal once I actually start
+  poking around with it
+
+* There is no caching of any kind as yet. It would be nice to add
+  appropriate caching.
+
+* no Ajax for e.g. paragraph comments, paragraph editing. would be nice
+  to make it use Ajax, which I shall work on when I get a chance.
+
+* stylesheets, and, in general, class names for divs, etc. should be
+  mapped to the current stylesheet set-- the other choice would be to
+  create a new stylesheet that matches the current layout, which might
+  actually be a better idea. For that matter, one stylesheet is not
+  consistently being used; this needs to be fixed.
+
+* should add the javascript bit for changing stylesheets to the layout
+  pages once there are two stylesheets
+
+* am not sure if sessions store cookies for <foo>.pele.cx or just
+  pele.cx; ideally want only pele.cx so that data is carried over
+  between the subdomains

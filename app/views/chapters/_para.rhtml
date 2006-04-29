@@ -1,0 +1,11 @@
+<div class="paragraph">
+  <a id="<%= ["p",para.id] %>"></a>
+  <div class="parabody">
+    <%= textilize(para.body) %>
+    <p><%= link_to 'Edit this paragraph', :controller => 'paragraphs', :action => 'edit', :id => para.id %></p>
+  </div>
+  <div class="comments">
+    <%= render :partial => 'pcomm', :collection => Pcomment.listForPara(para.id) %>
+    <p><%= link_to 'Comment on this paragraph', :controller => 'pcomments', :action => 'new', :paragraph_id => para.id %></p>
+  </div>
+</div>

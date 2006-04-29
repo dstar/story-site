@@ -1,0 +1,18 @@
+<%= error_messages_for 'story' %>
+
+<!--[form:story]-->
+<p><label for="story_title">Title</label><br/>
+<%= text_field 'story', 'title' %></p>
+
+<p><label for="story_short_title">Short title</label><br/>
+<%= text_field 'story', 'short_title' %></p>
+
+<p><label for="story_universe_id">Universe</label>
+<%= select "story", "universe_id", Universe.find_all.collect {|u| [u.universe, u.id ]}, {:include_blank => true} %>
+
+<p><label for="story_description">Description</label><br/>
+<%= text_area 'story', 'description' %></p>
+<%= hidden_field 'story', 'flag' %>
+
+<!--[eoform:story]-->
+

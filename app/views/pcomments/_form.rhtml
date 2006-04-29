@@ -1,0 +1,14 @@
+<%= error_messages_for 'pcomment' %>
+
+<!--[form:pcomments]-->
+<p><label for="pcomment_body">Body</label><br/>
+<%= text_area 'pcomment', 'body'  %></p>
+
+<p><label for="pcomment_posted">Posted</label><br/>
+<%= datetime_select 'pcomment', 'posted'  %></p>
+
+<p><label for="pcomment_user_id">User</label>
+<%= select "pcomment", "user_id", User.find_all.collect {|u| [u.name, u.id ]}, {:include_blank => true} %></p>
+
+<%= hidden_field "pcomment", "paragraph_id" %>
+<!--[eoform:pcomments]-->

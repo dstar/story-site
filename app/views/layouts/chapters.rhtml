@@ -1,0 +1,17 @@
+<html>
+<head>
+  <% if @chapter %>
+  <title><%= Story.find(@chapter.story_id).title if not :action =~ 'list' %>: Chapter <%= @chapter.number %></title>
+  <% else %>
+  <title>Chapter List</title>
+  <% end %>
+  <%= stylesheet_link_tag 'mod' %>
+</head>
+<body>
+
+<p style="color: green"><%= flash[:notice] %></p>
+
+<%= @content_for_layout %>
+
+</body>
+</html>

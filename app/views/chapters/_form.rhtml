@@ -1,0 +1,21 @@
+<%= error_messages_for 'chapter' %>
+
+<!--[form:chapter]-->
+<p><label for="chapter_story_id">Story</label><br/>
+<%= select "chapter", "story_id", Story.find_all.collect {|s| [s.title,
+s.id]} %>
+
+<p><label for="chapter_number">Chapter number</label><br/>
+<%= text_field 'chapter', 'number' %>
+
+<p><label for="chapter_date">Post date</label><br/>
+<%= text_field 'chapter', 'date' %>
+
+<p><label for="chapter_words">Wordcount</label><br/>
+<%= text_field 'chapter', 'words' %></p>
+
+<p><label for="file">File</label><br/>
+<%= file_field_tag "file" %>
+
+<!--[eoform:chapter]-->
+

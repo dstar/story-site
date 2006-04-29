@@ -1,0 +1,4 @@
+<div class="userinfo">
+	<%= render :partial => "logged_in" if @php_username and @php_username != "Anonymous"%>
+	<%= render :partial => "login" unless @php_username and @php_username != "Anonymous" %>
+</div>

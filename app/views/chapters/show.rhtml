@@ -1,0 +1,18 @@
+<div><%= link_to 'Edit', :action => 'edit', :id => @chapter %></div>
+<div>
+<%= link_to_if prevChapter(@chapter), 'Prev', chapter_url(:chapter => prevChapter(@chapter)) %> |
+<%= link_to 'Index', index_url %> |
+<%= link_to_if nextChapter(@chapter), 'Next', chapter_url(:chapter => nextChapter(@chapter)) %>
+</div>
+
+<%= render_component(:controller => 'php_session', :action => 'has_session') %>
+
+<div class="full">
+<%= render :partial => "para", :collection => Paragraph.paraList(@chapter.id) %>
+</div>
+
+<div>
+<%= link_to_if prevChapter(@chapter), 'Prev', chapter_url(:chapter => prevChapter(@chapter)) %> |
+<%= link_to 'Index', index_url %> |
+<%= link_to_if nextChapter(@chapter), 'Next', chapter_url(:chapter => nextChapter(@chapter)) %>
+</div>

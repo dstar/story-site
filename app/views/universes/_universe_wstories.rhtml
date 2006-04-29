@@ -1,0 +1,9 @@
+  <div>
+    <h2><%= link_to universe_wstories.universe,
+        :controller => 'universes',
+        :action => 'show',
+        :id => universe_wstories.id %></h2>
+    <%= textilize(universe_wstories.description) %>
+    <%= render :partial => "story",
+        :collection => Story.OrderedListByUniverse(universe_wstories.id) %>
+  </div>

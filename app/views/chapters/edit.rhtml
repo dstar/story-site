@@ -1,0 +1,9 @@
+<h1>Editing chapter</h1>
+
+<%= start_form_tag :action => 'update', :id => @chapter %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Save' %>
+<%= end_form_tag %>
+
+<%= link_to 'Show', :action => 'show', :id => @chapter %> |
+<%= link_to 'Back', :action => 'list' %>

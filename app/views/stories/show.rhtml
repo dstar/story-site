@@ -1,0 +1,10 @@
+<%= render :partial => "story", :object => @story %>
+
+<%= link_to 'Edit Story', :action => 'edit', :id => @story %> |
+<%= link_to 'Story List', index_url(:host => 'playground.'.concat(request.domain()).concat(request.port_string)) %> |
+<%= link_to 'Add Chapter', :controller => 'chapters', :action => 'new',
+:story_id => @story.id %>
+
+<h3>Chapters (total wordcount: <%= Wordcount(@story.id) %>)</h3>
+
+<div><%= render :partial => "chapter", :collection => Chapter.orderedListByStory(@story.id) %></div>

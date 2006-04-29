@@ -1,0 +1,434 @@
+/*
+  Andromeda Boards Theme for phpBB2+
+  Created by Dubird
+  http://www.dubird.net
+ */
+
+ /* General page style. The scroll bar colours only visible in IE5.5+ */
+body { 
+	color: #DBFAFA;
+	background-color:#001831;
+scrollbar-face-color : #313E5F;
+scrollbar-highlight-color : #8081A0;
+scrollbar-shadow-color : #001831;
+scrollbar-3dlight-color : #8081A0;
+scrollbar-arrow-color : #D6D6F7;
+scrollbar-track-color : #001831;
+scrollbar-darkshadow-color: #001831;
+}
+
+/* General font families for common tags */
+font{ font-family: Verdana, Arial, Helvetica, sans-serif }
+td	{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 80% }
+p	{ font-family: Verdana, Arial, Helvetica, sans-serif }
+hr	{ height: 0px; border: solid #888BB0 0px; border-top-width: 1px;}
+
+
+/* This is the border line & background colour round the entire page */
+.bodyline	{ background-color:#0D253E; border: #56688C; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px }
+
+/* This is the outline round the main forum tables */
+.forumline	{ background-color:#0D253E; border: 2px #56688C solid }
+
+/*
+  Main table cell colours and backgrounds
+  Styles that use bitmap backgrounds are commented "Uses Bitmap"
+  Note that netscape 4 takes paths to bitmap files relative from
+  the html file rather than from the style sheet.
+  Hence, to maintain compatibility, all styles using bitmaps have
+  their "background : url(templates/subSilver/images/bitmap.gif);"
+  setting defined in overall_header.tpl 
+*/
+
+
+TH			{ font-family: Verdana, Arial, Helvetica, sans-serif; background-color: #183049; height: 25px; font-size: 11px; font-weight: bold; color: #ffffff; border:1px solid #56688C; text-align: center; padding-left: 0; margin-left: 0; text-indent: 0;
+}  /* Uses Bitmap */
+TD.tablebg	{ background-color: #000000 }
+TD.cat		{ background-color: #3B5B7D; height: 28px; border:1px solid #56688C }  /* Uses Bitmap */
+TD.row1		{ background-color: #001831; border:1px solid #56688C;  border-left-width: 0px; border-top-width: 0px; border-right-width: 1px; border-bottom-width: 1px }
+TD.row2		{ background-color: 	#001831; border:1px solid #56688C;  border-left-width: 0px; border-top-width: 0px; border-right-width: 1px; border-bottom-width: 1px }
+TD.row3		{ background-color: #001831; border:1px solid #56688C;  border-left-width: 0px; border-top-width: 0px; border-right-width: 1px; border-bottom-width: 1px}
+
+/* This is the spacer row between post replies */
+TD.spaceRow { background-color: #444578; }
+
+/*
+  This is for the table cell above the Topics, Post & Last posts on the index.php page
+  By default this is the fading out gradiated silver background.
+  However, you could replace this with a bitmap specific for each forum
+*/
+TD.rowpic	{ background-color: #284059; border: #001831; border-left-width: 0px; border-top-width: 0px; border-right-width: 1px; border-bottom-width: 1px} /* Uses Bitmap */
+
+/*
+  Setting additional nice borders for the main table cells.
+  The names indicate which sides the border will be on.
+  Don't worry if you don't understand this, just ignore it :-)
+*/
+TD.catHead,TD.catSides,TD.catLeft,TD.catRight,TD.catBottom { background-color:#284059; height: 28px; border: #001831; border-style: solid; }  /* Uses Bitmap */
+
+TD.catHead	 { height: 29px; border-left-width: 1px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px }
+TD.catSides  { border-left-width: 1px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px }
+TD.catLeft	 { border-left-width: 1px; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px }
+TD.catRight	 { border-left-width: 0px; border-top-width: 0px; border-right-width: 1px; border-bottom-width: 1px }
+TD.catBottom { height: 29px; border-left-width: 1px; border-top-width: 0px; border-right-width: 1px; border-bottom-width: 1px }
+
+TH.thHead,TH.thSides,TH.thTop,TH.thLeft,TH.thRight,TH.thBottom,TH.thCornerL,TH.thCornerR { border: #001831; border-style: solid; }
+
+TH.thHead	 { font-weight : bold; font-size: 12px; height: 25px; border-left-width: 1px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 0px }
+TH.thSides	 { border-left-width: 1px; border-top-width: 0px; border-right-width: 1px; border-bottom-width: 1px }
+TH.thTop	 { border-left-width: 0px; border-top-width: 1px; border-right-width: 0px; border-bottom-width: 1px }
+TH.thLeft	 { border-left-width: 1px; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px }
+TH.thRight	 { border-left-width: 0px; border-top-width: 0px; border-right-width: 1px; border-bottom-width: 1px }
+TH.thBottom  { border-left-width: 1px; border-top-width: 0px; border-right-width: 1px; border-bottom-width: 1px }
+TH.thCornerL { border-left-width: 1px; border-top-width: 1px; border-right-width: 0px; border-bottom-width: 1px }
+TH.thCornerR { border-left-width: 0px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px }
+
+TD.row3Right	 { background-color: #284059; border: #001831; border-style: solid;  border-left-width: 0px; border-top-width: 0px; border-right-width: 1px; border-bottom-width: 1px }
+
+td.donations { text-align: left; text-indent: 0;}
+TH.donations			{ font-family: Verdana, Arial, Helvetica, sans-serif; background-color: #183049; height: 25px; font-size: 11px; font-weight: bold; color: #ffffff; border:1px solid #56688C; text-align: center; padding-left: 0; margin-left: 1em; margin-right: 1em; text-indent: 0;}
+
+/* The largest text used in the index page title and toptic title etc. */
+.maintitle	{ font-family: Arial, Helvetica, sans-serif; font-size : 22px; font-weight : bold; text-decoration : none; line-height : 120%; color : #D6D6F7;}
+
+
+/* General normal text */
+.gen		{ font-size : 12px; color : #ECECFA; }
+a.gen		{ color: #D6D6E7; text-decoration: none; }
+a.gen:hover	{ background-color:#2A425B; color : #D6D6E7; }
+
+/* General medium text */
+.genmed		{ font-size : 11px; color : #ECECFA; }
+a.genmed	{ text-decoration: none; color : #D6D6E7; }
+a.genmed:hover	{ background-color:#2A425B; color : #D6D6E7; }
+
+
+/* General small */
+.gensmall	{ font-size : 10px; color : #ECECFA; }
+a.gensmall	{ color: ##D6D6E7; text-decoration: none; }
+a.gensmall:hover{ background-color:#2A425B; color : #D6D6E7; }
+
+
+/* The register, login, search etc links at the top of the page */
+.mainmenu		{ font-size : 11px; text-decoration : none; color : #ECECFA }
+a.mainmenu		{ text-decoration: none; color : #D6D6E7;  }
+a.mainmenu:hover{ background-color:#2A425B; color : #D6D6E7; }
+
+
+/* Forum category titles */
+.cattitle		{ font-size : 12px; letter-spacing: 1px; font-weight : bold; text-decoration : none; color : #D6D6F7}
+a.cattitle		{ text-decoration: none; color : #D6D6F7; }
+a.cattitle:hover{ text-decoration: underline; }
+
+
+/* Forum title: Text and link to the forums used in: index.php */
+.forumlink		{ font-size : 12px; font-weight : bold; text-decoration : none; color : #D6D6E7; }
+a.forumlink		{ text-decoration: none; color : #D6D6E7; }
+a.forumlink:hover{ background-color:#2A425B; color : #D6D6E7; }
+
+
+/* Used for the navigation text, (Page 1,2,3 etc) and the navigation bar when in a forum */
+.nav			{ font-size : 11px; font-weight : bold; text-decoration : none; color : #BAC3CC;}
+a.nav			{ text-decoration: none; color : #BFC0FB; }
+a.nav:hover		{ text-decoration: underline; }
+
+
+/* titles for the topics: could specify viewed link colour too */
+.topictitle			{ font-size : 11px; font-weight : bold; text-decoration : none; color : #ECECFA; }
+a.topictitle		{ text-decoration: none; color : #D6D6E7; }
+a.topictitle:hover	{ background-color:#2A425B; color : #D6D6E7; }
+a.topictitle:visited{ text-decoration: underline;  }
+
+
+/* Name of poster in viewmsg.php and viewtopic.php and other places */
+.name			{ font-size : 11px; text-decoration : none; color : #BAC3CC;}
+a.name			{ color: #D6D6E7; text-decoration: none;}
+a.name:hover	{ background-color:#2A425B; color : #D6D6E7;}
+
+
+/* Location, number of posts, post date etc */
+.postdetails		{ font-size : 10px; color : #DFDFEB; }
+a.postdetails		{ color: #5C5D4C; text-decoration: none; }
+a.postdetails:hover	{ color: #A0522D; text-decoration: underline; }
+
+
+/* The content of the posts (body of text) */
+.postbody { font-size : 12px; line-height: 18px}
+a.postlink	{ text-decoration: none; color : #5C5D4C }
+a.postlink:hover { text-decoration: underline; color : #A0522D}
+
+
+/* Quote Code (currently not used) */
+.code { 
+	font-family: Courier, "Courier New", sans-serif; font-size: 11px; color: #D5D6E1;
+	background-color: #49495B; border: #001831; border-style: solid;
+	border-left-width: 1px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px
+}
+
+.quote {
+	font-family: Verdana, Arial, sans-serif; font-size: 11px; color: #D5D6E1; line-height: 125%;
+	background-color: #49495B; border: #001831; border-style: solid;
+	border-left-width: 1px; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px
+}
+
+.editedby { font-size : 10px; line-height : 100%; color : #D9D9D9; }
+
+
+/* Form elements */
+input,textarea, select {
+	color : #000000;
+	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-size : 11px;
+	font-weight : normal;
+	border-color : #001831;
+}
+
+/* The text input fields background colour */
+input.post, textarea.post, select {
+	background-color : #5D5F73;
+}
+
+input { text-indent : 2px; }
+
+/* The buttons used for bbCode styling in message post */
+input.button {
+	background-color : #48425C;
+	color : #ffffff;
+	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-size : 11px;
+}
+
+/* The main submit button option */
+input.mainoption {
+	background-color : #48425C;
+	font-weight : bold;
+	color : #ffffff;
+}
+
+/* None-bold submit button */
+input.liteoption {
+	background-color : #48425C;
+	font-weight : normal;
+	color : #ffffff;
+}
+
+/* This is the line in the posting page which shows the rollover
+  help line. This is actually a text box, but if set to be the same
+  colour as the background no one will know ;)
+*/
+.helpline { background-color: #48425C; border-style: none; }
+
+/* Copyright and bottom info */
+.copyright		{ font-family: Verdana, Arial, Helvetica, sans-serif; color: #C8C8C8; font-size: 10px; letter-spacing: -1px;}
+a.copyright		{ color: #B8BED2; text-decoration: none;}
+a.copyright:hover { color: #B8BED2; text-decoration: underline;}
+
+td.alliNav {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        color: #DAD9D9;
+        line-height: 16px
+}
+
+.update {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        color: #373F49;
+        font-weight: bold;
+        line-height: 16pt;
+        letter-spacing: 5px
+}
+
+big {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        color: #373F49;
+        font-weight: bold;
+        line-height: 16pt;
+        text-indent: 10px;
+        letter-spacing: 5px
+}
+
+
+h1,h2,h3
+{
+font-family: arial, 'sans serif'; 
+}
+
+p,table,address
+{
+font-family: arial, 'sans serif'; 
+text-indent: 30pt;
+}
+
+p.donation
+{
+border-width: thin;
+border-style: dashed;
+background-color: silver;
+padding: 1em 1em 1em 1em;
+}
+
+p.navigation
+{
+text-align: center;
+}
+
+div.news
+{
+border-width: thin;
+border-style: solid;
+margin-bottom: 5px;
+/*max-width: 500px;*/
+padding: .2em .2em .2em .2em;
+font-size: 90%;
+}
+
+div.world
+{
+/*margin-bottom: 5px;*/
+/*max-width: 500px;*/
+/*padding: .2em .2em .2em .2em;*/
+margin: 0em .2em .2em 0em;
+}
+
+div.note
+{
+border-width: thin;
+border-style: solid;
+margin-bottom: 5px;
+background-color: silver;
+padding: 1em 1em 1em 1em;
+}
+
+div.whats_coming
+{
+border-width: thin;
+border-style: solid;
+margin-bottom: 5px;
+background-color: silver;
+padding: 1em 1em 1em 1em;
+}
+
+div.welcome
+{
+border-width: thin;
+border-style: none;
+/*padding: 1em 1em 1em 10em;*/
+margin-left: 12%;
+margin-right: 12%;
+}
+
+div.newscolumn, div.storiescolumn
+{
+    float:right;
+    width:69%;
+padding: 0em .2em .2em .2em;
+border-width: thin;
+border-style: solid;
+
+}
+
+div.chaptercolumn
+{
+    float:left;
+    width:25%;
+border-width: thin;
+border-style: solid;
+
+}
+
+div.worldlist {
+	float: left;
+
+}
+
+div.worldlistbox
+{
+    float:right;
+    width:69%;
+margin: 0em 0em .2em 0em;
+padding: 0em .2em .2em .2em;
+border-width: thin;
+border-style: solid;
+
+}
+
+div.donationdrive
+{
+    float:right;
+margin: 0em 0em .2em 0em;
+padding: 0em .2em .2em .2em;
+border-width: thin;
+border-style: solid;
+
+}
+
+div.playgroundnewscolumn
+{
+    float: left;
+    width:29%;
+border-width: thin;
+border-style: none;
+padding: 0em 0em .2em .2em;
+}
+
+div.body,  div.donationbox
+{
+margin: 0 auto;
+}
+
+div.amazon
+{
+    float:right;
+    width:50%;
+}
+
+div.paypal
+{
+    float:left;
+}
+
+
+div.footer
+{
+clear: both;
+}
+
+p.ad
+{
+border-width: thin;
+border-style: solid;
+margin-bottom: 5px;
+background-color: silver;
+font-size: 120%;
+padding: 1em 1em 1em 1em;
+}
+
+ul.chapters,ul.stories
+{
+list-style-type: none;
+padding: 0em .5em 0em .5em; 
+}
+
+h2.chapterheading
+{
+padding-left: .3em;
+}
+
+li.new
+{
+font-size: 120%;
+}
+
+h1,hr, h2.worldtitle
+{
+/*color: silver; */
+text-align: center;
+}
+
+a:link    {color:gold; border-color: #001831}
+a:visited {color:#CC6600}
+a:active  {color:gold}
+a:hover   {color:gold}
+a.img {color: #001831}

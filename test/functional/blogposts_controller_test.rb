@@ -1,0 +1,88 @@
+require File.dirname(__FILE__) + '/../test_helper'
+require 'blogposts_controller'
+
+# Re-raise errors caught by the controller.
+class BlogpostsController; def rescue_action(e) raise e end; end
+
+class BlogpostsControllerTest < Test::Unit::TestCase
+  fixtures :blogposts
+
+  def setup
+    @controller = BlogpostsController.new
+    @request    = ActionController::TestRequest.new
+    @response   = ActionController::TestResponse.new
+  end
+
+  def test_index
+    get :index
+    assert_response :success
+    assert_template 'list'
+  end
+
+  def test_list
+    get :list
+
+    assert_response :success
+    assert_template 'list'
+
+    assert_not_nil assigns(:blogposts)
+  end
+
+  def test_show
+    get :show, :id => 1
+
+    assert_response :success
+    assert_template 'show'
+
+    assert_not_nil assigns(:blogpost)
+    assert assigns(:blogpost).valid?
+  end
+
+  def test_new
+    get :new
+
+    assert_response :success
+    assert_template 'new'
+
+    assert_not_nil assigns(:blogpost)
+  end
+
+  def test_create
+    num_blogposts = Blogpost.count
+
+    post :create, :blogpost => {}
+
+    assert_response :redirect
+    assert_redirected_to :action => 'list'
+
+    assert_equal num_blogposts + 1, Blogpost.count
+  end
+
+  def test_edit
+    get :edit, :id => 1
+
+    assert_response :success
+    assert_template 'edit'
+
+    assert_not_nil assigns(:blogpost)
+    assert assigns(:blogpost).valid?
+  end
+
+  def test_update
+    post :update, :id => 1
+    assert_response :redirect
+    assert_redirected_to :action => 'show', :id => 1
+  end
+
+  def test_destroy
+    assert_not_nil Blogpost.find(1)
+
+    post :destroy, :id => 1
+    assert_response :redirect
+    assert_redirected_to :action => 'list'
+
+    assert_raise(ActiveRecord::RecordNotFound) {
+      Blogpost.find(1)
+    }
+  end
+end

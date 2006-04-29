@@ -1,0 +1,35 @@
+<h1>The Worlds of Pele's Playground</h1>
+
+<div name="welcome">
+<p>Welcome text and donation bar go here.</p>
+</div>
+
+<hr/>
+
+<div name="links">
+<p>Links go here.</p>
+</div>
+
+<div name="blog">
+<%= render :partial => 'blogposts/entry', :collection => Blogpost.frontpagelist %>
+</div>
+
+<%= link_to "Older News", :controller => 'blogposts', :action => 'archive', :page => '2' %>
+
+<hr/>
+
+<p> Updated story list goes here.</p>
+
+<div name="universelist">
+<%= render :partial => "universes/universe_wstories", :collection => Universe.find_all %>
+</div>
+
+<hr/>
+
+<div name="donations">
+<p>Donation information goes here.</p>
+</div>
+
+<div name="contact">
+<p>Contact information goes here.</p>
+</div>

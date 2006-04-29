@@ -1,0 +1,39 @@
+<html>
+<head>
+	<title>Customize styles for <%= session[:username] %> </title>
+	<%= javascript_include_tag "prototype" %>
+	<script type="text/javascript">
+		function insertStyle(element) {
+			var style ='<div id="edit_'+element+'_div">\n';
+			style +='<p>\n';
+			style +='<form action="/style/save_style" method="post" onsubmit="new Ajax.Updater(\'edit_'+element+'_div\', \'/style/save_style\', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)});  return false;">\n';
+			style +='Element: \n';
+			style +='<input type="text" id="edit_style_element" name="element" value="'+element+'"> \n';
+			style +='Style: \n';
+			style +='<input type="text" id="edit_style_definition" name="definition"> \n';
+			style +='<input name="commit" type="submit" value="Save element" onClick="Element.remove('save result')"/>\n'
+			style +='</form>\n';
+			style +='</p>\n';
+			style +='</div>\n';
+			return style;
+		}
+	</script>
+</head>
+<body>
+<div id="defaults">
+<center><h2> Default styles for theme <%= @theme %> </h2></center>
+<%= render :partial => "show_style", :collection => @default_styles %>
+</div>
+<div id="users">
+<center><h2> User styles for theme <%= @theme %> </h2></center>
+<div id="user_styles">
+<%= render :partial => "edit_style", :collection => @user_styles %>
+</div>
+<form action="" method="">
+<input type="TEXT" name="new_element" size="10" id="new_element">
+<input type="BUTTON" value="Add Element" name="Add Element"
+onClick="new Insertion.Bottom('user_styles', insertStyle(Form.Element.getValue('new_element')));Element.remove('save result'">
+</form>
+</div>
+</body>
+</html>

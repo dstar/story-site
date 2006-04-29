@@ -1,0 +1,10 @@
+<%= error_messages_for 'blogpost' %>
+
+<!--[form:blogpost]-->
+<p><label for="blogpost_body">Body</label><br/>
+<%= text_area 'blogpost', 'body'  %></p>
+
+<p><label for="blogpost_posted">Posted</label><br/>
+<%= date_select 'blogpost', 'posted'  %></p>
+<!--[eoform:blogpost]-->
+

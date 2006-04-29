@@ -1,0 +1,9 @@
+<%= render :partial => "universe", :object => @universe %>
+
+<%= link_to 'Edit Universe', :action => 'edit', :id => @universe %> |
+<%= link_to 'Universe List', :action => 'list' %> |
+<%= link_to 'Add Story', :controller => "stories", :action => "new" %>
+
+<h2><%= link_to "Stories", :controller => "stories", :action => "list" %></h2>
+
+<%= render :partial => "story", :collection => @stories %>
