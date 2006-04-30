@@ -47,17 +47,21 @@ class PcommentsController < ApplicationController
   end
 
   def destroy
-    foo = Pcomment.find(params[:id])
-    bar = Pcomment.chapterID(foo.id)
-    foo.update_attribute('flag',2)
-    redirect_to :controller => 'chapters',
+    if @authinfo[:username]
+      foo = Pcomment.find(params[:id])
+      bar = Pcomment.chapterID(foo.id)
+      foo.update_attribute('flag',2)
+      redirect_to :controller => 'chapters',
       :action => 'show', :id => bar
+    end
   end
   def markread
-    foo = Pcomment.find(params[:id])
-    bar = Pcomment.chapterID(foo.id)
-    foo.update_attribute('flag',1)
-    redirect_to :controller => 'chapters',
+    if @authinfo[:username]
+      foo = Pcomment.find(params[:id])
+      bar = Pcomment.chapterID(foo.id)
+      foo.update_attribute('flag',1)
+      redirect_to :controller => 'chapters',
       :action => 'show', :id => bar
+    end
   end
 end

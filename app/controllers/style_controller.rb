@@ -3,7 +3,7 @@ class StyleController < ApplicationController
     @theme = cookies[:style]
     @theme = 'default' unless @theme
     @default_styles = Style.find_all_by_theme_and_user(@theme,-1)
-    @user_styles = Style.find_all_by_theme_and_user(@theme,session[:user_id])
+    @user_styles = Style.find_all_by_theme_and_user(@theme,@authinfo[:user_id])
 
     @styles = Array.new
 
@@ -42,46 +42,47 @@ class StyleController < ApplicationController
     @theme = cookies[:style]
     @theme = 'default' unless @theme
     @default_styles = Style.find_all_by_theme_and_user(@theme,-1)
-    @user_styles = Style.find_all_by_theme_and_user(@theme,session[:user_id])
-    $stderr.write("\nid: #{session[:user_id]}\n")
+    @user_styles = Style.find_all_by_theme_and_user(@theme,@authinfo[:user_id])
   end
 
   def save_style
 
-    definition = params[:definition]
-    element = params[:element]
+    if @authinfo[:username]
+      definition = params[:definition]
+      element = params[:element]
 
-    if element and definition
-      
-      @theme = cookies[:style]
-      @theme = 'default' unless @theme
-      @style = Style.find_by_theme_and_user_and_element(@theme,session[:user_id],element)
+      if element and definition
+        
+        @theme = cookies[:style]
+        @theme = 'default' unless @theme
+        @style = Style.find_by_theme_and_user_and_element(@theme,@authinfo[:user_id],element)
 
-      @style = Style.new unless @style
-      # if @style is null, this style doesn't exist, so create it
+        @style = Style.new unless @style
+        # if @style is null, this style doesn't exist, so create it
 
-      #canonicalize definition
-      definition.gsub!(/\s+/, " ")
-      definition.gsub!(/ *: */, " : ")
-      definition.gsub!(/^\s+/, "")
-      definition.gsub!(/\s+$/, "")
+        #canonicalize definition
+        definition.gsub!(/\s+/, " ")
+        definition.gsub!(/ *: */, " : ")
+        definition.gsub!(/^\s+/, "")
+        definition.gsub!(/\s+$/, "")
 
-      @style.element = element
-      @style.definition = definition
-      @style.theme = @theme
-      @style.user = session[:user_id]
+        @style.element = element
+        @style.definition = definition
+        @style.theme = @theme
+        @style.user = @authinfo[:user_id]
 
-      if @style.save
-        @result = "Saved Successfully"
-        render :partial => "edit_style", :locals => { :edit_style => @style, :result => @result }
+        if @style.save
+          @result = "Saved Successfully"
+          render :partial => "edit_style", :locals => { :edit_style => @style, :result => @result }
+        else
+          @result = "Save failed"
+          render :partial => "edit_style", :locals => { :edit_style => @style, :result => @result }
+        end
       else
-        @result = "Save failed"
+        @style = Style.new unless @style
+        @result = "Please enter both an element specifier and a style"
         render :partial => "edit_style", :locals => { :edit_style => @style, :result => @result }
       end
-    else
-      @style = Style.new unless @style
-      @result = "Please enter both an element specifier and a style"
-      render :partial => "edit_style", :locals => { :edit_style => @style, :result => @result }
     end
   end
 end

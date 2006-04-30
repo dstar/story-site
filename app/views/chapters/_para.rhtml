@@ -6,6 +6,6 @@
   </div>
   <div class="comments">
     <%= render :partial => 'pcomm', :collection => Pcomment.listForPara(para.id) %>
-    <p><%= link_to 'Comment on this paragraph', :controller => 'pcomments', :action => 'new', :paragraph_id => para.id %></p>
+    <p><%= link_to 'Comment on this paragraph', :controller => 'pcomments', :action => 'new', :paragraph_id => para.id if @authinfo[:username]%></p>
   </div>
 </div>

@@ -2,12 +2,8 @@ class Story < ActiveRecord::Base
   validates_presence_of :universe_id, :title, :short_title, :description
   belongs_to :universe
   has_many :chapters
-  has_and_belongs_to_many :authors,
-  :class_name => "AuthorStory",
-  :join_table =>
-    "authors_stories",
-  :association_foreign_key =>
-    "user_id"
+  has_many :credits
+  has_many :authors, :through => :credits, :class_name =>"User", :as => :user
 
   def self.OrderedListByUniverse(universe_id)
     find(:all,

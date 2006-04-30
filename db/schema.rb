@@ -2,12 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define() do
-
-  create_table "authors_stories", :force => true do |t|
-    t.column "user_id", :string, :limit => 45, :default => "", :null => false
-    t.column "story_id", :integer, :limit => 10, :default => 0, :null => false
-  end
+ActiveRecord::Schema.define(:version => 1) do
 
   create_table "blogposts", :force => true do |t|
     t.column "body", :text, :default => "", :null => false
@@ -25,6 +20,12 @@ ActiveRecord::Schema.define() do
   end
 
   add_index "chapters", ["story_id", "number"], :name => "chap_uniq", :unique => true
+
+  create_table "credits", :force => true do |t|
+    t.column "user_id", :integer, :default => 0, :null => false
+    t.column "story_id", :integer, :default => 0, :null => false
+    t.column "credit_type", :string, :default => "Author", :null => false
+  end
 
   create_table "monthlybystory", :id => false, :force => true do |t|
     t.column "story_id", :integer, :limit => 10, :default => 0, :null => false

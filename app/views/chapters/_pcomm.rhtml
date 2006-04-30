@@ -4,7 +4,7 @@
   </div>
   <div class="commentposted">
   Posted at <%= pcomm.posted %> by <%= pcomm.username %>.
-  <%= link_to '(Delete comment)', { :controller => 'pcomments', :action => 'destroy', :id => pcomm.id }, :confirm => 'Are you sure?', :post => true %>
-  <%= link_to_if pcomm.flag==0, '(Mark comment as read)', :controller => 'pcomments', :action => 'markread', :id => pcomm.id %>
+  <%= link_to '(Delete comment)', { :controller => 'pcomments', :action => 'destroy', :id => pcomm.id }, :confirm => 'Are you sure?', :post => true if @authinfo[:username]%>
+  <%= link_to_if pcomm.flag==0, '(Mark comment as read)', :controller => 'pcomments', :action => 'markread', :id => pcomm.id if @authinfo[:username] %>
   </div>
 </div>
