@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   attr_writer :story
   attr_reader :story
 
+  before_filter :setup_page_vars
   before_filter :authenticate
   before_filter do |c|
     c.story = Story.find_by_short_title(c.request.subdomains(0).first)
@@ -19,16 +20,15 @@ class ApplicationController < ActionController::Base
       begin
         @authinfo[:session] = Php_Session.find_by_session_id(@sid)
         if @authinfo[:session] then
-          @authinfo[:user_id] = @authinfo[:session].session_user_id
-          @authinfo[:username] = User.find(@authinfo[:user_id]).username
+          user = User.find(@authinfo[:session].session_user_id)
+          @authinfo[:user_id] = user.user_id
+          @authinfo[:username] = user.username
           #at this point, we've verified that the session is still live
           @authinfo[:sid] = @sid 
 
-          @authinfo[:group_ids]=User_Group.find(:all, :conditions => ["user_id = ?", @authinfo[:user_id]]).collect {|g| g.group_id}
-          @authinfo[:groups]=@authinfo[:group_ids].collect { |g| Group.find(g).group_name }
-
-          $stderr.write("yup, got here")
-          $stderr.write(@authinfo.inspect)
+          groups = user.groups
+          @authinfo[:group_ids]=groups.collect {|g| g.group_id}
+          @authinfo[:groups]=groups.collect {|g| g.group_name}
 
         else
           #no session

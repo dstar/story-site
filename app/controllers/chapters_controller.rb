@@ -111,4 +111,26 @@ class ChaptersController < ApplicationController
     @chapter.save
     end
 
+  def setup_page_vars
+
+    logger.debug "#{params.inspect}"
+
+    @chapter = Chapter.find_by_file(params[:chapter])
+
+    home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
+    universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @chapter.story.universe.id  }">#{@chapter.story.universe.name}</a>|
+    story_link = %Q|<a href="#{url_for  :controller => 'stories', :action => 'show', :id => @chapter.story.id  }">#{@chapter.story.title}</a>|
+
+    @breadcrumbs = "#{home_link}"
+    @breadcrumbs += " > #{universe_link }"
+    @breadcrumbs += " > #{story_link }"
+
+    if params[:action] =~ /list/
+      @page_title = 'Chapter List'
+    else
+      @page_title = @chapter.story.title
+      @breadcrumbs += " > Chapter #{@chapter.number }"
+    end
+  end
+    
 end

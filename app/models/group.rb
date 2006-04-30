@@ -1,6 +1,6 @@
 class Group < ActiveRecord::Base
-  establish_connection "authentication"
-  set_table_name "php_forum_groups"
+  has_many :memberships
+  has_many :users, :through => :memberships
 
   def self.primary_key() "group_id"  end
 end

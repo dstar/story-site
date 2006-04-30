@@ -64,4 +64,36 @@ class PcommentsController < ApplicationController
       :action => 'show', :id => bar
     end
   end
+
+  def setup_page_vars
+
+    logger.debug "#{params.inspect}"
+
+    if params[:id]
+
+      @pcomment = Pcomment.find(params[:id])
+
+      home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
+      universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @pcomment.paragraph.chapter.story.universe.id  }">#{@pcomment.paragraph.chapter.story.universe.name}</a>|
+      story_link = %Q|<a href="#{url_for  :controller => 'stories', :action => 'show', :id => @pcomment.paragraph.chapter.story.id  }">#{@pcomment.paragraph.chapter.story.title}</a>|
+      chapter_link =   %Q|<a href="#{url_for  :controller => 'chapters', :action => 'show', :id => @pcomment.paragraph.chapter.id  }">Chapter #{@pcomment.paragraph.chapter.number}</a>|
+    else
+      @paragraph = Paragraph.find(params[:paragraph_id])
+
+      home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
+      universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @paragraph.chapter.story.universe.id  }">#{@paragraph.chapter.story.universe.name}</a>|
+      story_link = %Q|<a href="#{url_for  :controller => 'stories', :action => 'show', :id => @paragraph.chapter.story.id  }">#{@paragraph.chapter.story.title}</a>|
+      chapter_link =   %Q|<a href="#{url_for  :controller => 'chapters', :action => 'show', :id => @paragraph.chapter.id  }">Chapter #{@paragraph.chapter.number}</a>|
+    end
+
+    @breadcrumbs = "#{home_link}"
+    @breadcrumbs += " > #{universe_link }"
+    @breadcrumbs += " > #{story_link }"
+    @breadcrumbs += " > #{chapter_link }"
+
+    @page_title = 'Pcomments: #{params[:action]}'
+    @breadcrumbs += " > Pcomments: #{params[:action]}"
+  end
+
+
 end

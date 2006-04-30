@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
-  establish_connection "authentication"
   has_many :sessions
+
   has_many :credits
   has_many :stories, :through => :credits
 
-  set_table_name "php_forum_users"
+  has_many :memberships
+  has_many :groups, :through => :memberships
+
   set_primary_key "user_id"
 end

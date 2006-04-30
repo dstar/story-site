@@ -66,4 +66,25 @@ class StoriesController < ApplicationController
     Story.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
+
+  def setup_page_vars
+
+    logger.debug "#{params.inspect}"
+
+    @story = Story.find(params[:id])
+
+    home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
+    universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @story.universe.id  }">#{@story.universe.name}</a>|
+
+    @breadcrumbs = "#{home_link}"
+    @breadcrumbs += " > #{universe_link }"
+
+    if params[:action] =~ /list/
+      @page_title = 'Story List'
+    else
+      @page_title = @story.title
+      @breadcrumbs += " > #{@story.title }"
+    end
+  end
+
 end

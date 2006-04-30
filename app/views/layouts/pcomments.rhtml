@@ -7,6 +7,7 @@
 </head>
 <body>
 <%= render_component(:controller => 'php_session', :action => 'has_session') %>
+<%= @breadcrumbs %>
 <p style="color: green"><%= flash[:notice] %></p>
 
 <%= @content_for_layout %>

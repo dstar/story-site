@@ -5,8 +5,6 @@
 <%= link_to_if nextChapter(@chapter), 'Next', chapter_url(:chapter => nextChapter(@chapter)) %>
 </div>
 
-<%= render_component(:controller => 'php_session', :action => 'has_session') %>
-
 <div class="full">
 <%= render :partial => "para", :collection => Paragraph.paraList(@chapter.id) %>
 </div>

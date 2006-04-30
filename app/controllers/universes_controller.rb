@@ -49,4 +49,25 @@ class UniversesController < ApplicationController
     Universe.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
+
+  def setup_page_vars
+
+    logger.debug "#{params.inspect}"
+
+    @universe = Universe.find(params[:id])
+
+    home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
+
+
+    @breadcrumbs = "#{home_link}"
+
+    if params[:action] =~ /list|index/
+      @page_title = 'Universe List'
+    else
+      @page_title = @universe.name
+      @breadcrumbs += " > #{@universe.name }"
+    end
+  end
+
+
 end
