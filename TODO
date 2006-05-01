@@ -1,0 +1,38 @@
+* tweak various things for sessions and session data to actually _work_
+  properly in terms of restricting access, and saving comments, etc.
+
+* finish getting the stats pages done and up; these are mostly
+  standalone. Would be nice to somehow recalculate the chapter-level
+  wordcounts on paragraph editing, or something like that. At the
+  moment, all we have is a "list all targets, and their status" page, at
+  /targets; this is going to change a great deal once I actually start
+  poking around with it
+  (SQL in /app/models/matrix.sql should be rolled into Target model)
+
+* There is no caching of any kind as yet. It would be nice to add
+  appropriate caching.
+
+* no Ajax for e.g. paragraph comments, paragraph editing. would be nice
+  to make it use Ajax, which I shall work on when I get a chance.
+
+* stylesheets, and, in general, class names for divs, etc. should be
+  mapped to the current stylesheet set-- the other choice would be to
+  create a new stylesheet that matches the current layout, which might
+  actually be a better idea. For that matter, one stylesheet is not
+  consistently being used; this needs to be fixed.
+  code to get all stylesheet elements:
+      require 'rexml/document'
+      xml = REXML::Document.new(File.open("filename"))
+      # keys of @hash are our css elements
+      @hash = Hash.new
+      xml.elements.each do |e|
+        @hash["#{e}.#{c.attributes["class"]}"] = 1
+        @hash["#{e}"] = 1
+      end
+
+* should add the javascript bit for changing stylesheets to the layout
+  pages once there are two stylesheets
+
+* am not sure if sessions store cookies for <foo>.pele.cx or just
+  pele.cx; ideally want only pele.cx so that data is carried over
+  between the subdomains?
