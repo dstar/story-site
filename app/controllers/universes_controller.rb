@@ -54,8 +54,6 @@ class UniversesController < ApplicationController
 
     logger.debug "#{params.inspect}"
 
-    @universe = Universe.find(params[:id])
-
     home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
 
 
@@ -64,6 +62,7 @@ class UniversesController < ApplicationController
     if params[:action] =~ /list|index/
       @page_title = 'Universe List'
     else
+      @universe = Universe.find(params[:id])
       @page_title = @universe.name
       @breadcrumbs += " > #{@universe.name }"
     end

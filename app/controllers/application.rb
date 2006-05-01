@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   attr_writer :story
   attr_reader :story
 
+  before_filter do |controller|
+    controller.handle_url if controller.respond_to? :handle_url
+  end
+
   before_filter :setup_page_vars
   before_filter :authenticate
   before_filter do |c|

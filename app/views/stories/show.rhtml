@@ -1,9 +1,16 @@
 <%= render :partial => "story", :object => @story %>
 
+<% logger.debug "authinfo #{@authinfo.inspect}" %>
+
+<% if @authinfo[:user_id] and @story.authors.include? User.find(@authinfo[:user_id]) %>
 <%= link_to 'Edit Story', :action => 'edit', :id => @story %> |
-<%= link_to 'Story List', index_url(:host => 'playground.'.concat(request.domain()).concat(request.port_string)) %> |
+<% end %>
+<%= link_to 'Story List', index_url(:host => 'playground.'.concat(request.domain()).concat(request.port_string)) %> 
+<% if @authinfo[:user_id] and @story.authors.include? User.find(@authinfo[:user_id]) %>
+|
 <%= link_to 'Add Chapter', :controller => 'chapters', :action => 'new',
 :story_id => @story.id %>
+<% end %>
 
 <h3>Chapters (total wordcount: <%= Wordcount(@story.id) %>)</h3>
 

@@ -52,4 +52,21 @@ class BlogpostsController < ApplicationController
     Blogpost.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
+
+  def setup_page_vars
+
+    logger.debug "#{params.inspect}"
+
+    home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
+
+    @breadcrumbs = "#{home_link}"
+
+    if params[:action] =~ /archive/
+      @page_title = "Blog Archive Page #{params[:page]}"
+      @breadcrumbs += " > Blog Archive Page #{params[:page]}"
+    else
+      @page_title = "Blog"
+    end
+  end
+
 end

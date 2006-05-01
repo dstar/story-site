@@ -1,9 +1,16 @@
 class Story < ActiveRecord::Base
   validates_presence_of :universe_id, :title, :short_title, :description
+
   belongs_to :universe
+
   has_many :chapters
+
+  #hack, because I can't figure out a way to make has_many :authors work
   has_many :credits
-  has_many :authors, :through => :credits, :class_name =>"User", :as => :user
+  has_many :users, :through => :credits
+  def authors
+    self.users.collect { |u| c = Credit.find_by_user_id_and_story_id(u.user_id,self.id); u if c.credit_type == 'Author' }.compact
+  end
 
   def self.OrderedListByUniverse(universe_id)
     find(:all,

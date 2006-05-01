@@ -132,5 +132,9 @@ class ChaptersController < ApplicationController
       @breadcrumbs += " > Chapter #{@chapter.number }"
     end
   end
+
+  def handle_url
+      params[:id] = Chapter.find_by_file(params[:chapter]).id unless params[:id]
+  end
     
 end

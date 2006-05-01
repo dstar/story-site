@@ -1,5 +1,9 @@
 class StoriesController < ApplicationController
+
+
+
   layout "stories"
+
   def index
     list
     render :action => 'list'
@@ -14,7 +18,13 @@ class StoriesController < ApplicationController
   end
 
   def show
-    @story = Story.find(params[:id])
+    if (request.subdomains(0).first == 'playground')
+      list
+      render :action => 'playground', :layout => 'playground'
+    else
+    @story = Story.find(params[:id])      
+      render :action => 'show'
+    end
   end
 
   def showByName
@@ -71,19 +81,32 @@ class StoriesController < ApplicationController
 
     logger.debug "#{params.inspect}"
 
-    @story = Story.find(params[:id])
+    unless (request.subdomains(0).first == 'playground')
 
-    home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
-    universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @story.universe.id  }">#{@story.universe.name}</a>|
+      @story = Story.find(params[:id])
 
-    @breadcrumbs = "#{home_link}"
-    @breadcrumbs += " > #{universe_link }"
+      home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
+      universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @story.universe.id  }">#{@story.universe.name}</a>|
 
-    if params[:action] =~ /list/
-      @page_title = 'Story List'
+        @breadcrumbs = "#{home_link}"
+      @breadcrumbs += " > #{universe_link }"
+
+      if params[:action] =~ /list/
+        @page_title = 'Story List'
+      else
+        @page_title = @story.title
+        @breadcrumbs += " > #{@story.title }"
+      end
     else
-      @page_title = @story.title
-      @breadcrumbs += " > #{@story.title }"
+      home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
+      @breadcrumbs = "#{home_link}"
+      @page_title = "Pele's Playground"
+    end
+  end
+
+  def handle_url
+    unless (request.subdomains(0).first == 'playground')
+      params[:id] = Story.find_by_title(request.subdomains.first).id unless params[:id]
     end
   end
 
