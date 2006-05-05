@@ -6,11 +6,17 @@ class BlogpostsController; def rescue_action(e) raise e end; end
 
 class BlogpostsControllerTest < Test::Unit::TestCase
   fixtures :blogposts
+  fixture :user
+  fixture :group
+  fixture :userpermissions
+  fixture :session
+
 
   def setup
     @controller = BlogpostsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    @request.cookies[:php2mysql_session] = "test"
   end
 
   def test_index

@@ -1,4 +1,24 @@
 class BlogpostsController < ApplicationController
+
+  def setup_authorize_hash
+    @authorization = { 
+      "destroy" => proc { user = User.find_by_user_id(@authinfo[:user_id])
+        user.story_permissions(0) == "Author" ? true :  admonish("Only the author can delete blog posts!") },
+      "update"  => proc { user = User.find_by_user_id(@authinfo[:user_id])
+        user.story_permissions(0) == "Author" ? true :  admonish("Only the author can update blog posts!") },
+      "edit"    => proc { user = User.find_by_user_id(@authinfo[:user_id])
+        user.story_permissions(0) == "Author" ? true :  admonish("Only the author can edit blog posts!") },
+      "create"  => proc { user = User.find_by_user_id(@authinfo[:user_id])
+        user.story_permissions(0) == "Author" ? true :  admonish("Only the author can create blog posts!") },
+      "new"     => proc { user = User.find_by_user_id(@authinfo[:user_id])
+        user.story_permissions(0) == "Author" ? true :  admonish("Only the author can create blog posts!") },
+      "show"    => proc { true },
+      "list"    => proc { true },
+      "archive" => proc { true },
+      "index"   => proc { true }
+    }
+  end
+
   def index
     list
     render :action => 'list'

@@ -69,12 +69,22 @@ class ChaptersController < ApplicationController
 
   def update
     @chapter = Chapter.find(params[:id])
-    if @chapter.update_attributes(params[:chapter])
+
+    if params[:file] != ""
+      process_file(params[:file],@chapter.id) 
+      Paragraph.delete_all ["chapter_id = ?", chapter.id]
+    end
+
+    c=params[:chapter]
+
+    @chapter.status = c[:status] if c[:status]
+    if @chapter.save
       flash[:notice] = 'Chapter was successfully updated.'
       redirect_to :controller => 'stories', :action => 'show', :id => @chapter.story_id
     else
       render :action => 'edit'
     end
+
   end
 
   def destroy
@@ -113,28 +123,33 @@ class ChaptersController < ApplicationController
 
   def setup_page_vars
 
-    logger.debug "#{params.inspect}"
+    if params[:id]
 
-    @chapter = Chapter.find_by_file(params[:chapter])
+      @chapter = Chapter.find(params[:id])
 
-    home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
-    universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @chapter.story.universe.id  }">#{@chapter.story.universe.name}</a>|
-    story_link = %Q|<a href="#{url_for  :controller => 'stories', :action => 'show', :id => @chapter.story.id  }">#{@chapter.story.title}</a>|
+      home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
+      universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @chapter.story.universe.id  }">#{@chapter.story.universe.name}</a>|
+        story_link = %Q|<a href="#{url_for  :controller => 'stories', :action => 'show', :id => @chapter.story.id  }">#{@chapter.story.title}</a>|
 
-    @breadcrumbs = "#{home_link}"
-    @breadcrumbs += " > #{universe_link }"
-    @breadcrumbs += " > #{story_link }"
+        @breadcrumbs = "#{home_link}"
+      @breadcrumbs += " > #{universe_link }"
+      @breadcrumbs += " > #{story_link }"
 
-    if params[:action] =~ /list/
-      @page_title = 'Chapter List'
-    else
-      @page_title = @chapter.story.title
-      @breadcrumbs += " > Chapter #{@chapter.number }"
+      if params[:action] =~ /list/
+        @page_title = 'Chapter List'
+      else
+        @page_title = @chapter.story.title
+        @breadcrumbs += " > Chapter #{@chapter.number }"
+      end
+
     end
+
   end
 
   def handle_url
+    if params[:chapter]
       params[:id] = Chapter.find_by_file(params[:chapter]).id unless params[:id]
+    end
   end
     
 end

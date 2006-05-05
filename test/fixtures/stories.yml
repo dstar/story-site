@@ -1,5 +1,192 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-first:
+--- 
+story_12: 
+  status: released
+  title: Ascent Into Shadow
+  short_title: ais
+  order: 7
+  file_prefix: ais
+  id: 12
+  flag: 0
+  description: |-
+    Ashlyn didn't understand why she was so attracted to Lenore. All she knew was that she had to protect her. At first, she thought Lenore was being abused.
+    
+    Then she discovered that the truth was far worse. Lenore wasn't being abused...Lenore was _dinner._
+  universe_id: 1
+story_1: 
+  status: released
+  title: Prudence, TX Population 1276
+  short_title: prudence
+  order: 1
+  file_prefix: prudence
   id: 1
-another:
+  flag: 0
+  description: |-
+    Prudence is the second story we wrote in the world of Demon's Dream, and the first to be released. It chronicles the story of a new teacher in a small town who discovers that life in a small town is very different from the world he knew. When he falls in love with one of his students, his life begins to change in ways he never expected, and he learns that, just like Horatio, there's more under heaven and earth than dreamt of in his philosophy.
+    
+    We''ve released around 76,000 words on this, so far, and we're committed to getting at least 2,000 a month out in the future. We've got approximately 100,000 words ready for editing on this one; unfortunately, it's the old style, and editing is a pain.
+  universe_id: 1
+story_2: 
+  status: released
+  title: Furry
+  short_title: furry
+  order: 13
+  file_prefix: furry
   id: 2
+  flag: 0
+  description: Adam and Anya are twins, the children of a Tiger/Sable cross. Their father took them to Venus with him when he split from their mother, and all they've ever known was a primitive life. When he dies, their only choice is to run, or they'll be separated. And as they run, they grow even closer.
+  universe_id: 3
+story_13: 
+  status: released
+  title: Artform
+  short_title: artform
+  order: 8
+  file_prefix: artform
+  id: 13
+  flag: 0
+  description: |-
+    Traci's father sent her to live with her uncle to keep her out of trouble. Hard work on a farm would be good for her.
+    
+    Then she met Reina...
+  universe_id: 1
+story_14: 
+  status: released
+  title: Mistaken Assumptions
+  short_title: mistaken
+  order: 9
+  file_prefix: mistaken
+  id: 14
+  flag: 0
+  description: |-
+    Jason was new in town, and everyone 'knew' he was a bad boy. He smoked, he wore a leather jacket, he drove a motorcycle, and he wore a pendant with a 'satanic' symbol on it.
+    
+    So he was surprised to see the note asking him to meet someone privately. But her proposal was most intriguing indeed...
+  universe_id: 1
+story_3: 
+  status: released
+  title: Sonuachara
+  short_title: sonuachara
+  order: 4
+  file_prefix: sonuachara
+  id: 3
+  flag: 0
+  description: |-
+    Trina MacCeallich wasn't one of the 'in' crowd; she _was_ the 'in' crowd. Zoe was an outcast who'd bounced from foster home to foster home, counting the days until she was eighteen and could live on her own...and adopt her foster sister.
+    
+    So Zoe was surprised and suspicious when Trina went out of her way to befriend her. Why would someone like Trina want to be friends with her?
+    
+    The answer lies in the distant past, in the roots of Trina's family tree, and Zoe could never have guessed...
+  universe_id: 3
+story_4: 
+  status: released
+  title: Camp
+  short_title: camp
+  order: 14
+  file_prefix: camp
+  id: 4
+  flag: 0
+  description: |-
+    DJ liked girls, and he liked sex. He _didn't_ do relationships. Leah didn't do sex, but she found herself responding to him in ways that unnerved and frightened her.
+    
+    So he offered her a deal...
+  universe_id: 3
+story_15: 
+  status: released
+  title: Demonic
+  short_title: demonic
+  order: 10
+  file_prefix: demonic
+  id: 15
+  flag: 0
+  description: |-
+    Miriel had been the Demon Princess of Lust for centuries. She was good at what she did, and she enjoyed the work.
+    
+    Now Lucifer has changed, and the rules have changed with him. He's returned to what he once was, and with him, the demon lords have been freed. And Lucifer has given her a specific assignment...
+  universe_id: 1
+story_16: 
+  status: released
+  title: Country Chaos
+  short_title: chaos
+  order: 11
+  file_prefix: chaos
+  id: 16
+  flag: 0
+  description: |-
+    Lee's mother had divorced her werewolf father and moved far away to 'protect' her from the metaphysical. But Lee had been training under the Pack's shaman for a decade, and didn't want to be protected. Or human, for that matter, but genetics didn't ask her what she wanted. So when she discovers the rot lurking beneath the surface of the quiet country town they've moved to, she can't not get involved.
+    
+    Even though it may cost her everything she's ever wanted.
+  universe_id: 1
+story_5: 
+  status: released
+  title: Castle
+  short_title: castle
+  order: 15
+  file_prefix: castle
+  id: 5
+  flag: 0
+  description: Jeffrey Vaser has just inherited a castle in Romania from a relative he never knew he had. And he doesn't even _own_ a tuxedo!
+  universe_id: 3
+story_6: 
+  status: released
+  title: New Age Dawning
+  short_title: nad
+  order: 5
+  file_prefix: nad
+  id: 6
+  flag: 0
+  description: The gods are dead, and magic has begun to go astray. When Adara rescues Rhishandri from the mage who attempted to sacrifice her, she begins to get a hint as to the reasons why.
+  universe_id: 3
+story_7: 
+  status: released
+  title: Jason and Kylie, Naked in School
+  short_title: jaknis
+  order: 3
+  file_prefix: jaknis
+  id: 7
+  flag: 0
+  description: Jason's the Big Man on Campus, the quarterback of the school football team _despite_ being the coach's son. He sees the Naked in School program as an excuse for more sex. But there's something wrong with his Program partner...
+  universe_id: 2
+story_8: 
+  status: released
+  title: Oops
+  short_title: oops
+  order: 16
+  file_prefix: oops
+  id: 8
+  flag: 0
+  description: This one's experimental, and I'm not sure how to describe it yet. All I can say is READ THE DISCLAIMER, because it's a lot more extreme than anything else we've put up so far. This one's not part of the donation schedule, and I make no promises that we'll complete it; read the disclaimer.
+  universe_id: 3
+story_9: 
+  status: released
+  title: Steve and Deanna, Naked in School
+  short_title: sadnis
+  order: 12
+  file_prefix: sadnis
+  id: 9
+  flag: 0
+  description: Steve initially worries that his program partner has the same problems that Kylie had. He soon discovers, however, that this is a completely different situation...
+  universe_id: 2
+story_10: 
+  status: released
+  title: Pandora's Box
+  short_title: pandora
+  order: 2
+  file_prefix: pandoras_box
+  id: 10
+  flag: 0
+  description: |-
+    Pandora's Box is our most recent work. Gabriel is barely hanging on after his almost-ex-wife killed herself to protect him from her angry parents. He survives -- it can't really be called _living_ -- only because not doing so would be a waste of her sacrifice. Then, on his thirtieth birthday, a teenage girl shows up on his doorstep and turns his life upside down.
+    
+    And then he discovers that he's not even human.
+  universe_id: 1
+story_11: 
+  status: released
+  title: Here, Kitty Kitty
+  short_title: kitty
+  order: 6
+  file_prefix: kitty
+  id: 11
+  flag: 0
+  description: "When Nikki Morgan bought the small country practice from the former doctor, she thought she'd enjoy rural life. Unfortunately, she found that she missed the city. And then Kirsa showed up with the strangest symptoms she'd ever seen. \r\n\
+    \r\n\
+    If she didn't know better, she'd say she wasn't even human... "
+  universe_id: 1

@@ -9,16 +9,21 @@ class ApplicationController < ActionController::Base
   end
 
   before_filter :setup_page_vars
+
+  before_filter :setup_auth_structures
+  before_filter :setup_authorize_hash 
   before_filter :authenticate
+
+
   before_filter do |c|
     c.story = Story.find_by_short_title(c.request.subdomains(0).first)
   end
 
-  def authenticate
+  def setup_auth_structures
     @sdwtest = "testing"
     #We use @session[:key] to pass around the php session_id
     @sid = cookies[:phpbb2mysql_sid]
-    cookies[:login_redirect_to] = url_for
+    cookies[:login_redirect_to] = { :value => url_for, :domain => "pele.cx" }
     @authinfo = Hash.new
     if @sid
       begin
@@ -48,5 +53,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authenticate
+    $stderr.write("\n\n\nparams are #{params[:action]}\n\n\n")
+    @authorization[params[:action]].call
+  end
+  
+  def admonish(message)
+    flash[:notice] = message
+    redirect_to :back
+    false
+  end
 
 end

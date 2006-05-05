@@ -1,5 +1,19 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-first:
+--- 
+user_permission_1: 
+  permission: 
   id: 1
-another:
+  permissionable_id: 
+  user_id: 3
+  permissionable_type: 
+user_permission_2: 
+  permission: Author
   id: 2
+  permissionable_id: 8
+  user_id: 3
+  permissionable_type: 0
+user_permission_4: 
+  permission: Proofreader
+  id: 4
+  permissionable_id: 8
+  user_id: 17
+  permissionable_type: 0

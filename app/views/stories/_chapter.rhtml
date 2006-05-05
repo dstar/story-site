@@ -4,4 +4,5 @@
 <%= link_to "(Show)", chapter_url(:chapter => chapter) %>
 Part <%= chapter.number %>
 (<%= chapter.date %>)
-WC: <%= chapter.words %><br/>
+WC: <%= chapter.words %> <%= "<em><strong>DRAFT</strong></em>" if chapter.status == "draft" %><br/>
+

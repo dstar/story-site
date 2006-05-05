@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 1) do
+ActiveRecord::Schema.define(:version => 6) do
 
   create_table "blogposts", :force => true do |t|
     t.column "body", :text, :default => "", :null => false
@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 1) do
     t.column "words", :integer, :limit => 10, :default => 0, :null => false
     t.column "date", :date, :null => false
     t.column "file", :string, :limit => 45, :default => "", :null => false
+    t.column "status", :string, :default => "draft"
   end
 
   add_index "chapters", ["story_id", "number"], :name => "chap_uniq", :unique => true
@@ -25,6 +26,28 @@ ActiveRecord::Schema.define(:version => 1) do
     t.column "user_id", :integer, :default => 0, :null => false
     t.column "story_id", :integer, :default => 0, :null => false
     t.column "credit_type", :string, :default => "Author", :null => false
+  end
+
+  create_table "group_permissions", :force => true do |t|
+    t.column "group_id", :integer
+    t.column "permissionable_id", :integer
+    t.column "permissionable_type", :integer
+    t.column "permission", :string
+  end
+
+  create_table "groups", :id => false, :force => true do |t|
+    t.column "group_id", :integer, :limit => 8, :default => 0, :null => false
+    t.column "group_type", :integer, :limit => 4, :default => 0, :null => false
+    t.column "group_name", :string, :limit => 40, :default => "", :null => false
+    t.column "group_description", :string, :default => "", :null => false
+    t.column "group_moderator", :integer, :limit => 8, :default => 0, :null => false
+    t.column "group_single_user", :boolean, :default => false, :null => false
+  end
+
+  create_table "memberships", :id => false, :force => true do |t|
+    t.column "group_id", :integer, :limit => 8, :default => 0, :null => false
+    t.column "user_id", :integer, :limit => 8, :default => 0, :null => false
+    t.column "user_pending", :boolean
   end
 
   create_table "monthlybystory", :id => false, :force => true do |t|
@@ -54,6 +77,17 @@ ActiveRecord::Schema.define(:version => 1) do
     t.column "flag", :integer, :limit => 10, :default => 0, :null => false
   end
 
+  create_table "php_sessions", :force => true do |t|
+    t.column "session_id", :string, :limit => 32, :default => "", :null => false
+    t.column "session_user_id", :integer, :limit => 8, :default => 0, :null => false
+    t.column "session_start", :integer, :default => 0, :null => false
+    t.column "session_time", :integer, :default => 0, :null => false
+    t.column "session_ip", :string, :limit => 8, :default => "", :null => false
+    t.column "session_page", :integer, :default => 0, :null => false
+    t.column "session_logged_in", :boolean, :default => false, :null => false
+    t.column "session_admin", :integer, :limit => 2, :default => 0, :null => false
+  end
+
   create_table "sessions", :force => true do |t|
     t.column "sessid", :string
     t.column "data", :text
@@ -61,6 +95,11 @@ ActiveRecord::Schema.define(:version => 1) do
   end
 
   add_index "sessions", ["sessid"], :name => "session_index"
+
+  create_table "site_permissions", :force => true do |t|
+    t.column "user_id", :integer
+    t.column "permission", :string
+  end
 
   create_table "stories", :force => true do |t|
     t.column "title", :string, :default => "", :null => false
@@ -70,6 +109,7 @@ ActiveRecord::Schema.define(:version => 1) do
     t.column "short_title", :string, :limit => 45, :default => "", :null => false
     t.column "order", :integer, :limit => 10, :default => 0, :null => false
     t.column "file_prefix", :string, :limit => 45, :default => "", :null => false
+    t.column "status", :string, :default => "draft"
   end
 
   create_table "styles", :force => true do |t|
@@ -87,9 +127,79 @@ ActiveRecord::Schema.define(:version => 1) do
   end
 
   create_table "universes", :force => true do |t|
-    t.column "universe", :string, :limit => 45, :default => "", :null => false
+    t.column "name", :string, :limit => 45, :default => "", :null => false
     t.column "description", :text, :default => "", :null => false
     t.column "flag", :integer, :limit => 10, :default => 0, :null => false
+  end
+
+  create_table "user_permissions", :force => true do |t|
+    t.column "user_id", :integer
+    t.column "permissionable_id", :integer
+    t.column "permissionable_type", :integer
+    t.column "permission", :string
+  end
+
+  create_table "users", :id => false, :force => true do |t|
+    t.column "user_id", :integer, :limit => 8, :default => 0, :null => false
+    t.column "user_active", :boolean
+    t.column "username", :string, :limit => 25, :default => "", :null => false
+    t.column "user_password", :string, :limit => 32, :default => "", :null => false
+    t.column "user_session_time", :integer, :default => 0, :null => false
+    t.column "user_session_page", :integer, :limit => 5, :default => 0, :null => false
+    t.column "user_lastvisit", :integer, :default => 0, :null => false
+    t.column "user_lastvisit_chat", :integer, :default => 0, :null => false
+    t.column "user_regdate", :integer, :default => 0, :null => false
+    t.column "user_level", :integer, :limit => 4
+    t.column "user_posts", :integer, :limit => 8, :default => 0, :null => false
+    t.column "user_timezone", :float, :limit => 5, :default => 0.0, :null => false
+    t.column "user_style", :integer, :limit => 4
+    t.column "user_lang", :string
+    t.column "user_dateformat", :string, :limit => 14, :default => "", :null => false
+    t.column "user_new_privmsg", :integer, :limit => 5, :default => 0, :null => false
+    t.column "user_unread_privmsg", :integer, :limit => 5, :default => 0, :null => false
+    t.column "user_last_privmsg", :integer, :default => 0, :null => false
+    t.column "user_emailtime", :integer
+    t.column "user_viewemail", :boolean
+    t.column "user_attachsig", :boolean
+    t.column "user_setbm", :boolean, :default => false, :null => false
+    t.column "user_allowhtml", :boolean
+    t.column "user_allowbbcode", :boolean
+    t.column "user_allowsmile", :boolean
+    t.column "user_allowavatar", :boolean, :default => false, :null => false
+    t.column "user_allow_pm", :boolean, :default => false, :null => false
+    t.column "user_allow_viewonline", :boolean, :default => false, :null => false
+    t.column "user_notify", :boolean, :default => false, :null => false
+    t.column "user_notify_pm", :boolean, :default => false, :null => false
+    t.column "user_popup_pm", :boolean, :default => false, :null => false
+    t.column "user_rank", :integer
+    t.column "user_avatar", :string, :limit => 100
+    t.column "user_avatar_type", :integer, :limit => 4, :default => 0, :null => false
+    t.column "user_email", :string
+    t.column "user_icq", :string, :limit => 15
+    t.column "user_website", :string, :limit => 100
+    t.column "user_from", :string, :limit => 100
+    t.column "user_sig", :text
+    t.column "user_sig_bbcode_uid", :string, :limit => 10
+    t.column "user_pips", :text, :default => "", :null => false
+    t.column "user_pips_bbcode_uid", :string, :limit => 10, :default => "", :null => false
+    t.column "user_pips_parsed", :text, :default => "", :null => false
+    t.column "user_aim", :string
+    t.column "user_yim", :string
+    t.column "user_msnm", :string
+    t.column "user_occ", :string, :limit => 100
+    t.column "user_skype", :string, :default => "", :null => false
+    t.column "user_interests", :string
+    t.column "user_actkey", :string, :limit => 32
+    t.column "user_newpasswd", :string, :limit => 32
+    t.column "user_topic_view", :string, :limit => 0, :default => "", :null => false
+    t.column "user_pubname", :string
+    t.column "user_thread_indent_px", :integer, :limit => 6, :default => 0, :null => false
+    t.column "user_thread_cutofflevel", :integer, :limit => 6, :default => 0, :null => false
+    t.column "user_view_log", :integer, :limit => 4, :default => 0, :null => false
+    t.column "user_index_mode", :boolean, :default => false, :null => false
+    t.column "user_unread_topics", :text
+    t.column "user_login_tries", :integer, :limit => 5, :default => 0, :null => false
+    t.column "user_last_login_try", :integer, :default => 0, :null => false
   end
 
 end
