@@ -1,0 +1,624 @@
+--- 
+group_89: 
+  group_name: ""
+  group_type: 1
+  group_id: 89
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_7: 
+  group_name: ""
+  group_type: 1
+  group_id: 7
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_26: 
+  group_name: ""
+  group_type: 1
+  group_id: 26
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_70: 
+  group_name: ""
+  group_type: 1
+  group_id: 70
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_47: 
+  group_name: ""
+  group_type: 1
+  group_id: 47
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_68: 
+  group_name: ""
+  group_type: 1
+  group_id: 68
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_8: 
+  group_name: ""
+  group_type: 1
+  group_id: 8
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_50: 
+  group_name: ""
+  group_type: 1
+  group_id: 50
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_27: 
+  group_name: ""
+  group_type: 1
+  group_id: 27
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_71: 
+  group_name: ""
+  group_type: 1
+  group_id: 71
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_48: 
+  group_name: ""
+  group_type: 1
+  group_id: 48
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_69: 
+  group_name: ""
+  group_type: 1
+  group_id: 69
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_30: 
+  group_name: ""
+  group_type: 1
+  group_id: 30
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_9: 
+  group_name: ""
+  group_type: 1
+  group_id: 9
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_28: 
+  group_name: ""
+  group_type: 1
+  group_id: 28
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_51: 
+  group_name: ""
+  group_type: 1
+  group_id: 51
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_72: 
+  group_name: ""
+  group_type: 1
+  group_id: 72
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_49: 
+  group_name: ""
+  group_type: 1
+  group_id: 49
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_10: 
+  group_name: ""
+  group_type: 1
+  group_id: 10
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_31: 
+  group_name: ""
+  group_type: 1
+  group_id: 31
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_52: 
+  group_name: ""
+  group_type: 1
+  group_id: 52
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_29: 
+  group_name: ""
+  group_type: 1
+  group_id: 29
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_73: 
+  group_name: ""
+  group_type: 1
+  group_id: 73
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_32: 
+  group_name: ""
+  group_type: 1
+  group_id: 32
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_53: 
+  group_name: ""
+  group_type: 1
+  group_id: 53
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_74: 
+  group_name: ""
+  group_type: 1
+  group_id: 74
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_54: 
+  group_name: ""
+  group_type: 1
+  group_id: 54
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_75: 
+  group_name: ""
+  group_type: 1
+  group_id: 75
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_11: 
+  group_name: ""
+  group_type: 1
+  group_id: 11
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_76: 
+  group_name: beta_readers
+  group_type: 2
+  group_id: 76
+  group_single_user: false
+  group_description: have beta reader privileges
+  group_moderator: 3
+group_12: 
+  group_name: ""
+  group_type: 1
+  group_id: 12
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_33: 
+  group_name: ""
+  group_type: 1
+  group_id: 33
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_13: 
+  group_name: ""
+  group_type: 1
+  group_id: 13
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_34: 
+  group_name: ""
+  group_type: 1
+  group_id: 34
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_55: 
+  group_name: ""
+  group_type: 1
+  group_id: 55
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_14: 
+  group_name: ""
+  group_type: 1
+  group_id: 14
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_35: 
+  group_name: ""
+  group_type: 1
+  group_id: 35
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_56: 
+  group_name: ""
+  group_type: 1
+  group_id: 56
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_77: 
+  group_name: ""
+  group_type: 1
+  group_id: 77
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_15: 
+  group_name: ""
+  group_type: 1
+  group_id: 15
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_36: 
+  group_name: ""
+  group_type: 1
+  group_id: 36
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_80: 
+  group_name: ""
+  group_type: 1
+  group_id: 80
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_57: 
+  group_name: ""
+  group_type: 1
+  group_id: 57
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_78: 
+  group_name: ""
+  group_type: 1
+  group_id: 78
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_16: 
+  group_name: ""
+  group_type: 1
+  group_id: 16
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_60: 
+  group_name: ""
+  group_type: 1
+  group_id: 60
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_37: 
+  group_name: ""
+  group_type: 1
+  group_id: 37
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_81: 
+  group_name: ""
+  group_type: 1
+  group_id: 81
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_58: 
+  group_name: ""
+  group_type: 1
+  group_id: 58
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_79: 
+  group_name: ""
+  group_type: 1
+  group_id: 79
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_40: 
+  group_name: ""
+  group_type: 1
+  group_id: 40
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_17: 
+  group_name: ""
+  group_type: 1
+  group_id: 17
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_38: 
+  group_name: ""
+  group_type: 1
+  group_id: 38
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_61: 
+  group_name: ""
+  group_type: 1
+  group_id: 61
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_82: 
+  group_name: ""
+  group_type: 1
+  group_id: 82
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_59: 
+  group_name: ""
+  group_type: 1
+  group_id: 59
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_20: 
+  group_name: ""
+  group_type: 1
+  group_id: 20
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_18: 
+  group_name: ""
+  group_type: 1
+  group_id: 18
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_41: 
+  group_name: ""
+  group_type: 1
+  group_id: 41
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_62: 
+  group_name: ""
+  group_type: 1
+  group_id: 62
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_39: 
+  group_name: ""
+  group_type: 1
+  group_id: 39
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_83: 
+  group_name: ""
+  group_type: 1
+  group_id: 83
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_63: 
+  group_name: ""
+  group_type: 1
+  group_id: 63
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_1: 
+  group_name: Anonymous
+  group_type: 1
+  group_id: 1
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_21: 
+  group_name: ""
+  group_type: 1
+  group_id: 21
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_42: 
+  group_name: ""
+  group_type: 1
+  group_id: 42
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_19: 
+  group_name: ""
+  group_type: 1
+  group_id: 19
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_84: 
+  group_name: ""
+  group_type: 1
+  group_id: 84
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_85: 
+  group_name: ""
+  group_type: 1
+  group_id: 85
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_64: 
+  group_name: ""
+  group_type: 1
+  group_id: 64
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_43: 
+  group_name: ""
+  group_type: 1
+  group_id: 43
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_2: 
+  group_name: Admin
+  group_type: 1
+  group_id: 2
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_22: 
+  group_name: ""
+  group_type: 1
+  group_id: 22
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_65: 
+  group_name: ""
+  group_type: 1
+  group_id: 65
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_3: 
+  group_name: ""
+  group_type: 1
+  group_id: 3
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_86: 
+  group_name: ""
+  group_type: 1
+  group_id: 86
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_87: 
+  group_name: ""
+  group_type: 1
+  group_id: 87
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_23: 
+  group_name: ""
+  group_type: 1
+  group_id: 23
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_4: 
+  group_name: ""
+  group_type: 1
+  group_id: 4
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_44: 
+  group_name: ""
+  group_type: 1
+  group_id: 44
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_45: 
+  group_name: ""
+  group_type: 1
+  group_id: 45
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_24: 
+  group_name: ""
+  group_type: 1
+  group_id: 24
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_5: 
+  group_name: ""
+  group_type: 1
+  group_id: 5
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_66: 
+  group_name: ""
+  group_type: 1
+  group_id: 66
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_67: 
+  group_name: ""
+  group_type: 1
+  group_id: 67
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_25: 
+  group_name: ""
+  group_type: 1
+  group_id: 25
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_6: 
+  group_name: ""
+  group_type: 1
+  group_id: 6
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_46: 
+  group_name: ""
+  group_type: 1
+  group_id: 46
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
+group_88: 
+  group_name: ""
+  group_type: 1
+  group_id: 88
+  group_single_user: true
+  group_description: Personal User
+  group_moderator: 0
