@@ -1,2 +1,3 @@
-class SitePermissions < ActiveRecord::Base
+class SitePermission < ActiveRecord::Base
+  belongs_to :permission_holder, :polymorphic => true
 end
