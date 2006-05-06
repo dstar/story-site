@@ -1,4 +1,28 @@
 class ChaptersController < ApplicationController
+
+  def setup_authorize_hash
+    if params[:id] and ! @story_id
+      @story_id = Chapter.find(params[:id]).story.id
+    end
+    @authorization = { 
+      "destroy" => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+            user.has_story_permission(@story_id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "update"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+              user.has_story_permission(@story_id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "edit"    => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+                user.has_story_permission(@story_id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "create"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+                  user.has_story_permission(@story_id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "new"     => proc {if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+                    user.has_story_permission(@story_id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "show"    => proc { true },
+      "list"    => proc { true },
+      "archive" => proc { true },
+      "index"   => proc { true }
+    }
+  end
+
+
   def index
     list
     render :action => 'list'
@@ -54,8 +78,9 @@ class ChaptersController < ApplicationController
 
   def create
     @chapter = Chapter.new(params[:chapter])
+    @chapter.date = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless @chapter.date
     if @chapter.save
-      process_file(params[:file],@chapter.id) if params[:file].size
+      process_file(params[:file],@chapter.id) unless params[:file].blank?
       flash[:notice] = 'Chapter was successfully created.'
       redirect_to :controller => 'stories', :action => 'show', :id => @chapter.story_id
     else
@@ -70,13 +95,12 @@ class ChaptersController < ApplicationController
   def update
     @chapter = Chapter.find(params[:id])
 
-    if params[:file] != ""
+    unless params[:file].blank?
       process_file(params[:file],@chapter.id) 
       Paragraph.delete_all ["chapter_id = ?", chapter.id]
     end
 
     c=params[:chapter]
-
     @chapter.status = c[:status] if c[:status]
     if @chapter.save
       flash[:notice] = 'Chapter was successfully updated.'
@@ -147,9 +171,31 @@ class ChaptersController < ApplicationController
   end
 
   def handle_url
-    if params[:chapter]
-      params[:id] = Chapter.find_by_file(params[:chapter]).id unless params[:id]
+#    breakpoint "test"
+    unless params[:id] or params[:action] == 'index' or params[:action] == 'list' or params[:action] == 'new'
+      if params[:chapter] and ! params[:chapter].blank?
+        if params[:chapter].is_a? String
+          params[:id] = Chapter.find_by_file(params[:chapter]).id unless params[:id]
+        elsif params[:chapter].is_a? Hash and params[:chapter][:story_id]
+          @story_id = params[:chapter][:story_id]
+        else
+          render :status => 404, :file => "#{RAILS_ROOT}/public/404.html"
+          false
+        end
+      else
+        render :status => 404, :file => "#{RAILS_ROOT}/public/404.html"
+        false
+      end
+    end
+
+    if params[:action] == 'new'
+      if params[:story_id]
+        @story_id = params[:story_id]
+        @story_id = @story_id.to_i if @story_id.is_a? String
+      else
+        render :status => 404, :file => "#{RAILS_ROOT}/public/404.html"
+        false
+      end
     end
   end
-    
 end

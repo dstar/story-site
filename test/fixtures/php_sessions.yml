@@ -1,0 +1,4 @@
+--- 
+php_session_test: 
+  session_id: test
+  session_user_id: 3

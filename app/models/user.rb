@@ -12,14 +12,22 @@ class User < ActiveRecord::Base
   has_many :site_permissions, :as => :permission_holder
 
   def has_story_permission(story,permission)
-    story_id = story.id if story is_a?(Story)
+    if story.is_a?(Story)
+      story_id = story.id 
+    else
+      story_id = story
+    end
     has_permission = false
     self.story_permissions.each {|p| has_permission = true if p.story_id == story_id and p.permission == permission }
     return has_permission
   end
 
   def has_universe_permission(universe,permission)
-    universe_id = universe.id if universe is_a?(Universe)
+    if universe.is_a?(Universe)
+      universe_id = universe.id 
+    else
+      universe_id = universe
+    end
     has_permission = false
     self.universe_permissions.each {|p| has_permission = true if p.universe_id == universe_id and p.permission == permission }
     return has_permission
