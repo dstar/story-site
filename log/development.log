@@ -1796,3 +1796,579 @@ Migrating to CreateSitePermissions (6)
   [4;35;1mUser Columns (0.025032)[0m   [0mSHOW FIELDS FROM users[0m
   [4;36;1mUserPermission Load (0.007507)[0m   [0;1mSELECT * FROM user_permissions WHERE (user_permissions.user_id = 3) [0m
   [4;35;1mUserPermission Columns (0.011512)[0m   [0mSHOW FIELDS FROM user_permissions[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.011677)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000204)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000138)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000141)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000133)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000140)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000149)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to UserPermission (7)
+  [4;35;1mSQL (0.077897)[0m   [0mDROP TABLE user_permissions[0m
+  [4;36;1mSQL (0.000751)[0m   [0;1mUPDATE schema_info SET version = 7[0m
+  [4;35;1mSQL (0.000367)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to CreateStoryPermissions (8)
+  [4;36;1mSQL (0.010025)[0m   [0;1mCREATE TABLE story_permissions (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `permission_holder_id` int(11), `permission_holder_type` varchar(255), `story_id` int(11), `permission` varchar(255)) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.000730)[0m   [0mUPDATE schema_info SET version = 8[0m
+  [4;36;1mSQL (0.000405)[0m   [0;1mSELECT * FROM schema_info[0m
+  [4;35;1mSQL (0.000691)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.001886)[0m   [0;1mSHOW FIELDS FROM blogposts[0m
+  [4;35;1mSQL (0.000825)[0m   [0mSHOW KEYS FROM blogposts[0m
+  [4;36;1mSQL (0.001226)[0m   [0;1mSHOW FIELDS FROM chapters[0m
+  [4;35;1mSQL (0.001073)[0m   [0mSHOW KEYS FROM chapters[0m
+  [4;36;1mSQL (0.001088)[0m   [0;1mSHOW FIELDS FROM credits[0m
+  [4;35;1mSQL (0.000823)[0m   [0mSHOW KEYS FROM credits[0m
+  [4;36;1mSQL (0.001160)[0m   [0;1mSHOW FIELDS FROM group_permissions[0m
+  [4;35;1mSQL (0.000773)[0m   [0mSHOW KEYS FROM group_permissions[0m
+  [4;36;1mSQL (0.043159)[0m   [0;1mSHOW FIELDS FROM groups[0m
+  [4;35;1mSQL (0.000904)[0m   [0mSHOW KEYS FROM groups[0m
+  [4;36;1mSQL (0.011408)[0m   [0;1mSHOW FIELDS FROM memberships[0m
+  [4;35;1mSQL (0.000891)[0m   [0mSHOW KEYS FROM memberships[0m
+  [4;36;1mSQL (0.015785)[0m   [0;1mSHOW FIELDS FROM monthlybystory[0m
+  [4;35;1mSQL (0.001352)[0m   [0mSHOW KEYS FROM monthlybystory[0m
+  [4;36;1mSQL (0.013811)[0m   [0;1mSHOW FIELDS FROM paragraphs[0m
+  [4;35;1mSQL (0.000903)[0m   [0mSHOW KEYS FROM paragraphs[0m
+  [4;36;1mSQL (0.001283)[0m   [0;1mSHOW FIELDS FROM pcomments[0m
+  [4;35;1mSQL (0.000820)[0m   [0mSHOW KEYS FROM pcomments[0m
+  [4;36;1mSQL (0.021082)[0m   [0;1mSHOW FIELDS FROM php_sessions[0m
+  [4;35;1mSQL (0.060969)[0m   [0mSHOW KEYS FROM php_sessions[0m
+  [4;36;1mSQL (0.052968)[0m   [0;1mSHOW FIELDS FROM sessions[0m
+  [4;35;1mSQL (0.001126)[0m   [0mSHOW KEYS FROM sessions[0m
+  [4;36;1mSQL (0.001148)[0m   [0;1mSHOW FIELDS FROM site_permissions[0m
+  [4;35;1mSQL (0.000758)[0m   [0mSHOW KEYS FROM site_permissions[0m
+  [4;36;1mSQL (0.008043)[0m   [0;1mSHOW FIELDS FROM stories[0m
+  [4;35;1mSQL (0.000966)[0m   [0mSHOW KEYS FROM stories[0m
+  [4;36;1mSQL (0.001499)[0m   [0;1mSHOW FIELDS FROM story_permissions[0m
+  [4;35;1mSQL (0.000756)[0m   [0mSHOW KEYS FROM story_permissions[0m
+  [4;36;1mSQL (0.001242)[0m   [0;1mSHOW FIELDS FROM styles[0m
+  [4;35;1mSQL (0.000786)[0m   [0mSHOW KEYS FROM styles[0m
+  [4;36;1mSQL (0.001222)[0m   [0;1mSHOW FIELDS FROM targets[0m
+  [4;35;1mSQL (0.000830)[0m   [0mSHOW KEYS FROM targets[0m
+  [4;36;1mSQL (0.001197)[0m   [0;1mSHOW FIELDS FROM universes[0m
+  [4;35;1mSQL (0.001027)[0m   [0mSHOW KEYS FROM universes[0m
+  [4;36;1mSQL (0.023213)[0m   [0;1mSHOW FIELDS FROM users[0m
+  [4;35;1mSQL (0.002021)[0m   [0mSHOW KEYS FROM users[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000547)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000185)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000142)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000170)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000140)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000144)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000151)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000138)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000163)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to CreateUniversePermissions (9)
+  [4;35;1mSQL (0.052506)[0m   [0mCREATE TABLE universe_permissions (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `permission_holder_id` int(11), `permission_holder_type` varchar(255), `universe_id` int(11), `permission` varchar(255)) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000401)[0m   [0;1mUPDATE schema_info SET version = 9[0m
+  [4;35;1mSQL (0.000491)[0m   [0mSELECT * FROM schema_info[0m
+  [4;36;1mSQL (0.000655)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.001355)[0m   [0mSHOW FIELDS FROM blogposts[0m
+  [4;36;1mSQL (0.000628)[0m   [0;1mSHOW KEYS FROM blogposts[0m
+  [4;35;1mSQL (0.001483)[0m   [0mSHOW FIELDS FROM chapters[0m
+  [4;36;1mSQL (0.000884)[0m   [0;1mSHOW KEYS FROM chapters[0m
+  [4;35;1mSQL (0.001226)[0m   [0mSHOW FIELDS FROM credits[0m
+  [4;36;1mSQL (0.000700)[0m   [0;1mSHOW KEYS FROM credits[0m
+  [4;35;1mSQL (0.001821)[0m   [0mSHOW FIELDS FROM group_permissions[0m
+  [4;36;1mSQL (0.000582)[0m   [0;1mSHOW KEYS FROM group_permissions[0m
+  [4;35;1mSQL (0.001362)[0m   [0mSHOW FIELDS FROM groups[0m
+  [4;36;1mSQL (0.000925)[0m   [0;1mSHOW KEYS FROM groups[0m
+  [4;35;1mSQL (0.001229)[0m   [0mSHOW FIELDS FROM memberships[0m
+  [4;36;1mSQL (0.000832)[0m   [0;1mSHOW KEYS FROM memberships[0m
+  [4;35;1mSQL (0.002268)[0m   [0mSHOW FIELDS FROM monthlybystory[0m
+  [4;36;1mSQL (0.001293)[0m   [0;1mSHOW KEYS FROM monthlybystory[0m
+  [4;35;1mSQL (0.001189)[0m   [0mSHOW FIELDS FROM paragraphs[0m
+  [4;36;1mSQL (0.000877)[0m   [0;1mSHOW KEYS FROM paragraphs[0m
+  [4;35;1mSQL (0.001169)[0m   [0mSHOW FIELDS FROM pcomments[0m
+  [4;36;1mSQL (0.000779)[0m   [0;1mSHOW KEYS FROM pcomments[0m
+  [4;35;1mSQL (0.001663)[0m   [0mSHOW FIELDS FROM php_sessions[0m
+  [4;36;1mSQL (0.061887)[0m   [0;1mSHOW KEYS FROM php_sessions[0m
+  [4;35;1mSQL (0.013982)[0m   [0mSHOW FIELDS FROM sessions[0m
+  [4;36;1mSQL (0.000992)[0m   [0;1mSHOW KEYS FROM sessions[0m
+  [4;35;1mSQL (0.001121)[0m   [0mSHOW FIELDS FROM site_permissions[0m
+  [4;36;1mSQL (0.000719)[0m   [0;1mSHOW KEYS FROM site_permissions[0m
+  [4;35;1mSQL (0.001514)[0m   [0mSHOW FIELDS FROM stories[0m
+  [4;36;1mSQL (0.000817)[0m   [0;1mSHOW KEYS FROM stories[0m
+  [4;35;1mSQL (0.001245)[0m   [0mSHOW FIELDS FROM story_permissions[0m
+  [4;36;1mSQL (0.000747)[0m   [0;1mSHOW KEYS FROM story_permissions[0m
+  [4;35;1mSQL (0.001238)[0m   [0mSHOW FIELDS FROM styles[0m
+  [4;36;1mSQL (0.000740)[0m   [0;1mSHOW KEYS FROM styles[0m
+  [4;35;1mSQL (0.001227)[0m   [0mSHOW FIELDS FROM targets[0m
+  [4;36;1mSQL (0.000805)[0m   [0;1mSHOW KEYS FROM targets[0m
+  [4;35;1mSQL (0.001351)[0m   [0mSHOW FIELDS FROM universe_permissions[0m
+  [4;36;1mSQL (0.000718)[0m   [0;1mSHOW KEYS FROM universe_permissions[0m
+  [4;35;1mSQL (0.001244)[0m   [0mSHOW FIELDS FROM universes[0m
+  [4;36;1mSQL (0.000734)[0m   [0;1mSHOW KEYS FROM universes[0m
+  [4;35;1mSQL (0.005389)[0m   [0mSHOW FIELDS FROM users[0m
+  [4;36;1mSQL (0.050870)[0m   [0;1mSHOW KEYS FROM users[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000540)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000179)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000149)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000144)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000151)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000165)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000138)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000142)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000149)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000147)[0m   [0mSELECT version FROM schema_info[0m
+Migrating to DropGroupPermission (10)
+  [4;36;1mSQL (0.081740)[0m   [0;1mDROP TABLE group_permissions[0m
+  [4;35;1mSQL (0.000630)[0m   [0mUPDATE schema_info SET version = 10[0m
+  [4;36;1mSQL (0.000589)[0m   [0;1mSELECT * FROM schema_info[0m
+  [4;35;1mSQL (0.000649)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.001329)[0m   [0;1mSHOW FIELDS FROM blogposts[0m
+  [4;35;1mSQL (0.000651)[0m   [0mSHOW KEYS FROM blogposts[0m
+  [4;36;1mSQL (0.042564)[0m   [0;1mSHOW FIELDS FROM chapters[0m
+  [4;35;1mSQL (0.000926)[0m   [0mSHOW KEYS FROM chapters[0m
+  [4;36;1mSQL (0.001268)[0m   [0;1mSHOW FIELDS FROM credits[0m
+  [4;35;1mSQL (0.000660)[0m   [0mSHOW KEYS FROM credits[0m
+  [4;36;1mSQL (0.035288)[0m   [0;1mSHOW FIELDS FROM groups[0m
+  [4;35;1mSQL (0.000895)[0m   [0mSHOW KEYS FROM groups[0m
+  [4;36;1mSQL (0.011452)[0m   [0;1mSHOW FIELDS FROM memberships[0m
+  [4;35;1mSQL (0.000837)[0m   [0mSHOW KEYS FROM memberships[0m
+  [4;36;1mSQL (0.014836)[0m   [0;1mSHOW FIELDS FROM monthlybystory[0m
+  [4;35;1mSQL (0.001285)[0m   [0mSHOW KEYS FROM monthlybystory[0m
+  [4;36;1mSQL (0.001163)[0m   [0;1mSHOW FIELDS FROM paragraphs[0m
+  [4;35;1mSQL (0.000928)[0m   [0mSHOW KEYS FROM paragraphs[0m
+  [4;36;1mSQL (0.001206)[0m   [0;1mSHOW FIELDS FROM pcomments[0m
+  [4;35;1mSQL (0.000794)[0m   [0mSHOW KEYS FROM pcomments[0m
+  [4;36;1mSQL (0.025587)[0m   [0;1mSHOW FIELDS FROM php_sessions[0m
+  [4;35;1mSQL (0.000946)[0m   [0mSHOW KEYS FROM php_sessions[0m
+  [4;36;1mSQL (0.001119)[0m   [0;1mSHOW FIELDS FROM sessions[0m
+  [4;35;1mSQL (0.061230)[0m   [0mSHOW KEYS FROM sessions[0m
+  [4;36;1mSQL (0.014175)[0m   [0;1mSHOW FIELDS FROM site_permissions[0m
+  [4;35;1mSQL (0.000605)[0m   [0mSHOW KEYS FROM site_permissions[0m
+  [4;36;1mSQL (0.001576)[0m   [0;1mSHOW FIELDS FROM stories[0m
+  [4;35;1mSQL (0.000671)[0m   [0mSHOW KEYS FROM stories[0m
+  [4;36;1mSQL (0.001525)[0m   [0;1mSHOW FIELDS FROM story_permissions[0m
+  [4;35;1mSQL (0.000831)[0m   [0mSHOW KEYS FROM story_permissions[0m
+  [4;36;1mSQL (0.001388)[0m   [0;1mSHOW FIELDS FROM styles[0m
+  [4;35;1mSQL (0.000639)[0m   [0mSHOW KEYS FROM styles[0m
+  [4;36;1mSQL (0.001397)[0m   [0;1mSHOW FIELDS FROM targets[0m
+  [4;35;1mSQL (0.000685)[0m   [0mSHOW KEYS FROM targets[0m
+  [4;36;1mSQL (0.001245)[0m   [0;1mSHOW FIELDS FROM universe_permissions[0m
+  [4;35;1mSQL (0.000758)[0m   [0mSHOW KEYS FROM universe_permissions[0m
+  [4;36;1mSQL (0.001225)[0m   [0;1mSHOW FIELDS FROM universes[0m
+  [4;35;1mSQL (0.016343)[0m   [0mSHOW KEYS FROM universes[0m
+  [4;36;1mSQL (0.015278)[0m   [0;1mSHOW FIELDS FROM users[0m
+  [4;35;1mSQL (0.002432)[0m   [0mSHOW KEYS FROM users[0m
+  [4;36;1mPhp_Session Load (0.000909)[0m   [0;1mSELECT * FROM php_sessions LIMIT 999999999999[0m
+  [4;35;1mPhp_Session Columns (0.001840)[0m   [0mSHOW FIELDS FROM php_sessions[0m
+  [4;36;1mPhp_Session Load (0.000884)[0m   [0;1mSELECT * FROM php_sessions LIMIT 999999999999[0m
+  [4;35;1mPhp_Session Columns (0.001855)[0m   [0mSHOW FIELDS FROM php_sessions[0m
+  [4;36;1mSQL (0.134407)[0m   [0;1mSHOW FULL TABLES WHERE Table_type = 'BASE TABLE'[0m
+  [4;35;1mSQL (0.000367)[0m   [0mSHOW CREATE TABLE blogposts[0m
+  [4;36;1mSQL (0.000281)[0m   [0;1mSHOW CREATE TABLE chapters[0m
+  [4;35;1mSQL (0.000262)[0m   [0mSHOW CREATE TABLE credits[0m
+  [4;36;1mSQL (0.000247)[0m   [0;1mSHOW CREATE TABLE paragraphs[0m
+  [4;35;1mSQL (0.000265)[0m   [0mSHOW CREATE TABLE pcomments[0m
+  [4;36;1mSQL (0.000243)[0m   [0;1mSHOW CREATE TABLE schema_info[0m
+  [4;35;1mSQL (0.000248)[0m   [0mSHOW CREATE TABLE sessions[0m
+  [4;36;1mSQL (0.000257)[0m   [0;1mSHOW CREATE TABLE site_permissions[0m
+  [4;35;1mSQL (0.000273)[0m   [0mSHOW CREATE TABLE stories[0m
+  [4;36;1mSQL (0.000258)[0m   [0;1mSHOW CREATE TABLE story_permissions[0m
+  [4;35;1mSQL (0.000257)[0m   [0mSHOW CREATE TABLE styles[0m
+  [4;36;1mSQL (0.000264)[0m   [0;1mSHOW CREATE TABLE targets[0m
+  [4;35;1mSQL (0.000258)[0m   [0mSHOW CREATE TABLE universe_permissions[0m
+  [4;36;1mSQL (0.000306)[0m   [0;1mSHOW CREATE TABLE universes[0m
+  [4;35;1mSQL (0.000417)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.133198)[0m   [0;1mDROP DATABASE IF EXISTS `pelestats_test`[0m
+  [4;35;1mSQL (0.000495)[0m   [0mCREATE DATABASE `pelestats_test`[0m
+  [4;36;1mSQL (0.000132)[0m   [0;1mSET foreign_key_checks = 0[0m
+  [4;35;1mSQL (0.024068)[0m   [0mCREATE TABLE `blogposts` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `body` text NOT NULL,
+ `posted` datetime NOT NULL default '0000-00-00 00:00:00',
+ `user` varchar(45) NOT NULL default 'dstar',
+ `title` varchar(45) NOT NULL default '',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;36;1mSQL (0.010252)[0m   [0;1mCREATE TABLE `chapters` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `story_id` int(10) unsigned NOT NULL default '0',
+ `number` int(10) unsigned NOT NULL default '0',
+ `words` int(10) unsigned NOT NULL default '0',
+ `date` date NOT NULL default '0000-00-00',
+ `file` varchar(45) NOT NULL default '',
+ `status` varchar(255) default 'draft',
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `chap_uniq` (`story_id`,`number`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;35;1mSQL (0.008901)[0m   [0mCREATE TABLE `credits` (
+ `id` int(11) NOT NULL auto_increment,
+ `user_id` int(11) NOT NULL,
+ `story_id` int(11) NOT NULL,
+ `credit_type` varchar(255) NOT NULL default 'Author',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;36;1mSQL (0.009752)[0m   [0;1mCREATE TABLE `paragraphs` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `chapter_id` int(10) unsigned NOT NULL default '0',
+ `body` text NOT NULL,
+ `order` int(10) unsigned NOT NULL default '1',
+ `flag` int(10) unsigned NOT NULL default '0',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;35;1mSQL (0.009631)[0m   [0mCREATE TABLE `pcomments` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `paragraph_id` int(10) unsigned NOT NULL default '0',
+ `body` text NOT NULL,
+ `posted` datetime NOT NULL default '0000-00-00 00:00:00',
+ `username` varchar(45) NOT NULL default 'no user',
+ `flag` int(10) unsigned NOT NULL default '0',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;36;1mSQL (0.008974)[0m   [0;1mCREATE TABLE `schema_info` (
+ `version` int(11) default NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;[0m
+  [4;35;1mSQL (0.009765)[0m   [0mCREATE TABLE `sessions` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `sessid` varchar(255) default NULL,
+ `data` text,
+ `updated_at` datetime default NULL,
+ PRIMARY KEY (`id`),
+ KEY `session_index` (`sessid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;36;1mSQL (0.008783)[0m   [0;1mCREATE TABLE `site_permissions` (
+ `id` int(11) NOT NULL auto_increment,
+ `user_id` int(11) default NULL,
+ `permission` varchar(255) default NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;35;1mSQL (0.008820)[0m   [0mCREATE TABLE `stories` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `title` varchar(255) NOT NULL default '',
+ `description` text NOT NULL,
+ `flag` int(10) unsigned NOT NULL default '0',
+ `universe_id` int(10) unsigned NOT NULL default '0',
+ `short_title` varchar(45) NOT NULL default '',
+ `order` int(10) unsigned NOT NULL default '0',
+ `file_prefix` varchar(45) NOT NULL default '',
+ `status` varchar(255) default 'draft',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;36;1mSQL (0.009812)[0m   [0;1mCREATE TABLE `story_permissions` (
+ `id` int(11) NOT NULL auto_increment,
+ `permission_holder_id` int(11) default NULL,
+ `permission_holder_type` varchar(255) default NULL,
+ `story_id` int(11) default NULL,
+ `permission` varchar(255) default NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;35;1mSQL (0.009728)[0m   [0mCREATE TABLE `styles` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `element` text NOT NULL,
+ `definition` text NOT NULL,
+ `theme` text NOT NULL,
+ `user` mediumint(8) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;36;1mSQL (0.009043)[0m   [0;1mCREATE TABLE `targets` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `story_id` int(10) unsigned NOT NULL default '0',
+ `month` int(10) unsigned NOT NULL default '0',
+ `year` int(10) unsigned NOT NULL default '0',
+ `weekly_words` int(10) unsigned NOT NULL default '2000',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;35;1mSQL (0.008901)[0m   [0mCREATE TABLE `universe_permissions` (
+ `id` int(11) NOT NULL auto_increment,
+ `permission_holder_id` int(11) default NULL,
+ `permission_holder_type` varchar(255) default NULL,
+ `universe_id` int(11) default NULL,
+ `permission` varchar(255) default NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;36;1mSQL (0.010569)[0m   [0;1mCREATE TABLE `universes` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `name` varchar(45) NOT NULL default '',
+ `description` text NOT NULL,
+ `flag` int(10) unsigned NOT NULL default '0',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;35;1mSQL (0.000649)[0m   [0mINSERT INTO schema_info (version) VALUES (10)[0m
+  [4;36;1mSQL (0.000267)[0m   [0;1mSELECT * FROM schema_info[0m
+  [4;35;1mSQL (0.000671)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.002062)[0m   [0;1mSHOW FIELDS FROM blogposts[0m
+  [4;35;1mSQL (0.000638)[0m   [0mSHOW KEYS FROM blogposts[0m
+  [4;36;1mSQL (0.001368)[0m   [0;1mSHOW FIELDS FROM chapters[0m
+  [4;35;1mSQL (0.000886)[0m   [0mSHOW KEYS FROM chapters[0m
+  [4;36;1mSQL (0.001231)[0m   [0;1mSHOW FIELDS FROM credits[0m
+  [4;35;1mSQL (0.000664)[0m   [0mSHOW KEYS FROM credits[0m
+  [4;36;1mSQL (0.001548)[0m   [0;1mSHOW FIELDS FROM groups[0m
+  [4;35;1mSQL (0.000745)[0m   [0mSHOW KEYS FROM groups[0m
+  [4;36;1mSQL (0.001375)[0m   [0;1mSHOW FIELDS FROM memberships[0m
+  [4;35;1mSQL (0.000701)[0m   [0mSHOW KEYS FROM memberships[0m
+  [4;36;1mSQL (0.002485)[0m   [0;1mSHOW FIELDS FROM monthlybystory[0m
+  [4;35;1mSQL (0.001143)[0m   [0mSHOW KEYS FROM monthlybystory[0m
+  [4;36;1mSQL (0.001279)[0m   [0;1mSHOW FIELDS FROM paragraphs[0m
+  [4;35;1mSQL (0.000781)[0m   [0mSHOW KEYS FROM paragraphs[0m
+  [4;36;1mSQL (0.001348)[0m   [0;1mSHOW FIELDS FROM pcomments[0m
+  [4;35;1mSQL (0.000632)[0m   [0mSHOW KEYS FROM pcomments[0m
+  [4;36;1mSQL (0.001778)[0m   [0;1mSHOW FIELDS FROM php_sessions[0m
+  [4;35;1mSQL (0.000773)[0m   [0mSHOW KEYS FROM php_sessions[0m
+  [4;36;1mSQL (0.001264)[0m   [0;1mSHOW FIELDS FROM sessions[0m
+  [4;35;1mSQL (0.160224)[0m   [0mSHOW KEYS FROM sessions[0m
+  [4;36;1mSQL (0.013746)[0m   [0;1mSHOW FIELDS FROM site_permissions[0m
+  [4;35;1mSQL (0.000588)[0m   [0mSHOW KEYS FROM site_permissions[0m
+  [4;36;1mSQL (0.001714)[0m   [0;1mSHOW FIELDS FROM stories[0m
+  [4;35;1mSQL (0.000630)[0m   [0mSHOW KEYS FROM stories[0m
+  [4;36;1mSQL (0.001332)[0m   [0;1mSHOW FIELDS FROM story_permissions[0m
+  [4;35;1mSQL (0.000622)[0m   [0mSHOW KEYS FROM story_permissions[0m
+  [4;36;1mSQL (0.001396)[0m   [0;1mSHOW FIELDS FROM styles[0m
+  [4;35;1mSQL (0.000623)[0m   [0mSHOW KEYS FROM styles[0m
+  [4;36;1mSQL (0.001378)[0m   [0;1mSHOW FIELDS FROM targets[0m
+  [4;35;1mSQL (0.000619)[0m   [0mSHOW KEYS FROM targets[0m
+  [4;36;1mSQL (0.001393)[0m   [0;1mSHOW FIELDS FROM universe_permissions[0m
+  [4;35;1mSQL (0.000599)[0m   [0mSHOW KEYS FROM universe_permissions[0m
+  [4;36;1mSQL (0.001387)[0m   [0;1mSHOW FIELDS FROM universes[0m
+  [4;35;1mSQL (0.000606)[0m   [0mSHOW KEYS FROM universes[0m
+  [4;36;1mSQL (0.006004)[0m   [0;1mSHOW FIELDS FROM users[0m
+  [4;35;1mSQL (0.002152)[0m   [0mSHOW KEYS FROM users[0m
+  [4;36;1mSQL (0.006693)[0m   [0;1mDROP TABLE blogposts[0m
+  [4;35;1mSQL (0.032872)[0m   [0mCREATE TABLE blogposts (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `body` text DEFAULT '' NOT NULL, `posted` datetime NOT NULL, `user` varchar(45) DEFAULT 'dstar' NOT NULL, `title` varchar(45) DEFAULT '' NOT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.001904)[0m   [0;1mDROP TABLE chapters[0m
+  [4;35;1mSQL (0.009238)[0m   [0mCREATE TABLE chapters (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `story_id` int(10) DEFAULT 0 NOT NULL, `number` int(10) DEFAULT 0 NOT NULL, `words` int(10) DEFAULT 0 NOT NULL, `date` date NOT NULL, `file` varchar(45) DEFAULT '' NOT NULL, `status` varchar(255) DEFAULT 'draft') ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.012220)[0m   [0;1mCREATE UNIQUE INDEX chap_uniq ON chapters (story_id, number)[0m
+  [4;35;1mSQL (0.001769)[0m   [0mDROP TABLE credits[0m
+  [4;36;1mSQL (0.009414)[0m   [0;1mCREATE TABLE credits (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) DEFAULT 0 NOT NULL, `story_id` int(11) DEFAULT 0 NOT NULL, `credit_type` varchar(255) DEFAULT 'Author' NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Unknown table 'groups': DROP TABLE groups[0m
+  [4;36;1mSQL (0.008902)[0m   [0;1mCREATE TABLE groups (`group_id` int(8) DEFAULT 0 NOT NULL, `group_type` int(4) DEFAULT 0 NOT NULL, `group_name` varchar(40) DEFAULT '' NOT NULL, `group_description` varchar(255) DEFAULT '' NOT NULL, `group_moderator` int(8) DEFAULT 0 NOT NULL, `group_single_user` tinyint(1) DEFAULT 0 NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Unknown table 'memberships': DROP TABLE memberships[0m
+  [4;36;1mSQL (0.009495)[0m   [0;1mCREATE TABLE memberships (`group_id` int(8) DEFAULT 0 NOT NULL, `user_id` int(8) DEFAULT 0 NOT NULL, `user_pending` tinyint(1)) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Unknown table 'monthlybystory': DROP TABLE monthlybystory[0m
+  [4;36;1mSQL (0.009392)[0m   [0;1mCREATE TABLE monthlybystory (`story_id` int(10) DEFAULT 0 NOT NULL, `ord` int(10) DEFAULT 0 NOT NULL, `title` varchar(255) DEFAULT '' NOT NULL, `universe_id` int(10) DEFAULT 0 NOT NULL, `month` int(11), `year` int(11), `target_words` int(28) DEFAULT 0 NOT NULL, `wordcount` float(33), `overage` float(34)) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.001964)[0m   [0mDROP TABLE paragraphs[0m
+  [4;36;1mSQL (0.009370)[0m   [0;1mCREATE TABLE paragraphs (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `chapter_id` int(10) DEFAULT 0 NOT NULL, `body` text DEFAULT '' NOT NULL, `order` int(10) DEFAULT 1 NOT NULL, `flag` int(10) DEFAULT 0 NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.001865)[0m   [0mDROP TABLE pcomments[0m
+  [4;36;1mSQL (0.018058)[0m   [0;1mCREATE TABLE pcomments (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `paragraph_id` int(10) DEFAULT 0 NOT NULL, `body` text DEFAULT '' NOT NULL, `posted` datetime NOT NULL, `username` varchar(45) DEFAULT 'no user' NOT NULL, `flag` int(10) DEFAULT 0 NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Unknown table 'php_sessions': DROP TABLE php_sessions[0m
+  [4;36;1mSQL (0.009256)[0m   [0;1mCREATE TABLE php_sessions (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `session_id` varchar(32) DEFAULT '' NOT NULL, `session_user_id` int(8) DEFAULT 0 NOT NULL, `session_start` int(11) DEFAULT 0 NOT NULL, `session_time` int(11) DEFAULT 0 NOT NULL, `session_ip` varchar(8) DEFAULT '' NOT NULL, `session_page` int(11) DEFAULT 0 NOT NULL, `session_logged_in` tinyint(1) DEFAULT 0 NOT NULL, `session_admin` int(2) DEFAULT 0 NOT NULL) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.001914)[0m   [0mDROP TABLE sessions[0m
+  [4;36;1mSQL (0.008939)[0m   [0;1mCREATE TABLE sessions (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `sessid` varchar(255), `data` text, `updated_at` datetime) ENGINE=InnoDB[0m
+  [4;35;1mSQL (0.013158)[0m   [0mCREATE INDEX session_index ON sessions (sessid)[0m
+  [4;36;1mSQL (0.001817)[0m   [0;1mDROP TABLE site_permissions[0m
+  [4;35;1mSQL (0.009761)[0m   [0mCREATE TABLE site_permissions (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11), `permission` varchar(255)) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.002054)[0m   [0;1mDROP TABLE stories[0m
+  [4;35;1mSQL (0.042251)[0m   [0mCREATE TABLE stories (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `title` varchar(255) DEFAULT '' NOT NULL, `description` text DEFAULT '' NOT NULL, `flag` int(10) DEFAULT 0 NOT NULL, `universe_id` int(10) DEFAULT 0 NOT NULL, `short_title` varchar(45) DEFAULT '' NOT NULL, `order` int(10) DEFAULT 0 NOT NULL, `file_prefix` varchar(45) DEFAULT '' NOT NULL, `status` varchar(255) DEFAULT 'draft') ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.001999)[0m   [0;1mDROP TABLE story_permissions[0m
+  [4;35;1mSQL (0.010978)[0m   [0mCREATE TABLE story_permissions (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `permission_holder_id` int(11), `permission_holder_type` varchar(255), `story_id` int(11), `permission` varchar(255)) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.002046)[0m   [0;1mDROP TABLE styles[0m
+  [4;35;1mSQL (0.008618)[0m   [0mCREATE TABLE styles (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `element` text DEFAULT '' NOT NULL, `definition` text DEFAULT '' NOT NULL, `theme` text DEFAULT '' NOT NULL, `user` int(8) DEFAULT 0 NOT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.001800)[0m   [0;1mDROP TABLE targets[0m
+  [4;35;1mSQL (0.008803)[0m   [0mCREATE TABLE targets (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `story_id` int(10) DEFAULT 0 NOT NULL, `month` int(10) DEFAULT 0 NOT NULL, `year` int(10) DEFAULT 0 NOT NULL, `weekly_words` int(10) DEFAULT 2000 NOT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.001827)[0m   [0;1mDROP TABLE universe_permissions[0m
+  [4;35;1mSQL (0.010618)[0m   [0mCREATE TABLE universe_permissions (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `permission_holder_id` int(11), `permission_holder_type` varchar(255), `universe_id` int(11), `permission` varchar(255)) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.001819)[0m   [0;1mDROP TABLE universes[0m
+  [4;35;1mSQL (0.009374)[0m   [0mCREATE TABLE universes (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(45) DEFAULT '' NOT NULL, `description` text DEFAULT '' NOT NULL, `flag` int(10) DEFAULT 0 NOT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Unknown table 'users': DROP TABLE users[0m
+  [4;35;1mSQL (0.011542)[0m   [0mCREATE TABLE users (`user_id` int(8) DEFAULT 0 NOT NULL, `user_active` tinyint(1), `username` varchar(25) DEFAULT '' NOT NULL, `user_password` varchar(32) DEFAULT '' NOT NULL, `user_session_time` int(11) DEFAULT 0 NOT NULL, `user_session_page` int(5) DEFAULT 0 NOT NULL, `user_lastvisit` int(11) DEFAULT 0 NOT NULL, `user_lastvisit_chat` int(11) DEFAULT 0 NOT NULL, `user_regdate` int(11) DEFAULT 0 NOT NULL, `user_level` int(4), `user_posts` int(8) DEFAULT 0 NOT NULL, `user_timezone` float(5) DEFAULT 0.0 NOT NULL, `user_style` int(4), `user_lang` varchar(255), `user_dateformat` varchar(14) DEFAULT '' NOT NULL, `user_new_privmsg` int(5) DEFAULT 0 NOT NULL, `user_unread_privmsg` int(5) DEFAULT 0 NOT NULL, `user_last_privmsg` int(11) DEFAULT 0 NOT NULL, `user_emailtime` int(11), `user_viewemail` tinyint(1), `user_attachsig` tinyint(1), `user_setbm` tinyint(1) DEFAULT 0 NOT NULL, `user_allowhtml` tinyint(1), `user_allowbbcode` tinyint(1), `user_allowsmile` tinyint(1), `user_allowavatar` tinyint(1) DEFAULT 0 NOT NULL, `user_allow_pm` tinyint(1) DEFAULT 0 NOT NULL, `user_allow_viewonline` tinyint(1) DEFAULT 0 NOT NULL, `user_notify` tinyint(1) DEFAULT 0 NOT NULL, `user_notify_pm` tinyint(1) DEFAULT 0 NOT NULL, `user_popup_pm` tinyint(1) DEFAULT 0 NOT NULL, `user_rank` int(11), `user_avatar` varchar(100), `user_avatar_type` int(4) DEFAULT 0 NOT NULL, `user_email` varchar(255), `user_icq` varchar(15), `user_website` varchar(100), `user_from` varchar(100), `user_sig` text, `user_sig_bbcode_uid` varchar(10), `user_pips` text DEFAULT '' NOT NULL, `user_pips_bbcode_uid` varchar(10) DEFAULT '' NOT NULL, `user_pips_parsed` text DEFAULT '' NOT NULL, `user_aim` varchar(255), `user_yim` varchar(255), `user_msnm` varchar(255), `user_occ` varchar(100), `user_skype` varchar(255) DEFAULT '' NOT NULL, `user_interests` varchar(255), `user_actkey` varchar(32), `user_newpasswd` varchar(32), `user_topic_view` varchar(0) DEFAULT '' NOT NULL, `user_pubname` varchar(255), `user_thread_indent_px` int(6) DEFAULT 0 NOT NULL, `user_thread_cutofflevel` int(6) DEFAULT 0 NOT NULL, `user_view_log` int(4) DEFAULT 0 NOT NULL, `user_index_mode` tinyint(1) DEFAULT 0 NOT NULL, `user_unread_topics` text, `user_login_tries` int(5) DEFAULT 0 NOT NULL, `user_last_login_try` int(11) DEFAULT 0 NOT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000949)[0m   [0mSHOW FIELDS FROM schema_info[0m
+  [4;36;1mSQL (0.000560)[0m   [0;1mUPDATE schema_info SET version = 10[0m
+  [4;36;1mSQL (0.000000)[0m   [0;1mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;35;1mSQL (0.000000)[0m   [0mMysql::Error: Table 'schema_info' already exists: CREATE TABLE schema_info (version int(11))[0m
+  [4;36;1mSQL (0.000362)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000167)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000147)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000137)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000159)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000137)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000136)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000140)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000137)[0m   [0;1mSELECT version FROM schema_info[0m
+  [4;35;1mSQL (0.000140)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.000140)[0m   [0;1mSELECT version FROM schema_info[0m
+Migrating to AddPermissionHolderToSitePermissions (11)
+  [4;35;1mSQL (0.024456)[0m   [0mALTER TABLE site_permissions ADD `permission_holder_id` int(11)[0m
+  [4;36;1mSQL (0.012670)[0m   [0;1mALTER TABLE site_permissions ADD `permission_holder_type` varchar(255)[0m
+  [4;35;1mSQL (0.018790)[0m   [0mUPDATE schema_info SET version = 11[0m
+  [4;36;1mSQL (0.000441)[0m   [0;1mSELECT * FROM schema_info[0m
+  [4;35;1mSQL (0.000629)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.001319)[0m   [0;1mSHOW FIELDS FROM blogposts[0m
+  [4;35;1mSQL (0.000659)[0m   [0mSHOW KEYS FROM blogposts[0m
+  [4;36;1mSQL (0.001351)[0m   [0;1mSHOW FIELDS FROM chapters[0m
+  [4;35;1mSQL (0.000940)[0m   [0mSHOW KEYS FROM chapters[0m
+  [4;36;1mSQL (0.001189)[0m   [0;1mSHOW FIELDS FROM credits[0m
+  [4;35;1mSQL (0.000695)[0m   [0mSHOW KEYS FROM credits[0m
+  [4;36;1mSQL (0.020020)[0m   [0;1mSHOW FIELDS FROM groups[0m
+  [4;35;1mSQL (0.000752)[0m   [0mSHOW KEYS FROM groups[0m
+  [4;36;1mSQL (0.027712)[0m   [0;1mSHOW FIELDS FROM memberships[0m
+  [4;35;1mSQL (0.000713)[0m   [0mSHOW KEYS FROM memberships[0m
+  [4;36;1mSQL (0.014762)[0m   [0;1mSHOW FIELDS FROM monthlybystory[0m
+  [4;35;1mSQL (0.001150)[0m   [0mSHOW KEYS FROM monthlybystory[0m
+  [4;36;1mSQL (0.017802)[0m   [0;1mSHOW FIELDS FROM paragraphs[0m
+  [4;35;1mSQL (0.000905)[0m   [0mSHOW KEYS FROM paragraphs[0m
+  [4;36;1mSQL (0.001171)[0m   [0;1mSHOW FIELDS FROM pcomments[0m
+  [4;35;1mSQL (0.001491)[0m   [0mSHOW KEYS FROM pcomments[0m
+  [4;36;1mSQL (0.031748)[0m   [0;1mSHOW FIELDS FROM php_sessions[0m
+  [4;35;1mSQL (0.000955)[0m   [0mSHOW KEYS FROM php_sessions[0m
+  [4;36;1mSQL (0.001270)[0m   [0;1mSHOW FIELDS FROM sessions[0m
+  [4;35;1mSQL (0.063053)[0m   [0mSHOW KEYS FROM sessions[0m
+  [4;36;1mSQL (0.013668)[0m   [0;1mSHOW FIELDS FROM site_permissions[0m
+  [4;35;1mSQL (0.000599)[0m   [0mSHOW KEYS FROM site_permissions[0m
+  [4;36;1mSQL (0.001708)[0m   [0;1mSHOW FIELDS FROM stories[0m
+  [4;35;1mSQL (0.000770)[0m   [0mSHOW KEYS FROM stories[0m
+  [4;36;1mSQL (0.001593)[0m   [0;1mSHOW FIELDS FROM story_permissions[0m
+  [4;35;1mSQL (0.000633)[0m   [0mSHOW KEYS FROM story_permissions[0m
+  [4;36;1mSQL (0.001453)[0m   [0;1mSHOW FIELDS FROM styles[0m
+  [4;35;1mSQL (0.000643)[0m   [0mSHOW KEYS FROM styles[0m
+  [4;36;1mSQL (0.002177)[0m   [0;1mSHOW FIELDS FROM targets[0m
+  [4;35;1mSQL (0.000641)[0m   [0mSHOW KEYS FROM targets[0m
+  [4;36;1mSQL (0.001479)[0m   [0;1mSHOW FIELDS FROM universe_permissions[0m
+  [4;35;1mSQL (0.000672)[0m   [0mSHOW KEYS FROM universe_permissions[0m
+  [4;36;1mSQL (0.001453)[0m   [0;1mSHOW FIELDS FROM universes[0m
+  [4;35;1mSQL (0.000619)[0m   [0mSHOW KEYS FROM universes[0m
+  [4;36;1mSQL (0.031983)[0m   [0;1mSHOW FIELDS FROM users[0m
+  [4;35;1mSQL (0.002603)[0m   [0mSHOW KEYS FROM users[0m
+  [4;36;1mSQL (0.115367)[0m   [0;1mSHOW FULL TABLES WHERE Table_type = 'BASE TABLE'[0m
+  [4;35;1mSQL (0.000362)[0m   [0mSHOW CREATE TABLE blogposts[0m
+  [4;36;1mSQL (0.001294)[0m   [0;1mSHOW CREATE TABLE chapters[0m
+  [4;35;1mSQL (0.000246)[0m   [0mSHOW CREATE TABLE credits[0m
+  [4;36;1mSQL (0.000316)[0m   [0;1mSHOW CREATE TABLE paragraphs[0m
+  [4;35;1mSQL (0.000262)[0m   [0mSHOW CREATE TABLE pcomments[0m
+  [4;36;1mSQL (0.000231)[0m   [0;1mSHOW CREATE TABLE schema_info[0m
+  [4;35;1mSQL (0.000248)[0m   [0mSHOW CREATE TABLE sessions[0m
+  [4;36;1mSQL (0.000262)[0m   [0;1mSHOW CREATE TABLE site_permissions[0m
+  [4;35;1mSQL (0.000269)[0m   [0mSHOW CREATE TABLE stories[0m
+  [4;36;1mSQL (0.000258)[0m   [0;1mSHOW CREATE TABLE story_permissions[0m
+  [4;35;1mSQL (0.000266)[0m   [0mSHOW CREATE TABLE styles[0m
+  [4;36;1mSQL (0.000247)[0m   [0;1mSHOW CREATE TABLE targets[0m
+  [4;35;1mSQL (0.000382)[0m   [0mSHOW CREATE TABLE universe_permissions[0m
+  [4;36;1mSQL (0.000258)[0m   [0;1mSHOW CREATE TABLE universes[0m
+  [4;35;1mSQL (0.001124)[0m   [0mSELECT version FROM schema_info[0m
+  [4;36;1mSQL (0.174879)[0m   [0;1mDROP DATABASE IF EXISTS `pelestats_test`[0m
+  [4;35;1mSQL (0.000483)[0m   [0mCREATE DATABASE `pelestats_test`[0m
+  [4;36;1mSQL (0.000134)[0m   [0;1mSET foreign_key_checks = 0[0m
+  [4;35;1mSQL (0.240974)[0m   [0mCREATE TABLE `blogposts` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `body` text NOT NULL,
+ `posted` datetime NOT NULL default '0000-00-00 00:00:00',
+ `user` varchar(45) NOT NULL default 'dstar',
+ `title` varchar(45) NOT NULL default '',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;36;1mSQL (0.252486)[0m   [0;1mCREATE TABLE `chapters` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `story_id` int(10) unsigned NOT NULL default '0',
+ `number` int(10) unsigned NOT NULL default '0',
+ `words` int(10) unsigned NOT NULL default '0',
+ `date` date NOT NULL default '0000-00-00',
+ `file` varchar(45) NOT NULL default '',
+ `status` varchar(255) default 'draft',
+ PRIMARY KEY (`id`),
+ UNIQUE KEY `chap_uniq` (`story_id`,`number`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;35;1mSQL (0.509977)[0m   [0mCREATE TABLE `credits` (
+ `id` int(11) NOT NULL auto_increment,
+ `user_id` int(11) NOT NULL,
+ `story_id` int(11) NOT NULL,
+ `credit_type` varchar(255) NOT NULL default 'Author',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;36;1mSQL (0.095819)[0m   [0;1mCREATE TABLE `paragraphs` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `chapter_id` int(10) unsigned NOT NULL default '0',
+ `body` text NOT NULL,
+ `order` int(10) unsigned NOT NULL default '1',
+ `flag` int(10) unsigned NOT NULL default '0',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;35;1mSQL (0.012629)[0m   [0mCREATE TABLE `pcomments` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `paragraph_id` int(10) unsigned NOT NULL default '0',
+ `body` text NOT NULL,
+ `posted` datetime NOT NULL default '0000-00-00 00:00:00',
+ `username` varchar(45) NOT NULL default 'no user',
+ `flag` int(10) unsigned NOT NULL default '0',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;36;1mSQL (0.008485)[0m   [0;1mCREATE TABLE `schema_info` (
+ `version` int(11) default NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;[0m
+  [4;35;1mSQL (0.021994)[0m   [0mCREATE TABLE `sessions` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `sessid` varchar(255) default NULL,
+ `data` text,
+ `updated_at` datetime default NULL,
+ PRIMARY KEY (`id`),
+ KEY `session_index` (`sessid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;36;1mSQL (0.009497)[0m   [0;1mCREATE TABLE `site_permissions` (
+ `id` int(11) NOT NULL auto_increment,
+ `user_id` int(11) default NULL,
+ `permission` varchar(255) default NULL,
+ `permission_holder_id` int(11) default NULL,
+ `permission_holder_type` varchar(255) default NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;35;1mSQL (0.009528)[0m   [0mCREATE TABLE `stories` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `title` varchar(255) NOT NULL default '',
+ `description` text NOT NULL,
+ `flag` int(10) unsigned NOT NULL default '0',
+ `universe_id` int(10) unsigned NOT NULL default '0',
+ `short_title` varchar(45) NOT NULL default '',
+ `order` int(10) unsigned NOT NULL default '0',
+ `file_prefix` varchar(45) NOT NULL default '',
+ `status` varchar(255) default 'draft',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;36;1mSQL (0.009400)[0m   [0;1mCREATE TABLE `story_permissions` (
+ `id` int(11) NOT NULL auto_increment,
+ `permission_holder_id` int(11) default NULL,
+ `permission_holder_type` varchar(255) default NULL,
+ `story_id` int(11) default NULL,
+ `permission` varchar(255) default NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;35;1mSQL (0.010215)[0m   [0mCREATE TABLE `styles` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `element` text NOT NULL,
+ `definition` text NOT NULL,
+ `theme` text NOT NULL,
+ `user` mediumint(8) NOT NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;36;1mSQL (0.009395)[0m   [0;1mCREATE TABLE `targets` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `story_id` int(10) unsigned NOT NULL default '0',
+ `month` int(10) unsigned NOT NULL default '0',
+ `year` int(10) unsigned NOT NULL default '0',
+ `weekly_words` int(10) unsigned NOT NULL default '2000',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;35;1mSQL (0.009027)[0m   [0mCREATE TABLE `universe_permissions` (
+ `id` int(11) NOT NULL auto_increment,
+ `permission_holder_id` int(11) default NULL,
+ `permission_holder_type` varchar(255) default NULL,
+ `universe_id` int(11) default NULL,
+ `permission` varchar(255) default NULL,
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;36;1mSQL (0.008390)[0m   [0;1mCREATE TABLE `universes` (
+ `id` int(10) unsigned NOT NULL auto_increment,
+ `name` varchar(45) NOT NULL default '',
+ `description` text NOT NULL,
+ `flag` int(10) unsigned NOT NULL default '0',
+ PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;[0m
+  [4;35;1mSQL (0.000550)[0m   [0mINSERT INTO schema_info (version) VALUES (11)[0m
+  [4;36;1mUser Columns (0.024803)[0m   [0;1mSHOW FIELDS FROM users[0m
+  [4;35;1mUser Load (0.001565)[0m   [0mSELECT * FROM users WHERE (users.user_id = 3) LIMIT 1[0m
+  [4;36;1mSitePermission Columns (0.001152)[0m   [0;1mSHOW FIELDS FROM site_permissions[0m
+  [4;35;1mSQL (0.000410)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.000482)[0m   [0;1mINSERT INTO site_permissions (`permission_holder_type`, `permission_holder_id`, `permission`, `user_id`) VALUES('User', 3, 'blogger', NULL)[0m
+  [4;35;1mSQL (0.002711)[0m   [0mCOMMIT[0m
+  [4;36;1mSitePermission Load (0.000930)[0m   [0;1mSELECT * FROM site_permissions WHERE (site_permissions.permission_holder_id = 3 AND site_permissions.permission_holder_type = 'User') [0m

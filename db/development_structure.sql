@@ -27,15 +27,6 @@ CREATE TABLE `credits` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `group_permissions` (
-  `id` int(11) NOT NULL auto_increment,
-  `group_id` int(11) default NULL,
-  `permissionable_id` int(11) default NULL,
-  `permissionable_type` int(11) default NULL,
-  `permission` varchar(255) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 CREATE TABLE `paragraphs` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `chapter_id` int(10) unsigned NOT NULL default '0',
@@ -68,6 +59,15 @@ CREATE TABLE `sessions` (
   KEY `session_index` (`sessid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `site_permissions` (
+  `id` int(11) NOT NULL auto_increment,
+  `user_id` int(11) default NULL,
+  `permission` varchar(255) default NULL,
+  `permission_holder_id` int(11) default NULL,
+  `permission_holder_type` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE `stories` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `title` varchar(255) NOT NULL default '',
@@ -78,6 +78,15 @@ CREATE TABLE `stories` (
   `order` int(10) unsigned NOT NULL default '0',
   `file_prefix` varchar(45) NOT NULL default '',
   `status` varchar(255) default 'draft',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `story_permissions` (
+  `id` int(11) NOT NULL auto_increment,
+  `permission_holder_id` int(11) default NULL,
+  `permission_holder_type` varchar(255) default NULL,
+  `story_id` int(11) default NULL,
+  `permission` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -99,6 +108,15 @@ CREATE TABLE `targets` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `universe_permissions` (
+  `id` int(11) NOT NULL auto_increment,
+  `permission_holder_id` int(11) default NULL,
+  `permission_holder_type` varchar(255) default NULL,
+  `universe_id` int(11) default NULL,
+  `permission` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE `universes` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `name` varchar(45) NOT NULL default '',
@@ -107,13 +125,4 @@ CREATE TABLE `universes` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `user_permissions` (
-  `id` int(11) NOT NULL auto_increment,
-  `user_id` int(11) default NULL,
-  `permissionable_id` int(11) default NULL,
-  `permissionable_type` int(11) default NULL,
-  `permission` varchar(255) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO schema_info (version) VALUES (5)
+INSERT INTO schema_info (version) VALUES (11)

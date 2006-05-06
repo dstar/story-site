@@ -1,5 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 admin:
-  user_id: 3
-velvet:
-  id: 4
+  id: 1
+  permission_holder_id: 3
+  permission_holder_type: User
+  permission: blogger

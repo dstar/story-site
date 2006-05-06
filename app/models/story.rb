@@ -5,7 +5,7 @@ class Story < ActiveRecord::Base
 
   has_many :chapters
 
-  has_many :userpermissions, :as => :permissionable
+  has_many :story_permissions
 
   #hack, because I can't figure out a way to make has_many :authors work
   has_many :credits

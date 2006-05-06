@@ -51,3 +51,5 @@ end
 # end
 
 # Include your application configuration below
+require 'ppstring.rb'
+

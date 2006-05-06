@@ -2,16 +2,16 @@ class BlogpostsController < ApplicationController
 
   def setup_authorize_hash
     @authorization = { 
-      "destroy" => proc { user = User.find_by_user_id(@authinfo[:user_id])
-        user.story_permissions(0) == "Author" ? true :  admonish("Only the author can delete blog posts!") },
-      "update"  => proc { user = User.find_by_user_id(@authinfo[:user_id])
-        user.story_permissions(0) == "Author" ? true :  admonish("Only the author can update blog posts!") },
-      "edit"    => proc { user = User.find_by_user_id(@authinfo[:user_id])
-        user.story_permissions(0) == "Author" ? true :  admonish("Only the author can edit blog posts!") },
-      "create"  => proc { user = User.find_by_user_id(@authinfo[:user_id])
-        user.story_permissions(0) == "Author" ? true :  admonish("Only the author can create blog posts!") },
-      "new"     => proc { user = User.find_by_user_id(@authinfo[:user_id])
-        user.story_permissions(0) == "Author" ? true :  admonish("Only the author can create blog posts!") },
+      "destroy" => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+            user.has_site_permission("blogger") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "update"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+              user.has_site_permission("blogger") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "edit"    => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+                user.has_site_permission("blogger") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "create"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+                  user.has_site_permission("blogger") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "new"     => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+                    user.has_site_permission("blogger") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
       "show"    => proc { true },
       "list"    => proc { true },
       "archive" => proc { true },
@@ -46,6 +46,7 @@ class BlogpostsController < ApplicationController
 
   def create
     @blogpost = Blogpost.new(params[:blogpost])
+    @blogpost.posted = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless @blogpost.posted
     if @blogpost.save
       flash[:notice] = 'Blogpost was successfully created.'
       redirect_to :action => 'list'

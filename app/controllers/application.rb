@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    $stderr.write("\n\n\nparams are #{params[:action]}\n\n\n")
+#    breakpoint "testauth"
     @authorization[params[:action]].call
   end
   
