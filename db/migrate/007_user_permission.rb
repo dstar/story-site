@@ -1,4 +1,4 @@
-class UserPermission < ActiveRecord::Migration
+class DropUserPermission < ActiveRecord::Migration
   def self.up
 	drop_table :user_permissions
   end

@@ -1,4 +1,4 @@
-class Chapter < ActiveRecord::Migration
+class AddStatusColumnToChapter < ActiveRecord::Migration
   def self.up
     add_column :chapters, :status, :string, :default => 'draft'
   end
