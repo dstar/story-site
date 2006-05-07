@@ -5,3 +5,21 @@ first:
   permission_holder_type: User
   story_id: 7
   permission: author
+second:
+  id: 2
+  permission_holder_id: 17
+  permission_holder_type: User
+  story_id: 7
+  permission: beta-reader
+third:
+  id: 3
+  permission_holder_id: 3
+  permission_holder_type: User
+  story_id: 8
+  permission: author
+fourth:
+  id: 4
+  permission_holder_id: 17
+  permission_holder_type: User
+  story_id: 8
+  permission: beta-reader

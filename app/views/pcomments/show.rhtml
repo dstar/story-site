@@ -1,5 +1,6 @@
-<% for column in Pcomments.content_columns %>
+<% for column in Pcomment.content_columns %>
 <p>
+<% logger.debug "\n\n\n\n***DEBUG: #{pp_s column.name}\n\n\n\n" %>
   <b><%= column.human_name %>:</b> <%=h @pcomments.send(column.name) %>
 </p>
 <% end %>

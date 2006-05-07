@@ -1,4 +1,31 @@
 class PcommentsController < ApplicationController
+
+  def setup_authorize_hash
+    if ! @paragraph
+      @paragraph = @pcomment.paragraph
+    end
+    @story_id = @paragraph.chapter.story.id
+    
+    @authorization = { 
+      "destroy" => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+            user.has_story_permission(@story_id,"author") or user.has_story_permission(@story_id,"beta-reader") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "update"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+              user.has_story_permission(@story_id,"author") or user.has_story_permission(@story_id,"beta-reader") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "edit"    => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+                user.has_story_permission(@story_id,"author") or user.has_story_permission(@story_id,"beta-reader") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "create"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+                  user.has_story_permission(@story_id,"author") or user.has_story_permission(@story_id,"beta-reader") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "new"     => proc {if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+                    user.has_story_permission(@story_id,"author") or user.has_story_permission(@story_id,"beta-reader") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "markread"     => proc {if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+                    user.has_story_permission(@story_id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "show"    => proc { true },
+      "list"    => proc { true },
+      "index"   => proc { true }
+    }
+  end
+
+
   def index
     list
     render :action => 'list'
@@ -12,9 +39,9 @@ class PcommentsController < ApplicationController
     @pcomment = Pcomment.find(:all, :conditions => 'flag = 0')
   end
 
-  def show
-    @pcomment = Pcomment.find(params[:id])
-  end
+#  def show
+#    @pcomment = Pcomment.find(params[:id])
+#  end
 
   def new
     @pcomment = Pcomment.new
@@ -23,6 +50,7 @@ class PcommentsController < ApplicationController
 
   def create
     @pcomment = Pcomment.new(params[:pcomment])
+    @pcomment.posted = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless @pcomment.posted
     if @pcomment.save
       flash[:notice] = 'Paragraph comment was successfully created.'
       redirect_to :controller => 'chapters', :action => 'show',
@@ -55,6 +83,7 @@ class PcommentsController < ApplicationController
       :action => 'show', :id => bar
     end
   end
+
   def markread
     if @authinfo[:username]
       foo = Pcomment.find(params[:id])
