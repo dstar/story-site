@@ -1,5 +1,28 @@
 class StoriesController < ApplicationController
 
+  def setup_authorize_hash
+    if params[:id] and ! @universe
+      @universe = Story.find(params[:id]).universe
+    end    
+    
+    @authorization = { 
+      "destroy" => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+            user.has_story_permission(@story.id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "update"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+              user.has_story_permission(@story.id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "edit"    => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+                user.has_story_permission(@story.id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "create"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+                  user.has_universe_permission(@universe.id,"owner") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "new"     => proc {if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
+                    user.has_universe_permission(@universe.id,"owner") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
+      "show"    => proc { true },
+      "list"    => proc { true },
+      "showByName" => proc { true },
+      "showBySubD" => proc { true },
+      "index"   => proc { true }
+    }
+  end
 
 
   layout "stories"
@@ -66,7 +89,7 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     if @story.update_attributes(params[:story])
       flash[:notice] = 'Story was successfully updated.'
-      redirect_to :action => 'show', :id => @story
+      redirect_to :action => 'show', :id => @story.id
     else
       render :action => 'edit'
     end
@@ -83,16 +106,26 @@ class StoriesController < ApplicationController
 
     unless (request.subdomains(0).first == 'playground')
 
-      @story = Story.find(params[:id])
 
       home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
-      universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @story.universe.id  }">#{@story.universe.name}</a>|
 
+      unless params[:action] == 'new' or params[:action] == 'create'
+        @story = Story.find(params[:id])
+        universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @story.universe.id  }">#{@story.universe.name}</a>|
+      else
+        @universe = Universe.find(params[:universe_id])
+        universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @universe.id  }">#{@universe.name}</a>|
+      end
         @breadcrumbs = "#{home_link}"
       @breadcrumbs += " > #{universe_link }"
 
-      if params[:action] =~ /list/
+      case params[:action] 
+      when /list/
         @page_title = 'Story List'
+      when 'new'
+        @page_title = 'New Story'
+      when 'create'
+        @page_title = 'New Story'
       else
         @page_title = @story.title
         @breadcrumbs += " > #{@story.title }"
@@ -105,7 +138,7 @@ class StoriesController < ApplicationController
   end
 
   def handle_url
-    unless (request.subdomains(0).first == 'playground')
+    unless (request.subdomains(0).first == 'playground') or params[:action] == 'new' or params[:action] == 'create'
       params[:id] = Story.find_by_title(request.subdomains.first).id unless params[:id]
     end
   end
