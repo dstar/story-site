@@ -12,7 +12,6 @@ class StoriesControllerTest < Test::Unit::TestCase
   fixtures :universe_permissions
   fixtures :php_sessions
   fixtures :universes
-  fixtures :stories
 
   def setup
     @controller = StoriesController.new

@@ -3,4 +3,9 @@ admin:
   id: 1
   permission_holder_id: 3
   permission_holder_type: User
+  permission: administrator
+blogger:
+  id: 2
+  permission_holder_id: 3
+  permission_holder_type: User
   permission: blogger

@@ -1,4 +1,42 @@
 class UniversesController < ApplicationController
+
+  def setup_authorize_hash
+    if params[:id] and ! @universe
+      @universe = Story.find(params[:id]).universe
+    end    
+
+    @authorization = { 
+      "destroy"    => proc { check_universe_permission("owner") },
+      "update"     => proc { check_universe_permission("owner") },
+      "edit"       => proc { check_universe_permission("owner") },
+      "create"     => proc { check_site_permission("administrator") },
+      "new"        => proc { check_site_permission("administrator") },
+      "show"       => proc { true },
+      "list"       => proc { true },
+      "showByName" => proc { true },
+      "showBySubD" => proc { true },
+      "index"      => proc { true }
+    }
+  end
+
+  def check_site_permission(permission)
+    if @authinfo[:user_id] 
+      user = User.find_by_user_id(@authinfo[:user_id])
+      user.has_site_permission(permission) ? true : admonish("You are not authorized for this action!") 
+    else 
+      admonish("You are not authorized for this action!") 
+    end 
+  end
+
+  def check_universe_permission(permission)
+    if @authinfo[:user_id] 
+      user = User.find_by_user_id(@authinfo[:user_id])
+      user.has_universe_permission(@universe.id,permission) ? true : admonish("You are not authorized for this action!") 
+    else 
+      admonish("You are not authorized for this action!") 
+    end 
+  end
+
   def index
     list
     render :action => 'list'
@@ -39,7 +77,7 @@ class UniversesController < ApplicationController
     @universe = Universe.find(params[:id])
     if @universe.update_attributes(params[:universe])
       flash[:notice] = 'Universe was successfully updated.'
-      redirect_to :action => 'show', :id => @universe
+      redirect_to :action => 'show', :id => @universe.id
     else
       render :action => 'edit'
     end
@@ -59,8 +97,11 @@ class UniversesController < ApplicationController
 
     @breadcrumbs = "#{home_link}"
 
-    if params[:action] =~ /list|index/
+    case params[:action] 
+    when /list|index/
       @page_title = 'Universe List'
+    when /create|new/
+      @page_title = 'New Universe'
     else
       @universe = Universe.find(params[:id])
       @page_title = @universe.name
