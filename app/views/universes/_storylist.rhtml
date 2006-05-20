@@ -1,0 +1,8 @@
+  <div class="worldlist">
+    <u><%= storylist.name %></u>
+    <ul>
+	<% Story.OrderedListByUniverse(storylist.id).each do |story| %>
+          <li><%= link_to story.title, index_url(:host => StoryHost(story.id)) %> <%= "<em>UPDATED!</em>" if story.chapters.find(:first, :order => "date DESC") and Date.today - story.chapters.find(:first, :order => "date DESC").date  < 7 %>
+	<% end %>
+    </ul>
+  </div>

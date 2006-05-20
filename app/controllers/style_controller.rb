@@ -1,4 +1,13 @@
 class StyleController < ApplicationController
+
+  def setup_authorize_hash
+    @authorization = { 
+      "show"   => proc { true },
+      "customize" => proc { @authinfo[:user_id] ? true :  admonish("You must be logged in to customize your styles.") },
+      "save_style" => proc { @authinfo[:user_id] ? true :  admonish("You must be logged in to customize your styles.") },
+    }
+  end
+
   def show
     @theme = cookies[:style]
     @theme = 'default' unless @theme
@@ -36,6 +45,7 @@ class StyleController < ApplicationController
     @styles_by_bodies.each do |style, element|
       @stylesheet = @stylesheet + "#{element} { #{style} }\n"
     end
+    render(:layout => false)
   end
 
   def customize
@@ -63,6 +73,7 @@ class StyleController < ApplicationController
         #canonicalize definition
         definition.gsub!(/\s+/, " ")
         definition.gsub!(/ *: */, " : ")
+        definition.gsub!(/ *; */, "; ")
         definition.gsub!(/^\s+/, "")
         definition.gsub!(/\s+$/, "")
 
@@ -85,4 +96,10 @@ class StyleController < ApplicationController
       end
     end
   end
+
+  def setup_page_vars
+    @breadcrumbs = 'Bleah! Bleah! Bleah!'
+  end
+
+
 end

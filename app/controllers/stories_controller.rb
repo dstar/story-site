@@ -72,7 +72,7 @@ class StoriesController < ApplicationController
   def create
     @story = Story.new(params[:story])
     @universes = Universe.find_all
-    if @story.save
+     if @story.save
       flash[:notice] = 'Story was successfully created.'
       redirect_to :action => 'list'
     else
@@ -139,7 +139,7 @@ class StoriesController < ApplicationController
 
   def handle_url
     unless (request.subdomains(0).first == 'playground') or params[:action] == 'new' or params[:action] == 'create'
-      params[:id] = Story.find_by_title(request.subdomains.first).id unless params[:id]
+      params[:id] = Story.find_by_short_title(request.subdomains(0).first).id unless params[:id]
     end
   end
 

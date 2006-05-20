@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :setup_page_vars
 
-  before_filter :setup_auth_structures
+  before_filter :setup_auth_structures 
   before_filter :setup_authorize_hash 
   before_filter :authenticate
 
@@ -23,7 +23,9 @@ class ApplicationController < ActionController::Base
     @sdwtest = "testing"
     #We use @session[:key] to pass around the php session_id
     @sid = cookies[:phpbb2mysql_sid]
-    cookies[:login_redirect_to] = { :value => url_for, :domain => "pele.cx" }
+    unless controller_name == "style" and params[:action] == "show"
+      cookies[:login_redirect_to] = { :value => url_for, :domain => "pele.cx" }
+    end
     @authinfo = Hash.new
     if @sid
       begin
