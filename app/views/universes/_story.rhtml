@@ -1,4 +1,5 @@
 <div>
-  <h3><%= link_to story.title, :controller => "stories", :action => "show", :id => story %></h3>
+  <li><p><b><%= link_to story.title, :controller => "stories", :action => "show", :id => story %></b></p>
   <%= textilize(story.description) %>
+  </li>
 </div>
