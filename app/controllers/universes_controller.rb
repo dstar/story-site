@@ -3,9 +3,9 @@ class UniversesController < ApplicationController
   def setup_authorize_hash
     if params[:id] and ! @universe
       @universe = Story.find(params[:id]).universe
-    end    
+    end
 
-    @authorization = { 
+    @authorization = {
       "destroy"    => proc { check_universe_permission("owner") },
       "update"     => proc { check_universe_permission("owner") },
       "edit"       => proc { check_universe_permission("owner") },
@@ -20,21 +20,21 @@ class UniversesController < ApplicationController
   end
 
   def check_site_permission(permission)
-    if @authinfo[:user_id] 
+    if @authinfo[:user_id]
       user = User.find_by_user_id(@authinfo[:user_id])
-      user.has_site_permission(permission) ? true : admonish("You are not authorized for this action!") 
-    else 
-      admonish("You are not authorized for this action!") 
-    end 
+      user.has_site_permission(permission) ? true : admonish("You are not authorized for this action!")
+    else
+      admonish("You are not authorized for this action!")
+    end
   end
 
   def check_universe_permission(permission)
-    if @authinfo[:user_id] 
+    if @authinfo[:user_id]
       user = User.find_by_user_id(@authinfo[:user_id])
-      user.has_universe_permission(@universe.id,permission) ? true : admonish("You are not authorized for this action!") 
-    else 
-      admonish("You are not authorized for this action!") 
-    end 
+      user.has_universe_permission(@universe.id,permission) ? true : admonish("You are not authorized for this action!")
+    else
+      admonish("You are not authorized for this action!")
+    end
   end
 
   def index
@@ -92,12 +92,11 @@ class UniversesController < ApplicationController
 
     logger.debug "#{params.inspect}"
 
-    home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
-
+    home_link = "#{link_to 'Home', index_url(:host => StoryHost('playground'}"
 
     @breadcrumbs = "#{home_link}"
 
-    case params[:action] 
+    case params[:action]
     when /list|index/
       @page_title = 'Universe List'
     when /create|new/

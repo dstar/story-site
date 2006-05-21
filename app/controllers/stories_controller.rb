@@ -3,9 +3,9 @@ class StoriesController < ApplicationController
   def setup_authorize_hash
     if params[:id] and ! @universe
       @universe = Story.find(params[:id]).universe
-    end    
-    
-    @authorization = { 
+    end
+
+    @authorization = {
       "destroy" => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
             user.has_story_permission(@story.id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
       "update"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
@@ -45,7 +45,7 @@ class StoriesController < ApplicationController
       list
       render :action => 'playground', :layout => 'playground'
     else
-    @story = Story.find(params[:id])      
+    @story = Story.find(params[:id])
       render :action => 'show'
     end
   end
@@ -107,19 +107,19 @@ class StoriesController < ApplicationController
     unless (request.subdomains(0).first == 'playground')
 
 
-      home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
+      home_link = link_to 'Home', index_url(:host => StoryHost('playground'))
 
       unless params[:action] == 'new' or params[:action] == 'create'
         @story = Story.find(params[:id])
-        universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @story.universe.id  }">#{@story.universe.name}</a>|
+        universe_link =  link_to @story.universe.name, url_for(:host => StoryHost('playground'), :controller => 'universes', :action => 'show', :id => @story.universe.id)
       else
         @universe = Universe.find(params[:universe_id])
-        universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @universe.id  }">#{@universe.name}</a>|
+        universe_link =  link_to @universe.name, url_for(:host => StoryHost('playground'), :controller => 'universes', :action => 'show', :id => @universe.id)
       end
         @breadcrumbs = "#{home_link}"
-      @breadcrumbs += " > #{universe_link }"
+      @breadcrumbs += " &gt; #{universe_link }"
 
-      case params[:action] 
+      case params[:action]
       when /list/
         @page_title = 'Story List'
       when 'new'
@@ -128,10 +128,10 @@ class StoriesController < ApplicationController
         @page_title = 'New Story'
       else
         @page_title = @story.title
-        @breadcrumbs += " > #{@story.title }"
+        @breadcrumbs += " &gt; #{@story.title }"
       end
     else
-      home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
+      home_link = link_to 'Home', index_url(:host => StoryHost('playground'))
       @breadcrumbs = "#{home_link}"
       @page_title = "Pele's Playground"
     end

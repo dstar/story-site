@@ -4,7 +4,7 @@ class ChaptersController < ApplicationController
     if params[:id] and ! @story_id
       @story_id = Chapter.find(params[:id]).story.id
     end
-    @authorization = { 
+    @authorization = {
       "destroy" => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
             user.has_story_permission(@story_id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
       "update"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
@@ -96,7 +96,7 @@ class ChaptersController < ApplicationController
     @chapter = Chapter.find(params[:id])
 
     unless params[:file].blank?
-      process_file(params[:file],@chapter.id) 
+      process_file(params[:file],@chapter.id)
       Paragraph.delete_all ["chapter_id = ?", chapter.id]
     end
 
@@ -134,9 +134,9 @@ class ChaptersController < ApplicationController
       para.body = line
       para.order = para_count
       para.chapter_id = chapter_id
-    
+
       para.save
-    
+
       para_count += 1
     }
 
@@ -151,13 +151,13 @@ class ChaptersController < ApplicationController
 
       @chapter = Chapter.find(params[:id])
 
-      home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
-      universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @chapter.story.universe.id  }">#{@chapter.story.universe.name}</a>|
-        story_link = %Q|<a href="#{url_for  :controller => 'stories', :action => 'show', :id => @chapter.story.id  }">#{@chapter.story.title}</a>|
+      home_link = link_to 'Home', index_url(:host => StoryHost('playground')
+      universe_link =  link_to @chapter.story.universe.name, url_for( :host => StoryHost('playground'), :controller => 'universes', :action => 'show', :id => @chapter.story.universe.id)
+      story_link = link_to @chapter.story.title, index_url(:host => StoryHost(@chapter.story.id))
 
-        @breadcrumbs = "#{home_link}"
-      @breadcrumbs += " > #{universe_link }"
-      @breadcrumbs += " > #{story_link }"
+      @breadcrumbs = "#{home_link}"
+      @breadcrumbs += " &gt; #{universe_link }"
+      @breadcrumbs += " &gt; #{story_link }"
 
       if params[:action] =~ /list/
         @page_title = 'Chapter List'
