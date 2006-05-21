@@ -1,8 +1,7 @@
-<% if @authinfo[:user_id] and @story.authors.include? User.find(@authinfo[:user_id]) %>
+<% if @authinfo[:user_id] and  User.find(@authinfo[:user_id]).has_story_permission(chapter.story,'author') %>
 <%= link_to "(Edit)", :controller => 'chapters', :action => 'edit', :id => chapter.id %>
 <% end %>
-<%= link_to "(Show)", chapter_url(:chapter => chapter) %>
-Part <%= chapter.number %>
-(<%= chapter.date %>)
-WC: <%= chapter.words %> <%= "<em><strong>DRAFT</strong></em>" if chapter.status == "draft" %><br/>
-
+<% if chapter.status == "released" or ( @authinfo[:user_id] and ( User.find(@authinfo[:user_id]).has_story_permission(chapter.story,'author') or User.find(@authinfo[:user_id]).has_story_permission(chapter.story,'beta-reader') ) ) %>
+<%= "<em><strong>DRAFT</strong></em>" if chapter.status == "draft" %> <%= link_to "Part #{chapter.number}", chapter_url(:chapter => chapter) %>
+(<%= chapter.date %>, <%= chapter.words %> words) <br/>
+<% end %>
