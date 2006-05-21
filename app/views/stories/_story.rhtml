@@ -1,5 +1,5 @@
 <div>
-  <li><p><b><%= link_to story.title, index_url(:host => StoryHost(story.id)) %></b></p>
+  <li><h4><%= link_to story.title, index_url(:host => StoryHost(story.id)) %></h4>
   <%= textilize(story.description) %>
   </li>
 </div>
