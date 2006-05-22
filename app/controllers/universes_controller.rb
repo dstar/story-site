@@ -90,12 +90,6 @@ class UniversesController < ApplicationController
 
   def setup_page_vars
 
-    logger.debug "#{params.inspect}"
-
-    home_link = "#{link_to 'Home', index_url(:host => StoryHost('playground'}"
-
-    @breadcrumbs = "#{home_link}"
-
     case params[:action]
     when /list|index/
       @page_title = 'Universe List'
@@ -104,7 +98,6 @@ class UniversesController < ApplicationController
     else
       @universe = Universe.find(params[:id])
       @page_title = @universe.name
-      @breadcrumbs += " > #{@universe.name }"
     end
   end
 

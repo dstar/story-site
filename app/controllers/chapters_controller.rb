@@ -150,20 +150,10 @@ class ChaptersController < ApplicationController
     if params[:id]
 
       @chapter = Chapter.find(params[:id])
-
-      home_link = link_to 'Home', index_url(:host => StoryHost('playground')
-      universe_link =  link_to @chapter.story.universe.name, url_for( :host => StoryHost('playground'), :controller => 'universes', :action => 'show', :id => @chapter.story.universe.id)
-      story_link = link_to @chapter.story.title, index_url(:host => StoryHost(@chapter.story.id))
-
-      @breadcrumbs = "#{home_link}"
-      @breadcrumbs += " &gt; #{universe_link }"
-      @breadcrumbs += " &gt; #{story_link }"
-
       if params[:action] =~ /list/
         @page_title = 'Chapter List'
       else
         @page_title = @chapter.story.title
-        @breadcrumbs += " > Chapter #{@chapter.number }"
       end
 
     end

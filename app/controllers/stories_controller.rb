@@ -101,23 +101,12 @@ class StoriesController < ApplicationController
   end
 
   def setup_page_vars
-
-    logger.debug "#{params.inspect}"
-
     unless (request.subdomains(0).first == 'playground')
-
-
-      home_link = link_to 'Home', index_url(:host => StoryHost('playground'))
-
       unless params[:action] == 'new' or params[:action] == 'create'
         @story = Story.find(params[:id])
-        universe_link =  link_to @story.universe.name, url_for(:host => StoryHost('playground'), :controller => 'universes', :action => 'show', :id => @story.universe.id)
       else
         @universe = Universe.find(params[:universe_id])
-        universe_link =  link_to @universe.name, url_for(:host => StoryHost('playground'), :controller => 'universes', :action => 'show', :id => @universe.id)
       end
-        @breadcrumbs = "#{home_link}"
-      @breadcrumbs += " &gt; #{universe_link }"
 
       case params[:action]
       when /list/
@@ -128,11 +117,8 @@ class StoriesController < ApplicationController
         @page_title = 'New Story'
       else
         @page_title = @story.title
-        @breadcrumbs += " &gt; #{@story.title }"
       end
     else
-      home_link = link_to 'Home', index_url(:host => StoryHost('playground'))
-      @breadcrumbs = "#{home_link}"
       @page_title = "Pele's Playground"
     end
   end

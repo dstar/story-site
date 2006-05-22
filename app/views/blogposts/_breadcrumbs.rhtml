@@ -1,0 +1,5 @@
+<%= link_to 'Home', index_url(:host => StoryHost('playground')) %>
+<% if params[:action] =~ /archive/ %>
+&gt; Blog Archive Page <%= params[:page] %>
+<% end %>
+

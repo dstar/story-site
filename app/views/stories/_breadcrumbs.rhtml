@@ -1,0 +1,14 @@
+   <% unless (request.subdomains(0).first == 'playground') %>
+
+
+     <%= link_to 'Home', index_url(:host => StoryHost('playground')) %>
+
+     <% unless params[:action] == 'new' or params[:action] == 'create' %>
+        &gt; <%= link_to @story.universe.name, url_for(:host => StoryHost('playground'), :controller => 'universes', :action => 'show', :id => @story.universe.id) %>
+	&gt; <%= @story.title %>
+      <% else %>
+        &gt; <%= link_to @universe.name, url_for(:host => StoryHost('playground'), :controller => 'universes', :action => 'show', :id => @universe.id) %>
+      <% end %>
+   <% else %>
+      <%= link_to 'Home', index_url(:host => StoryHost('playground')) %>
+   <% end %>
