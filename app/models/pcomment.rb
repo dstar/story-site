@@ -4,7 +4,7 @@ class Pcomment < ActiveRecord::Base
   def self.listForPara(para_id)
     find(:all,
       :conditions => ["paragraph_id = ? and flag < 2", para_id],
-      :order => "posted asc")
+      :order => "created_at asc")
   end
   def self.chapterID(pcomment_id)
     temp = find(:first,

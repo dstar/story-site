@@ -1,12 +1,8 @@
 <%= error_messages_for 'pcomment' %>
 
 <!--[form:pcomments]-->
-<p><label for="pcomment_body">Body</label><br/>
+<p><label for="pcomment_body">Comment:</label><br/>
 <%= text_area 'pcomment', 'body'  %></p>
-
-<p><label for="pcomment_posted">Posted</label><br/>
-<%= datetime_select 'pcomment', 'posted'  %></p>
-
 
 <%= hidden_field "pcomment", "paragraph_id" %>
 <!--[eoform:pcomments]-->

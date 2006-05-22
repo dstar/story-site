@@ -1,4 +1,9 @@
-<h1>New pcomments</h1>
+<h1>Comment on <%= @pcomment.paragraph.chapter.story.title %> Chapter <%= @pcomment.paragraph.chapter.number %> </h1>
+
+<p> Paragraph: </p>
+<div class="parabody">
+    <%= textilize(@pcomment.paragraph.body) %>
+</div>
 
 <%= start_form_tag :action => 'create' %>
   <%= render :partial => 'form' %>

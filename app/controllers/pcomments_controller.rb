@@ -50,7 +50,6 @@ class PcommentsController < ApplicationController
 
   def create
     @pcomment = Pcomment.new(params[:pcomment])
-    @pcomment.posted = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless @pcomment.posted
     if @pcomment.save
       flash[:notice] = 'Paragraph comment was successfully created.'
       redirect_to :controller => 'chapters', :action => 'show',
@@ -95,14 +94,10 @@ class PcommentsController < ApplicationController
   end
 
   def setup_page_vars
-
-    logger.debug "#{params.inspect}"
-
     if params[:id]
 
       @pcomment = Pcomment.find(params[:id])
 
-      home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
       universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @pcomment.paragraph.chapter.story.universe.id  }">#{@pcomment.paragraph.chapter.story.universe.name}</a>|
       story_link = %Q|<a href="#{url_for  :controller => 'stories', :action => 'show', :id => @pcomment.paragraph.chapter.story.id  }">#{@pcomment.paragraph.chapter.story.title}</a>|
       chapter_link =   %Q|<a href="#{url_for  :controller => 'chapters', :action => 'show', :id => @pcomment.paragraph.chapter.id  }">Chapter #{@pcomment.paragraph.chapter.number}</a>|
