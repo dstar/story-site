@@ -2,20 +2,11 @@ class BlogpostsController < ApplicationController
 
   def setup_authorize_hash
     @authorization = { 
-      "destroy" => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-            user.has_site_permission("blogger") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "update"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-              user.has_site_permission("blogger") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "edit"    => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-                user.has_site_permission("blogger") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "create"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-                  user.has_site_permission("blogger") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "new"     => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-                    user.has_site_permission("blogger") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "show"    => proc { true },
-      "list"    => proc { true },
-      "archive" => proc { true },
-      "index"   => proc { true }
+      "destroy" => [ {'permission_type'=>"SitePermission", 'permission'=>"blogger", },],
+      "update"  => [ {'permission_type'=>"SitePermission", 'permission'=>"blogger", },],
+      "edit"    => [ {'permission_type'=>"SitePermission", 'permission'=>"blogger", },],
+      "create"  => [ {'permission_type'=>"SitePermission", 'permission'=>"blogger", },],
+      "new"     => [ {'permission_type'=>"SitePermission", 'permission'=>"blogger", },],
     }
   end
 
@@ -75,16 +66,8 @@ class BlogpostsController < ApplicationController
   end
 
   def setup_page_vars
-
-    logger.debug "#{params.inspect}"
-
-    home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
-
-    @breadcrumbs = "#{home_link}"
-
     if params[:action] =~ /archive/
       @page_title = "Blog Archive Page #{params[:page]}"
-      @breadcrumbs += " > Blog Archive Page #{params[:page]}"
     else
       @page_title = "Blog"
     end

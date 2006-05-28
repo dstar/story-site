@@ -79,6 +79,7 @@ class ApplicationController < ActionController::Base
     else
       admonish("You are not authorized for this action!")
     end
+
   end
   
   def admonish(message)

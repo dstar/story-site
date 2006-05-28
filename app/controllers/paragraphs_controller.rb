@@ -1,20 +1,19 @@
 class ParagraphsController < ApplicationController
-  def index
-    list
-    render :action => 'list'
+
+  def setup_authorize_hash
+    @authorization = {
+      "destroy" => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+      "update"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+      "edit"    => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+      "create"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+      "new"     => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+    }
   end
+
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
          :redirect_to => { :action => :list }
-
-  def list
-    @paragraphs = Paragraph.find_all
-  end
-
-  def show
-    @paragraphs = Paragraph.find(params[:id])
-  end
 
   def new
     @paragraphs = Paragraph.new
@@ -23,23 +22,13 @@ class ParagraphsController < ApplicationController
     @story = Story.find(Chapter.find(@paragraphs.chapter_id).story_id)
   end
 
-  def tempcreate
-    @paracollect = []
-    @paragraphs = Paragraph.new(params[:paragraphs])
-    @body = @paragraphs.body.split("\r\n\r\n")
-    for i in 0...@body.length
-      @para = Paragraph.new(params[:paragraphs])
-      @para.order = @para.order + i
-      @para.body = @body[i]
-      @paracollect.push(@para)
-    end
-  end
-
   def create
     @paragraphs = Paragraph.new(params[:paragraphs])
     @paracollect = []
     saved = 0
-    body = @paragraphs.body.split("\r\n\r\n")
+    @paragraphs.body.gsub!(/\r/,'')
+    body = @paragraphs.body.split("\n\n")
+
     for i in 0...body.length
       para = Paragraph.new(params[:paragraphs])
       para.order = para.order + i
@@ -72,5 +61,16 @@ class ParagraphsController < ApplicationController
   def destroy
     Paragraph.find(params[:id]).destroy
     redirect_to :action => 'list'
+  end
+
+  def setup_page_vars
+    if params[:id] 
+      @chapter_id = Paragraph.find(params[:id]).chapter.id
+      @story_id = Paragraph.find(params[:id]).chapter.story.id
+    elsif params["chapter_id"] or params[:paragraphs]
+      @chapter_id = params["chapter_id"] if params["chapter_id"]
+      @chapter_id = params[:paragraphs]['chapter_id'] if params[:paragraphs] and params[:paragraphs]['chapter_id']
+      @story_id = Chapter.find(@chapter_id).story.id
+    end
   end
 end

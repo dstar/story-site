@@ -39,5 +39,11 @@ class User < ActiveRecord::Base
     return has_permission
   end
 
+  def User.has_permission(user, permission) 
+    if user and user.id != -1
+      return true
+    end
+  end
+
   set_primary_key "user_id"
 end

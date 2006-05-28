@@ -1,6 +1,7 @@
 class Paragraph < ActiveRecord::Base
   belongs_to :chapter
   has_many :pcomments
+
   def self.paraList(chapter_id)
     find(:all,
         :conditions => ["chapter_id = ?",chapter_id],

@@ -5,22 +5,24 @@ class StoriesController < ApplicationController
       @universe = Story.find(params[:id]).universe
     end
 
+    if @universe
+      @universe_id = @universe.id
+    else
+      @universe_id = ''
+    end
+
+    if @story
+      @story_id = @story.id
+    else
+      @story_id = ''
+    end
+
     @authorization = {
-      "destroy" => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-            user.has_story_permission(@story.id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "update"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-              user.has_story_permission(@story.id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "edit"    => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-                user.has_story_permission(@story.id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "create"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-                  user.has_universe_permission(@universe.id,"owner") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "new"     => proc {if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-                    user.has_universe_permission(@universe.id,"owner") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "show"    => proc { true },
-      "list"    => proc { true },
-      "showByName" => proc { true },
-      "showBySubD" => proc { true },
-      "index"   => proc { true }
+      "destroy" => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+      "update"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+      "edit"    => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+      "create"  => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
+      "new"     => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
     }
   end
 

@@ -2,7 +2,6 @@ class PhpSessionController < ApplicationController
 
   def setup_authorize_hash
     @authorization = { 
-      "has_session"   => proc { true }
     }
   end
 

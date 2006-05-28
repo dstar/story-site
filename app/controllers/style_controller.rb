@@ -2,9 +2,8 @@ class StyleController < ApplicationController
 
   def setup_authorize_hash
     @authorization = { 
-      "show"   => proc { true },
-      "customize" => proc { @authinfo[:user_id] ? true :  admonish("You must be logged in to customize your styles.") },
-      "save_style" => proc { @authinfo[:user_id] ? true :  admonish("You must be logged in to customize your styles.") },
+      "customize"  => [ { 'permission_type'=>"User", 'permission'=>"logged_in", } ],
+      "save_style" => [ { 'permission_type'=>"User", 'permission'=>"logged_in", } ],
     }
   end
 

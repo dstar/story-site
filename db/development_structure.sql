@@ -40,7 +40,7 @@ CREATE TABLE `pcomments` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `paragraph_id` int(10) unsigned NOT NULL default '0',
   `body` text NOT NULL,
-  `posted` datetime NOT NULL default '0000-00-00 00:00:00',
+  `created_at` datetime default NULL,
   `username` varchar(45) NOT NULL default 'no user',
   `flag` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`)
@@ -125,4 +125,4 @@ CREATE TABLE `universes` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO schema_info (version) VALUES (11)
+INSERT INTO schema_info (version) VALUES (12)

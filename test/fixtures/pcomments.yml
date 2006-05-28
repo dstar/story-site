@@ -5,53 +5,53 @@ pcomment_7:
   paragraph_id: 84
   id: 7
   flag: 0
-  posted: 2006-04-17 22:50:00 -05:00
+  created_at: 2006-04-17 22:50:00 -05:00
 pcomment_8: 
   body: testing testing testing
   username: dstar
   paragraph_id: 5
   id: 8
   flag: 0
-  posted: 2006-04-19 13:21:00 -05:00
+  created_at: 2006-04-19 13:21:00 -05:00
 pcomment_1: 
   body: Short sentences are fun.
   username: Victor
   paragraph_id: 4
   id: 1
   flag: 0
-  posted: 2006-04-17 21:39:00 -05:00
+  created_at: 2006-04-17 21:39:00 -05:00
 pcomment_2: 
   body: When masturbation doesn't work, you have serious problems.
   username: Nonny
   paragraph_id: 2
   id: 2
   flag: 0
-  posted: 2006-04-17 21:29:00 -05:00
+  created_at: 2006-04-17 21:29:00 -05:00
 pcomment_3: 
   body: You really like short, uninformative comments, don't you?
   username: Velvet
   paragraph_id: 4
   id: 3
   flag: 0
-  posted: 2006-04-17 21:43:00 -05:00
+  created_at: 2006-04-17 21:43:00 -05:00
 pcomment_4: 
   body: Anne is _hot_!
   username: Victor
   paragraph_id: 7
   id: 4
   flag: 0
-  posted: 2006-04-17 21:50:00 -05:00
+  created_at: 2006-04-17 21:50:00 -05:00
 pcomment_5: 
   body: Yes, yes she is.
   username: Nonny
   paragraph_id: 7
   id: 5
   flag: 0
-  posted: 2006-04-17 21:55:00 -05:00
+  created_at: 2006-04-17 21:55:00 -05:00
 pcomment_6: 
   body: ooh, topless Anne!
   username: Victor
   paragraph_id: 147
   id: 6
   flag: 1
-  posted: 2006-04-17 21:57:00 -05:00
+  created_at: 2006-04-17 21:57:00 -05:00

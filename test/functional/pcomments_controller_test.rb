@@ -12,6 +12,7 @@ class PcommentsControllerTest < Test::Unit::TestCase
   fixtures :php_sessions
   fixtures :universes
   fixtures :stories
+  fixtures :chapters
   fixtures :paragraphs
 
   def setup
@@ -19,21 +20,6 @@ class PcommentsControllerTest < Test::Unit::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     @request.env["HTTP_REFERER"] = "http://playground.pele.cx/pcomments/show"
-  end
-
-  def test_index
-    get :index, :paragraph_id => 4
-    assert_response :success
-    assert_template 'list'
-  end
-
-  def test_list
-    get :list, :paragraph_id => 4
-
-    assert_response :success
-    assert_template 'list'
-
-    assert_not_nil assigns(:pcomment)
   end
 
   def test_new_unauthed

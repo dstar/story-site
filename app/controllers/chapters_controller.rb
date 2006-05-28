@@ -5,36 +5,17 @@ class ChaptersController < ApplicationController
       @story_id = Chapter.find(params[:id]).story.id
     end
     @authorization = {
-      "destroy" => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-            user.has_story_permission(@story_id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "update"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-              user.has_story_permission(@story_id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "edit"    => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-                user.has_story_permission(@story_id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "create"  => proc { if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-                  user.has_story_permission(@story_id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "new"     => proc {if @authinfo[:user_id] then  user = User.find_by_user_id(@authinfo[:user_id])
-                    user.has_story_permission(@story_id,"author") ? true :  admonish("You are not authorized for this action!") else admonish("You are not authorized for this action!") end },
-      "show"    => proc { true },
-      "list"    => proc { true },
-      "archive" => proc { true },
-      "index"   => proc { true }
+      "destroy" => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+      "update"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+      "edit"    => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+      "create"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+      "new"     => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
     }
-  end
-
-
-  def index
-    list
-    render :action => 'list'
   end
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
          :redirect_to => { :action => :list }
-
-  def list
-    @chapters = Chapter.orderedList
-  end
 
   def listdump
     @chapters = Chapter.orderedListByDate

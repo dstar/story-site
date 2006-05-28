@@ -4,6 +4,6 @@
 
 <br />
 
-<% if @authinfo[:user_id] and @story.authors.include? User.find(@authinfo[:user_id]) %>
+<% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(@story,'author') %>
 <%= link_to 'New universe', :action => 'new' %>
 <% end %>

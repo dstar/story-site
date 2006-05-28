@@ -20,21 +20,6 @@ class ChaptersControllerTest < Test::Unit::TestCase
     @request.env["HTTP_REFERER"] = "http://playground.pele.cx/chapters/show"
   end
 
-  def test_index
-    get :index
-    assert_response :success
-    assert_template 'list'
-  end
-
-  def test_list
-    get :list
-
-    assert_response :success
-    assert_template 'list'
-
-    assert_not_nil assigns(:chapters)
-  end
-
   def test_show
     get :show, :id => 1
 
