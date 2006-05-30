@@ -18,7 +18,7 @@ class ParagraphsController < ApplicationController
   def new
     @paragraphs = Paragraph.new
     @paragraphs.chapter_id = Chapter.find(params["chapter_id"]).id
-    @paragraphs.order = 1+ Paragraph.maxPara(@paragraphs.chapter_id)
+    @paragraphs.position = 1+ Paragraph.maxPara(@paragraphs.chapter_id)
     @story = Story.find(Chapter.find(@paragraphs.chapter_id).story_id)
   end
 
@@ -31,7 +31,7 @@ class ParagraphsController < ApplicationController
 
     for i in 0...body.length
       para = Paragraph.new(params[:paragraphs])
-      para.order = para.order + i
+      para.position = para.position + i
       para.body = body[i]
       @paracollect.push(para)
       if para.save
@@ -46,15 +46,33 @@ class ParagraphsController < ApplicationController
 
   def edit
     @paragraphs = Paragraph.find(params[:id])
+    if request.xml_http_request?
+      @editbody = @paragraphs.body
+      render :partial => 'paraedit'
+    end
+  end
+
+  def ajax_update
+    @paragraphs = Paragraph.find(params[:id])
   end
 
   def update
     @paragraphs = Paragraph.find(params[:id])
-    if @paragraphs.update_attributes(params[:paragraphs])
-      flash[:notice] = 'Paragraph was successfully updated.'
-      redirect_to :controller => 'chapters', :action => 'showByFile', :chapter => @paragraphs.chapter
+    if request.xml_http_request?
+      if @paragraphs.update_attributes(params[:paragraphs])
+        render :partial => 'parabody'
+      else
+        @paragraphs = Paragraph.find(params[:id])
+        @editbody = params[:paragraphs]['body']
+        render :action => 'paraedit'
+      end
     else
-      render :action => 'edit'
+      if @paragraphs.update_attributes(params[:paragraphs])
+        flash[:notice] = 'Paragraph was successfully updated.'
+        redirect_to :controller => 'chapters', :action => 'showByFile', :chapter => @paragraphs.chapter
+      else
+        render :action => 'edit'
+      end
     end
   end
 

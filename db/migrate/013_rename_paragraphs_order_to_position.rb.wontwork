@@ -1,0 +1,8 @@
+class RenameParagraphsOrderToPosition < ActiveRecord::Migration
+  def self.up
+	rename_column('paragraphs','order','position')
+  end
+
+  def self.down
+  end
+end

@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 12) do
+ActiveRecord::Schema.define(:version => 14) do
 
   create_table "blogposts", :force => true do |t|
     t.column "body",   :text,                   :default => "",      :null => false
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 12) do
   create_table "paragraphs", :force => true do |t|
     t.column "chapter_id", :integer, :limit => 10, :default => 0,  :null => false
     t.column "body",       :text,                  :default => "", :null => false
-    t.column "order",      :integer, :limit => 10, :default => 1,  :null => false
+    t.column "position",   :integer, :limit => 10, :default => 1,  :null => false
     t.column "flag",       :integer, :limit => 10, :default => 0,  :null => false
   end
 
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(:version => 12) do
     t.column "created_at",   :datetime
     t.column "username",     :string,   :limit => 45, :default => "no user", :null => false
     t.column "flag",         :integer,  :limit => 10, :default => 0,         :null => false
+    t.column "read",         :string
   end
 
   create_table "php_sessions", :force => true do |t|

@@ -31,7 +31,7 @@ CREATE TABLE `paragraphs` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `chapter_id` int(10) unsigned NOT NULL default '0',
   `body` text NOT NULL,
-  `order` int(10) unsigned NOT NULL default '1',
+  `position` int(10) unsigned NOT NULL default '1',
   `flag` int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -1,12 +1,12 @@
 <div class="paragraph">
   <a id="<%= ["p",para.id] %>"></a>
-  <div class="parabody">
-    <%= textilize(para.body) %>
+  <div class="parabody" id="<%= ["parabody",para.id] %>">
+  <%= render :partial => 'parabody', :object => para %>
   </div>
   <% if @chapter.status == 'draft' %>
   <div class="comments">
       <a id="<%= ["pcomment",para.id] %>" onClick="Element.toggle('comments<%= para.id %>')">&#182;</a>
-<p><%= link_to 'Edit this paragraph', :controller => 'paragraphs', :action => 'edit', :id => para.id if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(para.chapter.story,'author')%></p>
+<p><%= link_to_remote 'Edit this paragraph', :url => { :controller => 'paragraphs', :action => 'edit', :id => para.id }, :update => "parabody#{para.id}" if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(para.chapter.story,'author')%></p>
 	  <div class="comments_display" id="comments<%= para.id %>">
     <%= render :partial => 'pcomm', :collection => Pcomment.listForPara(para.id) %>
     <p><%= link_to 'Comment on this paragraph', :controller => 'pcomments', :action => 'new', :paragraph_id => para.id if @authinfo[:username]%></p>

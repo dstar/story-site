@@ -1,4 +1,4 @@
-* tweak various things for sessions and session data to actually _work_
+* DONE tweak various things for sessions and session data to actually _work_
   properly in terms of restricting access, and saving comments, etc.
 
 * finish getting the stats pages done and up; these are mostly
@@ -15,7 +15,7 @@
 * no Ajax for e.g. paragraph comments, paragraph editing. would be nice
   to make it use Ajax, which I shall work on when I get a chance.
 
-* stylesheets, and, in general, class names for divs, etc. should be
+* DONE stylesheets, and, in general, class names for divs, etc. should be
   mapped to the current stylesheet set-- the other choice would be to
   create a new stylesheet that matches the current layout, which might
   actually be a better idea. For that matter, one stylesheet is not
@@ -33,6 +33,10 @@
 * should add the javascript bit for changing stylesheets to the layout
   pages once there are two stylesheets
 
-* am not sure if sessions store cookies for <foo>.pele.cx or just
+* DONE am not sure if sessions store cookies for <foo>.pele.cx or just
   pele.cx; ideally want only pele.cx so that data is carried over
   between the subdomains?
+
+* Send to ASSM functionality
+
+* Send to SOL functionality

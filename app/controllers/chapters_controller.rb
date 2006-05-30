@@ -113,7 +113,7 @@ class ChaptersController < ApplicationController
 
       para = Paragraph.new()
       para.body = line
-      para.order = para_count
+      para.position = para_count
       para.chapter_id = chapter_id
 
       para.save

@@ -1,0 +1,5 @@
+<%= textilize(@paragraphs.body) %>
+<%= start_form_tag :action => 'update', :id => @paragraphs %>
+    <%= render :partial => 'form' %>
+    <%= submit_tag 'Edit' %>
+<%= end_form_tag %>
