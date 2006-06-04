@@ -1,11 +1,13 @@
 <html>
 <head>
   <title>Blogposts: <%= controller.action_name %></title>
-  <link rel="stylesheet" type="text/css" href="http://playground.pele.cx:3000/style/show/1" title="default" />
+<%= javascript_include_tag "prototype" %>
+  <%= render_component(:controller => 'style', :action => 'style_links') %>
+  <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
 </head>
 <body>
 <%= render_component(:controller => 'php_session', :action => 'has_session') %>
-<%= render :partial => "breadcrumbs" %>
+<%= render_component(:controller => 'style', :action => 'style_dropdown') %>
 <p style="color: green"><%= flash[:notice] %></p>
 
 <%= @content_for_layout %>

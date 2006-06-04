@@ -3,10 +3,13 @@
 <html>
 <head>
   <title>Comment on <%= @pcomment.paragraph.chapter.story.title %> Chapter <%= @pcomment.paragraph.chapter.number %></title>
-  <link rel="stylesheet" type="text/css" href="http://playground.pele.cx:3000/style/show/1" title="default" />
+<%= javascript_include_tag "prototype" %>
+  <%= render_component(:controller => 'style', :action => 'style_links') %>
+  <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
 </head>
 <body>
 <%= render_component(:controller => 'php_session', :action => 'has_session') %>
+<%= render_component(:controller => 'style', :action => 'style_dropdown') %>
 <%= render :partial => "breadcrumbs" %>
 <p style="color: green"><%= flash[:notice] %></p>
 

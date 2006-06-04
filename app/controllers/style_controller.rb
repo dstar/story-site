@@ -7,8 +7,16 @@ class StyleController < ApplicationController
     }
   end
 
+  def style_dropdown
+    render(:layout => false)
+  end
+
+  def style_links
+    render(:layout => false)
+  end
+
   def show
-    @theme = cookies[:style]
+    @theme = params[:theme]
     @theme = 'default' unless @theme
     @default_styles = Style.find_all_by_theme_and_user(@theme,-1)
     @user_styles = Style.find_all_by_theme_and_user(@theme,@authinfo[:user_id])

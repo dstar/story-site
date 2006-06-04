@@ -12,8 +12,14 @@
 * There is no caching of any kind as yet. It would be nice to add
   appropriate caching.
 
-* no Ajax for e.g. paragraph comments, paragraph editing. would be nice
-  to make it use Ajax, which I shall work on when I get a chance.
+* DONE for para editing no Ajax for e.g. paragraph comments, paragraph
+  editing. would be nice
+  to make it use Ajax, which I shall work on when I get a
+  chance. HOWTO (for edit): change link to ajaxically pull in
+  paragraphs/_form.rhtml (separate action) if javascript  enabled,
+  otherwise link to edit action. same-same for comments.
+
+* DONE Add column 'read' to pcomments. Takes an array of author names.
 
 * DONE stylesheets, and, in general, class names for divs, etc. should be
   mapped to the current stylesheet set-- the other choice would be to
