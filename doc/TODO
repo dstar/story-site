@@ -12,7 +12,7 @@
 * There is no caching of any kind as yet. It would be nice to add
   appropriate caching.
 
-* DONE for para editing no Ajax for e.g. paragraph comments, paragraph
+* DONE no Ajax for e.g. paragraph comments, paragraph
   editing. would be nice
   to make it use Ajax, which I shall work on when I get a
   chance. HOWTO (for edit): change link to ajaxically pull in
@@ -36,7 +36,7 @@
         @hash["#{e}"] = 1
       end
 
-* should add the javascript bit for changing stylesheets to the layout
+* DONE should add the javascript bit for changing stylesheets to the layout
   pages once there are two stylesheets
 
 * DONE am not sure if sessions store cookies for <foo>.pele.cx or just
@@ -46,3 +46,5 @@
 * Send to ASSM functionality
 
 * Send to SOL functionality
+
+* RSS feed functionality

@@ -8,8 +8,10 @@
       <a id="<%= ["pcomment",para.id] %>" onClick="Element.toggle('comments<%= para.id %>')">&#182;</a>
 <p><%= link_to_remote 'Edit this paragraph', :url => { :controller => 'paragraphs', :action => 'edit', :id => para.id }, :update => "parabody#{para.id}" if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(para.chapter.story,'author')%></p>
 	  <div class="comments_display" id="comments<%= para.id %>">
+	  <div class="comments_body" id="comments_body<%= para.id %>">
     <%= render :partial => 'pcomm', :collection => Pcomment.listForPara(para.id) %>
-    <p><%= link_to 'Comment on this paragraph', :controller => 'pcomments', :action => 'new', :paragraph_id => para.id if @authinfo[:username]%></p>
+	</div>
+    <p><%= link_to_remote 'Comment on this paragraph', :url => { :controller => 'pcomments', :action => 'new', :paragraph_id => para.id}, :update => "comments_body#{para.id}" if @authinfo[:username]%></p>
 	</div>
   </div>
   <% end %>

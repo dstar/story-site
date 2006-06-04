@@ -1,10 +1,11 @@
-<div class="comment">
+<div class="comment<%= "_read" if pcomm.read == 'yes' %>">
   <div class="commentbody">
   <%= textilize(pcomm.body) %>
   </div>
   <div class="commentposted">
-  Posted at <%= pcomm.posted %> by <%= pcomm.username %>.
-  <%= link_to '(Delete comment)', { :controller => 'pcomments', :action => 'destroy', :id => pcomm.id }, :confirm => 'Are you sure?', :post => true if @authinfo[:username]%>
-  <%= link_to_if pcomm.flag==0, '(Mark comment as read)', :controller => 'pcomments', :action => 'markread', :id => pcomm.id if @authinfo[:username] %>
+  Posted at <%= pcomm.created_at %> by <%= pcomm.username %>.
+  <%= link_to_remote '(Delete comment)', :url => { :controller => 'pcomments', :action => 'destroy', :id => pcomm.id }, :confirm => 'Are you sure?', :update => "comments_body#{pcomm.paragraph_id}" if @authinfo[:username] and ( User.find(@authinfo[:user_id]).has_story_permission(pcomm.paragraph.chapter.story,'author') or @authinfo[:username] == pcomm.username ) %>
+  <%= link_to_remote '(Mark comment as read)', :url => {:controller => 'pcomments', :action => 'markread', :id => pcomm.id}, :update => "comments_body#{pcomm.paragraph_id}" if pcomm.read != 'yes' and  @authinfo[:username]  and ( User.find(@authinfo[:user_id]).has_story_permission(pcomm.paragraph.chapter.story,'author') or @authinfo[:username] == pcomm.username ) %>
+  <%= link_to_remote '(Mark comment as unread)', :url => {:controller => 'pcomments', :action => 'markunread', :id => pcomm.id}, :update => "comments_body#{pcomm.paragraph_id}" if pcomm.read == 'yes' and  @authinfo[:username]  and ( User.find(@authinfo[:user_id]).has_story_permission(pcomm.paragraph.chapter.story,'author') or @authinfo[:username] == pcomm.username ) %>
   </div>
 </div>

@@ -23,16 +23,27 @@ class PcommentsController < ApplicationController
   def new
     @pcomment = Pcomment.new
     @pcomment.paragraph_id = params["paragraph_id"]
+    if request.xml_http_request?
+      render :partial => 'new_comment'
+    end
   end
 
   def create
     @pcomment = Pcomment.new(params[:pcomment])
+    if request.xml_http_request?
+      if @pcomment.save
+        render :partial => 'pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id)
+      else
+      render :action => 'new_comment'
+    end
+    else
     if @pcomment.save
       flash[:notice] = 'Paragraph comment was successfully created.'
       redirect_to :controller => 'chapters', :action => 'show',
         :id => Pcomment.chapterID(@pcomment.id)
     else
       render :action => 'new'
+    end
     end
   end
 
@@ -55,8 +66,12 @@ class PcommentsController < ApplicationController
       foo = Pcomment.find(params[:id])
       bar = Pcomment.chapterID(foo.id)
       foo.update_attribute('flag',2)
-      redirect_to :controller => 'chapters',
-      :action => 'show', :id => bar
+      if request.xml_http_request?
+        render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id)
+      else        
+        redirect_to :controller => 'chapters',
+        :action => 'show', :id => bar
+      end
     end
   end
 
@@ -64,11 +79,34 @@ class PcommentsController < ApplicationController
     if @authinfo[:username]
       foo = Pcomment.find(params[:id])
       bar = Pcomment.chapterID(foo.id)
-      foo.update_attribute('flag',1)
-      redirect_to :controller => 'chapters',
-      :action => 'show', :id => bar
+#      foo.update_attribute('flag',1)
+      foo.read = 'yes'
+      foo.save
+      if request.xml_http_request?
+        render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id)
+      else        
+        redirect_to :controller => 'chapters',
+        :action => 'show', :id => bar
+      end
     end
   end
+
+  def markunread
+    if @authinfo[:username]
+      foo = Pcomment.find(params[:id])
+      bar = Pcomment.chapterID(foo.id)
+#      foo.update_attribute('flag',1)
+      foo.read = 'no'
+      foo.save
+      if request.xml_http_request?
+        render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id)
+      else        
+        redirect_to :controller => 'chapters',
+        :action => 'show', :id => bar
+      end
+    end
+  end
+
 
   def setup_page_vars
     if params[:id]
@@ -79,7 +117,11 @@ class PcommentsController < ApplicationController
       story_link = %Q|<a href="#{url_for  :controller => 'stories', :action => 'show', :id => @pcomment.paragraph.chapter.story.id  }">#{@pcomment.paragraph.chapter.story.title}</a>|
       chapter_link =   %Q|<a href="#{url_for  :controller => 'chapters', :action => 'show', :id => @pcomment.paragraph.chapter.id  }">Chapter #{@pcomment.paragraph.chapter.number}</a>|
     else
-      @paragraph = Paragraph.find(params[:paragraph_id])
+      if params[:paragraph_id]
+        @paragraph = Paragraph.find(params[:paragraph_id])
+      else
+        @paragraph = Paragraph.find(params[:pcomment]['paragraph_id'])
+      end
 
       home_link = %Q{<a href="http://#{request.host_with_port}/">Home</a>}
       universe_link =  %Q|<a href="#{url_for  :controller => 'universes', :action => 'show', :id => @paragraph.chapter.story.universe.id  }">#{@paragraph.chapter.story.universe.name}</a>|

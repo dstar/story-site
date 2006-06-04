@@ -1,0 +1,5 @@
+<%= render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id) %>
+<%= start_form_tag :action => 'create' %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Create" %>
+<%= end_form_tag %>
