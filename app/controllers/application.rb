@@ -88,4 +88,26 @@ class ApplicationController < ActionController::Base
     false
   end
 
+  def dump_to_file(chapter)
+    @chapter_to_save = chapter
+    text = render_to_string :template => 'chapters/dump', :layout => false
+    out = File.new("#{RAILS_ROOT}/text_files/#{chapter.story.file_prefix}/#{chapter.story.file_prefix}#{chapter.number}.txt",File::CREAT|File::TRUNC|File::RDWR, 0644)
+    out.write(text)
+    out.close
+  end
+
+  def release_chapter(chapter)
+    story = chapter.story
+    filename = "#{RAILS_ROOT}/text_files/#{story.file_prefix}/#{story.file_prefix}#{chapter.number}.txt"
+    title = story.title
+    keywords = story.keywords
+    number = "#{chapter.number}"
+    succeeded = system("/home/dstar/projects/playground_utils/queue.pl", "/home/dstar/bin/#{story.file_prefix}_sendchaptercli_test.sh", title, number, keywords, "chapters/.disclaimer", filename, "chapters/.blurb")
+    if succeeded
+      logger.debug "Queued queue #{title} chapter #{number} for ASSM."
+      else
+      logger.error "Failed to queue #{title} chapter #{number} for ASSM: #{$?}"
+    end
+  end
+
 end

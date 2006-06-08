@@ -13,8 +13,8 @@
 released bits of the ongoing <%= @story.title %> storyline.</p>
 <img src="http://playground.pele.cx/images/progbar.png">
 
-<%= textilize(@story.description) %>
-
+<%= textilize(@story.description).gsub(/<br \/>/, "</p><p>")  %>
+<p><b>Keywords:</b> <%= @story.keywords %>
 <hr>
 <div class="body">
 <div class="newscolumn">

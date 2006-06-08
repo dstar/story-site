@@ -43,8 +43,16 @@
   pele.cx; ideally want only pele.cx so that data is carried over
   between the subdomains?
 
-* Send to ASSM functionality
+* DONE (if test chapter arrives ok) Send to ASSM functionality
 
-* Send to SOL functionality
+* DONE Send to SOL functionality
 
 * RSS feed functionality
+
+* DONE Keywords
+
+* DONE Auto-dump chapters
+
+* Auto-release Draft Chapters
+
+* permissions interface

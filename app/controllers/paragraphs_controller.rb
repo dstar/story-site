@@ -41,6 +41,7 @@ class ParagraphsController < ApplicationController
         render :action => 'new', :chapter_id => @paragraphs.chapter_id
       end
     end
+    dump_to_file(@paragraphs.chapter)
     redirect_to :action => 'list'
   end
 
@@ -52,14 +53,11 @@ class ParagraphsController < ApplicationController
     end
   end
 
-  def ajax_update
-    @paragraphs = Paragraph.find(params[:id])
-  end
-
   def update
     @paragraphs = Paragraph.find(params[:id])
     if request.xml_http_request?
       if @paragraphs.update_attributes(params[:paragraphs])
+        dump_to_file(@paragraphs.chapter)
         render :partial => 'parabody'
       else
         @paragraphs = Paragraph.find(params[:id])
@@ -69,6 +67,7 @@ class ParagraphsController < ApplicationController
     else
       if @paragraphs.update_attributes(params[:paragraphs])
         flash[:notice] = 'Paragraph was successfully updated.'
+        dump_to_file(@paragraphs.chapter)
         redirect_to :controller => 'chapters', :action => 'showByFile', :chapter => @paragraphs.chapter
       else
         render :action => 'edit'

@@ -40,6 +40,7 @@ class ChaptersController < ApplicationController
     ch = params[:chapter].gsub(/txt/,"html")
     @chapter = Chapter.find_by_file(ch)
     @headers["Content-Type"] = "text/plain"
+    @chapter_to_save = @chapter
     render :template => 'chapters/dump', :layout => false
   end
 
@@ -61,6 +62,7 @@ class ChaptersController < ApplicationController
     @chapter = Chapter.new(params[:chapter])
     @chapter.date = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless @chapter.date
     if @chapter.save
+      release_chapter(@chapter) if @chapter.status == 'released'
       process_file(params[:file],@chapter.id) unless params[:file].blank?
       flash[:notice] = 'Chapter was successfully created.'
       redirect_to :controller => 'stories', :action => 'show', :id => @chapter.story_id
@@ -81,9 +83,11 @@ class ChaptersController < ApplicationController
       Paragraph.delete_all ["chapter_id = ?", chapter.id]
     end
 
+    oldstatus = @chapter.status
     c=params[:chapter]
     @chapter.status = c[:status] if c[:status]
     if @chapter.save
+      release_chapter(@chapter) if @chapter.status == 'released' and oldstatus == 'draft'
       flash[:notice] = 'Chapter was successfully updated.'
       redirect_to :controller => 'stories', :action => 'show', :id => @chapter.story_id
     else
@@ -108,7 +112,6 @@ class ChaptersController < ApplicationController
       line.gsub!(/^\s*|\s*$/,'')
       line.gsub!(/#/,'***') if line == "#"
       line.gsub(/\s+--/, "--")
-      $stderr.write("line is #{line.inspect}\n")
       word_count += line.split.length
 
       para = Paragraph.new()
@@ -124,7 +127,8 @@ class ChaptersController < ApplicationController
     @chapter.words = word_count
     @chapter.file = file.original_filename
     @chapter.save
-    end
+    dump_to_file(@chapter)
+  end
 
   def setup_page_vars
 

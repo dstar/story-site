@@ -7,6 +7,9 @@
 <p><label for="story_short_title">Short title</label><br/>
 <%= text_field 'story', 'short_title' %></p>
 
+<p><label for="story_keywords">Keywords</label><br/>
+<%= text_field 'story', 'keywords' %></p>
+
 <p><label for="story_universe_id">Universe</label>
 <%= select "story", "universe_id", Universe.find_all.collect {|u| [u.name, u.id ]}, {:include_blank => true} %>
 

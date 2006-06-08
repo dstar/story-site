@@ -1,5 +1,7 @@
 <div>
   <li><h4><%= link_to story.title, index_url(:host => StoryHost(story.id)) %></h4>
-  <%= textilize(story.description) %>
+<% logger.debug("#{story.inspect}") %>
+  <% kw = " (Keywords: #{story.keywords})</p>" %>
+  <%= textilize(story.description).gsub(/<\/p>/,kw).gsub(/<br \/>/, "</p><p>") %>
   </li>
 </div>
