@@ -91,7 +91,9 @@ class ApplicationController < ActionController::Base
   def dump_to_file(chapter)
     @chapter_to_save = chapter
     text = render_to_string :template => 'chapters/dump', :layout => false
-    out = File.new("#{RAILS_ROOT}/text_files/#{chapter.story.file_prefix}/#{chapter.story.file_prefix}#{chapter.number}.txt",File::CREAT|File::TRUNC|File::RDWR, 0644)
+    dirname = "#{RAILS_ROOT}/text_files/#{chapter.story.file_prefix}"
+    Dir.mkdir(dirname) unless File.exist?(dirname)
+    out = File.new("#{dirname}/#{chapter.story.file_prefix}#{chapter.number}.txt",File::CREAT|File::TRUNC|File::RDWR, 0644)
     out.write(text)
     out.close
   end

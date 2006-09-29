@@ -2,11 +2,13 @@
 
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_universe_permission(@universe,'owner')  %>
 <%= link_to 'Edit Universe', :action => 'edit', :id => @universe %> |
+<%= link_to 'Edit Permissions', :action => 'permissions', :id => @universe %> |
 <% end %>
+
 <%= link_to 'Universe List', :action => 'list' %> 
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_universe_permission(@universe,'owner') %>
 |
-<%= link_to 'Add Story', :controller => "stories", :action => "new" %>
+<%= link_to 'Add Story', { :controller => "stories",  :action => "new", :universe_id => @universe.id} %>
 <% end %>
 <h2><%= link_to "Stories", :controller => "stories", :action => "list" %></h2>
 

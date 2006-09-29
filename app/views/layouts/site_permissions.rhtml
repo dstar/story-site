@@ -1,16 +1,16 @@
 <html>
 <head>
-  <title>Welcome to Pele's Playground!</title>
+  <title>
+  Site Permissions
+  </title>
   <%= javascript_include_tag "prototype" %>
   <%= render_component(:controller => 'style', :action => 'style_links') %>
   <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
+  <%= javascript_include_tag "prototype" %>
 </head>
 <body>
 <%= render_component(:controller => 'php_session', :action => 'has_session') %>
 <%= render_component(:controller => 'style', :action => 'style_dropdown') %>
-<% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('admin') %>
-	<%= link_to 'Edit Site Permissions', :controller => 'site_permissions', :action => 'permissions' %>
-<% end %>
 <p style="color: green"><%= flash[:notice] %></p>
 
 <%= @content_for_layout %>

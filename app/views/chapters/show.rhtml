@@ -14,10 +14,12 @@ Next
 
 <div class="full">
 <%= render :partial => "para", :collection => Paragraph.paraList(@chapter.id) %>
-</div>
 
-<div>
+<div class="paragraph">
+<p class="navigation">
 <%= link_to_if prevChapter(@chapter), 'Prev', chapter_url(:chapter => prevChapter(@chapter)) %> |
 <%= link_to 'Index', index_url %> |
 <%= link_to_if nextChapter(@chapter), 'Next', chapter_url(:chapter => nextChapter(@chapter)) %>
+</p>
+</div>
 </div>

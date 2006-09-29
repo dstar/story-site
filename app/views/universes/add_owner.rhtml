@@ -1,0 +1,10 @@
+<div id="new">
+<%= start_form_tag :action => 'owner_add_save', :id => @universe.id %>
+Name: <input type="text" name="permission_holder">
+Type: <select name="type"><option value="user">User</option><option value="group">Group</option></select>
+Permission: <select name="permission"><option value="owner">Owner</option></select>
+<input type="hidden" value="<%= @universe.id %>" name="universe_id">
+<input type="submit" value="Add Permission">
+</form>
+</div>
+

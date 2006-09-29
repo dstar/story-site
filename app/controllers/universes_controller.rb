@@ -10,12 +10,17 @@ class UniversesController < ApplicationController
       @universe_id = ""
     end
 
-    @authorization = {
-      "destroy"    => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
-      "update"     => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
-      "edit"       => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
-      "create"     => [ {'permission_type'=>"SitePermission", 'permission'=>"administrator", },],
-      "new"        => [ {'permission_type'=>"SitePermission", 'permission'=>"administrator", },],
+    @authorization          = {
+      "destroy"             => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
+      "update"              => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
+      "edit"                => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
+      "permissions"         => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
+      "permissions_modify"  => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
+      "permissions_destroy" => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
+      "owner_add"           => [ {'permission_type'=>"SitePermission", 'permission'=>"admin", },],
+      "owner_add_save"      => [ {'permission_type'=>"SitePermission", 'permission'=>"admin", },],
+      "create"              => [ {'permission_type'=>"SitePermission", 'permission'=>"admin", },],
+      "new"                 => [ {'permission_type'=>"SitePermission", 'permission'=>"admin", },],
     }
 
   end
@@ -82,6 +87,81 @@ class UniversesController < ApplicationController
       @universe = Universe.find(params[:id])
       @page_title = @universe.name
     end
+  end
+
+  def permissions_modify
+
+    case params[:type]
+    when /user/
+      permission_holder = User.find_by_username(params[:permission_holder])
+    when /group/
+      permission_holder = Group.find_by_group_name(params[:permission_holder])
+    end
+    
+    if permission_holder and params[:permission]
+      universe_permissions=UniversePermission.new
+      universe_permissions.permission_holder = permission_holder
+      universe_permissions.permission=params[:permission]
+      universe_permissions.universe_id=params[:universe_id]      
+      unless universe_permissions.save
+        flash[:notice] = "Permission Add Failed"
+      end
+    else
+      unless permission_holder
+        message = "Unknown User/Group."
+      end
+      unless params[:permission]
+        message = "No Permission Selected."
+      end
+      flash[:notice]=message
+      render :action => 'permissions'
+    end
+    
+    render :action => 'permissions'
+  end
+
+  def owner_add_save
+
+    case params[:type]
+    when /user/
+      permission_holder = User.find_by_username(params[:permission_holder])
+    when /group/
+      permission_holder = Group.find_by_group_name(params[:permission_holder])
+    end
+    
+    if permission_holder and params[:permission]
+      universe_permissions=UniversePermission.new
+      universe_permissions.permission_holder = permission_holder
+      universe_permissions.permission=params[:permission]
+      universe_permissions.universe_id=params[:universe_id]      
+      unless universe_permissions.save
+        flash[:notice] = "Permission Add Failed"
+      end
+    else
+      unless permission_holder
+        message = "Unknown User/Group."
+      end
+      unless params[:permission]
+        message = "No Permission Selected."
+      end
+      flash[:notice]=message
+      render :action => 'permissions'
+    end
+    
+    render :action => 'permissions'
+  end
+
+  def permissions_destroy
+    case params[:type]
+    when /User/
+      permission_holder = User.find_by_username(params[:permission_holder])
+    when /Group/
+      permission_holder = Group.find_by_group_name(params[:permission_holder])
+    end
+    
+    permission = UniversePermission.find_by_permission_holder_type_and_permission_holder_id_and_permission_and_universe_id(params[:type], permission_holder.id,params[:permission],params[:universe_id])
+    permission.destroy
+    render :action => 'permissions'
   end
 
 

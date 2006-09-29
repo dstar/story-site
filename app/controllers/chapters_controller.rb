@@ -4,6 +4,7 @@ class ChaptersController < ApplicationController
     if params[:id] and ! @story_id
       @story_id = Chapter.find(params[:id]).story.id
     end
+
     @authorization = {
       "destroy" => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
       "update"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
@@ -109,6 +110,8 @@ class ChaptersController < ApplicationController
     lines = file_string.split(/\n\n/)
     lines.each { |line|
       line.gsub!(/^\n/,' ')
+      line.gsub!(/(\w)\n(\w)/,'\1 \2')
+      line.gsub!(/\n/,'')
       line.gsub!(/^\s*|\s*$/,'')
       line.gsub!(/#/,'***') if line == "#"
       line.gsub(/\s+--/, "--")
@@ -165,7 +168,7 @@ class ChaptersController < ApplicationController
 
     if params[:action] == 'new'
       if params[:story_id]
-        @story_id = params[:story_id]
+        @story_id = Story.find(params[:story_id]).id
         @story_id = @story_id.to_i if @story_id.is_a? String
       else
         render :status => 404, :file => "#{RAILS_ROOT}/public/404.html"

@@ -1,0 +1,3 @@
+<%= render :partial => "new_form" %>
+<b/>
+<%= render :partial => "current_permissions", :collection => UniversePermission.find_all_by_universe_id(@universe.id)  %>

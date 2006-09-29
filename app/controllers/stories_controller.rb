@@ -122,6 +122,14 @@ class StoriesController < ApplicationController
       end
     else
       @page_title = "Pele's Playground"
+      if params[:universe_id]
+        @universe = Universe.find(params[:universe_id])
+      end
+      if params[:story] 
+        if params[:story][:universe_id]
+          @universe = Universe.find(params[:story][:universe_id])
+        end
+      end
     end
   end
 
@@ -130,5 +138,81 @@ class StoriesController < ApplicationController
       params[:id] = Story.find_by_short_title(request.subdomains(0).first).id unless params[:id]
     end
   end
+
+  def permissions_modify
+
+    case params[:type]
+    when /user/
+      permission_holder = User.find_by_username(params[:permission_holder])
+    when /group/
+      permission_holder = Group.find_by_group_name(params[:permission_holder])
+    end
+    
+    if permission_holder and params[:permission]
+      universe_permissions=StoryPermission.new
+      universe_permissions.permission_holder = permission_holder
+      universe_permissions.permission=params[:permission]
+      universe_permissions.story_id=params[:story_id]      
+      unless universe_permissions.save
+        flash[:notice] = "Permission Add Failed"
+      end
+    else
+      unless permission_holder
+        message = "Unknown User/Group."
+      end
+      unless params[:permission]
+        message = "No Permission Selected."
+      end
+      flash[:notice]=message
+      render :action => 'permissions'
+    end
+    
+    render :action => 'permissions'
+  end
+
+  def owner_add_save
+
+    case params[:type]
+    when /user/
+      permission_holder = User.find_by_username(params[:permission_holder])
+    when /group/
+      permission_holder = Group.find_by_group_name(params[:permission_holder])
+    end
+    
+    if permission_holder and params[:permission]
+      universe_permissions=StoryPermission.new
+      universe_permissions.permission_holder = permission_holder
+      universe_permissions.permission=params[:permission]
+      universe_permissions.story_id=params[:story_id]      
+      unless universe_permissions.save
+        flash[:notice] = "Permission Add Failed"
+      end
+    else
+      unless permission_holder
+        message = "Unknown User/Group."
+      end
+      unless params[:permission]
+        message = "No Permission Selected."
+      end
+      flash[:notice]=message
+      render :action => 'permissions'
+    end
+    
+    render :action => 'permissions'
+  end
+
+  def permissions_destroy
+    case params[:type]
+    when /User/
+      permission_holder = User.find_by_username(params[:permission_holder])
+    when /Group/
+      permission_holder = Group.find_by_group_name(params[:permission_holder])
+    end
+    
+    permission = StoryPermission.find_by_permission_holder_type_and_permission_holder_id_and_permission_and_story_id(params[:type], permission_holder.id,params[:permission],params[:story_id])
+    permission.destroy
+    render :action => 'permissions'
+  end
+
 
 end

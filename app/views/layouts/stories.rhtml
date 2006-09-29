@@ -14,6 +14,14 @@
 <%= render_component(:controller => 'php_session', :action => 'has_session') %>
 <%= render_component(:controller => 'style', :action => 'style_dropdown') %>
 <%= render :partial => "breadcrumbs" %>
+
+<% if @authinfo[:user_id] and @universe and User.find(@authinfo[:user_id]).has_universe_permission(@universe.id,'owner') and ! User.find(@authinfo[:user_id]).has_story_permission(@story.id,'author') %>
+	<%= link_to 'Add Story Permissions', :controller => 'stories', :action => 'add_owner', :id => @story.id %>
+<% end %>
+<% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(@story.id,'author') %>
+	<%= link_to 'Edit Story Permissions', :controller => 'stories', :action => 'permissions', :id => @story.id %>
+<% end %>
+
 <p style="color: green"><%= flash[:notice] %></p>
 
 <%= @content_for_layout %>
