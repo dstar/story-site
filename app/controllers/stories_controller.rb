@@ -23,6 +23,9 @@ class StoriesController < ApplicationController
       "create"  => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
       "new"     => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
     }
+
+    logger.debug "QQQ: Got here...\n" if params[:action] == "destroy"
+
   end
 
 
@@ -97,7 +100,6 @@ class StoriesController < ApplicationController
   end
 
   def destroy
-    logger.debug "QQQ: Got here...\n"
     @story = Story.find(params[:id])
     @story_title = @story.title
     if @story.destroy
