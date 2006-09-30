@@ -97,8 +97,13 @@ class StoriesController < ApplicationController
   end
 
   def destroy
-    logger.debug "QQQ: Destroying #{@story.id}\n" 
-    Story.find(params[:id]).destroy
+    @story = Story.find(params[:id])
+    @story_title = @story.title
+    if @story.destroy
+      flash[:notice] = '#{@story_title} was successfully deleted.'      
+    else
+      flash[:notice] = '#{@story_title} was not deleted: .'
+    end
     redirect_to :action => 'list'
   end
 

@@ -73,7 +73,6 @@ class ApplicationController < ActionController::Base
     end
 
 #    breakpoint "testauth"
-    logger.debug "QQQ: Destroying #{params.inspect}\n" if is_permitted 
 
     if is_permitted
       true
