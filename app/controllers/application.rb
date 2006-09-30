@@ -12,9 +12,9 @@ class ApplicationController < ActionController::Base
 
   before_filter :setup_auth_structures 
   before_filter :setup_authorize_hash 
-  debug_destroy "QQQ: authenticating before destroying \n"
+  before_filter :debug_destroy "QQQ: authenticating before destroying \n"
   before_filter :authenticate
-  debug_destroy "QQQ: finished authenticating before destroying \n"
+  before_filter :debug_destroy "QQQ: finished authenticating before destroying \n"
 
   before_filter do |c|
     c.story = Story.find_by_short_title(c.request.subdomains(0).first) unless c.story
@@ -115,5 +115,6 @@ class ApplicationController < ActionController::Base
 
   def debug_destroy(message)
     logger.debug "#{message}\n" if params[:action] == "destroy"
+    true
   end
 end
