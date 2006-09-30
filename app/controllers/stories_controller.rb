@@ -97,6 +97,7 @@ class StoriesController < ApplicationController
   end
 
   def destroy
+    logger.debug "QQQ: Got here...\n"
     @story = Story.find(params[:id])
     @story_title = @story.title
     if @story.destroy
