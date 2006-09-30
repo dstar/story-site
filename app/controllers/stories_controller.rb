@@ -1,6 +1,7 @@
 class StoriesController < ApplicationController
 
   def setup_authorize_hash
+    logger.debug "QQQ: AAA #{@story.id}\n" 
     if params[:id] and ! @universe
       @universe = Story.find(params[:id]).universe
     end
@@ -16,7 +17,7 @@ class StoriesController < ApplicationController
     else
       @story_id = ''
     end
-
+    logger.debug "QQQ: BBB #{@story.id}\n" 
     @authorization = {
       "destroy" => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
       "update"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
