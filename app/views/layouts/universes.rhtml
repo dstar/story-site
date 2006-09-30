@@ -18,7 +18,7 @@
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('admin') and ! User.find(@authinfo[:user_id]).has_universe_permission(@universe.id,'owner') %>
 	<%= link_to 'Edit Universe Permissions', :controller => 'universes', :action => 'add_owner', :id => @universe.id %>
 <% end %>
-<% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_universe_permission(@universe.id,'owner') %>
+<% if @universe and @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_universe_permission(@universe.id,'owner') %>
 	<%= link_to 'Edit Universe Permissions', :controller => 'universes', :action => 'permissions', :id => @universe.id %>
 <% end %>
 
