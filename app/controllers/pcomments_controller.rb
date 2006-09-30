@@ -30,6 +30,7 @@ class PcommentsController < ApplicationController
 
   def create
     @pcomment = Pcomment.new(params[:pcomment])
+    @pcomment.username = @authinfo[:username]
     if request.xml_http_request?
       if @pcomment.save
         render :partial => 'pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id)
