@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   before_filter do |c|
     c.story = Story.find_by_short_title(c.request.subdomains(0).first) unless c.story
-    logger.debug "QQQ: in final before_filter before destroying #{@story.id}\n" if params[:action] == "destroy"    
+    logger.debug "QQQ: in final before_filter before destroying #{@story.id}\n"
   end
 
   def setup_auth_structures
