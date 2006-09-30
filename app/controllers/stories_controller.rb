@@ -24,8 +24,6 @@ class StoriesController < ApplicationController
       "new"     => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
     }
 
-    logger.debug "QQQ: Got here...\n" if params[:action] == "destroy"
-
   end
 
 
@@ -76,6 +74,7 @@ class StoriesController < ApplicationController
   def create
     @story = Story.new(params[:story])
     @universes = Universe.find_all
+    @story.description.gsub(/\s+--/, "--")
      if @story.save
       flash[:notice] = 'Story was successfully created.'
       redirect_to :action => 'list'
@@ -91,6 +90,7 @@ class StoriesController < ApplicationController
 
   def update
     @story = Story.find(params[:id])
+    @story.description.gsub(/\s+--/, "--")
     if @story.update_attributes(params[:story])
       flash[:notice] = 'Story was successfully updated.'
       redirect_to :action => 'show', :id => @story.id
