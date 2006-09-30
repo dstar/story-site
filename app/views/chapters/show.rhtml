@@ -1,4 +1,4 @@
-<div><%= link_to 'Edit', :action => 'edit', :id => @chapter if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(@chapter.story,'author') %></div>
+<div><%= link_to 'Edit', :action => 'edit', :id => @chapter.id if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(@chapter.story,'author') %></div>
 
 <h1><%= @chapter.story.title %> Chapter <%= @chapter.number %></h1>
 
