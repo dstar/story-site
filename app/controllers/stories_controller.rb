@@ -74,7 +74,7 @@ class StoriesController < ApplicationController
   def create
     @story = Story.new(params[:story])
     @universes = Universe.find_all
-    @story.description.gsub!(/\s+--/, "--")
+    @story.description.gsub!(/\s\s*--/, "--")
      if @story.save
       flash[:notice] = 'Story was successfully created.'
       redirect_to :action => 'list'
@@ -90,7 +90,7 @@ class StoriesController < ApplicationController
 
   def update
     @story = Story.find(params[:id])
-    @story.description.gsub!(/\s+--/, "--")
+    @story.description.gsub!(/\s\s*--/, "--")
     if @story.update_attributes(params[:story])
       logger.debug "QQQ: BBB Description: #{@story.description}\n"
       flash[:notice] = 'Story was successfully updated.'
