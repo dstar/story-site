@@ -114,7 +114,7 @@ class ChaptersController < ApplicationController
       line.gsub!(/\n/,'')
       line.gsub!(/^\s*|\s*$/,'')
       line.gsub!(/#/,'***') if line == "#"
-      line.gsub(/\s+--/, "--")
+      line.gsub!(/\s+--/, "--")
       word_count += line.split.length
 
       para = Paragraph.new()
