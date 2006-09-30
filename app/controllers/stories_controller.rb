@@ -103,9 +103,7 @@ class StoriesController < ApplicationController
   end
 
   def setup_page_vars
-    logger.debug "QQQ: #{request.subdomains(0).first}\n" 
     unless (request.subdomains(0).first == 'playground')
-      logger.debug "QQQ: action: #{params[:action]} id: #{params[:universe_id]} story->id: #{params[:story][:universe_id]}\n" 
       unless params[:action] == 'new' or params[:action] == 'create'
         @story = Story.find(params[:id])
       else
