@@ -90,8 +90,8 @@ class StoriesController < ApplicationController
 
   def update
     @story = Story.find(params[:id])
-    @story.description.gsub(/\s+--/, "--")
     if @story.update_attributes(params[:story])
+      @story.description.gsub(/\s+--/, "--")
       flash[:notice] = 'Story was successfully updated.'
       redirect_to :action => 'show', :id => @story.id
     else
