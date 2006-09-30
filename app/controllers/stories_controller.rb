@@ -97,6 +97,7 @@ class StoriesController < ApplicationController
   end
 
   def destroy
+    logger.debug "QQQ: Destroying #{@story.id}\n" 
     Story.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
