@@ -3,9 +3,7 @@
 <%= link_to 'Delete Story', :action => 'delete_story', :id => @story %> |
 <% end %>
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(@story,'author') %>
-|
-<%= link_to 'Add Chapter', :controller => 'chapters', :action => 'new',
-:story_id => @story.id %>
+<%= link_to 'Add Chapter', :controller => 'chapters', :action => 'new', :story_id => @story.id %>
 <% end %>
 
 <h1><%= @story.title %> Web Archive</h1>

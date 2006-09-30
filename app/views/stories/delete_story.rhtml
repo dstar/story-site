@@ -1,5 +1,5 @@
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(@story,'author') %>
-<p>Are you <b>SURE</b> you want to delete <font size="+2+><%= @story.title %></font>?</p>
+<p>Are you <b>SURE</b> you want to delete <font size="+2+"><%= @story.title %></font>?</p>
 <%= start_form_tag :action => 'destroy' %>
   <%= submit_tag "Yes" %>
 <%= end_form_tag %>
