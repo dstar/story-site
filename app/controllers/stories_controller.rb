@@ -106,6 +106,7 @@ class StoriesController < ApplicationController
     unless (request.subdomains(0).first == 'playground')
       unless params[:action] == 'new' or params[:action] == 'create'
         @story = Story.find(params[:id])
+            logger.debug "QQQ: #{@story.id}\n" 
       else
         if params[:universe_id]
           @universe = Universe.find(params[:universe_id])
