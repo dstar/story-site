@@ -1,5 +1,6 @@
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(@story,'author') %>
 <%= link_to 'Edit Story', :action => 'edit', :id => @story %> |
+<%= link_to 'Delete Story', :action => 'delete_story', :id => @story %> |
 <% end %>
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(@story,'author') %>
 |
