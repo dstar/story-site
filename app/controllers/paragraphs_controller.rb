@@ -69,7 +69,7 @@ class ParagraphsController < ApplicationController
       if @paragraph.update_attributes(params[:paragraphs])
         flash[:notice] = 'Paragraph was successfully updated.'
         word_count = 0
-        @paragraph.chapter.paragraphs.each { |p| word_count += p.body.split.length }
+        @paragraph.chapter.paragraphs.each { |p| word_count += p.body.scan(/\w+/).length }
         @paragraph.chapter.update_attribute("words",word_count)
         dump_to_file(@paragraph.chapter)
         redirect_to :controller => 'chapters', :action => 'showByFile', :chapter => @paragraph.chapter
