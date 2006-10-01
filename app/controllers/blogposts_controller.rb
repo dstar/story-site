@@ -20,11 +20,11 @@ class BlogpostsController < ApplicationController
          :redirect_to => { :action => :list }
 
   def archive
-    @blogpost_pages, @blogposts = paginate :blogposts, :order => 'posted desc', :per_page => 10
+    @blogpost_pages, @blogposts = paginate :blogposts, :order => 'created_on desc', :per_page => 10
   end
 
   def list
-    @blogposts = Blogpost.find(:all, :order => 'posted desc')
+    @blogposts = Blogpost.find(:all, :order => 'created_on desc')
   end
 
   def show
@@ -37,7 +37,7 @@ class BlogpostsController < ApplicationController
 
   def create
     @blogpost = Blogpost.new(params[:blogpost])
-#    @blogpost.posted = Time.now.strftime('%Y-%m-%d') unless @blogpost.posted
+#    @blogpost.created_on = Time.now.strftime('%Y-%m-%d') unless @blogpost.created_on
     if @blogpost.save
       flash[:notice] = 'Blogpost was successfully created.'
       redirect_to :action => 'list'
