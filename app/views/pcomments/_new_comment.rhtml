@@ -1,5 +1,5 @@
 <%= render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id) %>
-<%= form_remote_tag :update => 'comments<%= paragraph_id %>', :url => {:controller => 'poomments', :action => 'create') } %>
+<%= form_remote_tag :update => "comments#{paragraph_id}", :url => {:controller => 'poomments', :action => 'create') } %>
   <%= render :partial => 'form' %>
   <%= submit_tag "Create" %>
 <%= end_form_tag %>
