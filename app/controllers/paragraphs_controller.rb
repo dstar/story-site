@@ -59,7 +59,7 @@ class ParagraphsController < ApplicationController
     if request.xml_http_request?
       if @paragraph.update_attributes(params[:paragraphs])
         dump_to_file(@paragraph.chapter)
-        logger.info "expiring..."
+        logger.info "expiring...\n"
         expire_fragment(:controller => "chapters", :action => "show", :action_suffix => "paragraph_#{@paragraph.id}")
         render :partial => 'parabody'
       else
