@@ -16,9 +16,9 @@ module ApplicationHelper
 
   def format_time(time, format)
     if time.is_a?(String)
-      Time.parse(time).to_formatted_s(format)
+      Time.parse(time).strftime(format)
     elsif time.is_a?(Time) || time.is_a?(DateTime)
-      time.to_formatted_s(format)
+      time.strftime(format)
     end
   end
 
