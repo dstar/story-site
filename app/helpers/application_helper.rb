@@ -10,6 +10,7 @@ module ApplicationHelper
   end
 
   def our_markdown(text)
+    text.gsub!(/--/,"&emdash;")
     markdown(text)
   end
 
