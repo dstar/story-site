@@ -37,7 +37,7 @@ class PcommentsController < ApplicationController
       logger.info "QQQ: got _here_\n"
       if @pcomment.save
         logger.info "QQQ: Right Place\n"
-        render :partial => 'comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
+        render :partial => 'chapter/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
       else
         logger.info "QQQ: AAAA Wrong Place\n"
         render :action => 'new_comment'
