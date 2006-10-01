@@ -7,12 +7,13 @@ class PcommentsController < ApplicationController
     @story_id = @paragraph.chapter.story.id
     
     @authorization = { 
-      "destroy"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
-      "update"   => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
-      "edit"     => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
-      "create"   => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
-      "new"      => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
-      "markread" => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+      "destroy"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
+      "update"   => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
+      "edit"     => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
+      "create"   => [ { 'permission_type'=>"StoryPermission", 'permission'=>"beta-reader", 'id'=> @story_id },
+                      { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
+      "new"      => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
+      "markread" => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
     }
   end
 

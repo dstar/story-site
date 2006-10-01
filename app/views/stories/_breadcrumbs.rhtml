@@ -5,7 +5,12 @@
 
      <% unless params[:action] == 'new' or params[:action] == 'create' or params[:action] == 'list' or params[:action] == 'index' %>
         &gt; <%= link_to @story.universe.name, url_for(:host => StoryHost('playground'), :controller => 'universes', :action => 'show', :id => @story.universe.id) %>
-	&gt; <%= @story.title %>
+	<% if params[:action] == 'show' %>
+		&gt; <%= @story.title %>
+	<% else %>
+		&gt; <%= link_to @story.title, url_for(:host => StoryHost('playground'), :controller => 'stories', :action => 'show', :id => @story.id) %>
+		&gt; <%= @description[params[:action]] if @description[params[:action]] %>
+	<% end %>
       <% else %>
       <% if params[:action] == 'list' or params[:action] == 'index' %>
 	&gt; Story List

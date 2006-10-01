@@ -112,6 +112,13 @@ class StoriesController < ApplicationController
   end
 
   def setup_page_vars
+
+    @description = {
+      'permissions'  => "Edit Permissions",
+      'edit'         => "Edit Story",
+      'delete_story' => "Delete Story",
+    }
+
     unless (request.subdomains(0).first == 'playground')
       unless params[:action] == 'new' or params[:action] == 'create'
         @story = Story.find(params[:id])
