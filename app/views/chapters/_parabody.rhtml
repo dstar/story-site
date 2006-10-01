@@ -2,5 +2,7 @@
 <% @body = parabody.body %>
 <% end %>
 <% benchmark "QQQ: BBBB markdown" do %>
+<% cache(:action => "list", :action_suffix => "paragraph_#{parabody.id}") do %>
 <%= our_markdown(@body) %>
+<% end %>
 <% end %>
