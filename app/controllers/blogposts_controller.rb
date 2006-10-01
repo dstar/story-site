@@ -66,6 +66,17 @@ class BlogpostsController < ApplicationController
   end
 
   def setup_page_vars
+
+    @description = {
+      'edit'         => "Edit Blog Entry",
+      'delete_story' => "Delete Blog Entry",
+      'new'          => "New Blog Entry",
+      'archive'      => "Older Entries",
+      'list'         => "Blog Entries",
+      'show'         => "Blog Entry"
+    }
+    
+
     if params[:action] =~ /archive/
       @page_title = "Blog Archive Page #{params[:page]}"
     else

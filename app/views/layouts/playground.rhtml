@@ -11,6 +11,10 @@
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('admin') %>
 	<%= link_to 'Edit Site Permissions', :controller => 'site_permissions', :action => 'permissions' %>
 <% end %>
+<% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('blogger') %>
+	<%= link_to 'New blogpost', :action => 'new' %>
+<% end %>
+
 <p style="color: green"><%= flash[:notice] %></p>
 
 <%= @content_for_layout %>
