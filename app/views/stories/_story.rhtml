@@ -1,7 +1,7 @@
 <div>
   <li><h4><%= link_to story.title, index_url(:host => StoryHost(story.id)) %></h4>
-  <% kw = "</p>" %>
-  <% kw = " (Keywords: #{story.keywords})</p>" if story.keywords %>
+  <% kw = "" %>
+  <% kw = "\n(Keywords: #{story.keywords})" if story.keywords %>
   <%= our_markdown(story.description + kw).gsub(/<br \/>/, "</p><p>") %>
   </li>
 </div>
