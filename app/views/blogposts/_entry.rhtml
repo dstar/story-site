@@ -3,7 +3,7 @@
 
 <%= our_markdown(entry.body).gsub(/<br \/>/, "</p><p>") %>
 
-<p><font size="-2">Posted on <%= entry.created_on %> by <%= entry.user %>
+<p><font size="-2">Posted on <%= format_time(entry.created_on, "%a, %b %d, %Y") %> by <%= entry.user %>
 
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('blogger')  %>
 	<%= link_to 'edit', :controller => 'blog', :action => 'edit', :id => entry.id %>
