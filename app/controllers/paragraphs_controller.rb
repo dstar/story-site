@@ -59,6 +59,7 @@ class ParagraphsController < ApplicationController
     if request.xml_http_request?
       if @paragraph.update_attributes(params[:paragraphs])
         dump_to_file(@paragraph.chapter)
+        expire_fragment(:controller => "chapters", :action => "show", :action_suffix => "paragraph_#{@paragraph.id}")
         render :partial => 'parabody'
       else
         @paragraph = Paragraph.find(params[:id])
@@ -72,6 +73,7 @@ class ParagraphsController < ApplicationController
         @paragraph.chapter.paragraphs.each { |p| word_count += p.body.scan(/\w+/).length }
         @paragraph.chapter.update_attribute("words",word_count)
         dump_to_file(@paragraph.chapter)
+        expire_fragment(:controller => "chapters", :action => "show", :action_suffix => "paragraph_#{@paragraph.id}")
         redirect_to :controller => 'chapters', :action => 'showByFile', :chapter => @paragraph.chapter
       else
         render :action => 'edit'
@@ -81,6 +83,8 @@ class ParagraphsController < ApplicationController
 
   def destroy
     Paragraph.find(params[:id]).destroy
+        dump_to_file(@paragraph.chapter)
+        expire_fragment(:controller => "chapters", :action => "show", :action_suffix => "paragraph_#{@paragraph.id}")
     redirect_to :action => 'list'
   end
 
