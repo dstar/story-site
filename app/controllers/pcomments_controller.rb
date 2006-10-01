@@ -35,6 +35,7 @@ class PcommentsController < ApplicationController
     @pcomment.username = @authinfo[:username]
     if request.xml_http_request?
       if @pcomment.save
+        logger.info "QQQ: Right Place\n"
         render :partial => 'comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
       else
         render :action => 'new_comment'
