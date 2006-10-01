@@ -1,6 +1,6 @@
 <div>
   <li><h4><%= link_to story.title, :controller => "stories", :action => "show", :id => story %></h4>
   <p><b>Keywords:</b><%= story.keywords %></p>
-  <%= textilize(story.description) %>
+  <%= our_markdown(story.description) %>
   </li>
 </div>

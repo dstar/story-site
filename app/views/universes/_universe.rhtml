@@ -1,4 +1,4 @@
   <div>
     <h2><%= link_to universe.name, :action => 'show', :id => universe %></h2>
-    <%= textilize(universe.description) %>
+    <%= our_markdown(universe.description) %>
   </div>

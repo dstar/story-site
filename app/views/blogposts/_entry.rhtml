@@ -1,7 +1,7 @@
 <div class="news" name=<%= ["entry",entry.id] %> >
 <h2><%= entry.title %></h2>
 
-<%= textilize(entry.body).gsub(/<br \/>/, "</p><p>") %>
+<%= our_markdown(entry.body).gsub(/<br \/>/, "</p><p>") %>
 
 <p><font size="-2">Posted at <%= entry.posted %> by <%= entry.user %>
 

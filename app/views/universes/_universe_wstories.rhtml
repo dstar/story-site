@@ -3,7 +3,7 @@
         :controller => 'universes',
         :action => 'show',
         :id => universe_wstories.id %></h2>
-    <%= textilize(universe_wstories.description) %>
+    <%= our_markdown(universe_wstories.description) %>
     <ul>
     <%= render :partial => "story",
         :collection => Story.OrderedListByUniverse(universe_wstories.id) %>

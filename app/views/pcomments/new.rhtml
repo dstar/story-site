@@ -2,7 +2,7 @@
 
 <p> Paragraph: </p>
 <div class="parabody">
-    <%= textilize(@pcomment.paragraph.body) %>
+    <%= our_markdown(@pcomment.paragraph.body) %>
 </div>
 
 <%= start_form_tag :action => 'create' %>

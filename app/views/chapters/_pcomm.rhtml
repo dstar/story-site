@@ -1,6 +1,6 @@
 <div class="comment<%= "_read" if pcomm.read == 'yes' %>">
   <div class="commentbody">
-  <%= textilize(pcomm.body) %>
+  <%= our_markdown(pcomm.body) %>
   </div>
   <div class="commentposted">
   Posted at <%= pcomm.created_at %> by <%= pcomm.username %>.
