@@ -1,3 +1,4 @@
+<% benchmark "QQQ: Before Paras" do %>
 <div><%= link_to 'Edit', :action => 'edit', :id => @chapter.id if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(@chapter.story,'author') %></div>
 
 <h1><%= @chapter.story.title %> Chapter <%= @chapter.number %></h1>
@@ -13,8 +14,11 @@ Next
 </p>
 
 <div class="full">
+<% end %>
+<% benchmark "QQQ: Paras" do %>
 <%= render :partial => "para", :collection => Paragraph.paraList(@chapter.id) %>
-
+<% end %>
+<% benchmark "QQQ: After Paras" do %>
 <div class="paragraph">
 <p class="navigation">
 <%= link_to_if prevChapter(@chapter), 'Prev', chapter_url(:chapter => prevChapter(@chapter)) %> |
@@ -23,3 +27,4 @@ Next
 </p>
 </div>
 </div>
+<% end %>
