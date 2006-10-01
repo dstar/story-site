@@ -1,6 +1,6 @@
 <% benchmark "QQQ: AAAA get Parabody" do %>
-<% body = parabody.body %>
+<% @body = parabody.body %>
 <% end %>
 <% benchmark "QQQ: BBBB markdown" do %>
-<%= our_markdown(body) %>
+<%= our_markdown(@body) %>
 <% end %>
