@@ -1,8 +1,8 @@
 <% if @authinfo[:user_id] and @universe and User.find(@authinfo[:user_id]).has_universe_permission(@universe.id,'owner') or User.find(@authinfo[:user_id]).has_story_permission(@story.id,'author') %>
-	<%= link_to 'Edit Story Permissions', :controller => 'stories', :action => 'permissions', :id => @story.id %> |
+	<%= link_to 'Edit Story Permissions', :controller => 'stories', :action => 'permissions', :id => @story.id %>
 <% end %>
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(@story,'author') %>
-<%= link_to 'Edit Story', :action => 'edit', :id => @story %> |
+ | <%= link_to 'Edit Story', :action => 'edit', :id => @story %> |
 <%= link_to 'Delete Story', :action => 'delete_story', :id => @story %> |
 <% end %>
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(@story,'author') %>
