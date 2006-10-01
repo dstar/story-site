@@ -2,14 +2,14 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 17) do
+ActiveRecord::Schema.define(:version => 18) do
 
   create_table "blogposts", :force => true do |t|
-    t.column "body",       :text,                 :default => "",      :null => false
-    t.column "created_on", :date
-    t.column "user",       :string, :limit => 45, :default => "dstar", :null => false
-    t.column "title",      :string, :limit => 45, :default => "",      :null => false
-    t.column "updated_on", :date
+    t.column "body",       :text,                   :default => "",      :null => false
+    t.column "created_on", :datetime
+    t.column "user",       :string,   :limit => 45, :default => "dstar", :null => false
+    t.column "title",      :string,   :limit => 45, :default => "",      :null => false
+    t.column "updated_on", :datetime
   end
 
   create_table "chapters", :force => true do |t|
