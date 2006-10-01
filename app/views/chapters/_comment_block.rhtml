@@ -1,10 +1,13 @@
-  <div class="comments" id="comment_block_<%= para.id %>" >
-      <a id="<%= ["pcomment",para.id] %>" onClick="Element.toggle('comments<%= para.id %>')">&#182; (<%= para.pcomments.collect {|x| x if x.flag < 2}.compact.length %> comments, <%= para.pcomments.collect {|x| x unless x.read or x.flag > 1}.compact.length  %> unread)</a>
-<p><%= link_to_remote 'Edit this paragraph', :url => { :controller => 'paragraphs', :action => 'edit', :id => para.id }, :update => "parabody#{para.id}" if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(para.chapter.story,'author')%></p>
-	  <div class="comments_display" id="comments<%= para.id %>" style="display:none">
-	  <div class="comments_body" id="comments_body<%= para.id %>">
-    <%= render :partial => 'pcomm', :collection => Pcomment.listForPara(para.id) %>
+<div class="comments" id="comment_block_<%= para.id %>" >
+	<% total_comments  = para.pcomments.collect {|x| x if x.flag < 2}.compact.length %>
+	<% unread_comments = para.pcomments.collect {|x| x unless x.read or x.flag > 1}.compact.length %>
+	<% can_edit = @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(para.chapter.story,'author') %>
+	<a id="<%= ["pcomment",para.id] %>" onClick="Element.toggle('comments<%= para.id %>')">&#182; (<%= total_comments %> comments, <%= unread_comments  %> unread)</a>
+	<p><%= link_to_remote 'Edit this paragraph', :url => { :controller => 'paragraphs', :action => 'edit', :id => para.id }, :update => "parabody#{para.id}" if can_edit %></p>
+	<div class="comments_display" id="comments<%= para.id %>" style="display:none">
+		<div class="comments_body" id="comments_body<%= para.id %>">
+			<%= render :partial => 'pcomm', :collection => Pcomment.listForPara(para.id) %>
+		</div>
+	<p><%= link_to_remote 'Comment on this paragraph', :url => { :controller => 'pcomments', :action => 'new', :paragraph_id => para.id}, :update => "comments_body#{para.id}" if @authinfo[:username]%></p>
 	</div>
-    <p><%= link_to_remote 'Comment on this paragraph', :url => { :controller => 'pcomments', :action => 'new', :paragraph_id => para.id}, :update => "comments_body#{para.id}" if @authinfo[:username]%></p>
-	</div>
-  </div>
+</div>
