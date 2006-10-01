@@ -7,7 +7,7 @@ class Universe < ActiveRecord::Base
     find(:all,
             :select => "name, universes.description, count(stories.id) as sort, universes.id",
             :joins => "left outer join stories on stories.universe_id = universes.id",
-            :group => "universes.id", :order => "sort asc")
+            :group => "universes.id", :order => "sort desc")
   end
 
 end
