@@ -3,6 +3,6 @@
 <% logger.debug("#{story.inspect}") %>
   <% kw = "</p>" %>
   <% kw = " (Keywords: #{story.keywords})</p>" if story.keywords %>
-  <%= our_markdown(story.description).gsub(/<\/p>/,kw).gsub(/<br \/>/, "</p><p>") %>
+  <%= our_markdown(story.description).sub(/<\/p>$/,kw).gsub(/<br \/>/, "</p><p>") %>
   </li>
 </div>
