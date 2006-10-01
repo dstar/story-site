@@ -8,4 +8,9 @@ module ApplicationHelper
       story_id.concat('.').concat(request.domain(domain_length)).concat(request.port_string)
     end
   end
+
+  def our_markdown(text)
+    markdown(text)
+  end
+
 end
