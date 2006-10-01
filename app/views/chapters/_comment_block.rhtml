@@ -1,6 +1,10 @@
 	<% total_comments  = para.pcomments.collect {|x| x if x.flag < 2}.compact.length %>
 	<% unread_comments = para.pcomments.collect {|x| x unless x.read or x.flag > 1}.compact.length %>
 	<% can_edit = (@authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(para.chapter.story,'author') ) %>
+	<form>
+		<input type="hidden" id="comment_count_<%= para.id %>" value="<%= total_comments %>">
+		<input type="hidden" id="unread_comment_count_<%= para.id %>" value="<%= unread_comments %>">
+	</form>
 	<a id="<%= ["pcomment",para.id] %>" onClick="Element.toggle('comments<%= para.id %>')">&#182; (<%= total_comments %> comments, <%= unread_comments  %> unread)</a>
 	<p><%= link_to_remote 'Edit this paragraph', :url => { :controller => 'paragraphs', :action => 'edit', :id => para.id }, :update => "parabody#{para.id}" if can_edit %></p>
 	<div class="comments_display" id="comments<%= para.id %>" style="display:none">
