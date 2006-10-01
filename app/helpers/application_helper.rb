@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def our_markdown(text)
-    text.gsub!(/\s*--\s*/,"&mdash;")
+    text.gsub!(/\s*--\s*/,"&zwnj;&mdash;&zwnj;")
     markdown(text)
   end
 
