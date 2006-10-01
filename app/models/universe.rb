@@ -5,7 +5,7 @@ class Universe < ActiveRecord::Base
 
   def self.OrderedListByStoryCount
     find(:all,
-            :select => "name, description, count(stories.id) as sort, universes.id",
+            :select => "name, universes.description, count(stories.id) as sort, universes.id",
             :joins => "left outer join stories on story.universe_id = universes.id",
             :group => "universes.id", :order => "sort asc")
   end
