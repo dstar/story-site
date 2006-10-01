@@ -3,9 +3,9 @@
 
 <%= our_markdown(entry.body).gsub(/<br \/>/, "</p><p>") %>
 
-<p><font size="-2">Posted on <%= format_time(entry.created_on, "%a, %b %d, %Y") %> by <%= entry.user %></p>
+<p><font size="-2">Posted on <%= format_time(entry.created_on, "%a, %b %d, %Y") %> by <%= entry.user %></font></p>
 <% if entry.created_on != entry.updated_on %>
-	<p><font size="-2">Edited on <%= format_time(entry.updated_on, "%a, %b %d, %Y") %>
+	<p><font size="-2">Edited on <%= format_time(entry.updated_on, "%a, %b %d, %Y") %></font></p>
 <% end %>
 <p>
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('blogger')  %>
