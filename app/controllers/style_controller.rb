@@ -2,8 +2,11 @@ class StyleController < ApplicationController
 
   def setup_authorize_hash
     @authorization = { 
-      "customize"  => [ { 'permission_type'=>"User", 'permission'=>"logged_in", } ],
-      "save_style" => [ { 'permission_type'=>"User", 'permission'=>"logged_in", } ],
+      "customize"        => [ { 'permission_type'=>"User", 'permission'=>"logged_in", } ],
+      "save_style"       => [ { 'permission_type'=>"User", 'permission'=>"logged_in", } ],
+      "edit_theme"       => [ {'permission_type'=>"SitePermission", 'permission'=>"admin", },],
+      "save_theme_style" => [ {'permission_type'=>"SitePermission", 'permission'=>"admin", },],
+
     }
   end
 
@@ -55,6 +58,12 @@ class StyleController < ApplicationController
     render(:layout => false)
   end
 
+  def edit_theme
+    @theme = cookies[:style]
+    @theme = 'default' unless @theme
+    @theme_styles = Style.find_all_by_theme_and_user(@theme,-1)
+  end
+
   def customize
     @theme = cookies[:style]
     @theme = 'default' unless @theme
@@ -100,6 +109,48 @@ class StyleController < ApplicationController
         @style = Style.new unless @style
         @result = "Please enter both an element specifier and a style"
         render :partial => "edit_style", :locals => { :edit_style => @style, :result => @result }
+      end
+    end
+  end
+
+  def save_theme_style
+
+    if @authinfo[:username]
+      definition = params[:definition]
+      element = params[:element]
+
+      if element and definition
+        
+        @theme = cookies[:style]
+        @theme = 'default' unless @theme
+        @style = Style.find_by_theme_and_user_and_element(@theme,-1,element)
+
+        @style = Style.new unless @style
+        # if @style is null, this style doesn't exist, so create it
+
+        #canonicalize definition
+        definition.gsub!(/\s+/, " ")
+        definition.gsub!(/ *: */, " : ")
+        definition.gsub!(/ *; */, "; ")
+        definition.gsub!(/^\s+/, "")
+        definition.gsub!(/\s+$/, "")
+
+        @style.element = element
+        @style.definition = definition
+        @style.theme = @theme
+        @style.user = @authinfo[:user_id]
+
+        if @style.save
+          @result = "Saved Successfully"
+          render :partial => "edit_theme_style", :locals => { :edit_style => @style, :result => @result }
+        else
+          @result = "Save failed"
+          render :partial => "edit_theme_style", :locals => { :edit_style => @style, :result => @result }
+        end
+      else
+        @style = Style.new unless @style
+        @result = "Please enter both an element specifier and a style"
+        render :partial => "edit_theme_style", :locals => { :edit_style => @style, :result => @result }
       end
     end
   end
