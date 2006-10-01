@@ -66,46 +66,46 @@ class PcommentsController < ApplicationController
 
   def destroy
     if @authinfo[:username]
-      foo = Pcomment.find(params[:id])
-      bar = Pcomment.chapterID(foo.id)
-      foo.update_attribute('flag',2)
+      @pcomment = Pcomment.find(params[:id])
+      @chapter_id = Pcomment.chapterID(@pcomment.id)
+      @pcomment.update_attribute('flag',2)
       if request.xml_http_request?
-        render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id)
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
       else
         redirect_to :controller => 'chapters',
-        :action => 'show', :id => bar
+        :action => 'show', :id => @chapter_id
       end
     end
   end
 
   def markread
     if @authinfo[:username]
-      foo = Pcomment.find(params[:id])
-      bar = Pcomment.chapterID(foo.id)
-#      foo.update_attribute('flag',1)
-      foo.read = 'yes'
-      foo.save
+      @pcomment = Pcomment.find(params[:id])
+      @chapter_id = Pcomment.chapterID(@pcomment.id)
+#      @pcomment.update_attribute('flag',1)
+      @pcomment.read = 'yes'
+      @pcomment.save
       if request.xml_http_request?
-        render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id)
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
       else
         redirect_to :controller => 'chapters',
-        :action => 'show', :id => bar
+        :action => 'show', :id => @chapter_id
       end
     end
   end
 
   def markunread
     if @authinfo[:username]
-      foo = Pcomment.find(params[:id])
-      bar = Pcomment.chapterID(foo.id)
-#      foo.update_attribute('flag',1)
-      foo.read = 'no'
-      foo.save
+      @pcomment = Pcomment.find(params[:id])
+      @chapter_id = Pcomment.chapterID(@pcomment.id)
+#      @pcomment.update_attribute('flag',1)
+      @pcomment.read = 'no'
+      @pcomment.save
       if request.xml_http_request?
-        render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id)
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
       else
         redirect_to :controller => 'chapters',
-        :action => 'show', :id => bar
+        :action => 'show', :id => @chapter_id
       end
     end
   end
