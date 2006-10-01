@@ -65,7 +65,6 @@ class ApplicationController < ActionController::Base
     
     if @authorization[params[:action]]
       @authorization[params[:action]].each do |perm_tuple|
-        logger.debug "QQQ: Trying #{perm_tuple.to_a.join("|")} for #{params[:controller]}/#{params[:action]} (user is #{@authinfo[:username]} (#{@authinfo[:user_id]}))\n"
         is_permitted = true if perm_tuple['permission_type'].constantize.has_permission(user, perm_tuple)
       end
     else
