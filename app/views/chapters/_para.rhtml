@@ -4,6 +4,8 @@
 	  <%= render :partial => 'parabody', :object => para %>
   </div>
   <% if @chapter.status == 'draft' %>
+	<div class="comments" id="comment_block_<%= para.id %>" >
 	  <%= render :partial => 'comment_block', :locals => { :para => para } %>
+	</div>
   <% end %>
 </div>

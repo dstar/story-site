@@ -34,16 +34,12 @@ class PcommentsController < ApplicationController
     @pcomment = Pcomment.new(params[:pcomment])
     @pcomment.username = @authinfo[:username]
     if request.xml_http_request?
-      logger.info "QQQ: got _here_\n"
       if @pcomment.save
-        logger.info "QQQ: Right Place\n"
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
       else
-        logger.info "QQQ: AAAA Wrong Place\n"
         render :action => 'new_comment'
       end
     else
-      logger.info "QQQ: BBBB Wrong Place\n"
     if @pcomment.save
       flash[:notice] = 'Paragraph comment was successfully created.'
       redirect_to :controller => 'chapters', :action => 'show',
