@@ -37,7 +37,7 @@ class BlogpostsController < ApplicationController
 
   def create
     @blogpost = Blogpost.new(params[:blogpost])
-    @blogpost.posted = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless @blogpost.posted
+#    @blogpost.posted = Time.now.strftime('%Y-%m-%d') unless @blogpost.posted
     if @blogpost.save
       flash[:notice] = 'Blogpost was successfully created.'
       redirect_to :action => 'list'
