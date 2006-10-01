@@ -10,6 +10,7 @@ module ApplicationHelper
   end
 
   def our_markdown(text)
+    logger.error "marking down...\n"
     text.gsub!(/\s*--\s*/,"&mdash; ")
     markdown(text)
   end
