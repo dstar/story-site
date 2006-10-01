@@ -54,21 +54,25 @@ class ParagraphsController < ApplicationController
   end
 
   def update
-    @paragraphs = Paragraph.find(params[:id])
+    @paragraph = Paragraph.find(params[:id])
+    @orig = @paragraph
     if request.xml_http_request?
-      if @paragraphs.update_attributes(params[:paragraphs])
-        dump_to_file(@paragraphs.chapter)
+      if @paragraph.update_attributes(params[:paragraphs])
+        dump_to_file(@paragraph.chapter)
         render :partial => 'parabody'
       else
-        @paragraphs = Paragraph.find(params[:id])
+        @paragraph = Paragraph.find(params[:id])
         @editbody = params[:paragraphs]['body']
         render :action => 'paraedit'
       end
     else
-      if @paragraphs.update_attributes(params[:paragraphs])
+      if @paragraph.update_attributes(params[:paragraphs])
         flash[:notice] = 'Paragraph was successfully updated.'
-        dump_to_file(@paragraphs.chapter)
-        redirect_to :controller => 'chapters', :action => 'showByFile', :chapter => @paragraphs.chapter
+        original_word_count = @orig.body.split.length
+        new_word_count = @paragraph.body.split.length
+        @paragraph.chapter.update_attributes("words",new_word_count - original_word_count)
+        dump_to_file(@paragraph.chapter)
+        redirect_to :controller => 'chapters', :action => 'showByFile', :chapter => @paragraph.chapter
       else
         render :action => 'edit'
       end
