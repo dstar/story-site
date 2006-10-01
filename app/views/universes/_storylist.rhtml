@@ -3,9 +3,10 @@
     <ul>
 	<% Story.OrderedListByUniverse(storylist.id).each do |story| %>
           <li><%= link_to story.title, index_url(:host => StoryHost(story.id)) %> 
-	      <% if story.chapters.find(:first, :order => "date DESC", :conditions => "status = 'released'" ) and Date.today - story.chapters.find(:first, :order => "date DESC", :conditions => "status = 'released'").date  < 7 %>
-	      <% if @authinfo[:username] and ( StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => story.id, 'permission' => 'author'}) or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => story.id, 'permission' => 'beta-reader'}) ) story.chapters.find(:first, :order => "date DESC" ) and Date.today - story.chapters.find(:first, :order => "date DESC").date  < 7 %>
-	      <em>UPDATED!</em> 
+	      <% updated = true if story.chapters.find(:first, :order => "date DESC", :conditions => "status = 'released'" ) and Date.today - story.chapters.find(:first, :order => "date DESC", :conditions => "status = 'released'").date  < 7 %>
+	      <% updated = true if @authinfo[:username] and ( StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => story.id, 'permission' => 'author'}) or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => story.id, 'permission' => 'beta-reader'}) ) story.chapters.find(:first, :order => "date DESC" ) and Date.today - story.chapters.find(:first, :order => "date DESC").date  < 7 %>
+	      <% if updated %>
+		      <em>UPDATED!</em> 
 	      <% end %>
 	  </li>
 	<% end %>
