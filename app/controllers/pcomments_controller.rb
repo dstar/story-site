@@ -5,8 +5,8 @@ class PcommentsController < ApplicationController
       @paragraph = @pcomment.paragraph
     end
     @story_id = @paragraph.chapter.story.id
-    
-    @authorization = { 
+
+    @authorization = {
       "destroy"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
       "update"   => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
       "edit"     => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
@@ -35,7 +35,7 @@ class PcommentsController < ApplicationController
     @pcomment.username = @authinfo[:username]
     if request.xml_http_request?
       if @pcomment.save
-        render :partial => 'pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id)
+        render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id)
       else
       render :action => 'new_comment'
     end
@@ -71,7 +71,7 @@ class PcommentsController < ApplicationController
       foo.update_attribute('flag',2)
       if request.xml_http_request?
         render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id)
-      else        
+      else
         redirect_to :controller => 'chapters',
         :action => 'show', :id => bar
       end
@@ -87,7 +87,7 @@ class PcommentsController < ApplicationController
       foo.save
       if request.xml_http_request?
         render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id)
-      else        
+      else
         redirect_to :controller => 'chapters',
         :action => 'show', :id => bar
       end
@@ -103,7 +103,7 @@ class PcommentsController < ApplicationController
       foo.save
       if request.xml_http_request?
         render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id)
-      else        
+      else
         redirect_to :controller => 'chapters',
         :action => 'show', :id => bar
       end
