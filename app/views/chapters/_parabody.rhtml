@@ -1,6 +1,7 @@
 <% benchmark "QQQ: AAAA get Parabody" do %>
 <% @body = parabody.body %>
 <% end %>
+<% logger.info "QQQ: Controller is params[:controller]\n"
 <% benchmark "QQQ: BBBB markdown" do %>
 <% cache(:action => "show", :action_suffix => "paragraph_#{parabody.id}") do %>
 <%= our_markdown(@body) %>
