@@ -8,7 +8,7 @@
 	      <% else %>
 		      <% newest_chapter = story.chapters.find(:first, :order => "date DESC", :conditions => "status = 'released'" ) %>
 	      <% end %>
-	      <% if Date.today - newest_chapter.date  < 7 %>
+	      <% if newest_chapter and Date.today - newest_chapter.date  < 7 %>
 		      <em>UPDATED!</em> 
 	      <% end %>
 	  </li>
