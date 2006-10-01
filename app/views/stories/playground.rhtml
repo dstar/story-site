@@ -46,7 +46,7 @@ great degree.</p>
 </div>
 
 <div class="worldlistbox">
-<%= render :partial => "universes/storylist", :collection => Universe.OrderedListByStoryCount %>
+<%= render :partial => "universes/storylist", :collection => Universe.find_all %>
 </div>
 
 <div class="storiescolumn">
