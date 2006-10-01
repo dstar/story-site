@@ -9,7 +9,8 @@
 <% end %>
 <p>
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('blogger')  %>
-	<%= link_to 'edit', :controller => 'blog', :action => 'edit', :id => entry.id %>
+	<%= link_to 'edit', :controller => 'blog', :action => 'edit', :id => entry.id %> |
+	<%= link_to 'delete', :controller => 'blog', :action => 'delete_post', :id => entry.id %> 
 <% end %>
 </font></p>
 </div>

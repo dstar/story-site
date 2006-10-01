@@ -67,6 +67,10 @@ class BlogpostsController < ApplicationController
 
   def setup_page_vars
 
+    if params[:id]
+      @blogpost = Blogpost.find(params[:id])
+    end
+
     @description = {
       'edit'         => "Edit Blog Entry",
       'delete_story' => "Delete Blog Entry",
