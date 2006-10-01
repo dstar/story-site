@@ -37,8 +37,8 @@ class PcommentsController < ApplicationController
       if @pcomment.save
         render :partial => 'comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
       else
-      render :action => 'new_comment'
-    end
+        render :action => 'new_comment'
+      end
     else
     if @pcomment.save
       flash[:notice] = 'Paragraph comment was successfully created.'
