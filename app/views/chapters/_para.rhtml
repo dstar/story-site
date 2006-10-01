@@ -5,7 +5,7 @@
   </div>
   <% if @chapter.status == 'draft' %>
   <div class="comments">
-      <a id="<%= ["pcomment",para.id] %>" onClick="Element.toggle('comments<%= para.id %>')">&#182; (<%= para.pcomments.collect {|x| x if x.flag < 2}.compact.length %> comments, <%= para.pcomments.collect {|x| x unless x.read}.compact.length or x.flag > 2 %> unread)</a>
+      <a id="<%= ["pcomment",para.id] %>" onClick="Element.toggle('comments<%= para.id %>')">&#182; (<%= para.pcomments.collect {|x| x if x.flag < 2}.compact.length %> comments, <%= para.pcomments.collect {|x| x unless x.read or x.flag > 2}.compact.length  %> unread)</a>
 <p><%= link_to_remote 'Edit this paragraph', :url => { :controller => 'paragraphs', :action => 'edit', :id => para.id }, :update => "parabody#{para.id}" if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(para.chapter.story,'author')%></p>
 	  <div class="comments_display" id="comments<%= para.id %>" style="display:none">
 	  <div class="comments_body" id="comments_body<%= para.id %>">
