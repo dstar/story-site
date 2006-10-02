@@ -1,9 +1,11 @@
 <% is_author = (@authinfo[:username] and  User.find(@authinfo[:user_id]).has_story_permission(pcomm.paragraph.chapter.story,'author') ) %>
 <div class="comment<%= "_read" if pcomm.read_by.include?(@authinfo[:username]) %>">
 	<div class="commentbody">
+<% benchmark "QQQ: Comment_cache_markdown" do %>
 		<% cache(:action => "show", :action_suffix => "pcomment_#{pcomm.id}") do %>
 			<%= our_markdown(pcomm.body) %>
 		<% end %>
+<% end %>
 	</div>
 	<div class="commentposted">
 		Posted at <%= pcomm.created_at %> by <%= pcomm.username %>.
