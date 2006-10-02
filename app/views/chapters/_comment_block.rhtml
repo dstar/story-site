@@ -15,8 +15,12 @@
 	<div class="comments_display" id="comments<%= para.id %>" style="display:none">
 		<div class="comments_body" id="comments_body<%= para.id %>">
 <% end %>
+<% pcomment_array = [] %>
+<% benchmark "QQQ: Comment_array_check" do %>
+<% pcomment_array =  Pcomment.listForPara(para.id) %>
+<% end %>
 <% benchmark "QQQ: Comment_block_chunk_4" do %>
-			<%= render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(para.id) %>
+			<%= render :partial => 'chapters/pcomm', :collection => pcomment_array %>
 <% end %>
 <% benchmark "QQQ: Comment_block_chunk_5" do %>
 		</div>

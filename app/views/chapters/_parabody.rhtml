@@ -1,5 +1,7 @@
 <% @body = parabody.body %>
 
+<% benchmark "QQQ: para_body_markdown" do %>
 <% cache(:action => "show", :action_suffix => "paragraph_#{parabody.id}") do %>
 	<%= our_markdown(@body) %>
+<% end %>
 <% end %>
