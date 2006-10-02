@@ -24,6 +24,9 @@ memcache_options = {
 }
 memcache_servers = [ '127.0.0.1:11211', ]
 
+CACHE = MemCache.new(memcache_options)
+CACHE.servers = memcache_servers
+
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence those specified here
 
@@ -40,7 +43,9 @@ Rails::Initializer.run do |config|
   # Use the database for sessions instead of the file system
   # (create the session table with 'rake db:sessions:create')
   config.action_controller.session_store = :mem_cache_store
-  config.action_controller.fragment_cache_store = :mem_cache_store, memcache_servers, memcache_options
+  config.action_controller.fragment_cache_store =  CACHE, {}
+
+config.active_record.colorize_logging = false
 
   config.action_controller.session :domain => 'pele.cx'
   # Use SQL instead of Active Record's schema dumper when creating the test database.
@@ -69,6 +74,4 @@ end
 # Include your application configuration below
 require 'ppstring.rb'
 
-CACHE = MemCache.new(memcache_options)
-CACHE.servers = memcache_servers
 ActionController::CgiRequest::DEFAULT_SESSION_OPTIONS.merge!({ 'cache' => CACHE })
