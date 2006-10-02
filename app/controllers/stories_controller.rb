@@ -235,7 +235,9 @@ class StoriesController < ApplicationController
 
   def expire_cache
     expire_fragment(/.*/)
-    redirect_to index_url(:host => StoryHost('playground'))
+    domain_length = request.subdomains.length
+    hostname = request.subdomains[0]
+    redirect_to index_url(:host => hostname.concat('.').concat(request.domain(domain_length)).concat(request.port_string))
   end
 
 end
