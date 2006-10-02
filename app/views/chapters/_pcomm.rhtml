@@ -6,6 +6,7 @@
 			<%= our_markdown(pcomm.body) %>
 		<% end %>
 <% end %>
+<% benchmark "QQQ: Comment_cache_OUTSIDE_markdown" do %>
 	</div>
 	<div class="commentposted">
 		Posted at <%= pcomm.created_at %> by <%= pcomm.username %>.
@@ -14,3 +15,4 @@
 		<%= link_to_remote '(Mark comment as unread)', :url => {:controller => 'pcomments', :action => 'markunread', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}" if pcomm.read_by.include?(@authinfo[:username]) %>
 	</div>
 </div>
+<% end %>
