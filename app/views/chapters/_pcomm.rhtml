@@ -1,9 +1,10 @@
 <% is_author = (@authinfo[:username] and  User.find(@authinfo[:user_id]).has_story_permission(pcomm.paragraph.chapter.story,'author') ) %>
 <div class="comment<%= "_read" if pcomm.read_by.include?(@authinfo[:username]) %>">
 	<div class="commentbody">
-		<%= our_markdown(pcomm.body) %>
+		<% cache(:action => "show", :action_suffix => "pcomment_#{pcomm.id}") do %>
+			<%= our_markdown(pcomm.body) %>
+		<% end %>
 	</div>
-	<%= pcomm.read_by.include?(@authinfo[:username]) %>
 	<div class="commentposted">
 		Posted at <%= pcomm.created_at %> by <%= pcomm.username %>.
 		<%= link_to_remote '(Delete comment)', :url => { :controller => 'pcomments', :action => 'destroy', :id => pcomm.id }, :confirm => 'Are you sure?', :update => "comment_block_#{pcomm.paragraph_id}" if is_author %>
