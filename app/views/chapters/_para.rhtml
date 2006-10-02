@@ -8,13 +8,11 @@
   </div>
   <% @local_chapter_status = @chapter.status %>
 <% end %>
-<% benchmark "QQQ: Comment_block_setup1" do %>
   <% if @local_chapter_status == 'draft' %>
+<% benchmark "QQQ: Comment_block_setup1" do %>
 	<% total_comments = 1 %>
 	<%# total_comments = para.pcomments.collect {|x| x if x.flag < 2}.length %>
 	<%# total_comments = para.pcomments.count(:conditions => "flag < 2") %>
-<% end %>
-<% benchmark "QQQ: Comment_block_setup2" do %>
 	<% unread_comments = para.pcomments.collect {|x| x if x.flag < 2 and not x.read_by.include?(@authinfo[:username])}.length %>
 	<% denotation_class = "" %>
 	<% denotation_class = 'class="unread_comments"' if unread_comments > 0 %>
