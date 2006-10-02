@@ -18,6 +18,7 @@
 <% benchmark "QQQ: Comment_block_setup1_c" do %>
 	<% unread_comments = para.pcomments.collect {|x| x if x.flag < 2 and not x.read_by.include?(@authinfo[:username])}.length %>
 	<% denotation_class = "" %>
+<% total_comments = 1 %>
 	<% denotation_class = 'class="unread_comments"' if unread_comments > 0 %>
 	<% denotation_class = 'class="read_comments"' if total_comments > 0 and unread_comments < 1%>
 
