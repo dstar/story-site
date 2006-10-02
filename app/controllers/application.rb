@@ -83,6 +83,7 @@ class ApplicationController < ActionController::Base
   
   def admonish(message)
     flash[:notice] = message
+    request.env["HTTP_REFERER"] = index_url(:host => StoryHost('playground'))
     redirect_to :back
     false
   end

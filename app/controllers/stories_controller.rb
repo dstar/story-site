@@ -233,5 +233,9 @@ class StoriesController < ApplicationController
     render :action => 'permissions'
   end
 
+  def expire_cache
+    expire_fragment(/.*/)
+    redirect_to index_url(:host => StoryHost('playground'))
+  end
 
 end
