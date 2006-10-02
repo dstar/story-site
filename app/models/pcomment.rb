@@ -1,6 +1,9 @@
 class Pcomment < ActiveRecord::Base
   belongs_to :paragraph
   belongs_to :user
+
+  serialize :read_by
+
   def self.listForPara(para_id)
     find(:all,
       :conditions => ["paragraph_id = ? and flag < 2", para_id],
