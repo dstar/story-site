@@ -1,5 +1,5 @@
 	<% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
-	<% unread_comments = para.pcomments.count(:conditions => "flag < 2 and read_by regexp ' #{@authinfo[:username]}\n'") %>
+	<% unread_comments = para.pcomments.count(:conditions => "flag < 2 and not read_by regexp ' #{@authinfo[:username]}\n'") %>
 	<% can_edit = (@authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(para.chapter.story,'author') ) %>
 	<form>
 		<input type="hidden" id="comment_count_<%= para.id %>" value="<%= total_comments %>">
