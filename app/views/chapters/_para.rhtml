@@ -4,9 +4,11 @@
 	<% benchmark "QQQ: Parabody" do %>
 	  <%= render :partial => 'parabody', :object => para %>
 	<% end %>
-<% benchmark "QQQ: Comment_block_setup1" do %>
+<% benchmark "QQQ: Chapter_status" do %>
   </div>
   <% if @chapter.status == 'draft' %>
+<% end %>
+<% benchmark "QQQ: Comment_block_setup1" do %>
 	<% total_comments = 1 %>
 	<%# total_comments = para.pcomments.collect {|x| x if x.flag < 2}.length %>
 	<%# total_comments = para.pcomments.count(:conditions => "flag < 2") %>
