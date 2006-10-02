@@ -5,6 +5,7 @@
 			<%= our_markdown(pcomm.body) %>
 		<% end %>
 	</div>
+	<%= pcomm.read_by.inspect %>
 	<div class="commentposted">
 		Posted at <%= pcomm.created_at %> by <%= pcomm.username %>.
 		<%= link_to_remote '(Delete comment)', :url => { :controller => 'pcomments', :action => 'destroy', :id => pcomm.id }, :confirm => 'Are you sure?', :update => "comment_block_#{pcomm.paragraph_id}" if is_author %>
