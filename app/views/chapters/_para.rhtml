@@ -7,8 +7,8 @@
 	<% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
 	<% unread_comments = para.pcomments.count(:conditions => "flag < 2 and read_by <> '#{@authinfo[:username]}'") %>
 	<% denotation_class = "" %>
-	<% denotation_class = 'class="unread_comments"' if unread_comments %>
-	<% denotation_class = 'class="read_comments"' if read_comments and not unread_comments%>
+	<% denotation_class = 'class="unread_comments"' if unread_comments > 0 %>
+	<% denotation_class = 'class="read_comments"' if total_comments > 0 and unread_comments < 1%>
 
 	<div class="comments" <%= denotation_class %> id="comment_block_<%= para.id %>" >
 	  <%= render :partial => 'comment_block', :locals => { :para => para } %>
