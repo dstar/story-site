@@ -28,6 +28,7 @@ Rails::Initializer.run do |config|
   # (create the session table with 'rake db:sessions:create')
   config.action_controller.session_store = :mem_cache_store
 
+require "rubygems"
 require "memcache"
 memcache_servers = [ "localhost:11211" ]
 memcache_options = {
