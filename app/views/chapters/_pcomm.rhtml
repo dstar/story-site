@@ -3,10 +3,11 @@
 	<div class="commentbody">
 		<%= our_markdown(pcomm.body) %>
 	</div>
+	<%= pcomm.read_by.inspect %>
 	<div class="commentposted">
-	Posted at <%= pcomm.created_at %> by <%= pcomm.username %>.
-	<%= link_to_remote '(Delete comment)', :url => { :controller => 'pcomments', :action => 'destroy', :id => pcomm.id }, :confirm => 'Are you sure?', :update => "comment_block_#{pcomm.paragraph_id}" if is_author %>
-	<%= link_to_remote '(Mark comment as read)', :url => {:controller => 'pcomments', :action => 'markread', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}" unless pcomm.read_by.include?(@authinfo[:username])  %>
-	<%= link_to_remote '(Mark comment as unread)', :url => {:controller => 'pcomments', :action => 'markunread', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}" if pcomm.read_by.include?(@authinfo[:username]) %>
+		Posted at <%= pcomm.created_at %> by <%= pcomm.username %>.
+		<%= link_to_remote '(Delete comment)', :url => { :controller => 'pcomments', :action => 'destroy', :id => pcomm.id }, :confirm => 'Are you sure?', :update => "comment_block_#{pcomm.paragraph_id}" if is_author %>
+		<%= link_to_remote '(Mark comment as read)', :url => {:controller => 'pcomments', :action => 'markread', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}" unless pcomm.read_by.include?(@authinfo[:username])  %>
+		<%= link_to_remote '(Mark comment as unread)', :url => {:controller => 'pcomments', :action => 'markunread', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}" if pcomm.read_by.include?(@authinfo[:username]) %>
 	</div>
 </div>
