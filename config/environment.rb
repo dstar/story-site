@@ -10,7 +10,7 @@ RAILS_GEM_VERSION = '1.1.2'
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
-require 'memcache'
+require_gem 'memcache'
 
 memcache_options = {
    :compression => false,
