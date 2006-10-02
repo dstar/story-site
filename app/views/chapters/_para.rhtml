@@ -9,9 +9,13 @@
   <% @local_chapter_status = @chapter.status %>
 <% end %>
   <% if @local_chapter_status == 'draft' %>
-<% benchmark "QQQ: Comment_block_setup1" do %>
+<% benchmark "QQQ: Comment_block_setup1_a" do %>
 	<% total_comments = para.pcomments.collect {|x| x if x.flag < 2}.length %>
-	<%# total_comments = para.pcomments.count(:conditions => "flag < 2") %>
+<% end %>
+<% benchmark "QQQ: Comment_block_setup1_b" do %>
+	<% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
+<% end %>
+<% benchmark "QQQ: Comment_block_setup1_c" do %>
 	<% unread_comments = para.pcomments.collect {|x| x if x.flag < 2 and not x.read_by.include?(@authinfo[:username])}.length %>
 	<% denotation_class = "" %>
 	<% denotation_class = 'class="unread_comments"' if unread_comments > 0 %>
