@@ -27,13 +27,23 @@ Rails::Initializer.run do |config|
   # Use the database for sessions instead of the file system
   # (create the session table with 'rake db:sessions:create')
   config.action_controller.session_store = :mem_cache_store
-  CACHE = MemCache.new :c_threshold => 10_000,
-                       :compression => true,
-                       :debug => false,
-                       :namespace => 'my_namespace',
-                       :readonly => false,
-                       :urlencode => false
-  CACHE.servers = 'localhost:11211'
+
+require "memcache"
+memcache_servers = [ "localhost:11211" ]
+memcache_options = {
+    :c_threshold => 10_000,
+    :compression => true,
+    :debug => false,
+    :namespace => "mydevelopment",
+    :readonly => false,
+    :urlencode => false
+}
+
+
+CACHE = MemCache.new(memcache_options)
+CACHE.servers = memcache_servers
+config.action_controller.fragment_cache_store = CACHE, {}
+ActionController::CgiRequest::DEFAULT_SESSION_OPTIONS.merge!({ 'cache' => CACHE })
 
   config.action_controller.session :domain => 'pele.cx'
   # Use SQL instead of Active Record's schema dumper when creating the test database.
