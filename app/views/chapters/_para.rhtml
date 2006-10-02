@@ -1,7 +1,10 @@
 <div class="paragraph">
   <a id="<%= ["p",para.id] %>"></a>
   <div class="parabody" id="<%= ["parabody",para.id] %>">
+	<% benchmark "QQQ: Parabody" do %>
 	  <%= render :partial => 'parabody', :object => para %>
+	<% end %>
+<% benchmark "QQQ: Comment_block_setup" do %>
   </div>
   <% if @chapter.status == 'draft' %>
 	<% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
@@ -11,7 +14,10 @@
 	<% denotation_class = 'class="read_comments"' if total_comments > 0 and unread_comments < 1%>
 
 	<div class="comments" <%= denotation_class %> id="comment_block_<%= para.id %>" >
+<% end %>
+<% benchmark "QQQ: Comment_block" do %>
 	  <%= render :partial => 'comment_block', :locals => { :para => para } %>
+<% end %>
 	</div>
   <% end %>
 </div>

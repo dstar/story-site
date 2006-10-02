@@ -11,7 +11,6 @@ module ApplicationHelper
 
   def our_markdown(text)
     text.gsub!(/\s*--\s*/,"&mdash; ")
-    logger.info "Marking down from (#{params[:controller]}) #{text} "
     markdown(text)
   end
 
