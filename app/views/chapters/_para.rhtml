@@ -4,10 +4,12 @@
 	<% benchmark "QQQ: Parabody" do %>
 	  <%= render :partial => 'parabody', :object => para %>
 	<% end %>
-<% benchmark "QQQ: Comment_block_setup" do %>
+<% benchmark "QQQ: Comment_block_setup1" do %>
   </div>
   <% if @chapter.status == 'draft' %>
 	<% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
+<% end %>
+<% benchmark "QQQ: Comment_block_setup2" do %>
 	<% unread_comments = para.pcomments.collect {|x| x if x.flag < 2 and not x.read_by.include?(@authinfo[:username])}.length %>
 	<% denotation_class = "" %>
 	<% denotation_class = 'class="unread_comments"' if unread_comments > 0 %>
