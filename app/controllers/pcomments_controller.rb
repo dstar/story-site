@@ -84,7 +84,7 @@ class PcommentsController < ApplicationController
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
 #      @pcomment.update_attribute('flag',1)
-      @pcomment.read_by.push(@authparams[:username])
+      @pcomment.read_by.push(@authinfo[:username])
       @pcomment.save
       if request.xml_http_request?
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
@@ -100,7 +100,7 @@ class PcommentsController < ApplicationController
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
 #      @pcomment.update_attribute('flag',1)
-      @pcomment.read_by.delete(@authparams[:username])
+      @pcomment.read_by.delete(@authinfo[:username])
       @pcomment.save
       if request.xml_http_request?
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
