@@ -10,16 +10,13 @@ RAILS_GEM_VERSION = '1.1.2'
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
-require_gem 'memcache'
-
-memcache_options = {
-   :compression => false,
-   :debug => false,
-   :namespace => "app-#{RAILS_ENV}",
-   :readonly => false,
-   :urlencode => false
-}
-memcache_servers = [ '127.0.0.1:11211',]
+ CACHE = MemCache.new :c_threshold => 10_000,
+                       :compression => true,
+                       :debug => false,
+                       :namespace => 'my_namespace',
+                       :readonly => false,
+                       :urlencode => false
+  CACHE.servers = 'localhost:11211'
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence those specified here
