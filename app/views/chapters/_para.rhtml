@@ -8,7 +8,7 @@
   </div>
   <% if @chapter.status == 'draft' %>
 	<% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
-	<% unread_comments = para.pcomments.count(:conditions => "flag < 2 and not read_by regexp ' #{@authinfo[:username]}\n'") %>
+	<% unread_comments = para.pcomments.collect {|x| x if x.flag < 2 and not read_by.includes?(@authinfo[:username])}.length %>
 	<% denotation_class = "" %>
 	<% denotation_class = 'class="unread_comments"' if unread_comments > 0 %>
 	<% denotation_class = 'class="read_comments"' if total_comments > 0 and unread_comments < 1%>
