@@ -1,7 +1,5 @@
 <% @body = parabody.body %>
 
-<% logger.info "QQQ: Controller is #{params[:controller]}\n" %>
-
 <% cache(:action => "show", :action_suffix => "paragraph_#{parabody.id}") do %>
 	<%= our_markdown(@body) %>
 <% end %>
