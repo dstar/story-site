@@ -7,6 +7,19 @@
   <%= render_component(:controller => 'style', :action => 'style_links') %>
   <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
 
+	<script type="text/javascript">
+		function denote_comments(para_id) {
+			var element = document.getElementById("comment_block_"+para_id);
+			var total_comments = Form.Element.getValue("comment_count_"+para_id);
+			var unread_comments = Form.Element.getValue("unread_comment_count_"+para_id);
+			if (unread_comments > 0) {
+				Element.addClassName(element,"unread_comments");
+			} elsif (total_comments > 0) {
+				Element.addClassName(element,"unread_comments");
+			}		
+		}
+	</script>
+
   <%= javascript_include_tag "prototype" %>
 
 </head>
