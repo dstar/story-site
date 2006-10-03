@@ -33,6 +33,8 @@ class ApplicationController < ActionController::Base
           user = User.find(@authinfo[:session].session_user_id)
           @authinfo[:user_id] = user.user_id
           @authinfo[:username] = user.username
+          @authinfo[:user] = user
+          # stick the user object itself in, so we don't have to look it up later
           #at this point, we've verified that the session is still live
           @authinfo[:sid] = @sid 
 

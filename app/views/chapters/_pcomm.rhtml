@@ -2,7 +2,7 @@
 <% local_user = nil %>
 <% story = nil %>
 <% benchmark "QQQ: XXX_Comment_cache_BEFORE_markdown_get_user" do %>
-<% local_user = User.find(@authinfo[:user_id]) if @authinfo[:user_id] %>
+<% local_user = @authinfo[:user] if @authinfo[:user_id] %>
 <% end %>
 <% benchmark "QQQ: XXX_Comment_cache_BEFORE_markdown_get_story" do %>
 <% story = @chapter.story %>
