@@ -11,6 +11,9 @@ class ChaptersController < ApplicationController
       "edit"    => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
       "create"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
       "new"     => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+      "new"     => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id },
+                     { 'permission_type'=>"StoryPermission", 'permission'=>"beta-reader", 'id'=> @story_id  ],
+
     }
   end
 
@@ -33,6 +36,11 @@ class ChaptersController < ApplicationController
   end
 
   def showByFile
+    @chapter = Chapter.find_by_file(params[:chapter])
+    render :action => 'show'
+  end
+
+  def show_draft
     @chapter = Chapter.find_by_file(params[:chapter])
     render :action => 'show'
   end
