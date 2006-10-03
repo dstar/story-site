@@ -5,7 +5,7 @@
 	  <%= render :partial => 'parabody', :object => para %>
 	<% end %>
   </div>
-  <% if @chapter_status == 'draft' %>
+  <% if @chapter.status == 'draft' %>
 <% total_comments = 1 %>
 <% benchmark "QQQ: Comment_block_setup1_b" do %>
 	<% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
