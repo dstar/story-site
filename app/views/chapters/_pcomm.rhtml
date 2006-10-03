@@ -1,6 +1,8 @@
 <% is_author = false %>
 <% benchmark "QQQ: XXX_Comment_cache_BEFORE_markdown" do %>
 <% is_author = (@authinfo[:username] and  User.find(@authinfo[:user_id]).has_story_permission(pcomm.paragraph.chapter.story,'author') ) %>
+<% end %>
+<% benchmark "QQQ: XXX_Comment_cache_BEFORE_markdown_pcomm_read_by_include" do %>
 <div class="comment<%= "_read" if pcomm.read_by.include?(@authinfo[:username]) %>">
 	<div class="commentbody">
 <% end %>
