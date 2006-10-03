@@ -163,7 +163,7 @@ class ChaptersController < ApplicationController
         if params[:chapter].is_a? String
           chapter = Chapter.find_by_file(params[:chapter])
           if chapter 
-            params[:id] = chapter.id unless params[:id]
+            params[:id] = chapter.id 
           else
             render :status => 404, :file => "#{RAILS_ROOT}/public/404.html"
             false
