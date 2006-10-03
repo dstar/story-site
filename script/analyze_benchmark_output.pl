@@ -6,6 +6,8 @@ while (<>) {
 	$time =~ s/\((.*)\)/$1/; 
 	$q{$t} += $time; 
 	
+	$count{$t}++;
+
 	unless (defined $max{$t} and $max{$t} > $time) {
 		$max{$t} = $time;
 		$maxline{$t} = $i;
@@ -19,13 +21,13 @@ while (<>) {
 
 print "-"x17, " $i ", "-"x17, "\n"; 
 
-foreach my $e (sort { $max{$a} <=> $max{$b} } keys %q) { 
+foreach my $e (sort { $count{$a} <=> $count{$b} } keys %q) { 
 
 	$avg = $q{$e} / $i;
 	
 #	next unless $avg > .0001;
 
-	print "$q{$e} ($avg) $max{$e} ($maxline{$e}) $min{$e} ($minline{$e}) $e\n";
+	print "$count{$e} $q{$e} ($avg) $max{$e} ($maxline{$e}) $min{$e} ($minline{$e}) $e\n";
 	$total += $q{$e}; 
 } 
 
