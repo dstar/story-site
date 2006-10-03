@@ -4,7 +4,10 @@
 <% local_user = User.find(@authinfo[:user_id]) if @authinfo[:user_id] %>
 <% end %>
 <% benchmark "QQQ: XXX_Comment_cache_BEFORE_markdown_get_permission" do %>
-<% is_author = (local_user and local_user.has_story_permission(pcomm.paragraph.chapter.story,'author') ) %>
+<% story = pcomm.paragraph.chapter.story %>
+<% end %>
+<% benchmark "QQQ: XXX_Comment_cache_BEFORE_markdown_get_permission" do %>
+<% is_author = (local_user and local_user.has_story_permission(story,'author') ) %>
 <% end %>
 <% benchmark "QQQ: XXX_Comment_cache_BEFORE_markdown_pcomm_read_by_include" do %>
 <div class="comment<%= "_read" if pcomm.read_by.include?(@authinfo[:username]) %>">
