@@ -1,25 +1,14 @@
 <% is_author = false %>
 <% local_user = nil %>
 <% story = nil %>
-<% benchmark "QQQ: XXX_Comment_cache_BEFORE_markdown_get_user" do %>
 <% local_user = @authinfo[:user] if @authinfo[:user_id] %>
-<% end %>
-<% benchmark "QQQ: XXX_Comment_cache_BEFORE_markdown_get_story" do %>
 <% story = @chapter.story %>
-<% end %>
-<% benchmark "QQQ: XXX_Comment_cache_BEFORE_markdown_get_permission" do %>
 <% is_author = (local_user and local_user.has_story_permission(story,'author') ) %>
-<% end %>
-<% benchmark "QQQ: XXX_Comment_cache_BEFORE_markdown_pcomm_read_by_include" do %>
 <div class="comment<%= "_read" if pcomm.read_by.include?(@authinfo[:username]) %>">
 	<div class="commentbody">
-<% end %>
-<% benchmark "QQQ: XXX_Comment_cache_markdown" do %>
 		<% cache(:action => "show", :action_suffix => "pcomment_#{pcomm.id}") do %>
 			<%= our_markdown(pcomm.body) %>
 		<% end %>
-<% end %>
-<% benchmark "QQQ: XXX_Comment_cache_AFTER_markdown" do %>
 	</div>
 	<div class="commentposted">
 		Posted at <%= pcomm.created_at %> by <%= pcomm.username %>.
@@ -28,4 +17,3 @@
 		<%= link_to_remote '(Mark comment as unread)', :url => {:controller => 'pcomments', :action => 'markunread', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}" if pcomm.read_by.include?(@authinfo[:username]) %>
 	</div>
 </div>
-<% end %>
