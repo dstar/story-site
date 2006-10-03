@@ -41,7 +41,7 @@ class ChaptersController < ApplicationController
   end
 
   def show_draft
-    @chapter = Chapter.find_by_file(params[:chapter])
+    @chapter = Chapter.find(params[:id])
     render :action => 'show'
   end
 
@@ -151,8 +151,6 @@ class ChaptersController < ApplicationController
       else
         @page_title = @chapter.story.title
       end
-
-      logger.info "Chapter: *#{@chapter}*"
 
     end
 
