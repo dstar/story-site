@@ -13,7 +13,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 require "rubygems"
 
-require 'memcache-stats'
+require 'memcache'
 
 memcache_options = {
    :compression => false,
