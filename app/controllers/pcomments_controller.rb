@@ -38,6 +38,7 @@ class PcommentsController < ApplicationController
     @pcomment.username = @authinfo[:username]
     if request.xml_http_request?
       if @pcomment.save
+        @chapter = @paragraph.chapter
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
       else
         render :action => 'new_comment'
@@ -74,6 +75,7 @@ class PcommentsController < ApplicationController
       @pcomment.update_attribute('flag',2)
         expire_fragment( :action => "show", :action_suffix => "pcomment_#{@pcomment.id}", :controller => "chapters")
       if request.xml_http_request?
+        @chapter = @paragraph.chapter
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
       else
         redirect_to :controller => 'chapters',
@@ -90,6 +92,7 @@ class PcommentsController < ApplicationController
       @pcomment.read_by.push(@authinfo[:username])
       @pcomment.save
       if request.xml_http_request?
+        @chapter = @paragraph.chapter
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
       else
         redirect_to :controller => 'chapters',
@@ -106,6 +109,7 @@ class PcommentsController < ApplicationController
       @pcomment.read_by.delete(@authinfo[:username])
       @pcomment.save
       if request.xml_http_request?
+        @chapter = @paragraph.chapter
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
       else
         redirect_to :controller => 'chapters',
