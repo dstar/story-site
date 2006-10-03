@@ -3,6 +3,7 @@
   <div class="parabody" id="<%= ["parabody",para.id] %>">
 	  <%= render :partial => 'parabody', :object => para %>
   </div>
+  <!-- end parabody -->
   <% if params[:action] == 'show_draft' %>
 	<% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
 	<% unread_comments = para.pcomments.collect {|x| x.id if x.flag < 2 and not x.read_by.include?(@authinfo[:username])}.compact.length %>
@@ -12,6 +13,8 @@
 	<div class="comments  <%= denotation_class %>" id="comment_block_<%= para.id %>" >
 
 	  <%= render :partial => 'comment_block', :locals => { :para => para } %>
+	</div>
+	<!-- end comments -->
 
   <% end %>
 </div>
