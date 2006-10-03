@@ -1,7 +1,7 @@
 <% is_author = false %>
 <% local_user = nil %>
 <% benchmark "QQQ: XXX_Comment_cache_BEFORE_markdown_get_user" do %>
-<% local_user = User.find(@authinfo[:user_id] if @authinfo[:user_id])
+<% local_user = User.find(@authinfo[:user_id]) if @authinfo[:user_id] %>
 <% end %>
 <% benchmark "QQQ: XXX_Comment_cache_BEFORE_markdown_get_permission" do %>
 <% is_author = (local_user and local_user.has_story_permission(pcomm.paragraph.chapter.story,'author') ) %>
