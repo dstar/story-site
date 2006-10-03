@@ -6,18 +6,13 @@
 	<% end %>
   </div>
   <% if @chapter.status == 'draft' %>
-<% total_comments = 1 %>
-<% benchmark "QQQ: Comment_block_setup1_b" do %>
 	<% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
-<% end %>
-<% benchmark "QQQ: Comment_block_setup1_c" do %>
 	<% unread_comments = para.pcomments.collect {|x| x if x.flag < 2 and not x.read_by.include?(@authinfo[:username])}.length %>
-	<% denotation_class = "" %>
 	<% denotation_class = 'class="unread_comments"' if unread_comments > 0 %>
 	<% denotation_class = 'class="read_comments"' if total_comments > 0 and unread_comments < 1%>
 
 	<div class="comments" <%= denotation_class %> id="comment_block_<%= para.id %>" >
-<% end %>
+
 	  <%= render :partial => 'comment_block', :locals => { :para => para } %>
 
   <% end %>
