@@ -152,6 +152,8 @@ class ChaptersController < ApplicationController
         @page_title = @chapter.story.title
       end
 
+      logger.info "Chapter: *#{@chapter}*"
+
     end
 
   end
