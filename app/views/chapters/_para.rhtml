@@ -4,11 +4,8 @@
 	<% benchmark "QQQ: Parabody" do %>	  
 	  <%= render :partial => 'parabody', :object => para %>
 	<% end %>
-<% benchmark "QQQ: Chapter_status" do %>
   </div>
-  <% @local_chapter_status = @chapter.status %>
-<% end %>
-  <% if @local_chapter_status == 'draft' %>
+  <% if @chapter_status == 'draft' %>
 <% total_comments = 1 %>
 <% benchmark "QQQ: Comment_block_setup1_b" do %>
 	<% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
@@ -21,9 +18,7 @@
 
 	<div class="comments" <%= denotation_class %> id="comment_block_<%= para.id %>" >
 <% end %>
-<% benchmark "QQQ:  AAAA_Comment_block" do %>
 	  <%= render :partial => 'comment_block', :locals => { :para => para } %>
-<% end %>
-	</div>
+
   <% end %>
 </div>
