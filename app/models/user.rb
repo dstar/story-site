@@ -17,9 +17,10 @@ class User < ActiveRecord::Base
     else
       story_id = story
     end
-    has_permission = false
-    self.story_permissions.each {|p| has_permission = true if p.story_id == story_id and p.permission == permission }
-    return has_permission
+    #has_permission = false
+    #self.story_permissions.each {|p| has_permission = true if p.story_id == story_id and p.permission == permission }
+    return self.story_permissions.find_by_story_id_and_permission(story_id,permission)
+    #return has_permission
   end
 
   def has_universe_permission(universe,permission)
