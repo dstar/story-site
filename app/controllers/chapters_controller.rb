@@ -161,7 +161,13 @@ class ChaptersController < ApplicationController
     unless params[:id] or params[:action] == 'index' or params[:action] == 'list' or params[:action] == 'new'
       if params[:chapter] and ! params[:chapter].blank?
         if params[:chapter].is_a? String
-          params[:id] = Chapter.find_by_file(params[:chapter]).id unless params[:id]
+          chapter = Chapter.find_by_file(params[:chapter])
+          if chapter 
+            params[:id] = chapter.id unless params[:id]
+          else
+            render :status => 404, :file => "#{RAILS_ROOT}/public/404.html"
+            false
+          end
         elsif params[:chapter].is_a? Hash and params[:chapter][:story_id]
           @story_id = params[:chapter][:story_id]
         else
