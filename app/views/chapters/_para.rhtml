@@ -9,7 +9,7 @@
 	<% denotation_class = 'unread_comments' if unread_comments > 0 %>
 	<% denotation_class = 'read_comments' if total_comments > 0 and unread_comments < 1%>
 
-	<div class="comments  <% denotation_class %>" id="comment_block_<%= para.id %>" >
+	<div class="comments  <%= denotation_class %>" id="comment_block_<%= para.id %>" >
 
 	  <%= render :partial => 'comment_block', :locals => { :para => para } %>
 
