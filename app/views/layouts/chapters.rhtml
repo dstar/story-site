@@ -23,9 +23,12 @@
 
 			if (unread_comments > 0) {
 				Element.addClassName(element,"unread_comments");
-			} elsif (total_comments > 0) {
-				Element.addClassName(element,"read_comments");
+			} else {
+				if (total_comments > 0) {
+					Element.addClassName(element,"read_comments");
+				}
 			}		
+			
 		}
 	</script>
 
