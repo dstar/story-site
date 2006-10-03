@@ -1,5 +1,6 @@
 <% is_author = false %>
 <% local_user = nil %>
+<% story = nil %>
 <% benchmark "QQQ: XXX_Comment_cache_BEFORE_markdown_get_user" do %>
 <% local_user = User.find(@authinfo[:user_id]) if @authinfo[:user_id] %>
 <% end %>
