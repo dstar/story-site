@@ -28,7 +28,7 @@ class PcommentsController < ApplicationController
     @pcomment = Pcomment.new
     @pcomment.paragraph_id = params["paragraph_id"]
     if request.xml_http_request?
-      @story = @story_id
+      @chapter = @paragraph.chapter
       render :partial => 'new_comment'
     end
   end
