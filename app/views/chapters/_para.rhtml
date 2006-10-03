@@ -1,9 +1,7 @@
 <div class="paragraph">
   <a id="<%= ["p",para.id] %>"></a>
   <div class="parabody" id="<%= ["parabody",para.id] %>">
-	<% benchmark "QQQ: Parabody" do %>	  
 	  <%= render :partial => 'parabody', :object => para %>
-	<% end %>
   </div>
   <% if @chapter.status == 'draft' %>
 	<% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
