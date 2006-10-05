@@ -4,7 +4,8 @@
 	<% denotation_class = 'unread_comments' if unread_comments > 0 %>
 	<% denotation_class = 'read_comments' if total_comments > 0 and unread_comments < 1%>
 
-<span class="<%= denotation_class %>" id="comment_block_<%= para.id %>" >
+<div class="comments  <%= denotation_class %>" id="comment_block_<%= para.id %>" >
+
 	<form>
 		<input type="hidden" id="comment_count_<%= para.id %>" value="<%= total_comments %>">
 		<input type="hidden" id="unread_comment_count_<%= para.id %>" value="<%= unread_comments %>">
@@ -20,3 +21,4 @@
 	<p><%= link_to_remote 'Comment on this paragraph', :url => { :controller => 'pcomments', :action => 'new', :paragraph_id => para.id}, :update => "comments_body#{para.id}" if @authinfo[:username]%></p>
 	</span>
 
+</div>
