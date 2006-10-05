@@ -5,9 +5,11 @@
   </div>
   <!-- end parabody -->
   <% if params[:action] == 'show_draft' %>
+	<div class="comments  <%= denotation_class %>" id="comment_block_<%= para.id %>" >
 
 	  <%= render :partial => 'comment_block', :locals => { :para => para } %>
 
+	</div>
 	<!-- end comments -->
 
   <% end %>
