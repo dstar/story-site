@@ -18,7 +18,10 @@
 <% pcomment_array =  Pcomment.listForPara(para.id) %>
 			<%= render :partial => 'chapters/pcomm', :collection => pcomment_array %>
 		</span>
+		<!-- end comments_body -->		
 	<p><%= link_to_remote 'Comment on this paragraph', :url => { :controller => 'pcomments', :action => 'new', :paragraph_id => para.id}, :update => "comments_body#{para.id}" if @authinfo[:username]%></p>
 	</span>
+	<!-- end comments_display -->
 
 </span>
+<!-- end comments_span -->
