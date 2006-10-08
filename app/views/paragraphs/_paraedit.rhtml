@@ -1,5 +1,5 @@
 <%= our_markdown(@paragraphs.body) %>
-<%= form_remote_tag( :url => {:controller => "paragraphs", :action => 'confirm_delete', :id => @paragraphs}, :update => "parabody#{@paragraphs.id}) %>
+<%= form_remote_tag( :url => {:controller => "paragraphs", :action => 'confirm_delete', :id => @paragraphs}, :update => "parabody#{@paragraphs.id}") %>
     <%= submit_tag("Delete Paragraph", {:confirm => "Are you sure?"}) %>
 <%= end_form_tag %>
 <%= start_form_tag :action => 'update', :id => @paragraphs %>
