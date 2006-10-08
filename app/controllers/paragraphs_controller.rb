@@ -114,10 +114,15 @@ class ParagraphsController < ApplicationController
   end
 
   def destroy
-    Paragraph.find(params[:id]).destroy
-        dump_to_file(@paragraph.chapter)
-        expire_fragment( :action => "show", :action_suffix => "paragraph_#{@paragraph.id}", :controller => "chapters")
-    redirect_to :action => 'list'
+    paragraph = Paragraph.find(params[:id])
+    next_paragraph = paragraph.lower_item
+
+    expire_fragment( :action => "show", :action_suffix => "paragraph_#{paragraph.id}", :controller => "chapters")
+    paragraph.destroy
+
+    dump_to_file(next_paragraph.chapter)
+
+    redirect_to :controller => 'chapters', :action => 'show_draft', :id => next_paragraph.chapter.id, :anchor => "p#{next_paragraph.id}"
   end
 
   def setup_page_vars
