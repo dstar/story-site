@@ -115,7 +115,7 @@ class ParagraphsController < ApplicationController
 
   def confirm_delete
     if request.xml_http_request?
-      render :partial => '_confirm_delete'
+      render :partial => 'confirm_delete'
     end
   end
 
