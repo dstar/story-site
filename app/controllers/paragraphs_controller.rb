@@ -69,7 +69,7 @@ class ParagraphsController < ApplicationController
         insert_at = @paragraph.position + 1
         need_page_reload = false
 
-        paras.each |body| do
+        paras.each do |body| 
           para = Paragraph.new(:chapter_id => @paragraph.chapter_id, :body => body);
           para.save
           para.insert_at(insert_at)
