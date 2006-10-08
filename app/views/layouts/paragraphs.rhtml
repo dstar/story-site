@@ -6,6 +6,15 @@
 <%= javascript_include_tag "prototype" %>
   <%= render_component(:controller => 'style', :action => 'style_links') %>
   <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
+	<script LANGUAGE="JavaScript">
+		function confirmSubmit() {
+			var agree=confirm("Are you sure you wish to continue?");
+			if (agree)
+				return true ;
+			else
+				return false ;
+		}
+	</script>
 </head>
 <body>
 <%= render_component(:controller => 'php_session', :action => 'has_session') %>

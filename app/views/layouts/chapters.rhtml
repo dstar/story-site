@@ -8,6 +8,15 @@
   <%= javascript_include_tag "prototype" %>
   <%= render_component(:controller => 'style', :action => 'style_links') %>
   <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
+	<script LANGUAGE="JavaScript">
+		function confirmSubmit() {
+			var agree=confirm("Are you sure you wish to continue?");
+			if (agree)
+				return true ;
+			else
+				return false ;
+		}
+	</script>
 	<script type="text/javascript">
 		function denote_comments(para_id) {
 			var element = document.getElementById("comment_block_"+para_id);
