@@ -1,0 +1,15 @@
+<h1>Confirm Delete</h1>
+<%= start_form_tag :action => 'destroy', :id => @paragraphs %>
+    <p><strong>Are you sure you want to delete this paragraph?</strong></p>
+    <%= submit_tag("yes", {:confirm => "Are you sure?"}) %>
+<%= end_form_tag %>
+
+<%= link_to "NO", :controller => 'chapters', :action => 'show_draft', :id => @paragraph.chapter.id, :anchor => "p#{@paragraph.id}" %>
+
+<%= render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@paragraphs.id) %>
+
+<hr/>
+
+<h2>Comments</h2>
+
+<%= render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@paragraphs.id) %>
