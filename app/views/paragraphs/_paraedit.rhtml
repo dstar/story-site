@@ -1,5 +1,5 @@
 <%= our_markdown(@paragraphs.body) %>
-<%= link_to "Delete Paragraph", { :action => "destroy", :id => @paragraphs.id }, :confirm => "Are you sure?"
+<%= link_to "Delete Paragraph", { :action => "destroy", :id => @paragraphs.id }, :confirm => "Are you sure?" %>
 <%= start_form_tag :action => 'update', :id => @paragraphs %>
     <%= render :partial => 'form' %>
     <%= submit_tag 'Edit' %>
