@@ -113,6 +113,13 @@ class ParagraphsController < ApplicationController
     end
   end
 
+  def confirm_delete
+    if request.xml_http_request?
+      render :partial => '_confirm_delete'
+    end
+  end
+
+
   def destroy
     paragraph = Paragraph.find(params[:id])
     next_paragraph = paragraph.lower_item
