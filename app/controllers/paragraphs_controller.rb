@@ -127,8 +127,9 @@ class ParagraphsController < ApplicationController
 
   def setup_page_vars
     if params[:id] 
-      @chapter_id = Paragraph.find(params[:id]).chapter.id
-      @story_id = Paragraph.find(params[:id]).chapter.story.id
+      @paragraph = Paragraph.find(params[:id])
+      @chapter_id = @paragraph.chapter.id
+      @story_id = @paragraph.chapter.story.id
     elsif params["chapter_id"] or params[:paragraphs]
       @chapter_id = params["chapter_id"] if params["chapter_id"]
       @chapter_id = params[:paragraphs]['chapter_id'] if params[:paragraphs] and params[:paragraphs]['chapter_id']
