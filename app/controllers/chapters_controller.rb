@@ -88,7 +88,7 @@ class ChaptersController < ApplicationController
     @chapter = Chapter.find(params[:id])
 
     unless params[:file].blank?
-      Paragraph.delete_all ["chapter_id = ?", chapter.id]
+      Paragraph.delete_all ["chapter_id = ?", @chapter.id]
       process_file(params[:file],@chapter.id)
     end
 
