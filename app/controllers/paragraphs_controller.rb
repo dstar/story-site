@@ -56,11 +56,43 @@ class ParagraphsController < ApplicationController
   def update
     @paragraph = Paragraph.find(params[:id])
     @orig = @paragraph
-    if request.xml_http_request?
-      if @paragraph.update_attributes(params[:paragraphs])
+
+    saved_successfully = true
+
+    begin
+      @paragraph.transaction do
+        paras = params[:paragraphs][paragraph_body].split(/^\s*$/)
+
+        @paragraph.body = paras.shift
+        @paragraph.save!
+
+        insert_at = @paragraph.position + 1
+        need_page_reload = false
+
+        paras.each |body| do
+          para = Paragraph.new(:chapter_id => @paragraph.chapter_id, :body => body);
+          para.save
+          para.insert_at(insert_at)
+          insert_at += 1
+          need_page_reload = true
+        end
+      end
+    rescue RecordNotSaved
+      saved_successfully = false
+    end
+
+    if request.xml_http_request? and not need_page_reload
+      if saved_successfully
+
+        word_count = 0
+        @paragraph.chapter.paragraphs.each { |p| word_count += p.body.scan(/\w+/).length }
+        @paragraph.chapter.update_attribute("words",word_count)
+
         dump_to_file(@paragraph.chapter)
+
         expire_fragment( :action => "show", :action_suffix => "paragraph_#{@paragraph.id}", :controller => "chapters")
         render :partial => 'parabody'
+
       else
         @paragraph = Paragraph.find(params[:id])
         @editbody = params[:paragraphs]['body']
