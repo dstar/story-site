@@ -61,7 +61,7 @@ class ParagraphsController < ApplicationController
 
     begin
       @paragraph.transaction do
-        paras = params[:paragraphs][:paragraph_body].split(/^\s*$/)
+        paras = params[:paragraphs][:body].split(/^\s*$/)
 
         @paragraph.body = paras.shift
         @paragraph.save!
