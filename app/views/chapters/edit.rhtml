@@ -1,6 +1,6 @@
 <h1>Editing chapter</h1>
 
-<%= start_form_tag :action => 'update', :id => @chapter.id %>
+<%= start_form_tag { :action => 'update', :id => @chapter.id }, :multipart => true %>
   <p><label for="chapter_status">Status</label><br/>
   <%= select "chapter", "status", [ ["Draft","draft"], ["Released", "released"] ] %>
 

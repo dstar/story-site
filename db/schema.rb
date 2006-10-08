@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 21) do
+ActiveRecord::Schema.define(:version => 22) do
 
   create_table "blogposts", :force => true do |t|
     t.column "body",       :text,                   :default => "",      :null => false
@@ -120,6 +120,9 @@ ActiveRecord::Schema.define(:version => 21) do
     t.column "story_id",               :integer
     t.column "permission",             :string
   end
+
+  add_index "story_permissions", ["story_id"], :name => "story_permissions_story_id_index"
+  add_index "story_permissions", ["permission_holder_id"], :name => "story_permissions_permission_holder_id_index"
 
   create_table "styles", :force => true do |t|
     t.column "element",    :text,                 :default => "", :null => false
