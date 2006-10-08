@@ -99,7 +99,7 @@ class ParagraphsController < ApplicationController
         render :action => 'paraedit'
       end
     else
-      if @paragraph.update_attributes(params[:paragraphs])
+      if saved_successfully
         flash[:notice] = 'Paragraph was successfully updated.'
         word_count = 0
         @paragraph.chapter.paragraphs.each { |p| word_count += p.body.scan(/\w+/).length }
