@@ -77,7 +77,7 @@ class ParagraphsController < ApplicationController
           need_page_reload = true
         end
       end
-    rescue RecordNotSaved
+    rescue ActiveRecord::RecordNotSaved
       saved_successfully = false
     end
 
