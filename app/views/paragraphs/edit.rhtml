@@ -1,6 +1,6 @@
 <h1>Editing paragraphs</h1>
 <%= start_form_tag :action => 'destroy', :id => @paragraphs %>
-    <%= submit_tag "Delete Paragraph", :confirm => "Are you sure?" %>
+    <%= submit_tag("Delete Paragraph", {:confirm => "Are you sure?"}) %>
 <%= end_form_tag %>
 <%= start_form_tag :action => 'update', :id => @paragraphs %>
   <%= render :partial => 'form' %>
