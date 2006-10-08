@@ -6,7 +6,7 @@
 
 <%= link_to "NO", :controller => 'chapters', :action => 'show_draft', :id => @paragraph.chapter.id, :anchor => "p#{@paragraph.id}" %>
 
-<%= render :partial => 'parabody', :object => @paragraph %>
+<%= render :partial => 'chapters/parabody', :object => @paragraph %>
 
 <hr/>
 
