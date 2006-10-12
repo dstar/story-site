@@ -183,7 +183,6 @@ class StoriesController < ApplicationController
         message = "No Permission Selected."
       end
       flash[:notice]=message
-      render :action => 'permissions'
     end
     
     render :action => 'permissions'
