@@ -115,6 +115,7 @@ class ChaptersController < ApplicationController
     para_count = 1
     word_count = 0
     file_string = file.read
+    file_string.gsub!(/\r/,'')
     lines = file_string.split(/\n\n/)
     lines.each { |line|
       line.gsub!(/^\n/,' ')
