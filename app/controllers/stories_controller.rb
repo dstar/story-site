@@ -74,6 +74,7 @@ class StoriesController < ApplicationController
   def create
     @story = Story.new(params[:story])
     @universes = Universe.find_all
+    @story.file_prefix = @story.short_title unless @story.file_prefix
     @story.description.gsub!(/\s+--/, "--")
      if @story.save
       flash[:notice] = 'Story was successfully created.'

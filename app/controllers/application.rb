@@ -94,6 +94,7 @@ class ApplicationController < ActionController::Base
     @chapter_to_save = chapter
     text = render_to_string :template => 'chapters/dump', :layout => false
     dirname = "#{RAILS_ROOT}/text_files/#{chapter.story.file_prefix}"
+    logger.warn("QQQ: #{dirname}");
     Dir.mkdir(dirname) unless File.exist?(dirname)
     out = File.new("#{dirname}/#{chapter.story.file_prefix}#{chapter.number}.txt",File::CREAT|File::TRUNC|File::RDWR, 0644)
     out.write(text)
