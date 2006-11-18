@@ -1,9 +1,10 @@
 CREATE TABLE `blogposts` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `body` text NOT NULL,
-  `posted` datetime NOT NULL default '0000-00-00 00:00:00',
+  `created_on` datetime default NULL,
   `user` varchar(45) NOT NULL default 'dstar',
   `title` varchar(45) NOT NULL default '',
+  `updated_on` datetime default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -15,6 +16,8 @@ CREATE TABLE `chapters` (
   `date` date NOT NULL default '0000-00-00',
   `file` varchar(45) NOT NULL default '',
   `status` varchar(255) default 'draft',
+  `last_status` varchar(255) default NULL,
+  `released` varchar(255) default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `chap_uniq` (`story_id`,`number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -33,7 +36,8 @@ CREATE TABLE `paragraphs` (
   `body` text NOT NULL,
   `position` int(10) unsigned NOT NULL default '1',
   `flag` int(10) unsigned NOT NULL default '0',
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `chapter_index` (`chapter_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `pcomments` (
@@ -43,7 +47,9 @@ CREATE TABLE `pcomments` (
   `created_at` datetime default NULL,
   `username` varchar(45) NOT NULL default 'no user',
   `flag` int(10) unsigned NOT NULL default '0',
-  PRIMARY KEY  (`id`)
+  `read_by` text,
+  PRIMARY KEY  (`id`),
+  KEY `pcomments_paragraph_id_index` (`paragraph_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `schema_info` (
@@ -78,6 +84,7 @@ CREATE TABLE `stories` (
   `order` int(10) unsigned NOT NULL default '0',
   `file_prefix` varchar(45) NOT NULL default '',
   `status` varchar(255) default 'draft',
+  `keywords` varchar(255) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -87,7 +94,9 @@ CREATE TABLE `story_permissions` (
   `permission_holder_type` varchar(255) default NULL,
   `story_id` int(11) default NULL,
   `permission` varchar(255) default NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  KEY `story_permissions_story_id_index` (`story_id`),
+  KEY `story_permissions_permission_holder_id_index` (`permission_holder_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `styles` (
@@ -125,4 +134,4 @@ CREATE TABLE `universes` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO schema_info (version) VALUES (12)
+INSERT INTO schema_info (version) VALUES (25)

@@ -94,9 +94,9 @@ class ParagraphsControllerTest < Test::Unit::TestCase
 
   def test_update_authed
     @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
-    post :update, :id => 1
+    post :update, :id => 1, :paragraphs => {'body' => "test1"}
     assert_response :redirect
-    assert_redirected_to :action => 'showByFile', :controller => 'chapters'
+    assert_redirected_to :action => 'show_draft', :controller => 'chapters'
   end
 
   def test_destroy_authed
@@ -105,7 +105,7 @@ class ParagraphsControllerTest < Test::Unit::TestCase
 
     post :destroy, :id => 1
     assert_response :redirect
-    assert_redirected_to :action => 'list'
+    assert_redirected_to :action => 'show_draft', :controller => 'chapters'
 
     assert_raise(ActiveRecord::RecordNotFound) {
       Paragraph.find(1)

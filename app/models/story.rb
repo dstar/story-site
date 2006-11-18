@@ -1,11 +1,16 @@
 class Story < ActiveRecord::Base
   validates_presence_of :universe_id, :title, :short_title, :description
+  validates_uniqueness_of :title, :short_title
+  validates_format_of :on_release, :with => /[a-zA-Z0-9_]*/
 
   belongs_to :universe
 
   has_many :chapters
 
   has_many :story_permissions
+
+  serialize :on_release
+  serialize :required_permissions
 
   #hack, because I can't figure out a way to make has_many :authors work
   has_many :credits
@@ -27,4 +32,6 @@ class Story < ActiveRecord::Base
             :joins => "left outer join chapters on chapters.story_id = stories.id",
             :group => "stories.id", :order => "sort desc")
   end
+
+
 end

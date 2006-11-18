@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 22) do
+ActiveRecord::Schema.define(:version => 24) do
 
   create_table "blogposts", :force => true do |t|
     t.column "body",       :text,                   :default => "",      :null => false
@@ -13,12 +13,15 @@ ActiveRecord::Schema.define(:version => 22) do
   end
 
   create_table "chapters", :force => true do |t|
-    t.column "story_id", :integer, :limit => 10, :default => 0,       :null => false
-    t.column "number",   :integer, :limit => 10, :default => 0,       :null => false
-    t.column "words",    :integer, :limit => 10, :default => 0,       :null => false
-    t.column "date",     :date,                                       :null => false
-    t.column "file",     :string,  :limit => 45, :default => "",      :null => false
-    t.column "status",   :string,                :default => "draft"
+    t.column "story_id",    :integer, :limit => 10, :default => 0,       :null => false
+    t.column "number",      :integer, :limit => 10, :default => 0,       :null => false
+    t.column "words",       :integer, :limit => 10, :default => 0,       :null => false
+    t.column "date",        :date,                                       :null => false
+    t.column "file",        :string,  :limit => 45, :default => "",      :null => false
+    t.column "status",      :string,                :default => "draft"
+    t.column "last_state",  :string
+    t.column "last_status", :string
+    t.column "released",    :string
   end
 
   add_index "chapters", ["story_id", "number"], :name => "chap_uniq", :unique => true
@@ -112,6 +115,7 @@ ActiveRecord::Schema.define(:version => 22) do
     t.column "file_prefix", :string,  :limit => 45, :default => "",      :null => false
     t.column "status",      :string,                :default => "draft"
     t.column "keywords",    :string
+    t.column "on_release",  :string
   end
 
   create_table "story_permissions", :force => true do |t|

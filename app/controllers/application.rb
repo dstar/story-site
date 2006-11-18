@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
   
   def admonish(message)
     flash[:notice] = message
-    request.env["HTTP_REFERER"] = index_url(:host => StoryHost('playground'))
+    request.env["HTTP_REFERER"] = index_url(:host => StoryHost('playground')) unless request.env["HTTP_REFERER"]
     redirect_to :back
     false
   end
@@ -112,6 +112,15 @@ class ApplicationController < ActionController::Base
       logger.debug "Queued queue #{title} chapter #{number} for ASSM."
       else
       logger.error "Failed to queue #{title} chapter #{number} for ASSM: #{$?}"
+    end
+  end
+
+  def StoryHost(story_id)
+    domain_length = request.subdomains.length
+    unless story_id == "playground"
+      Story.find(story_id).short_title.concat('.').concat(request.domain(domain_length)).concat(request.port_string)
+    else
+      story_id.concat('.').concat(request.domain(domain_length)).concat(request.port_string)
     end
   end
 
