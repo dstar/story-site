@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 24) do
+ActiveRecord::Schema.define(:version => 29) do
 
   create_table "blogposts", :force => true do |t|
     t.column "body",       :text,                   :default => "",      :null => false
@@ -45,18 +45,6 @@ ActiveRecord::Schema.define(:version => 24) do
     t.column "group_id",     :integer, :limit => 8, :default => 0, :null => false
     t.column "user_id",      :integer, :limit => 8, :default => 0, :null => false
     t.column "user_pending", :boolean
-  end
-
-  create_table "monthlybystory", :id => false, :force => true do |t|
-    t.column "story_id",     :integer, :limit => 10, :default => 0,  :null => false
-    t.column "ord",          :integer, :limit => 10, :default => 0,  :null => false
-    t.column "title",        :string,                :default => "", :null => false
-    t.column "universe_id",  :integer, :limit => 10, :default => 0,  :null => false
-    t.column "month",        :integer
-    t.column "year",         :integer
-    t.column "target_words", :integer, :limit => 28, :default => 0,  :null => false
-    t.column "wordcount",    :float,   :limit => 33
-    t.column "overage",      :float,   :limit => 34
   end
 
   create_table "paragraphs", :force => true do |t|
@@ -105,17 +93,27 @@ ActiveRecord::Schema.define(:version => 24) do
     t.column "permission_holder_type", :string
   end
 
+  create_table "sites", :force => true do |t|
+    t.column "required_permissions",   :string
+    t.column "available_permissions",  :string
+    t.column "available_actions",      :string
+    t.column "available_story_states", :string
+    t.column "default_permit",         :string
+  end
+
   create_table "stories", :force => true do |t|
-    t.column "title",       :string,                :default => "",      :null => false
-    t.column "description", :text,                  :default => "",      :null => false
-    t.column "flag",        :integer, :limit => 10, :default => 0,       :null => false
-    t.column "universe_id", :integer, :limit => 10, :default => 0,       :null => false
-    t.column "short_title", :string,  :limit => 45, :default => "",      :null => false
-    t.column "order",       :integer, :limit => 10, :default => 0,       :null => false
-    t.column "file_prefix", :string,  :limit => 45, :default => "",      :null => false
-    t.column "status",      :string,                :default => "draft"
-    t.column "keywords",    :string
-    t.column "on_release",  :string
+    t.column "title",                        :string,                :default => "",      :null => false
+    t.column "description",                  :text,                  :default => "",      :null => false
+    t.column "flag",                         :integer, :limit => 10, :default => 0,       :null => false
+    t.column "universe_id",                  :integer, :limit => 10, :default => 0,       :null => false
+    t.column "short_title",                  :string,  :limit => 45, :default => "",      :null => false
+    t.column "order",                        :integer, :limit => 10, :default => 0,       :null => false
+    t.column "file_prefix",                  :string,  :limit => 45, :default => "",      :null => false
+    t.column "status",                       :string,                :default => "draft"
+    t.column "keywords",                     :string
+    t.column "on_release",                   :string
+    t.column "required_chapter_permissions", :string
+    t.column "required_permission",          :string
   end
 
   create_table "story_permissions", :force => true do |t|
@@ -153,6 +151,7 @@ ActiveRecord::Schema.define(:version => 24) do
     t.column "name",        :string,  :limit => 45, :default => "", :null => false
     t.column "description", :text,                  :default => "", :null => false
     t.column "flag",        :integer, :limit => 10, :default => 0,  :null => false
+    t.column "status",      :string
   end
 
   create_table "users", :id => false, :force => true do |t|

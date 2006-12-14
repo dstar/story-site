@@ -101,20 +101,6 @@ class ApplicationController < ActionController::Base
     out.close
   end
 
-  def release_chapter(chapter)
-    story = chapter.story
-    filename = "#{RAILS_ROOT}/text_files/#{story.file_prefix}/#{story.file_prefix}#{chapter.number}.txt"
-    title = story.title
-    keywords = story.keywords
-    number = "#{chapter.number}"
-    succeeded = system("/home/dstar/projects/playground_utils/queue.pl", "/home/dstar/bin/#{story.file_prefix}_sendchaptercli_test.sh", title, number, keywords, "chapters/.disclaimer", filename, "chapters/.blurb")
-    if succeeded
-      logger.debug "Queued queue #{title} chapter #{number} for ASSM."
-      else
-      logger.error "Failed to queue #{title} chapter #{number} for ASSM: #{$?}"
-    end
-  end
-
   def StoryHost(story_id)
     domain_length = request.subdomains.length
     unless story_id == "playground"

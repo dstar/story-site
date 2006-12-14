@@ -96,7 +96,6 @@ class ChaptersController < ApplicationController
     c=params[:chapter]
     @chapter.status = c[:status] if c[:status]
     if @chapter.save
-      release_chapter(@chapter) if @chapter.status == 'released' and oldstatus == 'draft'
       flash[:notice] = 'Chapter was successfully updated.'
       redirect_to :controller => 'stories', :action => 'show', :id => @chapter.story_id
     else
