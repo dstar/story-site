@@ -1,26 +1,16 @@
+-*- mode: org; -*-
+#+CATEGORY: story-site
 * DONE tweak various things for sessions and session data to actually _work_
-  properly in terms of restricting access, and saving comments, etc.
-
-* finish getting the stats pages done and up; these are mostly
-  standalone. Would be nice to somehow recalculate the chapter-level
-  wordcounts on paragraph editing, or something like that. At the
-  moment, all we have is a "list all targets, and their status" page, at
-  /targets; this is going to change a great deal once I actually start
-  poking around with it
-  (SQL in /app/models/matrix.sql should be rolled into Target model)
-
-* There is no caching of any kind as yet. It would be nice to add
+  properly in terms of restricting access, and saving comments, etc.  
+* DONE There is no caching of any kind as yet. It would be nice to add
   appropriate caching.
-
 * DONE no Ajax for e.g. paragraph comments, paragraph
   editing. would be nice
   to make it use Ajax, which I shall work on when I get a
   chance. HOWTO (for edit): change link to ajaxically pull in
   paragraphs/_form.rhtml (separate action) if javascript  enabled,
   otherwise link to edit action. same-same for comments.
-
 * DONE Add column 'read' to pcomments. Takes an array of author names.
-
 * DONE stylesheets, and, in general, class names for divs, etc. should be
   mapped to the current stylesheet set-- the other choice would be to
   create a new stylesheet that matches the current layout, which might
@@ -35,24 +25,25 @@
         @hash["#{e}.#{c.attributes["class"]}"] = 1
         @hash["#{e}"] = 1
       end
-
 * DONE should add the javascript bit for changing stylesheets to the layout
   pages once there are two stylesheets
-
 * DONE am not sure if sessions store cookies for <foo>.pele.cx or just
   pele.cx; ideally want only pele.cx so that data is carried over
   between the subdomains?
-
 * DONE (if test chapter arrives ok) Send to ASSM functionality
-
 * DONE Send to SOL functionality
-
-* RSS feed functionality
-
 * DONE Keywords
-
 * DONE Auto-dump chapters
+** TODO Auto-release chapters at a specific date/time
+** DONE Import old blog entries
+   CLOSED: [2007-01-15 Sun]
+** TODO Fix next link in show_comments mode
 
-* Auto-release Draft Chapters
-
-* permissions interface
+* TODO Get codebase ready for release
+** TODO Backport all the changes in the new-auth-system branch except the new auth system to the trunk
+*** TODO Create TODO items for all of the changes
+** TODO Complete new auth system
+*** TODO Document/Diagram new auth system, to ensure it's a good architecture, (using use-case UML diagrams?)
+** TODO Fix show-drafts incompatibility with elinks
+** TODO Fix edit_themes
+   
