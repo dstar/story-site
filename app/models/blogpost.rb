@@ -4,7 +4,7 @@ class Blogpost < ActiveRecord::Base
 
   def self.frontpagelist
     find(:all,
-      :order => 'created_on desc, id asc', 
+      :order => 'created_on desc, id desc', 
       :limit => '10')
   end
 end
