@@ -2,8 +2,8 @@
 	<%= link_to "(Edit)", :controller => 'chapters', :action => 'edit', :id => chapter.id %>
 <% end %>
 <% if chapter.status == "released" %> 
-	<% if Date.today - chapter.date < 7 %> <em>NEW</em> <% end %>
 	<%= link_to "Part #{chapter.number}", chapter_url(:chapter => chapter) %>
+	<% if Date.today - chapter.date < 7 %> <em>NEW!</em> <% end %>
 <% end %>
 <% if ( @authinfo[:user_id] and ( StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'author'}) or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'beta-reader'}) ) ) %>
 	<%= "<em><strong>Part #{chapter.number} DRAFT</strong></em>" if chapter.status == "draft" %> <%= link_to "Comment", url_for(:controller => 'chapters', :action => 'show_draft', :id => chapter.id) %>
