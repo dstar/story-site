@@ -18,7 +18,11 @@ Next
 <p class="navigation">
 <%= link_to_if prevChapter(@chapter), 'Prev', chapter_url(:chapter => prevChapter(@chapter)) %> |
 <%= link_to 'Index', index_url %> |
-<%= link_to_if nextChapter(@chapter), 'Next', chapter_url(:chapter => nextChapter(@chapter)) %>
+<% if nextChapter(@chapter) and (nextChapter(@chapter).status == "released" or (@authinfo[:user_id] and ( User.find(@authinfo[:user_id]).has_story_permission(nextChapter(@chapter).story,'author') or User.find(@authinfo[:user_id]).has_story_permission(nextChapter(@chapter).story,'beta-reader') ) ) )%> 
+<%= link_to 'Next', chapter_url(:chapter => nextChapter(@chapter)) %>
+<% else %>
+Next
+<% end %>
 </p>
 </div>
 </div>
