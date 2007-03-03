@@ -4,5 +4,6 @@ class RenamePcommentPostedToCreatedAt < ActiveRecord::Migration
   end
 
   def self.down
+	rename_column('pcomments','created_at','posted')
   end
 end

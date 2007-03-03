@@ -21,17 +21,36 @@ class Chapter < ActiveRecord::Base
     self.file
   end
 
+  def date
+    # We need to play a little game, see -- if the chapters released, then we want date to display the release date. If not, we want the upload date.
+    if self.status == "released"
+      return date_released
+    else
+      return date_uploaded
+    end
+  end
+
   private
   def check_release_status
     if self.status == "released"
       if self.last_status != "released"
+        self.date_released = Time.now.strftime('%Y-%m-%d')
         if ! self.released? 
           if self.story.on_release
             self.story.on_release.each do |command|
-              system "#{RAILS_ROOT}/release_scripts/#{command}"
+              if command.match(/^[a-zA-Z0-9_]/)
+                # We make sure the filename is safe -- with only 
+                # letters, digits, and underscores, it _shouldn't_ 
+                # be possible to do anything nefarious with it. 
+                # I think. Never underestimate the ingenuity of 
+                # crackers.
+                system "#{RAILS_ROOT}/release_scripts/#{command}"
+                self.released = true
+              end
             end
           end
         end
+        self.save!
       end
     end
     self.last_status = self.status

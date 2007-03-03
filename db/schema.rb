@@ -2,26 +2,27 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 29) do
+ActiveRecord::Schema.define(:version => 26) do
 
   create_table "blogposts", :force => true do |t|
     t.column "body",       :text,                   :default => "",      :null => false
     t.column "created_on", :datetime
     t.column "user",       :string,   :limit => 45, :default => "dstar", :null => false
-    t.column "title",      :string,   :limit => 45, :default => "",      :null => false
+    t.column "title",      :text
     t.column "updated_on", :datetime
   end
 
   create_table "chapters", :force => true do |t|
-    t.column "story_id",    :integer, :limit => 10, :default => 0,       :null => false
-    t.column "number",      :integer, :limit => 10, :default => 0,       :null => false
-    t.column "words",       :integer, :limit => 10, :default => 0,       :null => false
-    t.column "date",        :date,                                       :null => false
-    t.column "file",        :string,  :limit => 45, :default => "",      :null => false
-    t.column "status",      :string,                :default => "draft"
-    t.column "last_state",  :string
-    t.column "last_status", :string
-    t.column "released",    :string
+    t.column "story_id",      :integer, :limit => 10, :default => 0,       :null => false
+    t.column "number",        :integer, :limit => 10, :default => 0,       :null => false
+    t.column "words",         :integer, :limit => 10, :default => 0,       :null => false
+    t.column "date_uploaded", :date
+    t.column "file",          :string,  :limit => 45, :default => "",      :null => false
+    t.column "status",        :string,                :default => "draft"
+    t.column "last_state",    :string
+    t.column "last_status",   :string
+    t.column "released",      :string
+    t.column "date_released", :date
   end
 
   add_index "chapters", ["story_id", "number"], :name => "chap_uniq", :unique => true
