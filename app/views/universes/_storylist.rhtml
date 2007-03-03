@@ -4,9 +4,9 @@
 	<% Story.OrderedListByUniverse(storylist.id).each do |story| %>
           <li><%= link_to story.title, index_url(:host => StoryHost(story.id)) %> 
 	      <% if @authinfo[:username] and ( StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => story.id, 'permission' => 'author'}) or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => story.id, 'permission' => 'beta-reader'}) ) %>
-		      <% newest_chapter = story.chapters.find(:first, :order => "date DESC" ) %>
+		      <% newest_chapter = story.chapters.find(:first, :order => "date_uploaded DESC" ) %>
 	      <% else %>
-		      <% newest_chapter = story.chapters.find(:first, :order => "date DESC", :conditions => "status = 'released'" ) %>
+		      <% newest_chapter = story.chapters.find(:first, :order => "date_uploaded DESC", :conditions => "status = 'released'" ) %>
 	      <% end %>
 	      <% if newest_chapter and Date.today - newest_chapter.date  < 7 %>
 		      <em>UPDATED!</em> 
