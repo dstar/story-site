@@ -69,7 +69,7 @@ class ChaptersController < ApplicationController
 
   def create
     @chapter = Chapter.new(params[:chapter])
-    @chapter.date = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless @chapter.date
+    @chapter.date_uploaded = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless @chapter.date_uploaded
     if @chapter.save
       release_chapter(@chapter) if @chapter.status == 'released'
       process_file(params[:file],@chapter.id) unless params[:file].blank?

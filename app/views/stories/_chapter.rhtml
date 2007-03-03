@@ -3,6 +3,7 @@
 <% end %>
 <% if chapter.status == "released" %> 
 	<%= link_to "Part #{chapter.number}", chapter_url(:chapter => chapter) %>
+	<% logger.error "chapter.date for #{chapter.id} is #{chapter.date}" %>
 	<% if Date.today - chapter.date < 7 %> <em>NEW!</em> <% end %>
 <% end %>
 <% if ( @authinfo[:user_id] and ( StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'author'}) or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'beta-reader'}) ) ) %>

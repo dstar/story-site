@@ -24,9 +24,9 @@ class Chapter < ActiveRecord::Base
   def date
     # We need to play a little game, see -- if the chapters released, then we want date to display the release date. If not, we want the upload date.
     if self.status == "released"
-      return date_released
+      return self.date_released
     else
-      return date_uploaded
+      return self.date_uploaded
     end
   end
 
@@ -50,7 +50,6 @@ class Chapter < ActiveRecord::Base
             end
           end
         end
-        self.save!
       end
     end
     self.last_status = self.status
