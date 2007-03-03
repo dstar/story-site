@@ -1,0 +1,94 @@
+require 'rubygems'
+require 'mechanize'
+require 'logger'
+
+agent = WWW::Mechanize.new { |a| a.log = Logger.new("mech.log") }
+
+user = ''
+pass = ''
+
+title = ARGV[0]
+chapnum = ARGV[1]
+url = ARGV[2]
+
+puts "Submitting #{title}\n"
+
+page = agent.get('http://www.storiesonline.net/nlogin.php')
+form = page.forms.first
+form.fields.name('theusername').first.value = user
+form.fields.name('thepassword').first.value = pass
+page = agent.submit(form)
+
+page = agent.get('/author/wizard.php')
+form = page.forms.first
+unless form
+  page = agent.get('/author/wizard.php?cmd=NewSubmission')
+  form = page.forms.first
+end
+button = form.buttons.collect {|b| b if b.value = 'New External Chapter' }[0]
+
+# select story page
+page = agent.submit(form,button)
+form = page.forms.first
+select = form.fields.name('storyID').first
+#option = select.options.text(title)
+select.value = select.options.find { |o| o.text == title}.value
+
+#confirm chapter page
+page = agent.submit(form)
+form = page.forms.first
+nextchap = form.fields.name('chapNum').first.value
+unless nextchap == chapnum
+  puts "Wrong Chapter Expected!"
+  Kernel::exit 1
+end
+#die "Wrong Chapter Expected!" unless nextchap == chapter_num
+form = page.forms.first
+
+#story finished page
+page = agent.submit(form)
+form = page.forms.first
+button = form.buttons.collect {|b| b if b.value = 'To be Continued' }[0]
+
+#modify categories page
+page = agent.submit(form,button)
+form = page.forms.first
+
+#notes page
+page = agent.submit(form)
+form = page.forms.first
+
+#set url page
+page = agent.submit(form)
+form = page.forms.first
+form.fields.name('subURL').first.value = url
+
+#confirmation page
+page = agent.submit(form)
+
+if page.body =~ /The system received an error while checking the validity/
+  Kernel::sleep 10
+  form = page.forms.first
+  page = agent.submit(form)
+  if page.body =~ /The system received an error while checking the validity/
+    puts "SOL Could Not Validate The URL: #{url}"
+    puts page.body
+    Kernel::exit 1
+    #die "SOL Could Not Validate The URL: #{url}"
+  end
+end
+
+form = page.forms.first
+button = form.buttons.collect {|b| b if b.value = 'Submit for posting' }[0]
+
+page = agent.submit(form,button)
+
+puts "Story Submitted"
+puts page.body
+    
+#parser = HTMLTree::XMLParser.new(false,false)
+#parser.feed(client.getContent(url))
+#xml=parser.document
+
+
+
