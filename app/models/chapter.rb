@@ -42,6 +42,18 @@ class Chapter < ActiveRecord::Base
     return unread_comments.length
   end
 
+  def get_unacknowledged_comments
+    comments = self.paragraphs.collect { |p| p.pcomments }.flatten.compact
+    unacknowledged_comments = comments.collect { |c| c if c.acknowledged.blank? }
+    return unacknowledged_comments
+  end
+
+  def get_num_unacknowledged_comments
+    comments = self.paragraphs.collect { |p| p.pcomments }.flatten.compact
+    unacknowledged_comments = comments.collect { |c| c if c.acknowledged.blank? }
+    return unacknowledged_comments.length
+  end
+
   private
   def check_release_status
     if self.status == "released"
