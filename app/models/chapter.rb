@@ -36,9 +36,9 @@ class Chapter < ActiveRecord::Base
     return unread_comments
   end
 
-  def get_num_comments_unread_by(user,chapter_id)
-    total_comments = Pcomments.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id",chapter_id])
-    read_comments = Pcomments.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id and c.read_by like ?",chapter_id, "%- user\n"])
+  def get_num_comments_unread_by(user)
+    total_comments = Pcomments.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id",self.id])
+    read_comments = Pcomments.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id and c.read_by like ?",self.id, "%- user\n"])
     return total_comments - read_comments
   end
 
