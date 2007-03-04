@@ -88,6 +88,7 @@ class ChaptersController < ApplicationController
     @chapter = Chapter.find(params[:id])
 
     unless params[:file].size > 0
+      logger.error "QQQ: size was #{params[:file].size}"
       Paragraph.delete_all ["chapter_id = ?", @chapter.id]
       process_file(params[:file],@chapter.id)
     end
