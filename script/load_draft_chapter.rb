@@ -58,7 +58,7 @@ end
 @chapter = Chapter.find_by_story_id_and_number(@story.id, chapter_num)
 @chapter = Chapter.new() unless @chapter
 
-@chapter.date = date
+@chapter.date_uploaded = date
 @chapter.story_id = @story.id
 @chapter.number = chapter_num
 @chapter.status = 'draft'
