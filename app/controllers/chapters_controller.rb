@@ -87,9 +87,7 @@ class ChaptersController < ApplicationController
   def update
     @chapter = Chapter.find(params[:id])
 
-    logger.error "QQQ: #{params[:file].size}"
-
-    unless params[:file].blank?
+    unless params[:file].size > 0
       Paragraph.delete_all ["chapter_id = ?", @chapter.id]
       process_file(params[:file],@chapter.id)
     end
