@@ -50,9 +50,9 @@ id, "%- user\n"])
   end
 
   def get_num_unacknowledged_comments
-    comments = self.paragraphs.collect { |p| p.pcomments }.flatten.compact
-    unacknowledged_comments = comments.collect { |c| c if c.acknowledged.blank? }
-    return unacknowledged_comments.length
+    unacknowledged_comments = Pcomment.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id and c.acknowledged like ? or c.acknowledged is null",self.
+id])
+    return unacknowledged_comments
   end
 
   private
