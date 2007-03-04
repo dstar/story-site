@@ -7,17 +7,64 @@ class PcommentsController < ApplicationController
     @story_id = @paragraph.chapter.story.id
 
     @authorization = {
-      "destroy"    => [{ 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
-      "update"     => [{ 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
-      "edit"       => [{ 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
-      "create"     => [{ 'permission_type'=>"StoryPermission", 'permission'=>"beta-reader", 'id'=> @story_id },
-                      {'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
-      "new"        => [{ 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id },
-                      { 'permission_type'=>"StoryPermission", 'permission'=>"beta-reader", 'id'=> @story_id } ],
-      "markread"   => [{ 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id },
-                      { 'permission_type'=>"StoryPermission", 'permission'=>"beta-reader", 'id'=> @story_id } ],
-      "markunread" => [{ 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id },
-                      { 'permission_type'=>"StoryPermission", 'permission'=>"beta-reader", 'id'=> @story_id } ],    }
+      "destroy"       => [{
+                            'permission_type'=>"StoryPermission",
+                            'permission'=>"author",
+                            'id'=> @story_id
+                          }],
+      "update"        => [{
+                            'permission_type'=>"StoryPermission",
+                            'permission'=>"author",
+                            'id'=> @story_id 
+                          } ],
+      "edit"          => [{
+                            'permission_type'=>"StoryPermission",
+                            'permission'=>"author",
+                            'id'=> @story_id 
+                          } ],
+      "create"        => [{
+                            'permission_type'=>"StoryPermission",
+                            'permission'=>"beta-reader",
+                            'id'=> @story_id },
+                          {'permission_type'=>"StoryPermission",
+                            'permission'=>"author",
+                            'id'=> @story_id 
+                          } ],
+      "new"           => [{
+                            'permission_type'=>"StoryPermission",
+                            'permission'=>"author",
+                            'id'=> @story_id },
+                          { 'permission_type'=>"StoryPermission",
+                            'permission'=>"beta-reader",
+                            'id'=> @story_id 
+                          } ],
+      "markread"      => [{
+                            'permission_type'=>"StoryPermission",
+                            'permission'=>"author",
+                            'id'=> @story_id },
+                          { 'permission_type'=>"StoryPermission",
+                            'permission'=>"beta-reader",
+                            'id'=> @story_id 
+                          } ],
+      "markunread"    => [{
+                            'permission_type'=>"StoryPermission",
+                            'permission'=>"author",
+                            'id'=> @story_id },
+                          { 'permission_type'=>"StoryPermission",
+                            'permission'=>"beta-reader",
+                            'id'=> @story_id 
+                          } ],
+      "acknowledge"   => [{
+                            'permission_type'=>"StoryPermission",
+                            'permission'=>"author",
+                            'id'=> @story_id 
+                          } ],
+      "unacknowledge" => [{
+                            'permission_type'=>"StoryPermission",
+                            'permission'=>"author",
+                            'id'=> @story_id 
+                          } ],
+    }
   end
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
@@ -119,6 +166,37 @@ class PcommentsController < ApplicationController
     end
   end
 
+  def acknowledge
+    if @authinfo[:username]
+      @pcomment = Pcomment.find(params[:id])
+      @chapter_id = Pcomment.chapterID(@pcomment.id)
+      @pcomment.acknowledged = @authinfo[:username]
+      @pcomment.save
+      if request.xml_http_request?
+        @chapter = @paragraph.chapter
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
+      else
+        redirect_to :controller => 'chapters',
+        :action => 'show', :id => @chapter_id
+      end
+    end
+  end
+
+  def unacknowledge
+    if @authinfo[:username]
+      @pcomment = Pcomment.find(params[:id])
+      @chapter_id = Pcomment.chapterID(@pcomment.id)
+      @pcomment.acknowledged = ""
+      @pcomment.save
+      if request.xml_http_request?
+        @chapter = @paragraph.chapter
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
+      else
+        redirect_to :controller => 'chapters',
+        :action => 'show', :id => @chapter_id
+      end
+    end
+  end
 
   def setup_page_vars
     if params[:id]
