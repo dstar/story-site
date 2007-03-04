@@ -21,7 +21,8 @@ while (<>) {
 
 print "-"x17, " $i ", "-"x17, "\n"; 
 
-foreach my $e (sort { $count{$a} <=> $count{$b} } keys %q) { 
+foreach my $e (sort { $q{$a} <=> $q{$b} } keys %q) { 
+#foreach my $e (sort { $count{$a} <=> $count{$b} } keys %q) { 
 
 	$avg = $q{$e} / $i;
 	
