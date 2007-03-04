@@ -41,7 +41,7 @@ class Chapter < ActiveRecord::Base
     results = Chapter.find_by_sql(["SELECT c.id, count(pc.id) as total, sum(pc.read_by NOT LIKE ?) as unread, sum(pc.acknowledged is null or pc.acknowledged like '') FROM pcomments pc LEFT JOIN paragraphs p on pc.paragraph_id = p.id LEFT JOIN chapters c on p.chapter_id = c.id WHERE c.id = ? GROUP BY c.id", "%- #{user}\n%", self.id]).first
 
     if results
-      return results.unread
+      return results.unread.to_i
     else
       return 0
     end
@@ -60,7 +60,7 @@ class Chapter < ActiveRecord::Base
     results = Chapter.find_by_sql(["SELECT c.id, count(pc.id) as total, sum(pc.acknowledged is null or pc.acknowledged like '') as unacknowledged FROM pcomments pc LEFT JOIN paragraphs p on pc.paragraph_id = p.id LEFT JOIN chapters c on p.chapter_id = c.id WHERE c.id = ? GROUP BY c.id", self.id]).first
 
     if results
-      return results.unacknowledged
+      return results.unacknowledged.to_i
     else
       return 0
     end
