@@ -121,7 +121,7 @@ class ChaptersController < ApplicationController
     lines.each { |line|
       line.gsub!(/^\n/,' ')
       line.gsub!(/(\w)\n(\w)/,'\1 \2')
-      line.gsub!(/\n/,'')
+      line.gsub!(/\n/,' ')
       line.gsub!(/^\s*|\s*$/,'')
       line.gsub!(/#/,'***') if line == "#"
       line.gsub!(/\s+--/, "--")
