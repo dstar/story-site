@@ -31,26 +31,26 @@ class Chapter < ActiveRecord::Base
   end
 
   def get_comments_unread_by(user)
-    comments = self.paragraphs.collect { |p| p.pcomments }.flatten.compact
-    unread_comments = comments.collect { |c| c if ! c.read_by.include?(user) }
+    comments = self.paragraphs.collect { |p| p.pcomments }.flatten
+    unread_comments = comments.collect { |c| c if ! c.read_by.include?(user) }.compact
     return unread_comments
   end
 
   def get_num_comments_unread_by(user)
-    comments = self.paragraphs.collect { |p| p.pcomments }.flatten.compact
-    unread_comments = comments.collect { |c| c if ! c.read_by.include?(user) }
+    comments = self.paragraphs.collect { |p| p.pcomments }.flatten
+    unread_comments = comments.collect { |c| c if ! c.read_by.include?(user) }.compact
     return unread_comments.length
   end
 
   def get_unacknowledged_comments
-    comments = self.paragraphs.collect { |p| p.pcomments }.flatten.compact
-    unacknowledged_comments = comments.collect {|c| c if c.acknowledged.blank?}
+    comments = self.paragraphs.collect { |p| p.pcomments }.flatten
+    unacknowledged_comments = comments.collect {|c| c if c.acknowledged.blank?}.compact
     return unacknowledged_comments
   end
 
   def get_num_unacknowledged_comments
-    comments = self.paragraphs.collect { |p| p.pcomments }.flatten.compact
-    unacknowledged_comments = comments.collect {|c| c if c.acknowledged.blank?}
+    comments = self.paragraphs.collect { |p| p.pcomments }.flatten
+    unacknowledged_comments = comments.collect {|c| c if c.acknowledged.blank?}.compact
     return unacknowledged_comments.length
   end
 
