@@ -30,6 +30,18 @@ class Chapter < ActiveRecord::Base
     end
   end
 
+  def get_comments_unread_by(user)
+    comments = self.paragraphs.collect { |p| p.pcomments }.flatten
+    unread_comments = comments.collect { |c| c if ! c.read_by.include?(user) }
+    return unread_comments
+  end
+
+  def get_num_comments_unread_by(user)
+    comments = self.paragraphs.collect { |p| p.pcomments }.flatten
+    unread_comments = comments.collect { |c| c if ! c.read_by.include?(user) }
+    return unread_comments.length
+  end
+
   private
   def check_release_status
     if self.status == "released"
