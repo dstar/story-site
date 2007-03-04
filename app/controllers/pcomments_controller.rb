@@ -171,6 +171,7 @@ class PcommentsController < ApplicationController
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
       @pcomment.acknowledged = @authinfo[:username]
+      @pcomment.read_by.push(@authinfo[:username])
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
@@ -187,6 +188,7 @@ class PcommentsController < ApplicationController
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
       @pcomment.acknowledged = ""
+      @pcomment.read_by.delete(@authinfo[:username])
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
