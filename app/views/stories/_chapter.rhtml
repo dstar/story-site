@@ -14,12 +14,12 @@
 <% end %>
 <% if chapter.status == "draft" or ( @authinfo[:user_id] and ( StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'author'}) or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'beta-reader'}) ) ) %>
 , <%= Paragraph.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id",chapter.id]) %> comments
-<% end %>
 <% if chapter.get_num_comments_unread_by(@authinfo[:username]) > 0 %>
 , <strong><%= chapter.get_num_comments_unread_by(@authinfo[:username]) %> unread</strong>
 <% end %>
 <% if @authinfo[:user_id] and ( StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'author'}) ) and chapter.get_num_unacknowledged_comments > 0 %>
 , <span class="unacknowledged_count"><%= chapter.get_num_unacknowledged_comments %> unacknowledged</span>
+<% end %>
 <% end %>
 <% if chapter.status == "released" or ( @authinfo[:user_id] and ( StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'author'}) or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'beta-reader'}) ) ) %>
 ) <br/>
