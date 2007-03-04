@@ -40,8 +40,11 @@ class Chapter < ActiveRecord::Base
   def get_num_comments_unread_by(user)
     results = Chapter.find_by_sql(["SELECT c.id, count(pc.id) as total, sum(pc.read_by NOT LIKE ?) as unread, sum(pc.acknowledged is null or pc.acknowledged like '') FROM pcomments pc LEFT JOIN paragraphs p on pc.paragraph_id = p.id LEFT JOIN chapters c on p.chapter_id = c.id WHERE c.id = ? GROUP BY c.id", "%- #{user}\n%", self.id]).first
 
-    return results.unread
-
+    if results
+      return results.unread
+    else
+      return 0
+    end
 #    comments = self.paragraphs.collect { |p| p.pcomments }.flatten
 #    unread_comments = comments.collect { |c| c if ! c.read_by.include?(user) }.compact
 #    return unread_comments.length
@@ -56,7 +59,11 @@ class Chapter < ActiveRecord::Base
   def get_num_unacknowledged_comments
     results = Chapter.find_by_sql(["SELECT c.id, count(pc.id) as total, sum(pc.acknowledged is null or pc.acknowledged like '') as unacknowledged FROM pcomments pc LEFT JOIN paragraphs p on pc.paragraph_id = p.id LEFT JOIN chapters c on p.chapter_id = c.id WHERE c.id = ? GROUP BY c.id", self.id]).first
 
-    return results.unacknowledged
+    if results
+      return results.unacknowledged
+    else
+      return 0
+    end
 
 #    comments = self.paragraphs.collect { |p| p.pcomments }.flatten
 #    unacknowledged_comments = comments.collect {|c| c if c.acknowledged.blank?}.compact
