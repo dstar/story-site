@@ -50,7 +50,7 @@ id, "%- user\n"])
   end
 
   def get_num_unacknowledged_comments
-    unacknowledged_comments = Pcomment.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id and c.acknowledged like ? or c.acknowledged is null",self.
+    unacknowledged_comments = Pcomment.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id and c.acknowledged like '' or c.acknowledged is null",self.
 id])
     return unacknowledged_comments
   end
