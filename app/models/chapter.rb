@@ -37,22 +37,21 @@ class Chapter < ActiveRecord::Base
   end
 
   def get_num_comments_unread_by(user)
-    total_comments = Pcomment.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id",self.id])
-    read_comments = Pcomment.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id and c.read_by like ?",self.
-id, "%- user\n"])
-    return total_comments - read_comments
+    comments = self.paragraphs.collect { |p| p.pcomments }.flatten.compact
+    unread_comments = comments.collect { |c| c if ! c.read_by.include?(user) }
+    return unread_comments.length
   end
 
   def get_unacknowledged_comments
     comments = self.paragraphs.collect { |p| p.pcomments }.flatten.compact
-    unacknowledged_comments = comments.collect { |c| c if c.acknowledged.blank? }
+    unacknowledged_comments = comments.collect {|c| c if c.acknowledged.blank?}
     return unacknowledged_comments
   end
 
   def get_num_unacknowledged_comments
-    unacknowledged_comments = Pcomment.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id and c.acknowledged like '' or c.acknowledged is null",self.
-id])
-    return unacknowledged_comments
+    comments = self.paragraphs.collect { |p| p.pcomments }.flatten.compact
+    unacknowledged_comments = comments.collect {|c| c if c.acknowledged.blank?}
+    return unacknowledged_comments.length
   end
 
   private

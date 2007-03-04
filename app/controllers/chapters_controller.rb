@@ -87,9 +87,11 @@ class ChaptersController < ApplicationController
   def update
     @chapter = Chapter.find(params[:id])
 
-    unless params[:file].size <= 0
-      Paragraph.delete_all ["chapter_id = ?", @chapter.id]
-      process_file(params[:file],@chapter.id)
+    if params[:file]
+      unless params[:file].size <= 0
+        Paragraph.delete_all ["chapter_id = ?", @chapter.id]
+        process_file(params[:file],@chapter.id)
+      end
     end
 
     oldstatus = @chapter.status
