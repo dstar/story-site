@@ -3,7 +3,7 @@
 <h1><%= @chapter.story.title %> Chapter <%= @chapter.number %></h1>
 
 <p class="navigation">
-<% if prevChapter(@chapter) and (prevChapter(@chapter).status == "released" or (@authinfo[:user_id] and ( User.find(@authinfo[:user_id]).has_story_permission(prevChapter(@chapter).story,'author') or User.find(@authinfo[:user_id]).has_story_permission(prevChapter(@chapter).story,'beta-reader') ) ) )%> 
+<% if prevChapter(@chapter) and (prevChapter(@chapter).status == "released" or (@authinfo[:user_id] and ( User.find(@authinfo[:user_id]).has_story_permission(prevChapter(@chapter).story,'author') or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'beta-reader'}) ) ) )%> 
 <% if params[:action] == 'show_draft' %>
 <%= link_to "Prev", url_for(:controller => 'chapters', :action => 'show_draft', :id => prevChapter(@chapter).id) %>
 <% else %>
@@ -14,7 +14,7 @@ Prev
 <% end %>
  |
 <%= link_to 'Index', index_url %> |
-<% if nextChapter(@chapter) and (nextChapter(@chapter).status == "released" or (@authinfo[:user_id] and ( User.find(@authinfo[:user_id]).has_story_permission(nextChapter(@chapter).story,'author') or User.find(@authinfo[:user_id]).has_story_permission(nextChapter(@chapter).story,'beta-reader') ) ) )%> 
+<% if nextChapter(@chapter) and (nextChapter(@chapter).status == "released" or (@authinfo[:user_id] and ( User.find(@authinfo[:user_id]).has_story_permission(nextChapter(@chapter).story,'author') or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'beta-reader'}) ) ) )%> 
 <% if params[:action] == 'show_draft' %>
 <%= link_to "Next", url_for(:controller => 'chapters', :action => 'show_draft', :id => nextChapter(@chapter).id) %>
 <% else %>
@@ -29,7 +29,7 @@ Next
 <%= render :partial => "para", :collection => Paragraph.paraList(@chapter.id) %>
 <div class="paragraph">
 <p class="navigation">
-<% if prevChapter(@chapter) and (prevChapter(@chapter).status == "released" or (@authinfo[:user_id] and ( User.find(@authinfo[:user_id]).has_story_permission(prevChapter(@chapter).story,'author') or User.find(@authinfo[:user_id]).has_story_permission(prevChapter(@chapter).story,'beta-reader') ) ) )%> 
+<% if prevChapter(@chapter) and (prevChapter(@chapter).status == "released" or (@authinfo[:user_id] and ( User.find(@authinfo[:user_id]).has_story_permission(prevChapter(@chapter).story,'author') or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'beta-reader'}) ) ) )%> 
 <% if params[:action] == 'show_draft' %>
 <%= link_to "Prev", url_for(:controller => 'chapters', :action => 'show_draft', :id => prevChapter(@chapter).id) %>
 <% else %>
@@ -40,7 +40,7 @@ Prev
 <% end %>
  |
 <%= link_to 'Index', index_url %> |
-<% if nextChapter(@chapter) and (nextChapter(@chapter).status == "released" or (@authinfo[:user_id] and ( User.find(@authinfo[:user_id]).has_story_permission(nextChapter(@chapter).story,'author') or User.find(@authinfo[:user_id]).has_story_permission(nextChapter(@chapter).story,'beta-reader') ) ) )%> 
+<% if nextChapter(@chapter) and (nextChapter(@chapter).status == "released" or (@authinfo[:user_id] and ( User.find(@authinfo[:user_id]).has_story_permission(nextChapter(@chapter).story,'author') or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'beta-reader'}) ) ) )%> 
 <% if params[:action] == 'show_draft' %>
 <%= link_to "Next", url_for(:controller => 'chapters', :action => 'show_draft', :id => nextChapter(@chapter).id) %>
 <% else %>
