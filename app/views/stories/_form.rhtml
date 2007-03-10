@@ -13,6 +13,9 @@
 <p><label for="story_keywords">Keywords</label><br/>
 <%= text_field 'story', 'keywords' %></p>
 
+<p><label for="story_keywords">Scripts to run on release</label><br/>
+<%= text_area 'story', 'on_release' %></p>
+
 <p><label for="story_universe_id">Universe</label>
 <%= select "story", "universe_id", Universe.find_all.collect {|u| [u.name, u.id ]}, {:include_blank => true} %>
 

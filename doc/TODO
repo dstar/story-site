@@ -48,4 +48,4 @@
 ** TODO Fix show-drafts incompatibility with elinks
 ** TODO Fix edit_themes
 ** TODO add text-area to set release scripts
-** TODO add close button to bottom of open comment area
+** DONE add close button to bottom of open comment area   CLOSED: [2007-03-10 Sat]
