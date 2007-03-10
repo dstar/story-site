@@ -2,7 +2,7 @@ class Chapter < ActiveRecord::Base
   belongs_to :story
   has_many :paragraphs
 
-  after_save :check_release_status
+  before_save :check_release_status
 
   def self.orderedListByStory(story_id)
     find(:all,
@@ -85,10 +85,10 @@ class Chapter < ActiveRecord::Base
                 # I think. Never underestimate the ingenuity of 
                 # crackers.
                 system "#{RAILS_ROOT}/release_scripts/#{command}"
-                self.released = true
               end
-            end
+            end            
           end
+          self.released = true
         end
       end
     end
