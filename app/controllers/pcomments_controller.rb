@@ -87,7 +87,7 @@ class PcommentsController < ApplicationController
     if request.xml_http_request?
       if @pcomment.save
         @chapter = @paragraph.chapter
-        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"} 
       else
         render :action => 'new_comment'
       end
@@ -124,7 +124,7 @@ class PcommentsController < ApplicationController
         expire_fragment( :action => "show", :action_suffix => "pcomment_#{@pcomment.id}", :controller => "chapters")
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"} 
       else
         redirect_to :controller => 'chapters',
         :action => 'show', :id => @chapter_id
@@ -141,7 +141,7 @@ class PcommentsController < ApplicationController
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"} 
       else
         redirect_to :controller => 'chapters',
         :action => 'show', :id => @chapter_id
@@ -158,7 +158,7 @@ class PcommentsController < ApplicationController
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"} 
       else
         redirect_to :controller => 'chapters',
         :action => 'show', :id => @chapter_id
@@ -175,7 +175,7 @@ class PcommentsController < ApplicationController
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"} 
       else
         redirect_to :controller => 'chapters',
         :action => 'show', :id => @chapter_id
@@ -192,7 +192,7 @@ class PcommentsController < ApplicationController
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph} 
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"} 
       else
         redirect_to :controller => 'chapters',
         :action => 'show', :id => @chapter_id
