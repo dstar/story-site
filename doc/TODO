@@ -34,10 +34,11 @@
 * DONE Send to SOL functionality
 * DONE Keywords
 * DONE Auto-dump chapters
-** TODO Auto-release chapters at a specific date/time
+* TODO Auto-release chapters at a specific date/time
 ** DONE Import old blog entries
    CLOSED: [2007-01-15 Sun]
-** TODO Fix next link in show_comments mode
+* DONE Fix next link in show_comments mode
+  CLOSED: [2007-03-03 Sat]
 
 * TODO Get codebase ready for release
 ** TODO Backport all the changes in the new-auth-system branch except the new auth system to the trunk
@@ -46,4 +47,4 @@
 *** TODO Document/Diagram new auth system, to ensure it's a good architecture, (using use-case UML diagrams?)
 ** TODO Fix show-drafts incompatibility with elinks
 ** TODO Fix edit_themes
-   
+** TODO add text-area to set release scripts

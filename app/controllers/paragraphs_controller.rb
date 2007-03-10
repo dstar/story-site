@@ -59,6 +59,8 @@ class ParagraphsController < ApplicationController
 
     saved_successfully = true
 
+    need_page_reload = false
+
     begin
       @paragraph.transaction do
         paras = params[:paragraphs][:body].gsub(/\r/,"").split(/^\s*$/).collect {|p| p.gsub(/^\r?\n/,"")}
@@ -67,7 +69,6 @@ class ParagraphsController < ApplicationController
         @paragraph.save!
 
         insert_at = @paragraph.position + 1
-        need_page_reload = false
 
         paras.each do |body| 
           para = Paragraph.new(:chapter_id => @paragraph.chapter_id, :body => body);
@@ -91,7 +92,7 @@ class ParagraphsController < ApplicationController
         dump_to_file(@paragraph.chapter)
 
         expire_fragment( :action => "show", :action_suffix => "paragraph_#{@paragraph.id}", :controller => "chapters")
-        render :partial => 'parabody'
+        render :partial => 'chapters/parabody', :locals => { :parabody => @paragraph }
 
       else
         @paragraph = Paragraph.find(params[:id])

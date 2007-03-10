@@ -2,7 +2,7 @@
 <%= form_remote_tag( :url => {:controller => "paragraphs", :action => 'confirm_delete', :id => @paragraphs}, :update => "parabody#{@paragraphs.id}") %>
     <%= submit_tag("Delete Paragraph", {:confirm => "Are you sure?"}) %>
 <%= end_form_tag %>
-<%= start_form_tag :action => 'update', :id => @paragraphs %>
+<%= form_remote_tag :update => "parabody#{@paragraphs.id}", :url => {:controller => 'paragraphs', :action => 'update', :id => @paragraphs.id } %>
     <%= render :partial => 'form' %>
     <%= submit_tag 'Edit' %>
 <%= end_form_tag %>
