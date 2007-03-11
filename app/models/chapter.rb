@@ -78,13 +78,13 @@ class Chapter < ActiveRecord::Base
         if ! self.released? 
           if self.story.on_release
             self.story.on_release.each do |command|
-              if command.match(/^[a-zA-Z0-9_]/)
+              if command.match(/^[a-zA-Z0-9_]+$/)
                 # We make sure the filename is safe -- with only 
                 # letters, digits, and underscores, it _shouldn't_ 
                 # be possible to do anything nefarious with it. 
                 # I think. Never underestimate the ingenuity of 
                 # crackers.
-                system "#{RAILS_ROOT}/release_scripts/#{command}"
+                system "#{RAILS_ROOT}/release_scripts/#{command}", self.story.short_title, self.number # with story.short_title and number, the script can get anything else it needs
               end
             end            
           end
