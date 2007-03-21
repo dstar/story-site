@@ -84,7 +84,7 @@ class Chapter < ActiveRecord::Base
                 # be possible to do anything nefarious with it. 
                 # I think. Never underestimate the ingenuity of 
                 # crackers.
-                system "#{RAILS_ROOT}/release_scripts/#{command}", self.story.short_title, self.number # with story.short_title and number, the script can get anything else it needs
+                system "#{RAILS_ROOT}/release_scripts/#{command}", self.story.short_title, self.number.to_s # with story.short_title and number, the script can get anything else it needs
               end
             end            
           end
