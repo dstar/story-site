@@ -77,7 +77,7 @@ class Chapter < ActiveRecord::Base
         self.date_released = Time.now.strftime('%Y-%m-%d')
         if ! self.released? 
           if self.story.on_release
-            self.story.on_release.each do |command|
+            self.story.on_release.split(/\n/).each do |command|
               if command.match(/^[a-zA-Z0-9_]+$/)
                 # We make sure the filename is safe -- with only 
                 # letters, digits, and underscores, it _shouldn't_ 

@@ -1,0 +1,46 @@
+NEW AUTH SYSTEM
+
+Users and Groups have permissions for a _particular object_, held in a
+'Permissions' table (attributes permission_holder, type, object,
+permission). A Permission_Holder is any object which can posess
+permissions.
+
+Required permissions for an object are held in a 'RequiredPermission'
+table (attributes object, action, differentiator,
+required_permission). Differentiator is a required method for any
+object which has permissions; it returns an opaque selector used to
+differentiate between the possible required permissions for an
+object-action pair. (For example, for a Story, differentiator() would
+simply return self.status, and the current tuples would be (story_id,
+'view', 'released', 'PUBLIC') and (story_id, 'view', 'draft',
+'beta-reader').
+
+The table 'AvailablePermissions' (attributes name) will contain the
+available permissions; RequiredPermissions and Permissions will be
+normalized to use available_permission_id. A better name will be
+chosen for AvailablePermissions (and possibly Permissions).
+
+.can?  will be an instance method.
+
+The differentiation between StoryPermission, UniversePermission, etc
+will vanish.
+
+Each permissionable object will have an owner, which will default to
+the creator of the class. The owner of the object will have all
+permissions on the object, as will the owner of its parent (that is,
+for a chapter, the self.owner, self.story.owner,
+self.story.universe.owner, and self.universe.site.owner will have all
+priviliges).
+
+Each permissionable object will implement is_superuser?, which will
+return true if the user is a superuser (checking its parent class if
+it is not). Universes will gain Site as their parent.
+
+A 'permit-all' permission will be in AvailablePermissions by default,
+tentatively called 'PUBLIC'; anything with this permission can be done
+by anyone.
+
+A 'permit-authenticated' permission ('LOGGED-IN') will be true for
+anyone who has logged
+in.
+
