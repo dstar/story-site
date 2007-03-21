@@ -92,6 +92,8 @@ class Chapter < ActiveRecord::Base
           self.released = true
         end
       end
+    elsif self.status == "draft" and self.last_status != "draft"
+      self.released = false
     end
     self.last_status = self.status
   end
