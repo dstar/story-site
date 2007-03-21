@@ -85,7 +85,7 @@ class Chapter < ActiveRecord::Base
                 # I think. Never underestimate the ingenuity of 
                 # crackers.
                 system "#{RAILS_ROOT}/release_scripts/#{command}", self.story.short_title, self.number.to_s # with story.short_title and number, the script can get anything else it needs
-                logger.error "Return code from #{RAILS_ROOT}/release_scripts/#{command} #{self.story.short_title} #{self.number.to_s} was #{$?}!" if $?
+                logger.error "Return code from #{RAILS_ROOT}/release_scripts/#{command} #{self.story.short_title} #{self.number.to_s} was #{$? >> 8}!" if $?
               end
             end            
           end
