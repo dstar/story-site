@@ -13,7 +13,6 @@ class ChaptersController < ApplicationController
       "new"     => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
       "new"     => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id },
                      { 'permission_type'=>"StoryPermission", 'permission'=>"beta-reader", 'id'=> @story_id } ],
-
     }
   end
 
@@ -32,6 +31,9 @@ class ChaptersController < ApplicationController
   end
 
   def show
+    # FIXME
+    # Ugly hack until new auth system is ready.
+    admonish("This chapter hasn't been released yet!") if @chapter.status == "draft"
     @chapter = Chapter.find(params[:id])
   end
 
