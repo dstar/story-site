@@ -142,15 +142,15 @@ class StyleController < ApplicationController
 
         if @style.save
           @result = "Saved Successfully"
-          render :partial => "edit_theme_style", :locals => { :edit_style => @style, :result => @result }
+          render :partial => "edit_theme_style", :locals => { :edit_theme_style => @style, :result => @result }
         else
           @result = "Save failed"
-          render :partial => "edit_theme_style", :locals => { :edit_style => @style, :result => @result }
+          render :partial => "edit_theme_style", :locals => { :edit_theme_style => @style, :result => @result }
         end
       else
         @style = Style.new unless @style
         @result = "Please enter both an element specifier and a style"
-        render :partial => "edit_theme_style", :locals => { :edit_style => @style, :result => @result }
+        render :partial => "edit_theme_style", :locals => { :edit_theme_style => @style, :result => @result }
       end
     end
   end
