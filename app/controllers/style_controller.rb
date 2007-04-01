@@ -61,7 +61,7 @@ class StyleController < ApplicationController
   def edit_theme
     @theme = cookies[:style]
     @theme = 'default' unless @theme
-    @theme_styles = Style.find_all_by_theme_and_user(@theme,-1)
+    @theme_styles = Style.find_all_by_theme_and_user(@theme,-1, :order => 'element ASC')
   end
 
   def customize
