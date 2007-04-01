@@ -22,7 +22,7 @@
 	<%= link_to 'Edit Universe Permissions', :controller => 'universes', :action => 'permissions', :id => @universe.id %>
 <% end %>
 
-<p style="color: green"><%= flash[:notice] %></p>
+<p style="color: red"><%= flash[:notice] %></p>
 
 <%= @content_for_layout %>
 
