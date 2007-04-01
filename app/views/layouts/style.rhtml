@@ -31,6 +31,7 @@
 <body>
 <%= render_component(:controller => 'php_session', :action => 'has_session') %>
 <%= render_component(:controller => 'style', :action => 'style_dropdown') %>
+<p><%= render :partial => "breadcrumbs" %></p>
 <p style="color: red"><%= flash[:notice] %></p>
 
 <%= @content_for_layout %>
