@@ -138,7 +138,7 @@ class StyleController < ApplicationController
         @style.element = element
         @style.definition = definition
         @style.theme = @theme
-        @style.user = @authinfo[:user_id]
+        @style.user = -1
 
         if @style.save
           @result = "Saved Successfully"
