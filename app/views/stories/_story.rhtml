@@ -2,7 +2,7 @@
 <div <%= "class='inactive_story'" if story.chapters.empty? %> >
   <li><h4><%= link_to story.title, index_url(:host => StoryHost(story.id)) %><%= inactive_tag %></h4>
   <% kw = "" %>
-  <% kw = "\n\n(Keywords: #{story.keywords})" if story.keywords %>
+  <% kw = "\n\n(Keywords: #{story.keywords})" unless story.keywords.empty? %>
   <%= our_markdown(story.description + kw).gsub(/<br \/>/, "</p><p>") %>
   </li>
 </div>
