@@ -1,4 +1,4 @@
-<% @body = parabody.body_raw %>
+<% @body = parabody.body %>
 <% cache(:action => "show", :action_suffix => "paragraph_#{parabody.id}") do %>
 	<p><%= @body %></p>
 <% end %>

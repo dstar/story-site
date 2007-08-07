@@ -12,7 +12,7 @@ module ApplicationHelper
   def our_markdown(text)
     text.gsub!(/\s*--\s*/,"&mdash; ")
 #    logger.info("Marking down! #{text}\n")
-    markdown(text)
+#    markdown(text)
   end
 
   def format_time(time, format)
