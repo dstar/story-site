@@ -1,4 +1,4 @@
-<% @body = parabody.body %>
+<% @body = parabody.body_raw %>
 <% cache(:action => "show", :action_suffix => "paragraph_#{parabody.id}") do %>
-	<%= our_markdown(@body) %>
+	<%= @body %>
 <% end %>

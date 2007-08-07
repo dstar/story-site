@@ -130,7 +130,7 @@ class ChaptersController < ApplicationController
       word_count += line.scan(/\w+/).length
 
       para = Paragraph.new()
-      para.body = line
+      para.body_raw = line
       para.position = para_count
       para.chapter_id = chapter_id
 

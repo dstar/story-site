@@ -26,13 +26,13 @@ class ParagraphsController < ApplicationController
     @paragraphs = Paragraph.new(params[:paragraphs])
     @paracollect = []
     saved = 0
-    @paragraphs.body.gsub!(/\r/,'')
-    body = @paragraphs.body.split("\n\n")
+    @paragraphs.body_raw.gsub!(/\r/,'')
+    body = @paragraphs.body_raw.split("\n\n")
 
     for i in 0...body.length
       para = Paragraph.new(params[:paragraphs])
       para.position = para.position + i
-      para.body = body[i]
+      para.body_raw = body[i]
       @paracollect.push(para)
       if para.save
         saved = saved + 1
@@ -48,7 +48,7 @@ class ParagraphsController < ApplicationController
   def edit
     @paragraphs = Paragraph.find(params[:id])
     if request.xml_http_request?
-      @editbody = @paragraphs.body
+      @editbody = @paragraphs.body_raw
       render :partial => 'paraedit'
     end
   end
@@ -63,15 +63,15 @@ class ParagraphsController < ApplicationController
 
     begin
       @paragraph.transaction do
-        paras = params[:paragraphs][:body].gsub(/\r/,"").split(/^\s*$/).collect {|p| p.gsub(/^\r?\n/,"")}
+        paras = params[:paragraphs][:body_raw].gsub(/\r/,"").split(/^\s*$/).collect {|p| p.gsub(/^\r?\n/,"")}
 
-        @paragraph.body = paras.shift
+        @paragraph.body_raw = paras.shift
         @paragraph.save!
 
         insert_at = @paragraph.position + 1
 
         paras.each do |body| 
-          para = Paragraph.new(:chapter_id => @paragraph.chapter_id, :body => body);
+          para = Paragraph.new(:chapter_id => @paragraph.chapter_id, :body_raw => body);
           para.save
           para.insert_at(insert_at)
           insert_at += 1
@@ -86,7 +86,7 @@ class ParagraphsController < ApplicationController
       if saved_successfully
 
         word_count = 0
-        @paragraph.chapter.paragraphs.each { |p| word_count += p.body.scan(/\w+/).length }
+        @paragraph.chapter.paragraphs.each { |p| word_count += p.body_raw.scan(/\w+/).length }
         @paragraph.chapter.update_attribute("words",word_count)
 
         dump_to_file(@paragraph.chapter)
@@ -96,14 +96,14 @@ class ParagraphsController < ApplicationController
 
       else
         @paragraph = Paragraph.find(params[:id])
-        @editbody = params[:paragraphs]['body']
+        @editbody = params[:paragraphs]['body_raw']
         render :action => 'paraedit'
       end
     else
       if saved_successfully
         flash[:notice] = 'Paragraph was successfully updated.'
         word_count = 0
-        @paragraph.chapter.paragraphs.each { |p| word_count += p.body.scan(/\w+/).length }
+        @paragraph.chapter.paragraphs.each { |p| word_count += p.body_raw.scan(/\w+/).length }
         @paragraph.chapter.update_attribute("words",word_count)
         dump_to_file(@paragraph.chapter)
         expire_fragment( :action => "show", :action_suffix => "paragraph_#{@paragraph.id}", :controller => "chapters" )

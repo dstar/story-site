@@ -2,7 +2,7 @@
 
 <p> Paragraph: </p>
 <div class="parabody">
-    <%= our_markdown(@pcomment.paragraph.body) %>
+    <%= @pcomment.paragraph.body_raw %>
 </div>
 
 <%= start_form_tag :action => 'create' %>
