@@ -177,8 +177,7 @@ class PcommentsController < ApplicationController
         @chapter = @paragraph.chapter
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"} 
       else
-        redirect_to :controller => 'chapters',
-        :action => 'show', :id => @chapter_id
+        redirect_to :controller => 'chapters', :action => 'show_draft', :id => @chapter_id
       end
     end
   end
@@ -195,7 +194,7 @@ class PcommentsController < ApplicationController
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"} 
       else
         redirect_to :controller => 'chapters',
-        :action => 'show', :id => @chapter_id
+        :action => 'show_draft', :id => @chapter_id
       end
     end
   end
