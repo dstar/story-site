@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 33) do
+ActiveRecord::Schema.define(:version => 34) do
 
   create_table "blogposts", :force => true do |t|
     t.column "body",       :text,                   :default => "",      :null => false
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 33) do
     t.column "body",       :text,                  :default => "", :null => false
     t.column "position",   :integer, :limit => 10, :default => 1,  :null => false
     t.column "flag",       :integer, :limit => 10, :default => 0,  :null => false
+    t.column "body_raw",   :text
   end
 
   add_index "paragraphs", ["chapter_id"], :name => "chapter_index"

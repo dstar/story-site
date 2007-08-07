@@ -40,6 +40,9 @@
 * DONE Fix next link in show_comments mode
   CLOSED: [2007-03-03 Sat]
 
+* TODO Convert array of usernames for read comments to join table (userid, comment_id, possibly chapter_id for optimization?)
+* TODO Convert usernames throughout DB to user_ids
+* TODO Add body_raw column, copy body to body_raw, replace body with html-ized body_raw
 * TODO Get codebase ready for release
 ** TODO Backport all the changes in the new-auth-system branch except the new auth system to the trunk
 *** TODO Create TODO items for all of the changes
@@ -82,3 +85,5 @@
 ** TODO add text-area to set release scripts
 ** DONE add close button to bottom of open comment area   CLOSED: [2007-03-10 Sat]
 ** TODO Refactor read_by into a separate class
+** TODO Add indicator of unread comments/new draft chapter with no comments to stories list
+** DONE clean up empty keyword list on j&k, etc   CLOSED: [2007-04-02 Mon]

@@ -1,4 +1,4 @@
-<h1>Editing paragraphs</h1>
+[<h1>Editing paragraphs</h1>
 <%= start_form_tag :action => 'confirm_delete', :id => @paragraphs %>
     <%= submit_tag("Delete Paragraph", {:confirm => "Are you sure?"}) %>
 <%= end_form_tag %>
@@ -9,6 +9,3 @@
 
 <hr/>
 
-<h2>Comments</h2>
-
-<%= render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@paragraphs.id) %>
