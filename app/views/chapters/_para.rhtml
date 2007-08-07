@@ -6,12 +6,8 @@
   <!-- end parabody -->
   <% if params[:action] == 'show_draft' %>
 	<div class="comments" id="comment_block_<%= para.id %>" >
-
 	  <%= render :partial => 'comment_block', :locals => { :para => para, :display => "none" } %>
-
 	</div>
 	<!-- end comments -->
-
-  <% end %>
-</div>
+  <% end %></div>
 <!-- end paragraph -->
