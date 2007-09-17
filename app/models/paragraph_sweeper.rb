@@ -13,7 +13,7 @@ class ParagraphSweeper < ActionController::Caching::Sweeper
           
   private
   def expire_cache_for(record)
-    logger.error "Expiring key #{record.cache_key}"
+    logger.error "Expiring key #{record.cache_key}" if logger
     expire_fragment(record.cache_key) #expire the fragment
   end
 end
