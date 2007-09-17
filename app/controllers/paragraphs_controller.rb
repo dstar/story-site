@@ -1,5 +1,7 @@
 class ParagraphsController < ApplicationController
 
+  cache_sweeper :paragraph_sweeper, :only => [:create, :update, :destroy]
+
   def setup_authorize_hash
     @authorization = {
       "destroy" => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],

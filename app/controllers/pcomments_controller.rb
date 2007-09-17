@@ -1,5 +1,7 @@
 class PcommentsController < ApplicationController
 
+  cache_sweeper :paragraph_sweeper, :only => [:create, :update, :destroy]
+
   def setup_authorize_hash
     if ! @paragraph
       @paragraph = @pcomment.paragraph
