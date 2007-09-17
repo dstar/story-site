@@ -13,7 +13,7 @@ class ParagraphSweeper < ActionController::Caching::Sweeper
           
   private
   def expire_cache_for(record)
-    expire_fragment("show#paragraph_#{self.id}") #expire the fragment
-    self.chapter.contents_changed if self.chapter.respond_to? "contents_changed"
+    expire_fragment("show#paragraph_#{record.id}") #expire the fragment
+    record.chapter.contents_changed if record.chapter.respond_to? "contents_changed"
   end
 end
