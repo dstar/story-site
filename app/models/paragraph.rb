@@ -5,8 +5,7 @@ class Paragraph < ActiveRecord::Base
   acts_as_list :scope => "chapter_id"
 
   before_save :format_body
-  before_save :expire_cache_for_body
-
+ 
   def self.paraList(chapter_id)
     find(:all,
         :conditions => ["chapter_id = ?",chapter_id],
@@ -20,11 +19,6 @@ class Paragraph < ActiveRecord::Base
     self.body = self.body_raw.dup
     self.body.gsub!(/_(\w+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"} 
     self.body.gsub!(/_([-\\{}?*A-Za-z0-9 .,;:`'!\/"()]+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"}
-  end
-
-  def expire_cache_for_body
-    expire_fragment("show#paragraph_#{self.id}")
-    self.chapter.expire_cache if self.chapter.respond_to? "expire_cache"
   end
 
 end
