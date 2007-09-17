@@ -16,4 +16,9 @@ class Pcomment < ActiveRecord::Base
       :conditions => ["pcomments.id = ?", pcomment_id])
     temp.chapter_id
   end
+
+  def cache_key
+    "pcomment_#{self.id}"
+  end
+
 end

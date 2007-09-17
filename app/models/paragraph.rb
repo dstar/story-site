@@ -21,4 +21,8 @@ class Paragraph < ActiveRecord::Base
     self.body.gsub!(/_([-\\{}?*A-Za-z0-9 .,;:`'!\/"()]+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"}
   end
 
+  def cache_key
+    "show#paragraph_#{self.id}"
+  end
+
 end
