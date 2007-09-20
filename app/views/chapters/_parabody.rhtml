@@ -1,1 +1,1 @@
-<!-- t --><% @body = parabody.body %><% cache(:action => "show", :action_suffix => "paragraph_#{parabody.id}") do %><p><%= @body %></p><% end %><!-- tt -->
+<!-- t --><% @body = parabody.body %><% cache("show#paragraph_#{parabody.id}") do %><p><%= @body %></p><% end %><!-- tt -->

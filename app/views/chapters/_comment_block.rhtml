@@ -14,7 +14,7 @@
 		<input type="hidden" id="unacknowledged_comment_count_<%= para.id %>" value="<%= unacknowledged_comments %>" />
 	</form>
 	<a id="<%= ["pcomment",para.id] %>" onclick="Element.toggle('comments<%= para.id %>')">&#182; (<%= total_comments %> comments, <%= unread_comments  %> unread)</a>
-	<p><%= link_to_remote 'Edit this paragraph', { :url => { :controller => 'paragraphs', :action => 'edit', :id => para.id }, :update => "parabody#{para.id}" }, {:href => url_for({:controller => 'paragraphs', :action => 'edit', :id => para.id})} if can_edit %> </p>
+	<p><%= link_to_remote 'Edit this paragraph', { :url => { :controller => 'paragraphs', :action => 'edit', :id => para.id }, :update => "parabody#{para.id}" }, {:href => "paragraphs/edit?id=#{para.id}"} if can_edit %> </p>
 	<div class="comments_display" id="comments<%= para.id %>" style="display:<%= display %>">
 		<div class="comments_body" id="comments_body<%= para.id %>">
 <% pcomment_array = [] %>
@@ -22,7 +22,7 @@
 			<%= render :partial => 'chapters/pcomm', :collection => pcomment_array %>
 		</div>
 		<!-- end comments_body -->		
-	<p><%= link_to_remote 'Comment on this paragraph',{ :url => { :controller => 'pcomments', :action => 'new', :paragraph_id => para.id}, :update => "comments_body#{para.id}"}, {:href => url_for({ :controller => 'pcomments', :action => 'new', :paragraph_id => para.id})} if @authinfo[:username]%></p>
+	<p><%= link_to_remote 'Comment on this paragraph',{ :url => { :controller => 'pcomments', :action => 'new', :paragraph_id => para.id}, :update => "comments_body#{para.id}"}, {:href => "pcomments/new?paragraph_id=#{para.id}"} if @authinfo[:username]%></p>
 	<a href="#<%= ["pcomment",para.id] %>" onclick="Element.toggle('comments<%= para.id %>')"> Hide Comments </a>
 	</div>
 	<!-- end comments_display -->

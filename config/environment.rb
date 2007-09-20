@@ -46,6 +46,8 @@ Rails::Initializer.run do |config|
   config.action_controller.fragment_cache_store =  CACHE, {}
 
 config.active_record.colorize_logging = false
+config.action_view.cache_template_loading = true
+config.action_view.local_assigns_support_string_keys = false
 
   config.action_controller.session :domain => 'pele.cx'
   # Use SQL instead of Active Record's schema dumper when creating the test database.

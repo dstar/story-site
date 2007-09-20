@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
     end
     #has_permission = false
     #self.story_permissions.each {|p| has_permission = true if p.story_id == story_id and p.permission == permission }
-    return self.story_permissions.find_by_story_id_and_permission(story_id,permission)
+    #return self.story_permissions.find_by_story_id_and_permission(story_id,permission)
+    return self.story_permissions.find(:first, :conditions => "story_id=#{story_id} and permission='#{permission}'")
     #return has_permission
   end
 
