@@ -5,7 +5,7 @@ class Paragraph < ActiveRecord::Base
   acts_as_list :scope => "chapter_id"
 
   before_save :format_body
- 
+
   def self.paraList(chapter_id)
     find(:all,
         :conditions => ["chapter_id = ?",chapter_id],
@@ -17,8 +17,8 @@ class Paragraph < ActiveRecord::Base
 
   def format_body
     self.body = self.body_raw.dup
-#    self.body.gsub!(/_(\w+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"} 
-    self.body.gsub!(/_([-\\{}?*A-Za-z0-9 .,;:`'!\/"()]+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"}
+#    self.body.gsub!(/_(\w+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"}
+    self.body.gsub!(/_([-\\{}?*A-Za-z0-9 .,;&:`'!\/"()]+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"}
   end
 
   def cache_key
