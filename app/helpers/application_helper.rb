@@ -15,6 +15,12 @@ module ApplicationHelper
 #    markdown(text)
   end
 
+  def blogpost_markdown(text)
+    text.gsub(/\s*--\s*/,"&mdash; ")
+#    logger.info("Marking down! #{text}\n")
+    markdown(text)
+  end
+
   def format_time(time, format)
     if time.is_a?(String)
       Time.parse(time).strftime(format)
