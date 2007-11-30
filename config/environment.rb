@@ -77,3 +77,4 @@ end
 require 'ppstring.rb'
 
 ActionController::CgiRequest::DEFAULT_SESSION_OPTIONS.merge!({ 'cache' => CACHE })
+

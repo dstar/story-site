@@ -1,0 +1,7 @@
+scheduled_release:
+  :class: :scheduled_release_worker
+  :job_key: :scheduled_release_key
+  :worker_method: :do_work
+  :trigger_args:
+    :start: <%= Time.now + 10.seconds %>
+    :repeat_interval: 1.hour

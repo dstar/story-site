@@ -6,77 +6,78 @@
   <title><%= @title %></title>
   <% end %>
   <%= javascript_include_tag "prototype" %>
+  <%= calendar_date_select_includes "blue" %>
   <%= render_component(:controller => 'style', :action => 'style_links') %>
   <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
-	<script type="text/javascript">
-		function confirmSubmit() {
-			var agree=confirm("Are you sure you wish to continue?");
-			if (agree)
-				return true ;
-			else
-				return false ;
-		}
-	</script>
-	<script type="text/javascript">
-		function denote_comments(para_id) {
-			var element = document.getElementById("comment_block_"+para_id);
-			var total_comments = Form.Element.getValue("comment_count_"+para_id);
-			var unread_comments = Form.Element.getValue("unread_comment_count_"+para_id);
+        <script type="text/javascript">
+                function confirmSubmit() {
+                        var agree=confirm("Are you sure you wish to continue?");
+                        if (agree)
+                                return true ;
+                        else
+                                return false ;
+                }
+        </script>
+        <script type="text/javascript">
+                function denote_comments(para_id) {
+                        var element = document.getElementById("comment_block_"+para_id);
+                        var total_comments = Form.Element.getValue("comment_count_"+para_id);
+                        var unread_comments = Form.Element.getValue("unread_comment_count_"+para_id);
 
-			if (Element.hasClassName(element,"unread_comments")) {
-				Element.removeClassName(element,"unread_comments");
-			}
+                        if (Element.hasClassName(element,"unread_comments")) {
+                                Element.removeClassName(element,"unread_comments");
+                        }
 
-			if (Element.hasClassName(element,"read_comments")) {
-				Element.removeClassName(element,"read_comments");
-			}
+                        if (Element.hasClassName(element,"read_comments")) {
+                                Element.removeClassName(element,"read_comments");
+                        }
 
-			if (unread_comments > 0) {
-				Element.addClassName(element,"unread_comments");
-				alert("unread_comments");
-			} else {
-				if (total_comments > 0) {
-					Element.addClassName(element,"read_comments");
-					alert("unread_comments");
-				}
-			}		
-			
-		}
-		function handle_acknowledgement(para_id) {
-			var element = document.getElementById("comment_block_"+para_id);
-			var total_comments = Form.Element.getValue("comment_count_"+para_id);
-			var unread_comments = Form.Element.getValue("unread_comment_count_"+para_id);
-			var unacknowledged_comments = Form.Element.getValue("unacknowledged_comment_count_"+para_id);
+                        if (unread_comments > 0) {
+                                Element.addClassName(element,"unread_comments");
+                                alert("unread_comments");
+                        } else {
+                                if (total_comments > 0) {
+                                        Element.addClassName(element,"read_comments");
+                                        alert("unread_comments");
+                                }
+                        }
 
-			if (Element.hasClassName(element,"unacknowledged_comments")) {
-				Element.removeClassName(element,"unacknowledged_comments");
-			}
+                }
+                function handle_acknowledgement(para_id) {
+                        var element = document.getElementById("comment_block_"+para_id);
+                        var total_comments = Form.Element.getValue("comment_count_"+para_id);
+                        var unread_comments = Form.Element.getValue("unread_comment_count_"+para_id);
+                        var unacknowledged_comments = Form.Element.getValue("unacknowledged_comment_count_"+para_id);
 
-			if (Element.hasClassName(element,"unread_comments")) {
-				Element.removeClassName(element,"unread_comments");
-			}
+                        if (Element.hasClassName(element,"unacknowledged_comments")) {
+                                Element.removeClassName(element,"unacknowledged_comments");
+                        }
 
-			if (Element.hasClassName(element,"read_comments")) {
-				Element.removeClassName(element,"read_comments");
-			}
+                        if (Element.hasClassName(element,"unread_comments")) {
+                                Element.removeClassName(element,"unread_comments");
+                        }
 
-			if (unacknowledged_comments > 0) {
-				Element.addClassName(element,"unacknowledged_comments");
-				alert("unacknowledged_comments");
-			} else {
-				if (unread_comments > 0) {
-					Element.addClassName(element,"unread_comments");
-					alert("unread_comments");
-				} else {
-					if (total_comments > 0) {
-						Element.addClassName(element,"read_comments");
-						alert("unread_comments");
-					}
-				}		
-			}
-			
-		}
-	</script>
+                        if (Element.hasClassName(element,"read_comments")) {
+                                Element.removeClassName(element,"read_comments");
+                        }
+
+                        if (unacknowledged_comments > 0) {
+                                Element.addClassName(element,"unacknowledged_comments");
+                                alert("unacknowledged_comments");
+                        } else {
+                                if (unread_comments > 0) {
+                                        Element.addClassName(element,"unread_comments");
+                                        alert("unread_comments");
+                                } else {
+                                        if (total_comments > 0) {
+                                                Element.addClassName(element,"read_comments");
+                                                alert("unread_comments");
+                                        }
+                                }
+                        }
+
+                }
+        </script>
 
   <%= javascript_include_tag "prototype" %>
 

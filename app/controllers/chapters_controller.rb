@@ -99,6 +99,8 @@ class ChaptersController < ApplicationController
     oldstatus = @chapter.status
     c=params[:chapter]
     @chapter.status = c[:status] if c[:status]
+    @chapter.release_on = params[:release_on] if params[:release_on]
+    logger.error "set release_on to #{params[:release_on]}: #{@chapter.release_on}"
     if @chapter.save
       flash[:notice] = 'Chapter was successfully updated.'
       redirect_to :controller => 'stories', :action => 'show', :id => @chapter.story_id
@@ -166,8 +168,8 @@ class ChaptersController < ApplicationController
       if params[:chapter] and ! params[:chapter].blank?
         if params[:chapter].is_a? String
           chapter = Chapter.find_by_file(params[:chapter])
-          if chapter 
-            params[:id] = chapter.id 
+          if chapter
+            params[:id] = chapter.id
           else
             render :status => 404, :file => "#{RAILS_ROOT}/public/404.html"
             false

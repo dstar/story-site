@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/home/httpd/html/rails/script/backgroundrb stop
