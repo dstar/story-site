@@ -19,7 +19,7 @@ class Paragraph < ActiveRecord::Base
     self.body = self.body_raw.dup
 #    self.body.gsub!(/_(\w+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"}
     self.body.gsub!(/_([-\\{}?*A-Za-z0-9 .,;&:`'!\/"()]+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"}
-    self.body.gsub(/--/,"&mdash;")
+    self.body.gsub!(/--/,"&mdash;")
   end
 
   def cache_key
