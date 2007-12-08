@@ -5,7 +5,7 @@
   <%= select "chapter", "status", [ ["Draft","draft"], ["Released", "released"] ] %>
 <% if @chapter.status != "released" -%>
   <p><label for="release_on">Release on</label><br/>
-  <%= calendar_date_select_tag "chapter", "release_on", @chapter.release_on, :time => true %>
+  <%= calendar_date_select_tag "release_on", @chapter.release_on, :time => true %>
 <% end -%>
   <p><label for="file">File</label><br/>
   <%= file_field_tag "file" %>
