@@ -65,7 +65,6 @@ module StoriesHelper
     link_buffer += ", <span class=\"unacknowledged_count\">#{chapter.get_num_unacknowledged_comments} unacknowledged</span>" if is_author(chapter) and chapter.get_num_unacknowledged_comments > 0
     link_buffer += ") <br/>\n" if chapter.status == "released" or can_comment(chapter)
     return link_buffer
-    end
   end
 
 end
