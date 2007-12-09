@@ -17,12 +17,12 @@ class PcommentsController < ApplicationController
       "update"        => [{
                             'permission_type'=>"StoryPermission",
                             'permission'=>"author",
-                            'id'=> @story_id 
+                            'id'=> @story_id
                           } ],
       "edit"          => [{
                             'permission_type'=>"StoryPermission",
                             'permission'=>"author",
-                            'id'=> @story_id 
+                            'id'=> @story_id
                           } ],
       "create"        => [{
                             'permission_type'=>"StoryPermission",
@@ -30,7 +30,7 @@ class PcommentsController < ApplicationController
                             'id'=> @story_id },
                           {'permission_type'=>"StoryPermission",
                             'permission'=>"author",
-                            'id'=> @story_id 
+                            'id'=> @story_id
                           } ],
       "new"           => [{
                             'permission_type'=>"StoryPermission",
@@ -38,7 +38,7 @@ class PcommentsController < ApplicationController
                             'id'=> @story_id },
                           { 'permission_type'=>"StoryPermission",
                             'permission'=>"beta-reader",
-                            'id'=> @story_id 
+                            'id'=> @story_id
                           } ],
       "markread"      => [{
                             'permission_type'=>"StoryPermission",
@@ -46,7 +46,7 @@ class PcommentsController < ApplicationController
                             'id'=> @story_id },
                           { 'permission_type'=>"StoryPermission",
                             'permission'=>"beta-reader",
-                            'id'=> @story_id 
+                            'id'=> @story_id
                           } ],
       "markunread"    => [{
                             'permission_type'=>"StoryPermission",
@@ -54,17 +54,17 @@ class PcommentsController < ApplicationController
                             'id'=> @story_id },
                           { 'permission_type'=>"StoryPermission",
                             'permission'=>"beta-reader",
-                            'id'=> @story_id 
+                            'id'=> @story_id
                           } ],
       "acknowledge"   => [{
                             'permission_type'=>"StoryPermission",
                             'permission'=>"author",
-                            'id'=> @story_id 
+                            'id'=> @story_id
                           } ],
       "unacknowledge" => [{
                             'permission_type'=>"StoryPermission",
                             'permission'=>"author",
-                            'id'=> @story_id 
+                            'id'=> @story_id
                           } ],
     }
   end
@@ -89,18 +89,19 @@ class PcommentsController < ApplicationController
     if request.xml_http_request?
       if @pcomment.save
         @chapter = @paragraph.chapter
-        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"} 
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
       else
         render :action => 'new_comment'
       end
     else
-    if @pcomment.save
-      flash[:notice] = 'Paragraph comment was successfully created.'
-      redirect_to :controller => 'chapters', :action => 'show',
+      if @pcomment.save
+        flash[:notice] = 'Paragraph comment was successfully created.'
+        logger.debug "QQQ: Comment created"
+        redirect_to :controller => 'chapters', :action => 'show',
         :id => Pcomment.chapterID(@pcomment.id)
-    else
-      render :action => 'new'
-    end
+      else
+        render :action => 'new'
+      end
     end
   end
 
@@ -126,7 +127,7 @@ class PcommentsController < ApplicationController
         expire_fragment( :action => "show", :action_suffix => "pcomment_#{@pcomment.id}", :controller => "chapters")
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"} 
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
       else
         redirect_to :controller => 'chapters',
         :action => 'show', :id => @chapter_id
@@ -143,7 +144,7 @@ class PcommentsController < ApplicationController
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"} 
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
       else
         redirect_to :controller => 'chapters',
         :action => 'show', :id => @chapter_id
@@ -160,7 +161,7 @@ class PcommentsController < ApplicationController
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"} 
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
       else
         redirect_to :controller => 'chapters',
         :action => 'show', :id => @chapter_id
@@ -177,7 +178,7 @@ class PcommentsController < ApplicationController
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"} 
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
       else
         redirect_to :controller => 'chapters', :action => 'show_draft', :id => @chapter_id
       end
@@ -193,7 +194,7 @@ class PcommentsController < ApplicationController
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"} 
+        render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
       else
         redirect_to :controller => 'chapters',
         :action => 'show_draft', :id => @chapter_id
