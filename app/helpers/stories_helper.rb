@@ -36,10 +36,12 @@ module StoriesHelper
   end
 
   def is_author(chapter)
-    logger.error "User is #{@authinfo[:user].username}; chapter is #{chapter}"
+    logger.error "User is #{@authinfo[:user].username}; chapter is #{chapter}, storyid is #{chapter.story.id}"
     if @authinfo[:user] and @authinfo[:user].has_story_permission(chapter.story.id,'author')
+      logger.error "QQQ: Returning true"
       return true
     end
+    logger.error "QQQ: Returning false"
     return false
   end
 
