@@ -23,7 +23,7 @@ module ApplicationHelper
 
   def comment_markdown(text)
     text.gsub(/\s*--\s*/,"&mdash; ")
-    text.gsub(/(.*?)\n+/, '<p>\1</p>\n')
+    text.gsub(/(.*?)(\n)+/, '<p>\1</p>\2')
 #    logger.info("Marking down! #{text}\n")
 #    markdown(text)
   end
