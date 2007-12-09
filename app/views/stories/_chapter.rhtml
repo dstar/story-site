@@ -18,5 +18,5 @@
 , <strong><%= chapter.get_num_comments_unread_by(@authinfo[:username]) %> unread</strong>
 <% end %>
 <% if is_author(chapter) and chapter.get_num_unacknowledged_comments > 0 %>
-, <span class="unacknowledged_count"><%= chapter.get_num_unacknowledged_comments %> unacknowledged</span><% end %><% end %><% if chapter.status == "released" or can_comment %>) <br/>
+, <span class="unacknowledged_count"><%= chapter.get_num_unacknowledged_comments %> unacknowledged</span><% end %><% end %><% if chapter.status == "released" or can_comment(chapter) %>) <br/>
 <% end %>
