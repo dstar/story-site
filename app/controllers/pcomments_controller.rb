@@ -96,8 +96,7 @@ class PcommentsController < ApplicationController
     else
       if @pcomment.save
         flash[:notice] = 'Paragraph comment was successfully created.'
-        logger.debug "QQQ: Comment created"
-        redirect_to :controller => 'chapters', :action => 'show',
+        redirect_to :controller => 'chapters', :action => 'show_draft',
         :id => Pcomment.chapterID(@pcomment.id)
       else
         render :action => 'new'
