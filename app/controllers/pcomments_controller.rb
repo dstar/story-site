@@ -112,7 +112,7 @@ class PcommentsController < ApplicationController
     @pcomment = Pcomment.find(params[:id])
     if @pcomment.update_attributes(params[:pcomment])
       flash[:notice] = 'Pcomment was successfully updated.'
-      redirect_to :action => 'show', :id => @pcomment
+      redirect_to :action => 'show_draft', :id => @pcomment
     else
       render :action => 'edit'
     end
@@ -129,7 +129,7 @@ class PcommentsController < ApplicationController
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
       else
         redirect_to :controller => 'chapters',
-        :action => 'show', :id => @chapter_id
+        :action => 'show_draft', :id => @chapter_id
       end
     end
   end
@@ -146,7 +146,7 @@ class PcommentsController < ApplicationController
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
       else
         redirect_to :controller => 'chapters',
-        :action => 'show', :id => @chapter_id
+        :action => 'show_draft', :id => @chapter_id
       end
     end
   end
@@ -163,7 +163,7 @@ class PcommentsController < ApplicationController
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
       else
         redirect_to :controller => 'chapters',
-        :action => 'show', :id => @chapter_id
+        :action => 'show_draft', :id => @chapter_id
       end
     end
   end
