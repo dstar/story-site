@@ -1,26 +1,26 @@
-<% if @authinfo[:user_id] and  User.find(@authinfo[:user_id]).has_story_permission(chapter.story,'author') %>
-	<%= link_to "(Edit)", :controller => 'chapters', :action => 'edit', :id => chapter.id %>
+<% if is_author(chapter) %>
+        <%= link_to "(Edit)", :controller => 'chapters', :action => 'edit', :id => chapter.id %>
 <% end %>
-<% if chapter.status == "released" %> 
-	<%= link_to "Part #{chapter.number}", chapter_url(:chapter => chapter) %>
-	<% logger.error "chapter.date for #{chapter.id} is #{chapter.date}" %>
-	<% if Date.today - chapter.date < 7 %> <em>NEW!</em> <% end %>
+<% if chapter.status == "released" %>
+        <%= link_to "Part #{chapter.number}", chapter_url(:chapter => chapter) %>
+        <% logger.error "chapter.date for #{chapter.id} is #{chapter.date}" %>
+        <% if Date.today - chapter.date < 7 %> <em>NEW!</em> <% end %>
 <% end %>
-<% if ( @authinfo[:user_id] and ( StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'author'}) or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'beta-reader'}) ) ) %>
-	<%= "<em><strong>Part #{chapter.number} DRAFT</strong></em>" if chapter.status == "draft" %> <%= link_to "Comment", url_for(:controller => 'chapters', :action => 'show_draft', :id => chapter.id) %>
+<% if can_comment(chapter) %>
+        <%= "<em><strong>Part #{chapter.number} DRAFT</strong></em>" if chapter.status == "draft" %> <%= link_to "Comment", :controller => 'chapters', :action => 'show_draft', :id => chapter.id %>
 <% end %>
-<% if chapter.status == "released" or ( @authinfo[:user_id] and ( StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'author'}) or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'beta-reader'}) ) ) %>
+<% if chapter.status == "released" or can_comment(chapter) %>
 (<%= chapter.date %>, <%= chapter.words %> words
 <% end %>
-<% if ( @authinfo[:user_id] and ( StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'author'}) or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'beta-reader'}) ) ) %>
+<% if can_comment(chapter) %>
 , <%= Paragraph.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id and c.flag != 2",chapter.id]) %> comments
 <% if chapter.get_num_comments_unread_by(@authinfo[:username]) > 0 %>
 , <strong><%= chapter.get_num_comments_unread_by(@authinfo[:username]) %> unread</strong>
 <% end %>
-<% if @authinfo[:user_id] and ( StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'author'}) ) and chapter.get_num_unacknowledged_comments > 0 %>
+<% if is_author(chapter) and chapter.get_num_unacknowledged_comments > 0 %>
 , <span class="unacknowledged_count"><%= chapter.get_num_unacknowledged_comments %> unacknowledged</span>
 <% end %>
 <% end %>
-<% if chapter.status == "released" or ( @authinfo[:user_id] and ( StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'author'}) or StoryPermission.has_permission(User.find(@authinfo[:user_id]), { 'id' => chapter.story.id, 'permission' => 'beta-reader'}) ) ) %>
+<% if chapter.status == "released" or can_comment %>
 ) <br/>
 <% end %>
