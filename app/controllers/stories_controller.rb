@@ -104,7 +104,7 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @story_title = @story.title
     if @story.destroy
-      flash[:notice] = '#{@story_title} was successfully deleted.'      
+      flash[:notice] = '#{@story_title} was successfully deleted.'
     else
       flash[:notice] = '#{@story_title} was not deleted: .'
     end
@@ -145,7 +145,7 @@ class StoriesController < ApplicationController
       if params[:universe_id]
         @universe = Universe.find(params[:universe_id])
       end
-      if params[:story] 
+      if params[:story]
         if params[:story][:universe_id]
           @universe = Universe.find(params[:story][:universe_id])
         end
@@ -167,12 +167,12 @@ class StoriesController < ApplicationController
     when /group/
       permission_holder = Group.find_by_group_name(params[:permission_holder])
     end
-    
+
     if permission_holder and params[:permission]
       universe_permissions=StoryPermission.new
       universe_permissions.permission_holder = permission_holder
       universe_permissions.permission=params[:permission]
-      universe_permissions.story_id=params[:story_id]      
+      universe_permissions.story_id=params[:story_id]
       unless universe_permissions.save
         flash[:notice] = "Permission Add Failed"
       end
@@ -185,7 +185,7 @@ class StoriesController < ApplicationController
       end
       flash[:notice]=message
     end
-    
+
     render :action => 'permissions'
   end
 
@@ -197,12 +197,12 @@ class StoriesController < ApplicationController
     when /group/
       permission_holder = Group.find_by_group_name(params[:permission_holder])
     end
-    
+
     if permission_holder and params[:permission]
       universe_permissions=StoryPermission.new
       universe_permissions.permission_holder = permission_holder
       universe_permissions.permission=params[:permission]
-      universe_permissions.story_id=params[:story_id]      
+      universe_permissions.story_id=params[:story_id]
       unless universe_permissions.save
         flash[:notice] = "Permission Add Failed"
       end
@@ -216,7 +216,7 @@ class StoriesController < ApplicationController
       flash[:notice]=message
       render :action => 'permissions'
     end
-    
+
     render :action => 'permissions'
   end
 
@@ -227,14 +227,15 @@ class StoriesController < ApplicationController
     when /Group/
       permission_holder = Group.find_by_group_name(params[:permission_holder])
     end
-    
+
     permission = StoryPermission.find_by_permission_holder_type_and_permission_holder_id_and_permission_and_story_id(params[:type], permission_holder.id,params[:permission],params[:story_id])
     permission.destroy
     render :action => 'permissions'
   end
 
   def expire_cache
-    expire_fragment(/.*/)
+#    expire_fragment(/.*/)
+    CACHE.flush_all
     domain_length = request.subdomains.length
     hostname = request.subdomains[0]
     redirect_to index_url(:host => hostname.concat('.').concat(request.domain(domain_length)).concat(request.port_string))
