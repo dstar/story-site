@@ -54,10 +54,10 @@ module StoriesHelper
 
   def build_chapter_links(chapter)
     link_buffer = ""
-    link_buffer += link_to "(Edit)", :controller => 'chapters', :action => 'edit', :id => chapter.id if is_author(chapter)
-    link_buffer += link_to "Part #{chapter.number}", chapter_url(:chapter => chapter) if chapter.status == 'released'
-    link_buffer += " <em>NEW!</em> " if Date.today - chapter.date < 7
-    link_buffer += "<em><strong>Part #{chapter.number} DRAFT</strong></em>" + link_to("Comment", :controller => 'chapters', :action => 'show_draft', :id => chapter.id) if chapter.status == "draft" and can_comment(chapter)
+    link_buffer += link_to "(Edit) ", :controller => 'chapters', :action => 'edit', :id => chapter.id if is_author(chapter)
+    link_buffer += link_to "Part #{chapter.number} ", chapter_url(:chapter => chapter) if chapter.status == 'released'
+    link_buffer += "<em>NEW!</em> " if Date.today - chapter.date < 7
+    link_buffer += "<em><strong>Part #{chapter.number} DRAFT</strong></em> " + link_to("Comment", :controller => 'chapters', :action => 'show_draft', :id => chapter.id) if chapter.status == "draft" and can_comment(chapter)
     link_buffer += "(#{chapter.date}, #{chapter.words} words" if chapter.status == 'released' or can_comment(chapter)
     comment_count = Paragraph.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id and c.flag != 2",chapter.id])
     link_buffer += ", #{comment_count} comments" if can_comment(chapter)
