@@ -36,6 +36,7 @@ module StoriesHelper
   end
 
   def is_author(chapter)
+    logger.error "User is #{@authinfo[:user].username}; chapter is #{chapter}"
     if @authinfo[:user] and @authinfo[:user].has_story_permission(chapter.story.id,'author')
       return true
     end
