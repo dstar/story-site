@@ -59,7 +59,7 @@ module StoriesHelper
       link_buffer += "<em>NEW!</em> " if (Date.today - chapter.date < 7)
     end
 
-    link_buffer += "<em><strong>Part #{chapter.number} DRAFT</strong></em> " + link_to("Comment", :controller => 'chapters', :action => 'show_draft', :id => chapter.id) if chapter.status == "draft" and can_comment(chapter)
+    link_buffer += "<em><strong>Part #{chapter.number} DRAFT</strong></em> " + link_to("Comment ", :controller => 'chapters', :action => 'show_draft', :id => chapter.id) if chapter.status == "draft" and can_comment(chapter)
 
     link_buffer += "(#{chapter.date}, #{chapter.words} words" if chapter.status == 'released' or can_comment(chapter)
 
