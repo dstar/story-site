@@ -36,14 +36,14 @@ module StoriesHelper
   end
 
   def is_author(chapter)
-    if @authinfo[:user] and @authinfo[:user_id].has_story_permission(chapter.story.id,'author')
+    if @authinfo[:user] and @authinfo[:user].has_story_permission(chapter.story.id,'author')
       return true
     end
     return false
   end
 
   def is_beta_reader(chapter)
-    if @authinfo[:user] and @authinfo[:user_id].has_story_permission(chapter.story.id,'beta-reader')
+    if @authinfo[:user] and @authinfo[:user].has_story_permission(chapter.story.id,'beta-reader')
       return true
     end
     return false
