@@ -36,12 +36,9 @@ module StoriesHelper
   end
 
   def is_author(chapter)
-    logger.error "User is #{@authinfo[:user].username}; chapter is #{chapter}, storyid is #{chapter.story.id}"
     if @authinfo[:user] and @authinfo[:user].has_story_permission(chapter.story.id,'author')
-      logger.error "QQQ: Returning true"
       return true
     end
-    logger.error "QQQ: Returning false"
     return false
   end
 
@@ -54,16 +51,27 @@ module StoriesHelper
 
   def build_chapter_links(chapter)
     link_buffer = ""
+
     link_buffer += link_to "(Edit) ", :controller => 'chapters', :action => 'edit', :id => chapter.id if is_author(chapter)
-    link_buffer += link_to "Part #{chapter.number} ", chapter_url(:chapter => chapter) if chapter.status == 'released'
-    link_buffer += "<em>NEW!</em> " if Date.today - chapter.date < 7
+
+    if chapter.status == 'released'
+      link_buffer += link_to "Part #{chapter.number} ", chapter_url(:chapter => chapter)
+      link_buffer += "<em>NEW!</em> " if (Date.today - chapter.date < 7)
+    end
+
     link_buffer += "<em><strong>Part #{chapter.number} DRAFT</strong></em> " + link_to("Comment", :controller => 'chapters', :action => 'show_draft', :id => chapter.id) if chapter.status == "draft" and can_comment(chapter)
+
     link_buffer += "(#{chapter.date}, #{chapter.words} words" if chapter.status == 'released' or can_comment(chapter)
+
     comment_count = Paragraph.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id and c.flag != 2",chapter.id])
     link_buffer += ", #{comment_count} comments" if can_comment(chapter)
+
     link_buffer += ", <strong>#{chapter.get_num_comments_unread_by(@authinfo[:username])} unread</strong>" if chapter.get_num_comments_unread_by(@authinfo[:username]) > 0 and can_comment(chapter)
+
     link_buffer += ", <span class=\"unacknowledged_count\">#{chapter.get_num_unacknowledged_comments} unacknowledged</span>" if is_author(chapter) and chapter.get_num_unacknowledged_comments > 0
+
     link_buffer += ") <br/>\n" if chapter.status == "released" or can_comment(chapter)
+
     return link_buffer
   end
 
