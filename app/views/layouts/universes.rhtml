@@ -15,12 +15,6 @@
 <%= render_component(:controller => 'php_session', :action => 'has_session') %>
 <%= render_component(:controller => 'style', :action => 'style_dropdown') %>
 <%= render :partial => "breadcrumbs" %>
-<% if @universe and @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('admin') and ! User.find(@authinfo[:user_id]).has_universe_permission(@universe.id,'owner') %>
-	<%= link_to 'Edit Universe Permissions', :controller => 'universes', :action => 'add_owner', :id => @universe.id %>
-<% end %>
-<% if @universe and @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_universe_permission(@universe.id,'owner') %>
-	<%= link_to 'Edit Universe Permissions', :controller => 'universes', :action => 'permissions', :id => @universe.id %>
-<% end %>
 
 <p style="color: red"><%= flash[:notice] %></p>
 
