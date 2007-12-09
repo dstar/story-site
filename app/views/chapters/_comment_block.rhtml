@@ -1,30 +1,30 @@
-	<% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
-	<% unread_comments = para.pcomments.collect {|x| x.id if x.flag < 2 and not x.read_by.include?(@authinfo[:username])}.compact.length %>
-	<% unacknowledged_comments = para.pcomments.collect {|x| x.id if x.flag < 2 and x.acknowledged.blank?}.compact.length %>
-	<% can_edit = (@authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(para.chapter.story,'author') ) %>
-	<% denotation_class = 'unread_comments' if unread_comments > 0 %>
-	<% denotation_class = 'read_comments' if total_comments > 0 and unread_comments < 1%>
-	<% denotation_class = 'unacknowledged_comments' if total_comments > 0 and unacknowledged_comments > 0 and (@authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(para.chapter.story,'author'))%>
+        <% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
+        <% unread_comments = para.pcomments.collect {|x| x.id if x.flag < 2 and not x.read_by.include?(@authinfo[:username])}.compact.length %>
+        <% unacknowledged_comments = para.pcomments.collect {|x| x.id if x.flag < 2 and x.acknowledged.blank?}.compact.length %>
+        <% can_edit = (@authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(para.chapter.story,'author') ) %>
+        <% denotation_class = 'unread_comments' if unread_comments > 0 %>
+        <% denotation_class = 'read_comments' if total_comments > 0 and unread_comments < 1%>
+        <% denotation_class = 'unacknowledged_comments' if total_comments > 0 and unacknowledged_comments > 0 and (@authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(para.chapter.story,'author'))%>
 
 <div class="<%= denotation_class %>" id="comment_span_<%= para.id %>" >
 
-	<form action="">
-		<input type="hidden" id="comment_count_<%= para.id %>" value="<%= total_comments %>" />
-		<input type="hidden" id="unread_comment_count_<%= para.id %>" value="<%= unread_comments %>" />
-		<input type="hidden" id="unacknowledged_comment_count_<%= para.id %>" value="<%= unacknowledged_comments %>" />
-	</form>
-	<a id="<%= ["pcomment",para.id] %>" onclick="Element.toggle('comments<%= para.id %>')">&#182; (<%= total_comments %> comments, <%= unread_comments  %> unread)</a>
-	<p><%= link_to_remote 'Edit this paragraph', { :url => { :controller => 'paragraphs', :action => 'edit', :id => para.id }, :update => "parabody#{para.id}" }, {:href => "paragraphs/edit?id=#{para.id}"} if can_edit %> </p>
-	<div class="comments_display" id="comments<%= para.id %>" style="display:<%= display %>">
-		<div class="comments_body" id="comments_body<%= para.id %>">
+        <form action="">
+                <input type="hidden" id="comment_count_<%= para.id %>" value="<%= total_comments %>" />
+                <input type="hidden" id="unread_comment_count_<%= para.id %>" value="<%= unread_comments %>" />
+                <input type="hidden" id="unacknowledged_comment_count_<%= para.id %>" value="<%= unacknowledged_comments %>" />
+        </form>
+        <a id="<%= ["pcomment",para.id] %>" onclick="Element.toggle('comments<%= para.id %>')">&#182; (<%= total_comments %> comments, <%= unread_comments  %> unread)</a>
+        <p><%= link_to_remote 'Edit this paragraph', { :url => { :controller => 'paragraphs', :action => 'edit', :id => para.id }, :update => "parabody#{para.id}" }, {:href => index_url + "paragraphs/edit?id=#{para.id}"} if can_edit %> </p>
+        <div class="comments_display" id="comments<%= para.id %>" style="display:<%= display %>">
+                <div class="comments_body" id="comments_body<%= para.id %>">
 <% pcomment_array = [] %>
 <% pcomment_array =  Pcomment.listForPara(para.id) %>
-			<%= render :partial => 'chapters/pcomm', :collection => pcomment_array %>
-		</div>
-		<!-- end comments_body -->		
-	<p><%= link_to_remote 'Comment on this paragraph',{ :url => { :controller => 'pcomments', :action => 'new', :paragraph_id => para.id}, :update => "comments_body#{para.id}"}, {:href => "pcomments/new?paragraph_id=#{para.id}"} if @authinfo[:username]%></p>
-	<a href="#<%= ["pcomment",para.id] %>" onclick="Element.toggle('comments<%= para.id %>')"> Hide Comments </a>
-	</div>
-	<!-- end comments_display -->
+                        <%= render :partial => 'chapters/pcomm', :collection => pcomment_array %>
+                </div>
+                <!-- end comments_body -->
+        <p><%= link_to_remote 'Comment on this paragraph',{ :url => { :controller => 'pcomments', :action => 'new', :paragraph_id => para.id}, :update => "comments_body#{para.id}"}, {:href => index_url + "pcomments/new?paragraph_id=#{para.id}"} if @authinfo[:username]%></p>
+        <a href="#<%= ["pcomment",para.id] %>" onclick="Element.toggle('comments<%= para.id %>')"> Hide Comments </a>
+        </div>
+        <!-- end comments_display -->
 </div>
 <!-- end comments_div -->
