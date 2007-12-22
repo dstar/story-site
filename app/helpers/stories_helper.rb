@@ -13,9 +13,10 @@ module StoriesHelper
       nav_buffer += link_to 'Edit Story Permissions', :controller => 'stories', :action => 'permissions', :id => story.id
       nav_buffer +=  " | "
       nav_buffer += link_to 'Edit Story', :action => 'edit', :id => story
+      nav_buffer +=  " | "
       nav_buffer += link_to 'Delete Story', :action => 'delete_story', :id => story
       nav_buffer +=  " | "
-      link_to 'Add Chapter', :controller => 'chapters', :action => 'new', :story_id => story.id
+      nav_buffer += link_to 'Add Chapter', :controller => 'chapters', :action => 'new', :story_id => story.id
     end
     return nav_buffer
   end
