@@ -2,6 +2,7 @@
 <head>
   <title>Welcome to Pele's Playground!</title>
   <%= javascript_include_tag "prototype" %>
+  <%= calendar_date_select_includes "blue" %>
   <%= render_component(:controller => 'style', :action => 'style_links') %>
   <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
 </head>
@@ -9,11 +10,12 @@
 <%= render_component(:controller => 'php_session', :action => 'has_session') %>
 <%= render_component(:controller => 'style', :action => 'style_dropdown') %>
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('admin') %>
-	<%= link_to 'Edit Site Permissions', :controller => 'site_permissions', :action => 'permissions' %> |
-	<%= link_to 'Expire cache', :controller => 'stories', :action => 'expire_cache' %> 
+        <%= link_to 'Edit Site Permissions', :controller => 'site_permissions', :action => 'permissions' %> |
+        <%= link_to 'Expire cache', :controller => 'stories', :action => 'expire_cache' %> |
+        <%= link_to 'Add Commitment', :controller => 'stories', :action => 'add_commitment' %> |
 <% end %>
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('blogger') %>
-	| <%= link_to 'New blogpost', :action => 'new' %>
+        | <%= link_to 'New blogpost', :action => 'new' %>
 <% end %>
 
 <p style="color: red"><%= flash[:notice] %></p>
