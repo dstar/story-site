@@ -16,7 +16,5 @@ class UniversePermission < ActiveRecord::Base
       end
     end
     return has_permission
-  end
-
-
+  end  
 end

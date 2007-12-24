@@ -8,6 +8,7 @@ class Story < ActiveRecord::Base
   has_many :chapters
 
   has_many :story_permissions
+  has_many :required_permissions, :as => :permissionable
 
   serialize :on_release
   serialize :required_permissions
@@ -21,17 +22,19 @@ class Story < ActiveRecord::Base
 
   def self.OrderedListByUniverse(universe_id)
     find(:all,
-            :select => "stories.id, title, description, sum(chapters.words) as sort, universe_id, keywords",
-            :joins => "left outer join chapters on chapters.story_id = stories.id",
-            :conditions => ["universe_id = ?", universe_id],
-            :group => "stories.id", :order => "sort desc")
+      :select => "stories.id, title, description, sum(chapters.words) as sort, universe_id, keywords",
+      :joins => "left outer join chapters on chapters.story_id = stories.id",
+      :conditions => ["universe_id = ?", universe_id],
+      :group => "stories.id", :order => "sort desc")
   end
   def self.OrderedList()
     find(:all,
-            :select => "stories.id, title, description, sum(chapters.words) as sort, universe_id, keywords",
-            :joins => "left outer join chapters on chapters.story_id = stories.id",
-            :group => "stories.id", :order => "sort desc")
+      :select => "stories.id, title, description, sum(chapters.words) as sort, universe_id, keywords",
+      :joins => "left outer join chapters on chapters.story_id = stories.id",
+      :group => "stories.id", :order => "sort desc")
   end
 
-
+  def required_permission(action)
+    return self.required_permissions.find(:first, :conditions => "status = '#{self.status}' and action = '#{action}'")
+  end
 end
