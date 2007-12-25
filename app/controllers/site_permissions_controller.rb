@@ -2,16 +2,25 @@ class SitePermissionsController < ApplicationController
   def setup_authorize_hash
 
     @authorization          = {
-      "permissions_destroy" => [ {'permission_type'=>"SitePermission", 'permission'=>"admin"},],
-      "permissions"         => [ {'permission_type'=>"SitePermission", 'permission'=>"admin"},],
-      "permissions_modify"  => [ {'permission_type'=>"SitePermission", 'permission'=>"admin"},],
+      "permissions_destroy" => [ "admin",],
+      "permissions"         => [ "admin",],
+      "permissions_modify"  => [ "admin",],
     }
 
   end
 
-
+  def check_authorization(user)
+    needed = @authorization[params[:action]]
+    if needed 
+      needed.each do |req|
+        return true if user.has_site_permission(req)
+      end
+    end
+    return false #default deny
+  end
+  
   def setup_page_vars
-      @page_title = "Modify Site Permissions"
+    @page_title = "Modify Site Permissions"
   end
 
   def permissions_destroy

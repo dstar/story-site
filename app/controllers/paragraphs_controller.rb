@@ -4,14 +4,26 @@ class ParagraphsController < ApplicationController
 
   def setup_authorize_hash
     @authorization = {
-      "destroy" => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
-      "update"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
-      "edit"    => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
-      "create"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
-      "new"     => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
+      "destroy" => [ "author",  ],
+      "confirm_delete" => [ "author",  ],
+      "update"  => [ "author",  ],
+      "edit"    => [ "author",  ],
+      "create"  => [ "author",  ],
+      "new"     => [ "author",  ],
     }
   end
 
+  def check_authorization(user)
+    needed = @authorization[params[:action]]
+    story = Chapter.find(params["chapter_id"]).story
+    if needed
+      needed.each do |req|
+        return true if req == "EVERYONE" # check for public action
+        return true if user.has_story_permission(story,req) # Else check that we have the required permission
+      end
+    end
+    return false
+  end
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],

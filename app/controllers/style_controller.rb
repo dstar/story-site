@@ -2,14 +2,25 @@ class StyleController < ApplicationController
 
   def setup_authorize_hash
     @authorization = { 
-      "customize"        => [ { 'permission_type'=>"User", 'permission'=>"logged_in", } ],
-      "save_style"       => [ { 'permission_type'=>"User", 'permission'=>"logged_in", } ],
-      "edit_theme"       => [ {'permission_type'=>"SitePermission", 'permission'=>"admin", },],
-      "save_theme_style" => [ {'permission_type'=>"SitePermission", 'permission'=>"admin", },],
-
+      "customize"        => [ "LOGGED_IN", ],
+      "save_style"       => [ "LOGGED_IN", ],
+      "edit_theme"       => [ "admin", ],
+      "save_theme_style" => [ "admin", ],
     }
   end
 
+  def check_authorization(user)
+    needed = @authorization[params[:action]]
+    if needed
+      needed.each do |req|
+        return true if req == "EVERYONE" # check for public action
+        return true if user.has_site_permission(req) # Else check that we have the required permission
+      end
+    end
+    return false
+  end
+  end
+  
   def style_dropdown
     render(:layout => false)
   end

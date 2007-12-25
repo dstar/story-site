@@ -1,10 +1,13 @@
 class PhpSessionController < ApplicationController
 
   def setup_authorize_hash
-    @authorization = { 
-    }
+    @authorization = {}
   end
 
+  def check_authorization(user)
+    return true #anyone can do this
+  end  
+  
   def has_session
   end
 

@@ -4,18 +4,25 @@ class ChaptersController < ApplicationController
     if params[:id] and ! @story_id
       @story_id = Chapter.find(params[:id]).story.id
     end
+    if params[:id] and ! @chapter
+      @chapter = Chapter.find(params[:id])
+    end
 
-    @authorization = {
-      "destroy" => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
-      "update"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
-      "edit"    => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
-      "create"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
-      "new"     => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id } ],
-      "new"     => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author",      'id'=> @story_id },
-                     { 'permission_type'=>"StoryPermission", 'permission'=>"beta-reader", 'id'=> @story_id } ],
-    }
+    @authorization = Chapter.default_permissions
   end
 
+  def check_authorization(user)
+    needed = @chapter.required_permission(params[:action])
+    needed = @authorization[@chapter.status][params[:action]] unless needed
+    if needed
+      needed.each do |req|
+        return true if req == "EVERYONE" # check for public action
+        return true if user.has_story_permission(@chapter.story, req) # Else check that we have the required permission
+      end
+    end
+    return false
+  end
+    
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
          :redirect_to => { :action => :list }

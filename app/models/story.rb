@@ -37,4 +37,39 @@ class Story < ActiveRecord::Base
   def required_permission(action)
     return self.required_permissions.find(:first, :conditions => "status = '#{self.status}' and action = '#{action}'")
   end
+  
+  def self.default_permissions
+    return { 'draft' => {
+        "destroy" => [ "author", ],
+        "update"  => [ "author",],
+        "edit"    => [ "author",],
+        "expire_cache" => [ "author",],
+        "owner_add_save" => [ "author",],
+        "permissions_modify" => [ "author",],
+        "permissions" => [ "author",],
+        "permissions_destroy" => [ "author",],
+        "index"    => [ "author","beta-reader"],
+        "list"    => [ "author","beta-reader"],
+        "show"    => [ "author","beta-reader"],
+        "showByName"    => [ "author","beta-reader"],
+        "showBySubD"    => [ "author","beta-reader"],
+      },
+      'released' => {
+        "destroy" => [ "author", ],
+        "update"  => [ "author",],
+        "edit"    => [ "author",],
+        "expire_cache" => [ "author",],
+        "owner_add_save" => [ "author",],
+        "permissions_modify" => [ "author",],
+        "permissions" => [ "author",],
+        "permissions_destroy" => [ "author",],
+        "index"    => [ "EVERYONE"],
+        "list"    => [ "EVERYONE"],
+        "show"    => [ "EVERYONE"],
+        "showByName"    => [ "EVERYONE"],
+        "showBySubD"    => [ "EVERYONE"],
+      } 
+    }
+  end
+  
 end

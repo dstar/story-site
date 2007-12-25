@@ -4,6 +4,9 @@ class StoriesController < ApplicationController
     if params[:id] and ! @universe
       @universe = Story.find(params[:id]).universe
     end
+    if params[:id] and ! @story
+      @story = Story.find(params[:id])
+    end
 
     if @universe
       @universe_id = @universe.id
@@ -16,16 +19,20 @@ class StoriesController < ApplicationController
     else
       @story_id = ''
     end
-    @authorization = {
-      "destroy" => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
-      "update"  => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
-      "edit"    => [ { 'permission_type'=>"StoryPermission", 'permission'=>"author", 'id'=> @story_id } ],
-      "create"  => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
-      "new"     => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
-    }
-
+    @authorization = Story.default_permissions
   end
 
+  def check_authorization(user)
+    needed = @story.required_permission(params[:action])
+    needed = @authorization[@story.status][params[:action]] unless needed
+    if needed
+      needed.each do |req|
+        return true if req == "EVERYONE" # check for public action
+        return true if user.has_story_permission(@story, req) # Else check that we have the required permission
+      end
+    end
+    return false
+  end
 
   layout "stories"
 
@@ -67,26 +74,11 @@ class StoriesController < ApplicationController
     end
   end
 
-  def new
-    @story = Story.new
-  end
-
-  def create
-    @story = Story.new(params[:story])
-    @universes = Universe.find_all
-    @story.file_prefix = @story.short_title unless @story.file_prefix
-    @story.description.gsub!(/\s+--/, "--")
-     if @story.save
-      flash[:notice] = 'Story was successfully created.'
-      redirect_to :action => 'list'
-    else
-      render :action => 'new'
-    end
-  end
+  
 
   def edit
     @story = Story.find(params[:id])
-    @universes = Universe.find_all
+    @universes = Universe.find(:all)
   end
 
   def update
@@ -189,36 +181,7 @@ class StoriesController < ApplicationController
     render :action => 'permissions'
   end
 
-  def owner_add_save
-
-    case params[:type]
-    when /user/
-      permission_holder = User.find_by_username(params[:permission_holder])
-    when /group/
-      permission_holder = Group.find_by_group_name(params[:permission_holder])
-    end
-
-    if permission_holder and params[:permission]
-      universe_permissions=StoryPermission.new
-      universe_permissions.permission_holder = permission_holder
-      universe_permissions.permission=params[:permission]
-      universe_permissions.story_id=params[:story_id]
-      unless universe_permissions.save
-        flash[:notice] = "Permission Add Failed"
-      end
-    else
-      unless permission_holder
-        message = "Unknown User/Group."
-      end
-      unless params[:permission]
-        message = "No Permission Selected."
-      end
-      flash[:notice]=message
-      render :action => 'permissions'
-    end
-
-    render :action => 'permissions'
-  end
+ 
 
   def permissions_destroy
     case params[:type]

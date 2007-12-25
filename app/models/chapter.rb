@@ -64,7 +64,33 @@ class Chapter < ActiveRecord::Base
   end
   
   def required_permission(action)
-    return self.required_permissions.find(:first, :conditions => "status = '#{self.status}' and action = '#{action}'")
+    return self.required_permissions.find(:all, :conditions => "status = '#{self.status}' and action = '#{action}'")
+  end
+  
+  def self.default_permissions
+    return { "draft" => {
+        "destroy" => ["author",],
+        "update"  => ["author",],
+        "edit"    => ["author",],
+        "create"  => ["author",],
+        "new"     => ["author",],
+        "show"     => ["author", "beta-reader"],
+        "showByFile"     => ["author", "beta-reader"],
+        "showByName"     => ["author", "beta-reader"],
+        "show_draft"     => ["author", "beta-reader"],
+      },
+      "released" => {
+        "destroy" => ["author",],
+        "update"  => ["author",],
+        "edit"    => ["author",],
+        "create"  => ["author",],
+        "new"     => ["author",],
+        "show"     => ["EVERYONE"],
+        "showByFile"     => ["EVERYONE"],
+        "showByName"     => ["EVERYONE"],
+        "show_draft"     => ["author", "beta-reader"],
+      }
+    }
   end
   
   private

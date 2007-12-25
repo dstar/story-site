@@ -9,66 +9,29 @@ class PcommentsController < ApplicationController
     @story_id = @paragraph.chapter.story.id
 
     @authorization = {
-      "destroy"       => [{
-                            'permission_type'=>"StoryPermission",
-                            'permission'=>"author",
-                            'id'=> @story_id
-                          }],
-      "update"        => [{
-                            'permission_type'=>"StoryPermission",
-                            'permission'=>"author",
-                            'id'=> @story_id
-                          } ],
-      "edit"          => [{
-                            'permission_type'=>"StoryPermission",
-                            'permission'=>"author",
-                            'id'=> @story_id
-                          } ],
-      "create"        => [{
-                            'permission_type'=>"StoryPermission",
-                            'permission'=>"beta-reader",
-                            'id'=> @story_id },
-                          {'permission_type'=>"StoryPermission",
-                            'permission'=>"author",
-                            'id'=> @story_id
-                          } ],
-      "new"           => [{
-                            'permission_type'=>"StoryPermission",
-                            'permission'=>"author",
-                            'id'=> @story_id },
-                          { 'permission_type'=>"StoryPermission",
-                            'permission'=>"beta-reader",
-                            'id'=> @story_id
-                          } ],
-      "markread"      => [{
-                            'permission_type'=>"StoryPermission",
-                            'permission'=>"author",
-                            'id'=> @story_id },
-                          { 'permission_type'=>"StoryPermission",
-                            'permission'=>"beta-reader",
-                            'id'=> @story_id
-                          } ],
-      "markunread"    => [{
-                            'permission_type'=>"StoryPermission",
-                            'permission'=>"author",
-                            'id'=> @story_id },
-                          { 'permission_type'=>"StoryPermission",
-                            'permission'=>"beta-reader",
-                            'id'=> @story_id
-                          } ],
-      "acknowledge"   => [{
-                            'permission_type'=>"StoryPermission",
-                            'permission'=>"author",
-                            'id'=> @story_id
-                          } ],
-      "unacknowledge" => [{
-                            'permission_type'=>"StoryPermission",
-                            'permission'=>"author",
-                            'id'=> @story_id
-                          } ],
+      "destroy"       => ["author",],
+      "update"        => ["author",],
+      "edit"          => ["author",],
+      "create"        => ["beta-reader","author",],
+      "new"           => ["author","beta-reader",],
+      "markread"      => ["author","beta-reader",],
+      "markunread"    => ["author","beta-reader",],
+      "acknowledge"   => ["author",],
+      "unacknowledge" => ["author",],
     }
   end
 
+  def check_authorization(user)
+    needed = @authorization[@chapter.status][params[:action]]
+    if needed
+      needed.each do |req|
+        return true if req == "EVERYONE" # check for public action
+        return true if user.has_story_permission(@paragraph.chapter.story,req) # Else check that we have the required permission
+      end
+    end
+    return false
+  end
+  
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
          :redirect_to => { :action => :list }

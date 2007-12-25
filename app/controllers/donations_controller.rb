@@ -1,4 +1,10 @@
 class DonationsController < ApplicationController
+  def setup_authorize_hash    
+  end
+  
+  def check_authorization(user)
+    return true if params[:action] == "paypal_ipn" # For now, there's nothing non-public, but make sure we have to update it if we add an action
+  end
   def paypal_ipn
     notify = Paypal::Notification.new(request.raw_post)
 

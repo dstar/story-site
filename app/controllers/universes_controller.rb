@@ -10,21 +10,26 @@ class UniversesController < ApplicationController
       @universe_id = ""
     end
 
-    @authorization          = {
-      "destroy"             => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
-      "update"              => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
-      "edit"                => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
-      "permissions"         => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
-      "permissions_modify"  => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
-      "permissions_destroy" => [ {'permission_type'=>"UniversePermission", 'permission'=>"owner", 'id'=>@universe_id},],
-      "owner_add"           => [ {'permission_type'=>"SitePermission", 'permission'=>"admin", },],
-      "owner_add_save"      => [ {'permission_type'=>"SitePermission", 'permission'=>"admin", },],
-      "create"              => [ {'permission_type'=>"SitePermission", 'permission'=>"admin", },],
-      "new"                 => [ {'permission_type'=>"SitePermission", 'permission'=>"admin", },],
-    }
+    @authorization          = Universe.default_permissions
 
   end
 
+  def check_authorization(user)
+    needed = @universe.required_permission(params[:action])
+    needed = @authorization[@universe.status][params[:action]] unless needed
+    if needed
+      needed.each do |req|
+        return true if req == "EVERYONE" # check for public action
+        return true if user.has_story_permission(@universe.story, req) # Else check that we have the required permission
+      end
+    end
+    return false
+  end
+  
+  def story_add_owner
+    @story=Story.find(params[:id])
+  end
+  
   def index
     list
     render :action => 'list'
@@ -35,7 +40,7 @@ class UniversesController < ApplicationController
          :redirect_to => { :action => :list }
 
   def list
-    @universes = Universe.find_all
+    @universes = Universe.find(:all)
   end
 
   def show
@@ -43,20 +48,22 @@ class UniversesController < ApplicationController
     @stories = Story.OrderedListByUniverse(@universe.id)
   end
 
-  def new
-    @universe = Universe.new
+  
+def new_story
+    @story = Story.new
   end
 
-  def create
-    @universe = Universe.new(params[:universe])
-    if @universe.save
-      flash[:notice] = 'Universe was successfully created.'
-      redirect_to :action => 'list'
+  def create_story
+    @story = Story.new(params[:story])
+    @story.file_prefix = @story.short_title unless @story.file_prefix
+    @story.description.gsub!(/\s+--/, "--")
+     if @story.save
+      flash[:notice] = 'Story was successfully created.'
+      redirect_to :action => 'show', :controller => 'story', :id => @story.id
     else
-      render :action => 'new'
+      render :action => 'new_story'
     end
   end
-
   def edit
     @universe = Universe.find(params[:id])
   end
@@ -120,36 +127,7 @@ class UniversesController < ApplicationController
     render :action => 'permissions'
   end
 
-  def owner_add_save
-
-    case params[:type]
-    when /user/
-      permission_holder = User.find_by_username(params[:permission_holder])
-    when /group/
-      permission_holder = Group.find_by_group_name(params[:permission_holder])
-    end
-    
-    if permission_holder and params[:permission]
-      universe_permissions=UniversePermission.new
-      universe_permissions.permission_holder = permission_holder
-      universe_permissions.permission=params[:permission]
-      universe_permissions.universe_id=params[:universe_id]      
-      unless universe_permissions.save
-        flash[:notice] = "Permission Add Failed"
-      end
-    else
-      unless permission_holder
-        message = "Unknown User/Group."
-      end
-      unless params[:permission]
-        message = "No Permission Selected."
-      end
-      flash[:notice]=message
-      render :action => 'permissions'
-    end
-    
-    render :action => 'permissions'
-  end
+ 
 
   def permissions_destroy
     case params[:type]
@@ -164,5 +142,34 @@ class UniversesController < ApplicationController
     render :action => 'permissions'
   end
 
+ def story_owner_add_save
 
+    case params[:type]
+    when /user/
+      permission_holder = User.find_by_username(params[:permission_holder])
+    when /group/
+      permission_holder = Group.find_by_group_name(params[:permission_holder])
+    end
+
+    if permission_holder and params[:permission]
+      story_permission=StoryPermission.new
+      story_permission.permission_holder = permission_holder
+      story_permission.permission=params[:permission]
+      story_permission.story_id=params[:story_id]
+      unless story_permission.save
+        flash[:notice] = "Permission Add Failed"
+      end
+    else
+      unless permission_holder
+        message = "Unknown User/Group."
+      end
+      unless params[:permission]
+        message = "No Permission Selected."
+      end
+      flash[:notice]=message
+      render :action => 'permissions', :controller => 'story'
+    end
+
+    render :action => 'permissions', :controller => 'story'
+  end
 end

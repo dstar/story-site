@@ -63,19 +63,7 @@ class ApplicationController < ActionController::Base
       user = User.find(-1)
     end
 
-    is_permitted = false
-    
-    if @authorization[params[:action]]
-      @authorization[params[:action]].each do |perm_tuple|
-        is_permitted = true if perm_tuple['permission_type'].constantize.has_permission(user, perm_tuple)
-      end
-    else
-      is_permitted = true
-    end
-
-#    breakpoint "testauth"
-
-    if is_permitted
+    if check_authorization(user)
       true
     else
       admonish("You are not authorized for this action!")

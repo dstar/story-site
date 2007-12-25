@@ -46,15 +46,19 @@ class User < ActiveRecord::Base
 
   def has_site_permission(permission)
     has_permission = false
-    self.site_permissions.each {|p| has_permission = true if p.permission == permission }
+    if permission == "LOGGED_IN"
+      has_permission = self.id != -1 # if our id is -1, we're anonymous
+    else
+      self.site_permissions.each {|p| has_permission = true if p.permission == permission }
+    end
     return has_permission
   end
 
-  def User.has_permission(user, permission)
-    if user and user.id != -1
-      return true
-    end
-  end
+  #  def User.has_permission(user, permission)
+  #    if user and user.id != -1
+  #      return true
+  #    end
+  #  end
 
   set_primary_key "user_id"
 end

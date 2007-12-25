@@ -1,8 +1,8 @@
 <h1>New story</h1>
 
 <%= start_form_tag :action => 'create' %>
-  <%= render :partial => 'form' %>
+  <%= render :partial => 'stories/form' %>
   <%= submit_tag "Create New Story" %>
 <%= end_form_tag %>
 
-<%= link_to 'Back', :action => 'list' %>
+<%= link_to 'Back', :action => 'show', :id => @universe.id %>

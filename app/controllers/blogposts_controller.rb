@@ -1,15 +1,25 @@
 class BlogpostsController < ApplicationController
 
-  def setup_authorize_hash
+  def setup_authorize_hash    
     @authorization = { 
-      "destroy" => [ {'permission_type'=>"SitePermission", 'permission'=>"blogger", },],
-      "update"  => [ {'permission_type'=>"SitePermission", 'permission'=>"blogger", },],
-      "edit"    => [ {'permission_type'=>"SitePermission", 'permission'=>"blogger", },],
-      "create"  => [ {'permission_type'=>"SitePermission", 'permission'=>"blogger", },],
-      "new"     => [ {'permission_type'=>"SitePermission", 'permission'=>"blogger", },],
+      "destroy" => [ "blogger", ],
+      "update"  => [ "blogger", ],
+      "edit"    => [ "blogger", ],
+      "create"  => [ "blogger", ],
+      "new"     => [ "blogger", ],
     }
   end
-
+  
+  def check_authorization(user)
+    needed = @authorization[params[:action]]
+    if needed 
+      needed.each do |req|
+        return true if user.has_site_permission(req)
+      end
+    end
+    return false #default deny
+  end
+  
   def index
     list
     render :action => 'list'

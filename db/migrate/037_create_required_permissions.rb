@@ -5,7 +5,7 @@ class CreateRequiredPermissions < ActiveRecord::Migration
       t.column :permissionable_type, :string
       t.column :status, :string
       t.column :action, :string
-      t.column :permission_id, :integer
+      t.column :permission, :string
     end
   end
 
