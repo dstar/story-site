@@ -1,6 +1,6 @@
 <%= render :partial => "universe", :object => @universe %>
 
 <%= nav_links(@universe) %>
-<h2><%= link_to "Stories", :controller => "stories", :action => "list" %></h2>
+<h2>Stories</h2>
 
 <%= render :partial => "story", :collection => @stories %>
