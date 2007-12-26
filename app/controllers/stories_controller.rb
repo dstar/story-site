@@ -23,7 +23,7 @@ class StoriesController < ApplicationController
   end
 
   def check_authorization(user)
-    if request.subdomains(0).first == 'playground' 
+    if request.subdomains(0).first == 'playground' and params[:action] == 'show'
       return true
     end
     logger.debug "SubD is #{request.subdomains(0).first}, action is #{params[:action]}"
