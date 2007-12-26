@@ -14,11 +14,18 @@ class ChaptersController < ApplicationController
   def check_authorization(user)
     needed = @chapter.required_permission(params[:action])
     needed = @authorization[@chapter.status][params[:action]] unless (needed and ! needed.empty?)
-    logger.debug("Chapter Status is #{@chapter.status}, action is #{params[:action]}, needed is #{needed.inspect}, hash entry is #{@authorization[@chapter.status][params[:action]]} @authorization hash is #{@authorization[@chapter.status].inspect}")
+    if @chapter
+      story = @chapter.story
+    else
+      if params[:story_id]
+        story = Story.find(params[:story_id])
+      end
+    end
+    return false unless story # a chapter without a story makes no sense, so nothing can be done to it
     if needed
       needed.each do |req|
         return true if req == "EVERYONE" # check for public action
-        return true if user.has_story_permission(@chapter.story, req) # Else check that we have the required permission
+        return true if user.has_story_permission(story, req) # Else check that we have the required permission
       end
     end
     return false
@@ -26,7 +33,7 @@ class ChaptersController < ApplicationController
     
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
+    :redirect_to => { :action => :list }
 
   def listdump
     @chapters = Chapter.orderedListByDate
@@ -171,7 +178,7 @@ class ChaptersController < ApplicationController
   end
 
   def handle_url
-#    breakpoint "test"
+    #    breakpoint "test"
     unless params[:id] or params[:action] == 'index' or params[:action] == 'list' or params[:action] == 'new'
       if params[:chapter] and ! params[:chapter].blank?
         if params[:chapter].is_a? String
