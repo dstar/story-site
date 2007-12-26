@@ -19,7 +19,7 @@ class StyleController < ApplicationController
         return true if user.has_site_permission(req) # Else check that we have the required permission
       end
     end
-    return false
+    return true # For styles, we want to default to permit
   end
   
   def style_dropdown
