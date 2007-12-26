@@ -11,7 +11,7 @@
 <%= render_component(:controller => 'style', :action => 'style_dropdown') %>
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('admin') %>
         <%= link_to 'Edit Site Permissions', :controller => 'site_permissions', :action => 'permissions' %> |
-        <%= link_to 'Expire cache', :controller => 'stories', :action => 'expire_cache' %> |
+        <%= link_to 'Expire cache', :controller => 'site', :action => 'expire_cache' %> |
         <%= link_to 'Add Commitment', :controller => 'stories', :action => 'add_commitment' %> |
 <% end %>
 <% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('blogger') %>

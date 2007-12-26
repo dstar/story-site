@@ -5,7 +5,8 @@ class SiteController < ApplicationController
       "universe_owner_add_save" => ["admin"],
       "universe_add_owner" => ["admin"],
       "new_universe" => ["admin"],
-      "create_universe" => ["admin"]
+      "create_universe" => ["admin"],
+      "expire_cache" => ["admin"],
     }
 
   end
@@ -69,5 +70,14 @@ class SiteController < ApplicationController
     
     render :action => 'permissions'
   end
+  
+  def expire_cache
+#    expire_fragment(/.*/)
+    CACHE.flush_all
+    domain_length = request.subdomains.length
+    hostname = request.subdomains[0]
+    redirect_to index_url(:host => hostname.concat('.').concat(request.domain(domain_length)).concat(request.port_string))
+  end
+
   
 end
