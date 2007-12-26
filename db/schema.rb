@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 36) do
+ActiveRecord::Schema.define(:version => 38) do
 
   create_table "blogposts", :force => true do |t|
     t.column "body",       :text,                   :default => "",      :null => false
@@ -27,6 +27,9 @@ ActiveRecord::Schema.define(:version => 36) do
   end
 
   add_index "chapters", ["story_id", "number"], :name => "chap_uniq", :unique => true
+
+  create_table "commitments", :force => true do |t|
+  end
 
   create_table "credits", :force => true do |t|
     t.column "user_id",     :integer, :default => 0,        :null => false
@@ -87,6 +90,14 @@ ActiveRecord::Schema.define(:version => 36) do
     t.column "session_page",      :integer,               :default => 0,     :null => false
     t.column "session_logged_in", :boolean,               :default => false, :null => false
     t.column "session_admin",     :integer, :limit => 2,  :default => 0,     :null => false
+  end
+
+  create_table "required_permissions", :force => true do |t|
+    t.column "permissionable_id",   :integer
+    t.column "permissionable_type", :string
+    t.column "status",              :string
+    t.column "action",              :string
+    t.column "permission",          :string
   end
 
   create_table "sessions", :force => true do |t|
