@@ -20,7 +20,7 @@ class UniversesController < ApplicationController
     if needed
       needed.each do |req|
         return true if req == "EVERYONE" # check for public action
-        return true if user.has_story_permission(@universe.story, req) # Else check that we have the required permission
+        return true if user.has_universe__permission(@universe, req) # Else check that we have the required permission
       end
     end
     return false
