@@ -12,8 +12,6 @@ class ChaptersController < ApplicationController
   end
 
   def check_authorization(user)
-    needed = @chapter.required_permission(params[:action])
-    needed = @authorization[@chapter.status][params[:action]] unless (needed and ! needed.empty?)
     if @chapter
       story = @chapter.story
     else
@@ -22,6 +20,8 @@ class ChaptersController < ApplicationController
       end
     end
     return false unless story # a chapter without a story makes no sense, so nothing can be done to it
+    needed = @chapter.required_permission(params[:action])
+    needed = @authorization[@chapter.status][params[:action]] unless (needed and ! needed.empty?)
     if needed
       needed.each do |req|
         return true if req == "EVERYONE" # check for public action
