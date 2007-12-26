@@ -26,6 +26,7 @@ class StoriesController < ApplicationController
     if request.subdomains(0).first == 'playground' and params[:action] == 'show'
       return true
     end
+    return false unless @story
     logger.debug "SubD is #{request.subdomains(0).first}, action is #{params[:action]}"
     needed = @story.required_permission(params[:action])
     needed = @authorization[@story.status][params[:action]] unless (needed and ! needed.empty?)
