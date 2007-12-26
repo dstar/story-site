@@ -14,7 +14,7 @@ module UniversesHelper
     nav_buffer += link_to 'Universe List', :action => 'list'
     if @authinfo[:user] and @authinfo[:user].has_universe_permission(universe,'owner')
       nav_buffer += " | "
-      nav_buffer += link_to 'Add Story', { :action => "new_story", :universe_id => universe.id}
+      nav_buffer += link_to 'Add Story', { :action => "new_story", :id => universe.id}
     end
 
     return nav_buffer
