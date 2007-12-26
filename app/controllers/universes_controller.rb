@@ -15,6 +15,9 @@ class UniversesController < ApplicationController
   end
 
   def check_authorization(user)
+    if (! @universe) 
+      return true # If we don't have @universe, we're listing the universes, which is okay.
+    end
     needed = @universe.required_permission(params[:action])
     needed = @authorization[@universe.status][params[:action]] unless (needed and ! needed.empty?)
     if needed
