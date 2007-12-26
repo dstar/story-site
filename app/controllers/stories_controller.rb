@@ -24,7 +24,7 @@ class StoriesController < ApplicationController
 
   def check_authorization(user)
     needed = @story.required_permission(params[:action])
-    needed = @authorization[@story.status][params[:action]] unless needed
+    needed = @authorization[@story.status][params[:action]] unless needed.empty?
     if needed
       needed.each do |req|
         return true if req == "EVERYONE" # check for public action

@@ -16,7 +16,7 @@ class UniversesController < ApplicationController
 
   def check_authorization(user)
     needed = @universe.required_permission(params[:action])
-    needed = @authorization[@universe.status][params[:action]] unless needed
+    needed = @authorization[@universe.status][params[:action]] unless needed.empty?
     if needed
       needed.each do |req|
         return true if req == "EVERYONE" # check for public action
