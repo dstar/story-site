@@ -19,7 +19,6 @@ class StyleController < ApplicationController
     end
     return false
   end
-  end
   
   def style_dropdown
     render(:layout => false)
