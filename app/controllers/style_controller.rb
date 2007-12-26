@@ -6,6 +6,8 @@ class StyleController < ApplicationController
       "save_style"       => [ "LOGGED_IN", ],
       "edit_theme"       => [ "admin", ],
       "save_theme_style" => [ "admin", ],
+      "style_links" => ['EVERYONE'],
+      "show" => ['EVERYONE']
     }
   end
 
