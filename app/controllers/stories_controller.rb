@@ -210,7 +210,7 @@ class StoriesController < ApplicationController
   end
 
   def new_chapter
-    @story = Story.find(params["story_id"])
+    @story = Story.find(params[:id])
     @chapter = Chapter.new
     @chapter.story_id = @story.id
     @chapter.number = Chapter.count_by_sql ["Select max(number) from chapters where story_id = ?", @story.id]
