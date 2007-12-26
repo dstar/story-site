@@ -79,5 +79,7 @@ class SiteController < ApplicationController
     redirect_to index_url(:host => hostname.concat('.').concat(request.domain(domain_length)).concat(request.port_string))
   end
 
+  def setup_page_vars    
+  end
   
 end
