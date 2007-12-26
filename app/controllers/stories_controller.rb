@@ -28,7 +28,7 @@ class StoriesController < ApplicationController
     end
     logger.debug "SubD is #{request.subdomains(0).first}, action is #{params[:action]}"
     needed = @story.required_permission(params[:action])
-    needed = @authorization[@story.status][params[:action]] if needed.empty?
+    needed = @authorization[@story.status][params[:action]] unless (needed and ! needed.empty?)
     if needed
       needed.each do |req|
         return true if req == "EVERYONE" # check for public action
