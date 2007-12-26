@@ -6,9 +6,7 @@
         :id => universe_wstories.id %></h2>
     <%= our_markdown(universe_wstories.description) %>
     <ul>
-  <% logger.debug "QQQ:Rendering story collection for #{ universe_wstories.name}"%>
     <%= render :partial => "story",
         :collection => Story.OrderedListByUniverse(universe_wstories.id) %>
-  <% logger.debug "QQQQQ: Done rendering story collection for #{ universe_wstories.name}"%>
     </ul>
   </div>
