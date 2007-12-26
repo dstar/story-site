@@ -121,6 +121,7 @@ class ParagraphsController < ApplicationController
         @paragraph.chapter.update_attribute("words",word_count)
         dump_to_file(@paragraph.chapter)
         expire_fragment( :action => "show", :action_suffix => "paragraph_#{@paragraph.id}", :controller => "chapters" )
+        logger.debug("redirecting to #{url_for :controller => 'chapters', :action => 'show_draft', :id => @paragraph.chapter.id, :anchor => "p#{@paragraph.id}"}")
         redirect_to :controller => 'chapters', :action => 'show_draft', :id => @paragraph.chapter.id, :anchor => "p#{@paragraph.id}"
       else
         render :action => 'edit'
