@@ -4,6 +4,6 @@
 
 <br />
 
-<% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('admin') %>
+<% if @authinfo[:user] and @authinfo[:user].has_site_permission('admin') %>
 <%= link_to 'New universe', :controller => 'site', :action => 'new_universe' %>
 <% end %>
