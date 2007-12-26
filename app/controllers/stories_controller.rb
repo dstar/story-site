@@ -23,6 +23,9 @@ class StoriesController < ApplicationController
   end
 
   def check_authorization(user)
+    if request.subdomains(0).first == 'playground' and params[:action] == 'show'
+      return true
+    end
     needed = @story.required_permission(params[:action])
     needed = @authorization[@story.status][params[:action]] if needed.empty?
     if needed
