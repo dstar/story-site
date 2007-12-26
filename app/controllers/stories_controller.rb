@@ -209,4 +209,26 @@ class StoriesController < ApplicationController
     redirect_to index_url(:host => hostname.concat('.').concat(request.domain(domain_length)).concat(request.port_string))
   end
 
+  def new_chapter
+    @story = Story.find(params["story_id"])
+    @chapter = Chapter.new
+    @chapter.story_id = @story.id
+    @chapter.number = Chapter.count_by_sql ["Select max(number) from chapters where story_id = ?", @story.id]
+    @chapter.number = @chapter.number + 1
+  end
+
+  def create_chapter
+    @chapter = Chapter.new(params[:chapter])
+    @chapter.date_uploaded = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless @chapter.date_uploaded
+    if @chapter.save
+      release_chapter(@chapter) if @chapter.status == 'released'
+      process_file(params[:file],@chapter.id) unless params[:file].blank?
+      flash[:notice] = 'Chapter was successfully created.'
+      redirect_to :controller => 'stories', :action => 'show', :id => @chapter.story_id
+    else
+      render :action => 'new'
+    end
+  end
+
+
 end

@@ -16,7 +16,7 @@ module StoriesHelper
       nav_buffer +=  " | "
       nav_buffer += link_to 'Delete Story', :action => 'delete_story', :id => story
       nav_buffer +=  " | "
-      nav_buffer += link_to 'Add Chapter', :controller => 'chapters', :action => 'new', :story_id => story.id
+      nav_buffer += link_to 'Add Chapter', :controller => 'stories', :action => 'new_chapter', :story_id => story.id
     end
     return nav_buffer
   end

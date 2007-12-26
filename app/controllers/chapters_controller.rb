@@ -12,20 +12,12 @@ class ChaptersController < ApplicationController
   end
 
   def check_authorization(user)
-    if @chapter
-      story = @chapter.story
-    else
-      if params[:story_id]
-        story = Story.find(params[:story_id])
-      end
-    end
-    return false unless story # a chapter without a story makes no sense, so nothing can be done to it
-    # needed = @chapter.required_permission(params[:action]) We don't change permissions at the chapter level....
+    return false unless @chapter 
     needed = @authorization[@chapter.status][params[:action]] unless (needed and ! needed.empty?)
     if needed
       needed.each do |req|
         return true if req == "EVERYONE" # check for public action
-        return true if user.has_story_permission(story, req) # Else check that we have the required permission
+        return true if user.has_story_permission(@chapter.story, req) # Else check that we have the required permission
       end
     end
     return false
@@ -76,28 +68,7 @@ class ChaptersController < ApplicationController
     render :action => 'show'
   end
 
-  def new
-    @story = Story.find(params["story_id"])
-    @chapter = Chapter.new
-    @chapter.story_id = @story.id
-    @chapter.number = Chapter.count_by_sql ["Select max(number) from chapters where story_id = ?", @story.id]
-    @chapter.number = @chapter.number + 1
-  end
-
-  def create
-    @chapter = Chapter.new(params[:chapter])
-    @chapter.date_uploaded = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless @chapter.date_uploaded
-    if @chapter.save
-      release_chapter(@chapter) if @chapter.status == 'released'
-      process_file(params[:file],@chapter.id) unless params[:file].blank?
-      flash[:notice] = 'Chapter was successfully created.'
-      redirect_to :controller => 'stories', :action => 'show', :id => @chapter.story_id
-    else
-      render :action => 'new'
-    end
-  end
-
-  def edit
+   def edit
     @chapter = Chapter.find(params[:id])
   end
 
