@@ -14,7 +14,7 @@ class ChaptersController < ApplicationController
   def check_authorization(user)
     needed = @chapter.required_permission(params[:action])
     needed = @authorization[@chapter.status][params[:action]] unless needed
-    logger.debug("Chapter Status is #{@chapter.status}, action is #{params[:action]}, needed is #{needed}, hash entry is #{@authorization[@chapter.status][params[:action]]} @authorization hash is #{@authorization[@chapter.status]}")
+    logger.debug("Chapter Status is #{@chapter.status}, action is #{params[:action]}, needed is #{needed.inspect}, hash entry is #{@authorization[@chapter.status][params[:action]]} @authorization hash is #{@authorization[@chapter.status].inspect}")
     if needed
       needed.each do |req|
         return true if req == "EVERYONE" # check for public action
