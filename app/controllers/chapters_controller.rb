@@ -20,7 +20,7 @@ class ChaptersController < ApplicationController
       end
     end
     return false unless story # a chapter without a story makes no sense, so nothing can be done to it
-    needed = @chapter.required_permission(params[:action])
+    # needed = @chapter.required_permission(params[:action]) We don't change permissions at the chapter level....
     needed = @authorization[@chapter.status][params[:action]] unless (needed and ! needed.empty?)
     if needed
       needed.each do |req|
