@@ -79,7 +79,10 @@ class StoriesController < ApplicationController
     end
   end
 
-  
+  def playground
+    list
+    render :action => 'playground', :layout => 'playground' 
+  end
 
   def edit
     @story = Story.find(params[:id])
