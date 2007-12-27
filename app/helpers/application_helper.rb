@@ -11,13 +11,10 @@ module ApplicationHelper
 
   def our_markdown(text)
     text.gsub(/\s*--\s*/,"&mdash; ")
-#    logger.info("Marking down! #{text}\n")
-#    markdown(text)
   end
 
   def blogpost_markdown(text)
     text.gsub(/\s*--\s*/,"&mdash; ")
-#    logger.info("Marking down! #{text}\n")
     markdown(text)
   end
 
@@ -25,8 +22,6 @@ module ApplicationHelper
     text.gsub(/\s*--\s*/,"&mdash; ")
     text.gsub(/(.*?)(\n)+/, '<p>\1</p>\2')
     text.gsub(/(\n)([^\n]+)$/, '\1<p>\2</p>\1')
-#    logger.info("Marking down! #{text}\n")
-#    markdown(text)
   end
 
 
