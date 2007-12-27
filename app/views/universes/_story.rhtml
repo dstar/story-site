@@ -1,4 +1,3 @@
-<% cache "story_universe_wstories#{story.id}" do %>
 <% inactive_tag = "(Not Active)" if story.chapters.empty? %>
 <div>
   <li><h4><%= link_to story.title, :controller => "stories", :action => "show", :id => story %> <%= inactive_tag %></h4>
@@ -6,4 +5,3 @@
   <%= our_markdown(story.description) %>
   </li>
 </div>
-<% end %>
