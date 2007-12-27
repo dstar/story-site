@@ -33,7 +33,7 @@ class StyleController < ApplicationController
   def show
     @theme = params[:theme]
     @theme = 'default' unless @theme
-    @theme.gsub(/.css/, "")
+    @theme.gsub!(/.css/, "")
     @default_styles = Style.find_all_by_theme_and_user(@theme,-1)
     @user_styles = Style.find_all_by_theme_and_user(@theme,@authinfo[:user].id)
 
