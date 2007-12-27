@@ -20,7 +20,7 @@ ActionController::Routing::Routes.draw do |map|
   map.chapter 'html/:chapter', :controller => 'chapters', :action => 'show'
   map.text 'text/:chapter', :controller => 'chapters', :action => 'dumpByFile'
   map.blog 'blog/:action/:id', :controller => 'blogposts'
-  map.style 'style/:theme', :controller => 'styles', :action => 'show'
+  map.style 'style/:theme', :controller => 'style', :action => 'show'
   
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'
