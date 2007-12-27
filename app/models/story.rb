@@ -22,7 +22,7 @@ class Story < ActiveRecord::Base
 
   def self.OrderedListByUniverse(universe_id)
     find(:all,
-      :select => "stories.id, title, description, sum(chapters.words) as sort, universe_id, keywords",
+      :select => "stories.id, title, description, sum(chapters.words) as sort, universe_id, keywords, short_title",
       :joins => "left outer join chapters on chapters.story_id = stories.id",
       :conditions => ["universe_id = ?", universe_id],
       :group => "stories.id", :order => "sort desc")
