@@ -7,7 +7,7 @@
 <div class="comment<%= "_read" if pcomm.read_by.include?(@authinfo[:user]) %>">
         <div class="commentbody">
                 <% cache(:action => "show", :action_suffix => "pcomment_#{pcomm.id}") do %>
-                        pcomm.body %>
+                        <%= pcomm.body %>
                 <% end %>
         </div>
         <div class="commentposted">
