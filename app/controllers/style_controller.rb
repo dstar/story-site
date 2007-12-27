@@ -35,8 +35,9 @@ class StyleController < ApplicationController
     @theme = 'default' unless @theme
     @theme.gsub!(/.css/, "")
     @default_styles = Style.find_all_by_theme_and_user(@theme,-1)
-    @user_styles = Style.find_all_by_theme_and_user(@theme,@authinfo[:user].id)
-
+    @user_styles = Style.find_all_by_theme_and_user(@theme,@authinfo[:user].id) if @authinfo[:user]
+    @user_styles = Array.new unless @user_styles
+    
     @styles = Array.new
 
     unless @user_styles.empty?
