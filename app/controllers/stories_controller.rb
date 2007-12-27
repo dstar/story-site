@@ -48,7 +48,7 @@ class StoriesController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
+    :redirect_to => { :action => :list }
 
   def list
     @stories = Story.OrderedList
@@ -59,7 +59,7 @@ class StoriesController < ApplicationController
       list
       render :action => 'playground', :layout => 'playground'
     else
-    @story = Story.find(params[:id])
+      @story = Story.find(params[:id])
       render :action => 'show'
     end
   end
@@ -94,6 +94,7 @@ class StoriesController < ApplicationController
     params[:story][:description].gsub!(/\s+--/, "--")
     if @story.update_attributes(params[:story])
       expire_fragment("story_#{@story.id}")
+      expire_fragment("story_list#{@story.id}")
       flash[:notice] = 'Story was successfully updated.'
       redirect_to :action => 'show', :id => @story.id
     else

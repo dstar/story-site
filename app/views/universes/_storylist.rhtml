@@ -2,6 +2,7 @@
     <u><%= storylist.name %></u>
     <ul>
         <% Story.OrderedListByUniverse(storylist.id).each do |story| %>
+          <% cache "story_list#{story.id}" do %>
           <li><a href="<%=index_url(:host => StoryHost(story)) %>"><% story.title %></a>
               <% if @authinfo[:user] and ( @authinfo[:user].has_story_permission(story,'author') or @authinfo[:user].has_story_permission(story,'beta-reader') ) %>
                       <% newest_chapter = story.chapters.find(:first, :order => "date_uploaded DESC" ) %>
@@ -12,6 +13,7 @@
                       <em>UPDATED!</em>
               <% end %>
           </li>
+          <% end %>
         <% end %>
     </ul>
   </div>
