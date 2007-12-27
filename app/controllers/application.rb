@@ -31,7 +31,6 @@ class ApplicationController < ActionController::Base
         @authinfo[:session] = Php_Session.find_by_session_id(@sid)
         if @authinfo[:session] then
           user = User.find(@authinfo[:session].session_user_id)
-          @authinfo[:user_id] = user.user_id
           @authinfo[:username] = user.username
           @authinfo[:user] = user
           # stick the user object itself in, so we don't have to look it up later
@@ -52,8 +51,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    if @authinfo[:user_id]
-      user = User.find(@authinfo[:user_id])
+    if @authinfo[:user]
+      user = @authinfo[:user]
     else
       user = User.find(-1)
     end
