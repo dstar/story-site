@@ -1,6 +1,6 @@
 <% inactive_tag = " (Not Active Yet)" if Chapter.find(:all, :conditions => "story_id=#{story.id}").empty? %>
 <div <%= "class='inactive_story'" if Chapter.find(:all, :conditions => "story_id=#{story.id}").empty? %> >
-  <li><h4><a href="http://<%= StoryHost(story.id) %>"><% story.title %></a><%= inactive_tag %></h4>
+  <li><h4><a href="http://<%= StoryHost(story) %>"><% story.title %></a><%= inactive_tag %></h4>
   <% kw = "" %>
   <% kw = "\n\n(Keywords: #{story.keywords})" if story.keywords and not story.keywords.empty? %>
 <% cache "story_#{story.id}" do %>  

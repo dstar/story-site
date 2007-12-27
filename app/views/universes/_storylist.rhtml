@@ -2,7 +2,7 @@
     <u><%= storylist.name %></u>
     <ul>
         <% Story.OrderedListByUniverse(storylist.id).each do |story| %>
-          <li><%= link_to story.title, index_url(:host => StoryHost(story.id)) %>
+          <li><%= link_to story.title, index_url(:host => StoryHost(story)) %>
               <% if @authinfo[:user] and ( StoryPermission.has_permission(@authinfo[:user], { 'id' => story.id, 'permission' => 'author'}) or StoryPermission.has_permission(@authinfo[:user], { 'id' => story.id, 'permission' => 'beta-reader'}) ) %>
                       <% newest_chapter = story.chapters.find(:first, :order => "date_uploaded DESC" ) %>
               <% else %>
