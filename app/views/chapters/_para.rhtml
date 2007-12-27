@@ -1,7 +1,9 @@
 <div class="paragraph">
   <a id="<%= ["p",para.id] %>"></a>
   <div class="parabody" id="<%= ["parabody",para.id] %>">
-	  <%= render :partial => 'parabody', :object => para %>
+<% cache("show#paragraph_#{parabody.id}") do -%>
+    <p><%= parabody.body %></p>
+<% end -%>
   </div>
   <!-- end parabody -->
   <% if params[:action] == 'show_draft' %>
