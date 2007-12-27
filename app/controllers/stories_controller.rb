@@ -23,7 +23,7 @@ class StoriesController < ApplicationController
   end
 
   def check_authorization(user)
-    if request.subdomains(0).first == 'playground' and params[:action] == 'show'
+    if (request.subdomains(0).first == 'playground' and params[:action] == 'show') or params[:action] == 'playground'
       return true
     end
     return false unless @story
