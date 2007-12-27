@@ -51,7 +51,6 @@ class ChaptersController < ApplicationController
 
   def show_draft
     @chapter = Chapter.find(params[:id])
-    render :action => 'show'
   end
 
   def dumpByFile
