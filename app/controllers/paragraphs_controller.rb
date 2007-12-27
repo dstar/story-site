@@ -106,6 +106,8 @@ class ParagraphsController < ApplicationController
         dump_to_file(@paragraph.chapter)
 
         expire_fragment( :action => "show", :action_suffix => "paragraph_#{@paragraph.id}", :controller => "chapters")
+        expire_fragment( :action => "show", :action_suffix => "chapter_#{@chapter.id}", :controller => "chapters") # need to expire the cache for the full chapter page as well
+        
         render :partial => 'chapters/parabody', :locals => { :parabody => @paragraph }
 
       else

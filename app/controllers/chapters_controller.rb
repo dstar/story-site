@@ -88,6 +88,7 @@ class ChaptersController < ApplicationController
     logger.error "set release_on to #{params[:release_on]}: #{@chapter.release_on}"
     if @chapter.save
       flash[:notice] = 'Chapter was successfully updated.'
+      expire_fragment( :action => "show", :action_suffix => "chapter_#{@chapter.id}", :controller => "chapters")
       redirect_to :controller => 'stories', :action => 'show', :id => @chapter.story_id
     else
       render :action => 'edit'

@@ -3,6 +3,7 @@
 <h1><%= @chapter.story.title %> Chapter <%= @chapter.number %></h1>
 
 <%= chapter_navigation(@chapter) %>
+<%cache("show#chapter_#{@chapter.id}")%>
 <div class="full">
 <% Paragraph.paraList(@chapter.id).each do |para| -%>
   <% cache("show#paragraph_#{para.id}") do -%>
@@ -15,6 +16,7 @@
   <% end -%>
 <% end -%>
   <div class="paragraph">
+<% end %>
 <%= chapter_navigation(@chapter) -%>
   </div>
 </div>
