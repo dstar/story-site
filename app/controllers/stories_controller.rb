@@ -93,6 +93,7 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     params[:story][:description].gsub!(/\s+--/, "--")
     if @story.update_attributes(params[:story])
+      expire_fragment("story_#{@story.id}")
       flash[:notice] = 'Story was successfully updated.'
       redirect_to :action => 'show', :id => @story.id
     else

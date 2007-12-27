@@ -3,6 +3,8 @@
   <li><h4><%= link_to story.title, index_url(:host => StoryHost(story.id)) %><%= inactive_tag %></h4>
   <% kw = "" %>
   <% kw = "\n\n(Keywords: #{story.keywords})" if story.keywords and not story.keywords.empty? %>
-  <%= our_markdown(story.description + kw).gsub(/<br \/>/, "</p><p>") %>
+<% cache "story_#{story.id}" do %>  
+<%= our_markdown(story.description + kw).gsub(/<br \/>/, "</p><p>") %>
+<% end %>
   </li>
 </div>
