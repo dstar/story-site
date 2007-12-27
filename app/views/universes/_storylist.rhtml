@@ -1,20 +1,20 @@
-<% can_comment = true if @authinfo[:user] and ( @authinfo[:user].has_story_permission(story,'author') or @authinfo[:user].has_story_permission(story,'beta-reader') ) %>
 <div class="worldlist">
   <u><%= storylist.name %></u>
   <ul>
     <% Story.OrderedListByUniverse(storylist.id).each do |story| %>
-              <% cache "story_list#{story.id}#{can_comment}" do %>
+      <% can_comment = true if @authinfo[:user] and ( @authinfo[:user].has_story_permission(story,'author') or @authinfo[:user].has_story_permission(story,'beta-reader') ) %>
+                  <% cache "story_list#{story.id}#{can_comment}" do %>
         <li><a href="<%=index_url(:host => StoryHost(story)) %>"><% story.title %></a>
           <% if can_comment %>
-                    <% newest_chapter = story.chapters.find(:first, :order => "date_uploaded DESC" ) %>
+                        <% newest_chapter = story.chapters.find(:first, :order => "date_uploaded DESC" ) %>
           <% else %>
-                    <% newest_chapter = story.chapters.find(:first, :order => "date_uploaded DESC", :conditions => "status = 'released'" ) %>
+                        <% newest_chapter = story.chapters.find(:first, :order => "date_uploaded DESC", :conditions => "status = 'released'" ) %>
           <% end %>
           <% if newest_chapter and Date.today - newest_chapter.date  < 7 %>
             <em>UPDATED!</em>
           <% end %>
         </li>
       <% end %>
-  <% end %>
+    <% end %>
   </ul>
 </div>
