@@ -1,10 +1,10 @@
 <% is_author = false %>
 <% local_user = nil %>
 <% story = nil %>
-<% local_user = @authinfo[:user] if @authinfo[:user_id] %>
+<% local_user = @authinfo[:user] if @authinfo[:user] %>
 <% story = @chapter.story %>
 <% is_author = (local_user and local_user.has_story_permission(story,'author') ) %>
-<div class="comment<%= "_read" if pcomm.read_by.include?(@authinfo[:username]) %>">
+<div class="comment<%= "_read" if pcomm.read_by.include?(@authinfo[:user]) %>">
         <div class="commentbody">
                 <% cache(:action => "show", :action_suffix => "pcomment_#{pcomm.id}") do %>
                         <%= comment_markdown(pcomm.body) %>

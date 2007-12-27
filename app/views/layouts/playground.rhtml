@@ -9,12 +9,12 @@
 <body>
 <%= render_component(:controller => 'php_session', :action => 'has_session') %>
 <%= render_component(:controller => 'style', :action => 'style_dropdown') %>
-<% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('admin') %>
+<% if @authinfo[:user] and @authinfo[:user].has_site_permission('admin') %>
         <%= link_to 'Edit Site Permissions', :controller => 'site_permissions', :action => 'permissions' %> |
         <%= link_to 'Expire cache', :controller => 'site', :action => 'expire_cache' %> |
         <%= link_to 'Add Commitment', :controller => 'stories', :action => 'add_commitment' %> |
 <% end %>
-<% if @authinfo[:user_id] and User.find(@authinfo[:user_id]).has_site_permission('blogger') %>
+<% if @authinfo[:user] and @authinfo[:user].has_site_permission('blogger') %>
         <%= link_to 'New blogpost', :action => 'new' %>
 <% end %>
 

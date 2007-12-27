@@ -34,7 +34,7 @@ class StyleController < ApplicationController
     @theme = params[:theme]
     @theme = 'default' unless @theme
     @default_styles = Style.find_all_by_theme_and_user(@theme,-1)
-    @user_styles = Style.find_all_by_theme_and_user(@theme,@authinfo[:user_id])
+    @user_styles = Style.find_all_by_theme_and_user(@theme,@authinfo[:user].id)
 
     @styles = Array.new
 
@@ -80,7 +80,7 @@ class StyleController < ApplicationController
     @theme = cookies[:style]
     @theme = 'default' unless @theme
     @default_styles = Style.find_all_by_theme_and_user(@theme,-1)
-    @user_styles = Style.find_all_by_theme_and_user(@theme,@authinfo[:user_id])
+    @user_styles = Style.find_all_by_theme_and_user(@theme,@authinfo[:user].id)
   end
 
   def save_style
@@ -93,7 +93,7 @@ class StyleController < ApplicationController
         
         @theme = cookies[:style]
         @theme = 'default' unless @theme
-        @style = Style.find_by_theme_and_user_and_element(@theme,@authinfo[:user_id],element)
+        @style = Style.find_by_theme_and_user_and_element(@theme,@authinfo[:user].id,element)
 
         @style = Style.new unless @style
         # if @style is null, this style doesn't exist, so create it

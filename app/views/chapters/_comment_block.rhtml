@@ -1,10 +1,10 @@
         <% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
-        <% unread_comments = para.pcomments.collect {|x| x.id if x.flag < 2 and not x.read_by.include?(@authinfo[:username])}.compact.length %>
+        <% unread_comments = para.pcomments.collect {|x| x.id if x.flag < 2 and not x.read_by.include?(@authinfo[:user].username)}.compact.length %>
         <% unacknowledged_comments = para.pcomments.collect {|x| x.id if x.flag < 2 and x.acknowledged.blank?}.compact.length %>
-        <% can_edit = (@authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(para.chapter.story,'author') ) %>
+        <% can_edit = (@authinfo[:user] and @authinfo[:user].has_story_permission(para.chapter.story,'author') ) %>
         <% denotation_class = 'unread_comments' if unread_comments > 0 %>
         <% denotation_class = 'read_comments' if total_comments > 0 and unread_comments < 1%>
-        <% denotation_class = 'unacknowledged_comments' if total_comments > 0 and unacknowledged_comments > 0 and (@authinfo[:user_id] and User.find(@authinfo[:user_id]).has_story_permission(para.chapter.story,'author'))%>
+        <% denotation_class = 'unacknowledged_comments' if total_comments > 0 and unacknowledged_comments > 0 and can_edit %>
 
 <div class="<%= denotation_class %>" id="comment_span_<%= para.id %>" >
 

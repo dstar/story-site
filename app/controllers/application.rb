@@ -37,11 +37,6 @@ class ApplicationController < ActionController::Base
           # stick the user object itself in, so we don't have to look it up later
           #at this point, we've verified that the session is still live
           @authinfo[:sid] = @sid 
-
-          groups = user.groups
-          @authinfo[:group_ids]=groups.collect {|g| g.group_id}
-          @authinfo[:groups]=groups.collect {|g| g.group_name}
-
         else
           #no session
           @authinfo = Hash.new
