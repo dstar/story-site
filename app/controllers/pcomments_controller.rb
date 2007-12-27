@@ -48,7 +48,7 @@ class PcommentsController < ApplicationController
   def create
     @pcomment = Pcomment.new(params[:pcomment])
     @pcomment.read_by = Array.new
-    @pcomment.username = @authinfo[:user].name
+    @pcomment.username = @authinfo[:user].username
     if request.xml_http_request?
       if @pcomment.save
         @chapter = @paragraph.chapter
@@ -102,7 +102,7 @@ class PcommentsController < ApplicationController
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
 #      @pcomment.update_attribute('flag',1)
-      @pcomment.read_by.push(@authinfo[:user].name)
+      @pcomment.read_by.push(@authinfo[:user].username)
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
@@ -119,7 +119,7 @@ class PcommentsController < ApplicationController
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
 #      @pcomment.update_attribute('flag',1)
-      @pcomment.read_by.delete(@authinfo[:user].name)
+      @pcomment.read_by.delete(@authinfo[:user].username)
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
@@ -135,8 +135,8 @@ class PcommentsController < ApplicationController
     if @authinfo[:user]
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
-      @pcomment.acknowledged = @authinfo[:user].name
-      @pcomment.read_by.push(@authinfo[:user].name)
+      @pcomment.acknowledged = @authinfo[:user].username
+      @pcomment.read_by.push(@authinfo[:user].username)
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
@@ -152,7 +152,7 @@ class PcommentsController < ApplicationController
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
       @pcomment.acknowledged = ""
-      @pcomment.read_by.delete(@authinfo[:user].name)
+      @pcomment.read_by.delete(@authinfo[:user].username)
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
