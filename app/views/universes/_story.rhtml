@@ -1,4 +1,4 @@
-<% inactive_tag = "(Not Active)" if story.chapters.empty? %>
+<% inactive_tag = "(Not Active)" if story.chapters.empty? -%>
 <div>
   <li><h4><%= link_to story.title, :controller => "stories", :action => "show", :id => story %> <%= inactive_tag %></h4>
   <p><b>Keywords:</b><%= story.keywords %></p>

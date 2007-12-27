@@ -4,6 +4,8 @@ class Pcomment < ActiveRecord::Base
 
   serialize :read_by
 
+  before_save :format_body  
+  
   def self.listForPara(para_id)
     find(:all,
       :conditions => ["paragraph_id = ? and flag < 2", para_id],
@@ -20,5 +22,10 @@ class Pcomment < ActiveRecord::Base
   def cache_key
     "pcomment_#{self.id}"
   end
-
+  def format_body
+    self.body = self.body_raw.dup
+    #    self.body.gsub!(/_(\w+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"}
+    self.body.gsub!(/_([-\\{}?*A-Za-z0-9 .,;&:`'!\/"()]+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"}
+    self.body.gsub!(/--/,"&mdash;")
+  end
 end
