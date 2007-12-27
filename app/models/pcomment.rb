@@ -27,5 +27,6 @@ class Pcomment < ActiveRecord::Base
     #    self.body.gsub!(/_(\w+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"}
     self.body.gsub!(/_([-\\{}?*A-Za-z0-9 .,;&:`'!\/"()]+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"}
     self.body.gsub!(/--/,"&mdash;")
+    self.body.gsub!(/\n+/,"<br />")
   end
 end
