@@ -1,11 +1,11 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  def StoryHost(story_id)
+  def StoryHost(story)
     domain_length = request.subdomains.length
-    unless story_id == "playground"
-      Story.find(story_id).short_title.concat('.').concat(request.domain(domain_length)).concat(request.port_string)
+    unless story.is_a? String
+      "#{story.short_title}.#{request.domain(domain_length)}#{request.port_string}"
     else
-      story_id.concat('.').concat(request.domain(domain_length)).concat(request.port_string)
+      "#{story}.#{request.domain(domain_length)}#{request.port_string}"
     end
   end
 
