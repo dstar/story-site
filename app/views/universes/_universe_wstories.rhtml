@@ -6,7 +6,7 @@
         :id => universe_wstories.id %></h2>
     <%= our_markdown(universe_wstories.description) %>
 <% end %>
-  <% cache "storyies_for_universe_#{universe_wstories.id}" do %>
+  <% cache "stories_for_universe_#{universe_wstories.id}" do %>
     <ul>
     <%= render :partial => "story",
         :collection => Story.OrderedListByUniverse(universe_wstories.id) %>

@@ -95,7 +95,7 @@ class StoriesController < ApplicationController
     if @story.update_attributes(params[:story])
       expire_fragment("story_#{@story.id}")
       expire_fragment("story_list#{@story.id}")
-      expire_fragment("story_universe_wstories#{@story.id}")
+      expire_fragment("stories_for_universe#{@story.id}")
       flash[:notice] = 'Story was successfully updated.'
       redirect_to :action => 'show', :id => @story.id
     else

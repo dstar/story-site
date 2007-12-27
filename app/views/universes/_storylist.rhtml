@@ -1,7 +1,8 @@
   <div class="worldlist">
     <u><%= storylist.name %></u>
     <ul>
-        <% Story.OrderedListByUniverse(storylist.id).each do |story| %>
+<% cache "storylist" do %>
+  <% Story.OrderedListByUniverse(storylist.id).each do |story| %>
           <% cache "story_list#{story.id}" do %>
           <li><a href="<%=index_url(:host => StoryHost(story)) %>"><% story.title %></a>
               <% if @authinfo[:user] and ( @authinfo[:user].has_story_permission(story,'author') or @authinfo[:user].has_story_permission(story,'beta-reader') ) %>
@@ -15,5 +16,6 @@
           </li>
           <% end %>
         <% end %>
-    </ul>
+<% end %>
+      </ul>
   </div>
