@@ -85,7 +85,7 @@ class StyleController < ApplicationController
 
   def save_style
 
-    if @authinfo[:username]
+    if @authinfo[:user]
       definition = params[:definition]
       element = params[:element]
 
@@ -127,7 +127,7 @@ class StyleController < ApplicationController
 
   def save_theme_style
 
-    if @authinfo[:username]
+    if @authinfo[:user]
       definition = params[:definition]
       element = params[:element]
 

@@ -1,5 +1,5 @@
 <div id="users">
-<center><h2> <%= @authinfo[:username] %>'s styles for theme <%= @theme %> </h2></center>
+<center><h2> <%= @authinfo[:user].name %>'s styles for theme <%= @theme %> </h2></center>
 <div id="user_styles">
 <%= render :partial => "edit_style", :collection => @user_styles %>
 </div>

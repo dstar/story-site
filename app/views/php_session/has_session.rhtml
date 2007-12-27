@@ -1,4 +1,4 @@
 <div class="userinfo">
-	<%= render :partial => "logged_in" if @authinfo[:username] and @authinfo[:username] != "Anonymous"%>
-	<%= render :partial => "login" unless @authinfo[:username] and @authinfo[:username] != "Anonymous" %>
+	<%= render :partial => "logged_in" if @authinfo[:user] and @authinfo[:user] != "Anonymous"%>
+	<%= render :partial => "login" unless @authinfo[:user] and @authinfo[:user] != "Anonymous" %>
 </div>
