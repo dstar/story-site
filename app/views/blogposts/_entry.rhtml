@@ -8,10 +8,10 @@
     <p><font size="-2">Edited on <%= format_time(entry.updated_on, "%a, %b %d, %Y") %></font></p>
   <% end %>
   <p>
-  <% end %>  
-  <% if @authinfo[:user] and @authinfo[:user].has_site_permission('blogger')  %>
+<% end %>  
+<% if @authinfo[:user] and @authinfo[:user].has_site_permission('blogger')  %>
             <%= link_to 'edit', :controller => 'blog', :action => 'edit', :id => entry.id %> |
             <%= link_to 'delete', :controller => 'blog', :action => 'delete_post', :id => entry.id %>
-  <% end %>
+<% end %>
 </font></p>
 </div>
