@@ -3,20 +3,20 @@
 <h1><%= @chapter.story.title %> Chapter <%= @chapter.number %></h1>
 
 <%= chapter_navigation(@chapter) %>
-<%cache("show#chapter_#{@chapter.id}")%>
-<div class="full">
-<% Paragraph.paraList(@chapter.id).each do |para| -%>
-  <% cache("show#paragraph_#{para.id}") do -%>
-  <div class="paragraph">
-    <a id="<%= ["p",para.id] %>"></a>
-    <div class="parabody" id="<%= ["parabody",para.id] %>">
-      <p><%= para.body %></p>
-    </div>
-  </div>
+<%cache("show#chapter_#{@chapter.id}") do -%>
+  <div class="full">
+    <% Paragraph.paraList(@chapter.id).each do |para| -%>
+        <% cache("show#paragraph_#{para.id}") do -%>
+        <div class="paragraph">
+          <a id="<%= ["p",para.id] %>"></a>
+          <div class="parabody" id="<%= ["parabody",para.id] %>">
+            <p><%= para.body %></p>
+          </div>
+        </div>
+      <% end -%>
   <% end -%>
-<% end -%>
-  <div class="paragraph">
+    <div class="paragraph">
 <% end %>
-<%= chapter_navigation(@chapter) -%>
+    <%= chapter_navigation(@chapter) -%>
   </div>
 </div>
