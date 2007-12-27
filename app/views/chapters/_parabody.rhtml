@@ -1,1 +1,1 @@
-<!-- t --><% @body = parabody.body %><% cache("show#paragraph_#{parabody.id}") do %><p><%= @body %></p><% end %><!-- tt -->
+<% cache("show#paragraph_#{parabody.id}") do %><p><%= parabody.body %></p><% end %>
