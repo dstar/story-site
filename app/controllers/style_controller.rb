@@ -68,6 +68,7 @@ class StyleController < ApplicationController
     @styles_by_bodies.each do |style, element|
       @stylesheet = @stylesheet + "#{element} { #{style} }\n"
     end
+    headers['Content-Type'] = "text/css"
     render(:layout => false)
   end
 
