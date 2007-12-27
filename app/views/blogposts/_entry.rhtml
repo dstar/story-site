@@ -1,7 +1,7 @@
 <% cache "blogpost_#{entry.id}" do -%>
   <div class="news" name=<%= ["entry",entry.id] %> >
        <h2><%= entry.title %></h2>
-    <%= blogpost_markdown(entry.body).gsub(/<br \/>/, "</p><p>") %>
+    <%= entry.body.gsub(/<br \/>/, "</p><p>") %>
     <p class="timestamp">Posted on <%= format_time(entry.created_on, "%a, %b %d, %Y") %> by <%= entry.user %></p>
     <% if entry.created_on != entry.updated_on -%>
       <p class="timestamp">Edited on <%= format_time(entry.updated_on, "%a, %b %d, %Y") %></p>

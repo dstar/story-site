@@ -13,16 +13,16 @@ module ApplicationHelper
     text.gsub(/\s*--\s*/,"&mdash; ")
   end
 
-  def blogpost_markdown(text)
-    text.gsub(/\s*--\s*/,"&mdash; ")
-    markdown(text)
-  end
-
-  def comment_markdown(text)
-    text.gsub(/\s*--\s*/,"&mdash; ")
-    text.gsub(/(.*?)(\n)+/, '<p>\1</p>\2')
-    text.gsub(/(\n)([^\n]+)$/, '\1<p>\2</p>\1')
-  end
+#  def blogpost_markdown(text)
+#    text.gsub(/\s*--\s*/,"&mdash; ")
+#    markdown(text)
+#  end
+#
+#  def comment_markdown(text)
+#    text.gsub(/\s*--\s*/,"&mdash; ")
+#    text.gsub(/(.*?)(\n)+/, '<p>\1</p>\2')
+#    text.gsub(/(\n)([^\n]+)$/, '\1<p>\2</p>\1')
+#  end
 
 
   def format_time(time, format)
