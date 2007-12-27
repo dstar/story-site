@@ -1,15 +1,16 @@
+<% cache("show#paragraph_#{para.id}") do -%>
 <div class="paragraph">
   <a id="<%= ["p",para.id] %>"></a>
   <div class="parabody" id="<%= ["parabody",para.id] %>">
-<% cache("show#paragraph_#{para.id}") do -%>
     <p><%= para.body %></p>
-<% end -%>
   </div>
+<% end -%>
   <!-- end parabody -->
-  <% if params[:action] == 'show_draft' %>
+  <% if params[:action] == 'show_draft' -%>
 	<div class="comments" id="comment_block_<%= para.id %>" >
-	  <%= render :partial => 'comment_block', :locals => { :para => para, :display => "none" } %>
+	  <%= render :partial => 'comment_block', :locals => { :para => para, :display => "none" } -%>
 	</div>
 	<!-- end comments -->
-  <% end %></div>
+  <% end -%>
+</div>
 <!-- end paragraph -->
