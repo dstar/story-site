@@ -6,7 +6,7 @@
 <% is_author = (local_user and local_user.has_story_permission(story,'author') ) %>
 <div class="comment<%= "_read" if pcomm.read_by.include?(@authinfo[:user]) %>">
         <div class="commentbody">
-                <% cache(:action => "show", :action_suffix => "pcomment_#{pcomm.id}") do %>
+                <% cache("show_pcomment_#{pcomm.id}") do %>
                         <%= pcomm.body %>
                 <% end %>
         </div>
