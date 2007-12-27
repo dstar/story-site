@@ -64,6 +64,7 @@ class BlogpostsController < ApplicationController
     @blogpost = Blogpost.find(params[:id])
     if @blogpost.update_attributes(params[:blogpost])
       flash[:notice] = 'Blogpost was successfully updated.'
+      expire_fragment("blogpost_#{@blogpost.id}")
       redirect_to :action => 'show', :id => @blogpost
     else
       render :action => 'edit'
