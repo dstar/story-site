@@ -1,6 +1,6 @@
-        <% total_comments = para.pcomments.count(:conditions => "flag < 2") %>
-        <% unread_comments = para.pcomments.collect {|x| x.id if x.flag < 2 and not x.read_by.include?(@authinfo[:user].username)}.compact.length %>
-        <% unacknowledged_comments = para.pcomments.collect {|x| x.id if x.flag < 2 and x.acknowledged.blank?}.compact.length %>
+        <% total_comments = para.pcomments.inject(0) {|i, pc| i += 1 if pc.flag < 2} %>
+        <% unread_comments = para.pcomments.inject(0) {|i,x| i += 1 if x.flag < 2 and not x.read_by.include?(@authinfo[:user].username)} %>
+        <% unacknowledged_comments = para.pcomments.inject(0) {|i, x| i += 1 if x.flag < 2 and x.acknowledged.blank?} %>
         <% can_edit = (@authinfo[:user] and @authinfo[:user].has_story_permission(@chapter.story,'author') ) %>
         <% denotation_class = 'unread_comments' if unread_comments > 0 %>
         <% denotation_class = 'read_comments' if total_comments > 0 and unread_comments < 1%>
