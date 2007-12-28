@@ -20,7 +20,7 @@
                         <%= render :partial => 'chapters/pcomm', :collection => para.pcomments %>
                 </div>
                 <!-- end comments_body -->
-        <p><%= link_to_remote 'Comment on this paragraph',{ :url => "#{index_url}pcomments/new/#{para.id}", :update => "comments_body#{para.id}"}, {:href => "#{index_url}pcomments/new/#{para.id}"} if @authinfo[:username]%></p>
+        <p><%= link_to_remote 'Comment on this paragraph',{ :url => "#{index_url}pcomments/new/#{para.id}", :update => "comments_body#{para.id}"}, {:href => "#{index_url}pcomments/new/#{para.id}"} if @authinfo[:user].username%></p>
         <a href="#<%= ["pcomment",para.id] %>" onclick="Element.toggle('comments<%= para.id %>')"> Hide Comments </a>
         </div>
         <!-- end comments_display -->
