@@ -1,6 +1,6 @@
 class Paragraph < ActiveRecord::Base
   belongs_to :chapter
-  has_many :pcomments
+  has_many :pcomments, :order => 'id'
 
   acts_as_list :scope => "chapter_id"
 
