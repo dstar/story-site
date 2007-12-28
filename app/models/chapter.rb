@@ -1,6 +1,6 @@
 class Chapter < ActiveRecord::Base
   belongs_to :story
-  has_many :paragraphs
+  has_many :paragraphs, :order => 'position'
   
   has_many :required_permissions, :as => :permissionable
 
