@@ -38,6 +38,7 @@ module ApplicationHelper
     Style.find(:all, :select => 'theme', :conditions => ['user=-1'], :group => 'theme').collect { |s| [s.theme, s.theme] }.each do |theme|
       style_links_buffer += %Q|<link rel="stylesheet" type="text/css" href="http://styles.playground.pele.cx/style/#{theme[0]}.css" title="#{theme[0]}" />|
     end 
+    return style_links_buffer
   end
 
   def php_session_header
