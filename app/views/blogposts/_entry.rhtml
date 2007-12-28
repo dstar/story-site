@@ -9,7 +9,7 @@
     <p>
   <% end -%>  
     <% if @authinfo[:user] and @authinfo[:user].has_site_permission('blogger')  -%>
-      <% cache "blogpost_admin_links_for_#{entry.id}"%>
+      <% cache "blogpost_admin_links_for_#{entry.id}" do %>
                   <%= link_to 'edit', :controller => 'blog', :action => 'edit', :id => entry.id %> |
                   <%= link_to 'delete', :controller => 'blog', :action => 'delete_post', :id => entry.id %>
       <% end %>
