@@ -36,7 +36,7 @@ module ApplicationHelper
   def style_links
     style_links_buffer = ""
     Style.find(:all, :select => 'theme', :conditions => ['user=-1'], :group => 'theme').collect { |s| [s.theme, s.theme] }.each do |theme|
-      style_links_buffer += %Q|<link rel="stylesheet" type="text/css" href="http://styles.playground.pele.cx/style/#{theme[0].css}" title="#{theme[0]}" />|
+      style_links_buffer += %Q|<link rel="stylesheet" type="text/css" href="http://styles.playground.pele.cx/style/#{theme[0]}.css" title="#{theme[0]}" />|
     end 
   end
 
