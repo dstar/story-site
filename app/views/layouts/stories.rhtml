@@ -8,13 +8,13 @@
   </title>
   <%= javascript_include_tag "prototype" %>
   <%= calendar_date_select_includes "blue" %>
-  <%= render_component(:controller => 'style', :action => 'style_links') %>
+  <%= style_links %>
   <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
 </head>
 <body>
-<%= render_component(:controller => 'php_session', :action => 'has_session') %>
-<%= render_component(:controller => 'style', :action => 'style_dropdown') %>
-<%= render :partial => "breadcrumbs" %>
+<%= php_session_header %>
+<%= style_dropdown %>
+<%= breadcrumbs %>
 
 
 

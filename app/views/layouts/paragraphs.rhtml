@@ -1,10 +1,10 @@
-<%# <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+%# <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
   "http//www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> %>
 <html>
 <head>
   <title>Paragraphs: <%= controller.action_name %></title>
 <%= javascript_include_tag "prototype" %>
-  <%= render_component(:controller => 'style', :action => 'style_links') %>
+  <%= style_links %>
   <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
 	<script type="text/javascript">
 		function confirmSubmit() {
@@ -17,8 +17,8 @@
 	</script>
 </head>
 <body>
-<%= render_component(:controller => 'php_session', :action => 'has_session') %>
-<%= render_component(:controller => 'style', :action => 'style_dropdown') %>
+<%= php_session_header %>
+<%= style_dropdown %>
 <p style="color: red"><%= flash[:notice] %></p>
 
 <%= @content_for_layout %>

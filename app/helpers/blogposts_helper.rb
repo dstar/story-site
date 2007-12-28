@@ -6,4 +6,8 @@ module BlogpostsHelper
 #    markdown(text)
 #  end
 
+  def breadcrumbs
+    return "#{link_to 'Home', index_url(:host => StoryHost('playground'))}\n&gt; #{@description[params[:action]] if @description[params[:action]]}"
+  end
+  
 end

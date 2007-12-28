@@ -7,7 +7,7 @@
   <% end %>
   <%= javascript_include_tag "prototype" %>
   <%= calendar_date_select_includes "blue" %>
-  <%= render_component(:controller => 'style', :action => 'style_links') %>
+  <%= style_links %>
   <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
         <script type="text/javascript">
                 function confirmSubmit() {
@@ -83,9 +83,9 @@
 
 </head>
 <body>
-<%= render_component(:controller => 'php_session', :action => 'has_session') %>
-<%= render_component(:controller => 'style', :action => 'style_dropdown') %>
-<p><%= render :partial => "breadcrumbs" %></p>
+<%= php_session_header %>
+<%= style_dropdown%>
+<p><%= breadcrumbs %></p>
 <p style="color: red"><%= flash[:notice] %></p>
 
 <%= @content_for_layout %>

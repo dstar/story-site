@@ -4,13 +4,13 @@
   Site Permissions
   </title>
   <%= javascript_include_tag "prototype" %>
-  <%= render_component(:controller => 'style', :action => 'style_links') %>
+  <%= style_links %>
   <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
   <%= javascript_include_tag "prototype" %>
 </head>
 <body>
-<%= render_component(:controller => 'php_session', :action => 'has_session') %>
-<%= render_component(:controller => 'style', :action => 'style_dropdown') %>
+<%= php_session_header %>
+<%= style_dropdown %>
 <p style="color: red"><%= flash[:notice] %></p>
 
 <%= @content_for_layout %>

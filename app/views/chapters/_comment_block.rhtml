@@ -2,7 +2,6 @@
         <% unread_comments = para.pcomments.inject(0) {|i,x| if x.flag < 2 and not x.read_by.include?(@authinfo[:user].username) then i += 1 else i += 0 end} %>
         <% unacknowledged_comments = para.pcomments.inject(0) {|i, x| if x.flag < 2 and x.acknowledged.blank? then i += 1 else i += 0 end} %>
         <% can_edit = (@authinfo[:user] and @authinfo[:user].has_story_permission(@chapter.story,'author') ) %>
-        <% logger.error "QQQ: unread comments is #{unread_comments}"%>
         <% denotation_class = 'unread_comments' if unread_comments > 0 %>
         <% denotation_class = 'read_comments' if total_comments > 0 and unread_comments < 1%>
         <% denotation_class = 'unacknowledged_comments' if total_comments > 0 and unacknowledged_comments > 0 and can_edit %>

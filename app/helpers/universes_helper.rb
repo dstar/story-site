@@ -19,5 +19,15 @@ module UniversesHelper
 
     return nav_buffer
   end
+  def breadcrumbs
+    home_link = link_to 'Home', index_url(:host => StoryHost('playground')) 
+    unless params[:action] =~ /list|index|create|new/ 
+      return "#{home_link} &gt; #{@universe.name}"
+    else 
+      if params[:action] == 'list' or params[:action] == 'index' 
+        return "#{home_link} &gt; Universe List"
+      end 
+    end 
+  end
 
 end

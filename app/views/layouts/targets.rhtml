@@ -4,7 +4,7 @@
   <link rel="stylesheet" type="text/css" href="http://playground.pele.cx:3000/style/show/1" title="default" />
 </head>
 <body>
-<%= render_component(:controller => 'php_session', :action => 'has_session') %>
+<%= php_session_header %>
 <p style="color: red"><%= flash[:notice] %></p>
 
 <%= @content_for_layout %>

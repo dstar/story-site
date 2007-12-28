@@ -78,4 +78,27 @@ module StoriesHelper
     return link_buffer
   end
 
+  def breadcrumbs
+    home_link = link_to 'Home', index_url(:host => StoryHost('playground')) 
+
+    unless params[:action] == 'new' or params[:action] == 'create' or params[:action] == 'list' or params[:action] == 'index' 
+      universe_link = link_to @story.universe.name, "#{StoryHost('playground')}/universes/show#{@story.universe.id}" 
+      if params[:action] == 'show' 
+        title_link = "#{@story.title}"
+      else 
+        title_link = link_to @story.title, "#{StoryHost('playground')}/stories/show/#{@story.id}" 
+        action_link = " &gt; #{@description[params[:action]]}" if @description[params[:action]] 
+      end 
+      return "#{home_link} &gt; #{universe_link} &gt; #{title_link}#{action_link}"
+    else 
+      if params[:action] == 'list' or params[:action] == 'index' 
+        return "#{home_link} &gt; Story List"
+      else 
+        universe_link = link_to @universe.name, "#{StoryHost('playground')}/universes/show/#{@universe.id}"
+        return "#{home_link} &gt; #{universe_link}"
+      end 
+
+    end
+  end
+  
 end

@@ -13,16 +13,16 @@ module ApplicationHelper
     text.gsub(/\s*--\s*/,"&mdash; ")
   end
 
-#  def blogpost_markdown(text)
-#    text.gsub(/\s*--\s*/,"&mdash; ")
-#    markdown(text)
-#  end
-#
-#  def comment_markdown(text)
-#    text.gsub(/\s*--\s*/,"&mdash; ")
-#    text.gsub(/(.*?)(\n)+/, '<p>\1</p>\2')
-#    text.gsub(/(\n)([^\n]+)$/, '\1<p>\2</p>\1')
-#  end
+  #  def blogpost_markdown(text)
+  #    text.gsub(/\s*--\s*/,"&mdash; ")
+  #    markdown(text)
+  #  end
+  #
+  #  def comment_markdown(text)
+  #    text.gsub(/\s*--\s*/,"&mdash; ")
+  #    text.gsub(/(.*?)(\n)+/, '<p>\1</p>\2')
+  #    text.gsub(/(\n)([^\n]+)$/, '\1<p>\2</p>\1')
+  #  end
 
 
   def format_time(time, format)
@@ -33,4 +33,33 @@ module ApplicationHelper
     end
   end
 
+  def style_links
+    style_links_buffer = ""
+    Style.find(:all, :select => 'theme', :conditions => ['user=-1'], :group => 'theme').collect { |s| [s.theme, s.theme] }.each do |theme|
+      style_links_buffer += %Q|<link rel="stylesheet" type="text/css" href="http://styles.playground.pele.cx/style/#{theme[0].css}" title="#{theme[0]}" />|
+    end 
+  end
+
+  def php_session_header
+    if @authinfo[:user] and @authinfo[:user].user_id != -1
+      return %Q|<div class="userinfo">\nLogged in as #{@authinfo[:user].username} ; <a href="http://playground.pele.cx/forums/login.php?logout=true&amp;redirect=redirect_out.php&amp;sid=<%= @sid %>">Log Out</a>\n</div>\n|
+    else
+      return %Q|<div class="userinfo">\n<a href="http://playground.pele.cx/forums/login.php?redirect=redirect_in.php">Log In</a>\n</div>\n|
+    end
+  end
+  
+  def style_dropdown
+    options_string = ""
+    Style.find(:all, :select => 'theme', :conditions => ['user=-1'], :group => 'theme').each {|s| options_string += "<option value='#{s.theme}'>#{s.theme}</option>\n"}
+    return <<EOS
+<div>
+<form action="">
+<select id="styleselect" onchange="setActiveStyleSheet(Form.Element.getValue('styleselect'));">
+#{options_string}
+</select>
+</form>
+</div>
+EOS
+  end
+  
 end

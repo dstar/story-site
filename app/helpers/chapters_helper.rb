@@ -47,4 +47,12 @@ module ChaptersHelper
     return false
   end
 
+  def breadcrumbs
+    chapno = " &gt; Chapter #{ @chapter.number }" unless params[:action] =~ /list/
+    home_link = link_to 'Home', index_url(:host => StoryHost('playground'))
+    universe_link =  link_to @chapter.story.universe.name, "#{StoryHost('playground')}/universes/show/#{@chapter.story.universe.id}"
+    story_link = link_to @chapter.story.title, index_url(:host => StoryHost(@chapter.story)) 
+    return "#{home_link} &gt; #{universe_link} &gt; #{story_link}#{chapno}"
+  end
+  
 end
