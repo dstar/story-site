@@ -7,7 +7,7 @@ module UniversesHelper
       nav_buffer +=  " | "
       nav_buffer += link_to 'Edit Permissions', :action => 'permissions', :id => universe
       nav_buffer +=  " | "
-    elsif @authinfo[:user] and @authinfo[:user].has_site_permission(universe,'admin')
+    elsif @authinfo[:user] and @authinfo[:user].has_site_permission('admin')
       nav_buffer += link_to 'Edit Universe Permissions', :controller => 'universes', :action => 'add_owner', :id => @universe.id
       nav_buffer +=  " | "
     end
