@@ -53,8 +53,9 @@ module StoriesHelper
   def build_chapter_links(chapter)
     link_buffer = ""
 
-    link_buffer += link_to "(Edit) ", :controller => 'chapters', :action => 'edit', :id => chapter.id if is_author(chapter)
-
+    link_buffer += link_to "(Edit)", :controller => 'chapters', :action => 'edit', :id => chapter.id if is_author(chapter)
+    link_buffer += " "
+    
     if chapter.status == 'released' or can_comment(chapter)
       link_buffer += "<em><strong>" if chapter.status == 'draft'
       link_buffer += link_to "Part #{chapter.number}", chapter_url(:chapter => chapter)
