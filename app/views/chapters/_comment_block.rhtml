@@ -5,7 +5,7 @@
         <% denotation_class = 'unread_comments' if unread_comments > 0 %>
         <% denotation_class = 'read_comments' if total_comments > 0 and unread_comments < 1%>
         <% denotation_class = 'unacknowledged_comments' if total_comments > 0 and unacknowledged_comments > 0 and can_edit %>
-        <% logger.debug "QQQ: #{unread_comments} unread comments, #{read_comments} read_comments, #{unacknowledged_comments} unacknowledged comments" %>
+        <% logger.debug "QQQ: #{unread_comments} unread comments, #{total_comments} total_comments, #{unacknowledged_comments} unacknowledged comments" %>
 
 <div class="<%= denotation_class %>" id="comment_span_<%= para.id %>" >
 
