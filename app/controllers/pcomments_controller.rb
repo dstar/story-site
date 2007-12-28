@@ -22,7 +22,7 @@ class PcommentsController < ApplicationController
   end
 
   def check_authorization(user)
-    needed = @authorization[@chapter.status][params[:action]]
+    needed = @authorization[@paragraph.chapter.status][params[:action]]
     if needed
       needed.each do |req|
         return true if req == "EVERYONE" # check for public action
