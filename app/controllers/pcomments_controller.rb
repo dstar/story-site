@@ -102,7 +102,7 @@ class PcommentsController < ApplicationController
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
 #      @pcomment.update_attribute('flag',1)
-      @pcomment.read_by.push(@authinfo[:user].username)
+      @pcomment.read_by.push(@authinfo[:user].username) unless @pcomment.read_by.include(@authinfo[:user].username)
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
