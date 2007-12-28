@@ -84,7 +84,7 @@ module StoriesHelper
     home_link = link_to 'Home', index_url(:host => StoryHost('playground')) 
 
     unless params[:action] == 'new' or params[:action] == 'create' or params[:action] == 'list' or params[:action] == 'index' 
-      universe_link = link_to @story.universe.name, "#{index_url(:host => StoryHost('playground'))}universes/show#{@story.universe.id}" 
+      universe_link = link_to @story.universe.name, "#{index_url(:host => StoryHost('playground'))}universes/show/#{@story.universe.id}" 
       if params[:action] == 'show' 
         title_link = "#{@story.title}"
       else 
