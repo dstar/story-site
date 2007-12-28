@@ -57,7 +57,8 @@ module StoriesHelper
 
     if chapter.status == 'released' or can_comment(chapter)
       link_buffer += "<em><strong>" if chapter.status == 'draft'
-      link_buffer += link_to "Part #{chapter.number} ", chapter_url(:chapter => chapter)
+      link_buffer += link_to "Part #{chapter.number}", chapter_url(:chapter => chapter)
+      link_buffer += " "
       link_buffer += "DRAFT</em></strong> " if chapter.status == 'draft'
       link_buffer += "<em>NEW!</em> " if (Date.today - chapter.date < 7)
     end
