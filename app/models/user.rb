@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
       @cache_story_permissions[story_id].push(temp_holder)
       logger.debug "QQQ: @cache_story_permissions[story_id] is @cache_#{@cache_story_permissions[story_id].inspect} with class #{@cache_story_permissions[story_id].class}"
       @cache_story_permissions[story_id].flatten
+      logger.debug "QQQ_AFTER_FLATTEN: @cache_story_permissions[story_id] is @cache_#{@cache_story_permissions[story_id].inspect} with class #{@cache_story_permissions[story_id].class}"
     end
     obtained_permisson = @cache_story_permissions[story_id].any? { |sp| sp.permission == permission}
     unless obtained_permisson
