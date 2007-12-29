@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :story_permissions, :as => :permission_holder
   has_many :universe_permissions, :as => :permission_holder
   has_many :site_permissions, :as => :permission_holder
-
+  
   def has_story_permission(story,permission)
     logger.debug "Permission is #{permission}\n"
     if story.is_a?(Story)
@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
     else
       story_id = story
     end
+    @story_permissions[story_id] ||= self.story_permissions.find(:conditions => "sp.story_id = #{story_id}")
     obtained_permisson = self.story_permissions.any? { |sp| sp.story_id=story_id && sp.permission=permission}
     unless obtained_permisson
       self.groups.each do |group|
@@ -34,10 +35,11 @@ class User < ActiveRecord::Base
     else
       universe_id = universe
     end
-    obtained_permisson = self.universe_permissions.any? { |up| up.story_id=universe_id && up.permission=permission}
+    @universe_permissions[universe_id] ||= self.universe_permissions.find(:conditions => "sp.universe_id = #{universe_id}")
+    obtained_permisson = self.universe_permissions.any? { |up| up.universe_id=universe_id && up.permission=permission}
     unless obtained_permisson
       self.groups.each do |group|
-        obtained_permisson = group.universe_permissions.any? { |up| up.story_id=universe_id && up.permission=permission}
+        obtained_permisson = group.universe_permissions.any? { |up| up.universe_id=universe_id && up.permission=permission}
         break if obtained_permisson
       end
     end
