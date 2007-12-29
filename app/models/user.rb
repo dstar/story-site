@@ -20,8 +20,13 @@ class User < ActiveRecord::Base
     end
     @story_permissions = [] unless @story_permissions  
     @story_permissions[story_id] = [] unless @story_permissions[story_id]
-    @story_permissions[story_id] << self.story_permissions.find(:all, :conditions => "story_id = #{story_id}") if @story_permissions[story_id].empty?
+    if @story_permissions[story_id].empty?
+    temp_holder = [].push(self.story_permissions.find(:all, :conditions => "story_id = #{story_id}"))
+    logger.debug "QQQ: Temp holder is #{temp_holder.inspect} with class #{temp_holder.class}"
+    @story_permissions[story_id].push(temp_holder)
+    logger.debug "QQQ: @story_permissions[story_id] is @#{@story_permissions[story_id].inspect} with class #{@story_permissions[story_id].class}"
     @story_permissions[story_id].flatten
+    end
     obtained_permisson = @story_permissions[story_id].any? { |sp| sp.permission == permission}
     unless obtained_permisson
       self.groups.each do |group|
