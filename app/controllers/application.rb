@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
       begin
         @authinfo[:session] = Php_Session.find_by_session_id(@sid)
         if @authinfo[:session] then
-          user = User.find(@authinfo[:session].session_user_id, :include => [:story_permissions, :universe_permissions, :site_permissions, {:groups => [:story_permissions, :universe_permissions]} ])
+          user = User.find(@authinfo[:session].session_user_id)
           @authinfo[:user] = user
           # stick the user object itself in, so we don't have to look it up later
           #at this point, we've verified that the session is still live
