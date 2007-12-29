@@ -27,6 +27,8 @@ memcache_servers = [ '127.0.0.1:11211', ]
 CACHE = MemCache.new(memcache_options)
 CACHE.servers = memcache_servers
 
+Object.send :undef_method, :id #fix warnings that aren't valid in rails...
+
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence those specified here
 
