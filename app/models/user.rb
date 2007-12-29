@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
     else
       story_id = story
     end
-    @story_permissions[story_id] ||= self.story_permissions.find(:conditions => "sp.story_id = #{story_id}")
+    @story_permissions[story_id] = self.story_permissions.find(:conditions => "story_id = #{story_id}") unless @story_permissions[story_id]
     obtained_permisson = self.story_permissions.any? { |sp| sp.story_id=story_id && sp.permission=permission}
     unless obtained_permisson
       self.groups.each do |group|
@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
     else
       universe_id = universe
     end
-    @universe_permissions[universe_id] ||= self.universe_permissions.find(:conditions => "sp.universe_id = #{universe_id}")
+    @universe_permissions[universe_id] = self.universe_permissions.find(:conditions => "universe_id = #{universe_id}") unless @universe_permissions[universe_id]
     obtained_permisson = self.universe_permissions.any? { |up| up.universe_id=universe_id && up.permission=permission}
     unless obtained_permisson
       self.groups.each do |group|
