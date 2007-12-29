@@ -18,10 +18,10 @@ class User < ActiveRecord::Base
     else
       story_id = story
     end
-    obtained_permisson = self.story_permissions.any { |sp| sp.story_id=story_id && sp.permission=permission}
+    obtained_permisson = self.story_permissions.any? { |sp| sp.story_id=story_id && sp.permission=permission}
     unless obtained_permisson
       self.groups.each do |group|
-        obtained_permisson = group.story_permissions.any { |sp| sp.story_id=story_id && sp.permission=permission}
+        obtained_permisson = group.story_permissions.any? { |sp| sp.story_id=story_id && sp.permission=permission}
         break if obtained_permisson
       end
     end
@@ -34,10 +34,10 @@ class User < ActiveRecord::Base
     else
       universe_id = universe
     end
-    obtained_permisson = self.universe_permissions.any { |up| up.story_id=universe_id && up.permission=permission}
+    obtained_permisson = self.universe_permissions.any? { |up| up.story_id=universe_id && up.permission=permission}
     unless obtained_permisson
       self.groups.each do |group|
-        obtained_permisson = group.universe_permissions.any { |up| up.story_id=universe_id && up.permission=permission}
+        obtained_permisson = group.universe_permissions.any? { |up| up.story_id=universe_id && up.permission=permission}
         break if obtained_permisson
       end
     end
