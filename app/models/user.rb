@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
         @cache_group_story_permissions[group] = [] unless @cache_group_story_permissions[group]
         @cache_group_story_permissions[group][story_id] = [] unless @cache_group_story_permissions[group][story_id]
         @cache_group_story_permissions[group][story_id] << group.story_permissions.find(:all,:conditions => "story_id = #{story_id}") if @cache_group_story_permissions[group][story_id].empty?
-        @cache_group_story_permissions[story_id].flatten!
+        @cache_group_story_permissions[group][story_id].flatten!
         obtained_permisson = @cache_group_story_permissions[group][story_id].any? { |sp| sp.permission==permission}
         break if obtained_permisson
       end
@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
         @cache_group_universe_permissions[group] = [] unless @cache_group_universe_permissions[group]
         @cache_group_universe_permissions[group][universe_id] = [] unless @cache_group_universe_permissions[group][universe_id]
         @cache_group_universe_permissions[group][universe_id] << group.universe_permissions.find(:all, :conditions => "universe_id = #{universe_id}") if @cache_group_universe_permissions[group][universe_id].empty?
-        @cache_group_universe_permissions[universe_id].flatten!
+        @cache_group_universe_permissions[group][universe_id].flatten!
         obtained_permisson = @cache_group_universe_permissions[group][universe_id].any? { |up| up.permission==permission}
         break if obtained_permisson
       end
