@@ -159,7 +159,8 @@ class StoriesController < ApplicationController
 
   def handle_url
     unless (request.subdomains(0).first == 'playground') or params[:action] == 'new' or params[:action] == 'create'
-      params[:id] = Story.find_by_short_title(request.subdomains(0).first).id unless params[:id]
+      story = Story.find_by_short_title(request.subdomains(0).first).id unless params[:id]
+      params[:id] = story.id
     end
   end
 
