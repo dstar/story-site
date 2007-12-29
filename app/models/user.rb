@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   has_many :universe_permissions, :as => :permission_holder
   has_many :site_permissions, :as => :permission_holder
   
+  @story_permissions = []
+  @universe_permissions = []
+  
   def has_story_permission(story,permission)
     logger.debug "Permission is #{permission}\n"
     if story.is_a?(Story)
