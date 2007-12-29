@@ -18,14 +18,14 @@ class User < ActiveRecord::Base
     else
       story_id = story
     end
-    @cache_cache_story_permissions = [] unless @cache_cache_story_permissions  
-    @cache_cache_story_permissions[story_id] = [] unless @cache_cache_story_permissions[story_id]
-    if @cache_cache_story_permissions[story_id].empty?
+    @cache_story_permissions = [] unless @cache_story_permissions  
+    @cache_story_permissions[story_id] = [] unless @cache_story_permissions[story_id]
+    if @cache_story_permissions[story_id].empty?
       temp_holder = [].push(self.story_permissions.find(:all, :conditions => "story_id = #{story_id}"))
       logger.debug "QQQ: Temp holder is #{temp_holder.inspect} with class #{temp_holder.class}"
-      @cache_cache_story_permissions[story_id].push(temp_holder)
-      logger.debug "QQQ: @cache_cache_story_permissions[story_id] is @cache_cache_#{@cache_cache_story_permissions[story_id].inspect} with class #{@cache_cache_story_permissions[story_id].class}"
-      @cache_cache_story_permissions[story_id].flatten
+      @cache_story_permissions[story_id].push(temp_holder)
+      logger.debug "QQQ: @cache_story_permissions[story_id] is @cache_#{@cache_story_permissions[story_id].inspect} with class #{@cache_story_permissions[story_id].class}"
+      @cache_story_permissions[story_id].flatten
     end
     obtained_permisson = @cache_story_permissions[story_id].any? { |sp| sp.permission == permission}
     unless obtained_permisson
