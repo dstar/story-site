@@ -21,16 +21,14 @@ class User < ActiveRecord::Base
     @story_permissions = [] unless @story_permissions  
     @story_permissions[story_id] = [] unless @story_permissions[story_id]
     @story_permissions[story_id] = self.story_permissions.find(:all, :conditions => "story_id = #{story_id}") if @story_permissions[story_id].empty?
-logger.debug "QQQ:@story_permissions[story_id] is #{@story_permissions[story_id]}"
-    @story_permissions[story_id] = [@story_permissions[story_id]] if @story_permissions.class == StoryPermission
-logger.debug "QQQ:@story_permissions[story_id] is #{@story_permissions[story_id]}" if @story_permissions.class == StoryPermission
+    @story_permissions[story_id] = [@story_permissions[story_id]] if @story_permissions[story_id].class == StoryPermission
     obtained_permisson = @story_permissions[story_id].any? { |sp| sp.permission == permission}
     unless obtained_permisson
       self.groups.each do |group|
         @group_story_permissions = {} unless @group_story_permissions
         @group_story_permissions[group][story_id] = [] unless @group_story_permissions[group][story_id]
         @group_story_permissions[group][story_id] = group.story_permissions.find(:all,:conditions => "story_id = #{story_id}") if @group_story_permissions[group][story_id].empty?
-@group_story_permissions[story_id] = [@group_story_permissions[story_id]] if @group_story_permissions.class == StoryPermission      
+@group_story_permissions[story_id] = [@group_story_permissions[story_id]] if @group_story_permissions[story_id].class == StoryPermission      
         obtained_permisson = @group_story_permissions[group][story_id].any? { |sp| sp.permission==permission}
         break if obtained_permisson
       end
@@ -47,14 +45,14 @@ logger.debug "QQQ:@story_permissions[story_id] is #{@story_permissions[story_id]
     @universe_permissions = [] unless @universe_permissions
     @universe_permissions[universe_id] = [] unless @universe_permissions[universe_id]
     @universe_permissions[universe_id] = self.universe_permissions.find(:all, :conditions => "universe_id = #{universe_id}") if @universe_permissions[universe_id].empty?
-@universe_permissions[universe_id] = [@universe_permissions[universe_id]] if @universe_permissions.class == UniversePermission  
+@universe_permissions[universe_id] = [@universe_permissions[universe_id]] if @universe_permissions[group][universe_id].class == UniversePermission  
     obtained_permisson = @universe_permissions[universe].any? { |up|  up.permission==permission}
     unless obtained_permisson
       self.groups.each do |group|
         @group_universe_permissions = {} unless @group_universe_permissions
         @group_universe_permissions[group][universe_id] = [] unless @group_universe_permissions[group][universe_id]
         @group_universe_permissions[group][universe_id] = group.universe_permissions.find(:all, :conditions => "universe_id = #{universe_id}") if @group_universe_permissions[group][universe_id].empty?
-@group_universe_permissions[universe_id] = [@group_universe_permissions[universe_id]] if @group_universe_permissions.class == UniversePermission      
+@group_universe_permissions[universe_id] = [@group_universe_permissions[universe_id]] if @group_universe_permissions[group][universe_id].class == UniversePermission      
         obtained_permisson = @group_universe_permissions[group][universe_id].any? { |up| up.permission==permission}
         break if obtained_permisson
       end
