@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
     unless obtained_permisson
       self.groups.each do |group|
         @group_story_permissions = {} unless @group_story_permissions
+        @group_story_permissions[group] = [] unless @group_story_permissions[group]
         @group_story_permissions[group][story_id] = [] unless @group_story_permissions[group][story_id]
         @group_story_permissions[group][story_id] = group.story_permissions.find(:all,:conditions => "story_id = #{story_id}") if @group_story_permissions[group][story_id].empty?
 @group_story_permissions[story_id] = [@group_story_permissions[story_id]] if @group_story_permissions[story_id].class == StoryPermission      
@@ -50,6 +51,7 @@ class User < ActiveRecord::Base
     unless obtained_permisson
       self.groups.each do |group|
         @group_universe_permissions = {} unless @group_universe_permissions
+        @group_universe_permissions[group] = [] unless @group_universe_permissions[group]
         @group_universe_permissions[group][universe_id] = [] unless @group_universe_permissions[group][universe_id]
         @group_universe_permissions[group][universe_id] = group.universe_permissions.find(:all, :conditions => "universe_id = #{universe_id}") if @group_universe_permissions[group][universe_id].empty?
 @group_universe_permissions[universe_id] = [@group_universe_permissions[universe_id]] if @group_universe_permissions[group][universe_id].class == UniversePermission      
