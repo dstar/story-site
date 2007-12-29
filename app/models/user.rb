@@ -21,7 +21,9 @@ class User < ActiveRecord::Base
     @story_permissions = [] unless @story_permissions  
     @story_permissions[story_id] = [] unless @story_permissions[story_id]
     @story_permissions[story_id] = self.story_permissions.find(:conditions => "story_id = #{story_id}") unless @story_permissions[story_id].empty?
+    logger.debug "@story_permissions[story_id] is #{@story_permissions[story_id]}"
     obtained_permisson = @story_permissions[story_id].any? { |sp| sp.permission == permission}
+logger.debug "obtained_permisson is #{obtained_permisson}"
     unless obtained_permisson
       self.groups.each do |group|
         @group_story_permissions = {} unless @group_story_permissions
