@@ -18,24 +18,24 @@ class User < ActiveRecord::Base
     else
       story_id = story
     end
-    @story_permissions = [] unless @story_permissions  
-    @story_permissions[story_id] = [] unless @story_permissions[story_id]
-    if @story_permissions[story_id].empty?
-    temp_holder = [].push(self.story_permissions.find(:all, :conditions => "story_id = #{story_id}"))
-    logger.debug "QQQ: Temp holder is #{temp_holder.inspect} with class #{temp_holder.class}"
-    @story_permissions[story_id].push(temp_holder)
-    logger.debug "QQQ: @story_permissions[story_id] is @#{@story_permissions[story_id].inspect} with class #{@story_permissions[story_id].class}"
-    @story_permissions[story_id].flatten
+    @cache_cache_story_permissions = [] unless @cache_cache_story_permissions  
+    @cache_cache_story_permissions[story_id] = [] unless @cache_cache_story_permissions[story_id]
+    if @cache_cache_story_permissions[story_id].empty?
+      temp_holder = [].push(self.story_permissions.find(:all, :conditions => "story_id = #{story_id}"))
+      logger.debug "QQQ: Temp holder is #{temp_holder.inspect} with class #{temp_holder.class}"
+      @cache_cache_story_permissions[story_id].push(temp_holder)
+      logger.debug "QQQ: @cache_cache_story_permissions[story_id] is @cache_cache_#{@cache_cache_story_permissions[story_id].inspect} with class #{@cache_cache_story_permissions[story_id].class}"
+      @cache_cache_story_permissions[story_id].flatten
     end
-    obtained_permisson = @story_permissions[story_id].any? { |sp| sp.permission == permission}
+    obtained_permisson = @cache_story_permissions[story_id].any? { |sp| sp.permission == permission}
     unless obtained_permisson
       self.groups.each do |group|
-        @group_story_permissions = {} unless @group_story_permissions
-        @group_story_permissions[group] = [] unless @group_story_permissions[group]
-        @group_story_permissions[group][story_id] = [] unless @group_story_permissions[group][story_id]
-        @group_story_permissions[group][story_id] << group.story_permissions.find(:all,:conditions => "story_id = #{story_id}") if @group_story_permissions[group][story_id].empty?
-@group_story_permissions[story_id].flatten
-        obtained_permisson = @group_story_permissions[group][story_id].any? { |sp| sp.permission==permission}
+        @cache_group_story_permissions = {} unless @cache_group_story_permissions
+        @cache_group_story_permissions[group] = [] unless @cache_group_story_permissions[group]
+        @cache_group_story_permissions[group][story_id] = [] unless @cache_group_story_permissions[group][story_id]
+        @cache_group_story_permissions[group][story_id] << group.story_permissions.find(:all,:conditions => "story_id = #{story_id}") if @cache_group_story_permissions[group][story_id].empty?
+        @cache_group_story_permissions[story_id].flatten
+        obtained_permisson = @cache_group_story_permissions[group][story_id].any? { |sp| sp.permission==permission}
         break if obtained_permisson
       end
     end
@@ -48,19 +48,19 @@ class User < ActiveRecord::Base
     else
       universe_id = universe
     end
-    @universe_permissions = [] unless @universe_permissions
-    @universe_permissions[universe_id] = [] unless @universe_permissions[universe_id]
-    @universe_permissions[universe_id] << self.universe_permissions.find(:all, :conditions => "universe_id = #{universe_id}") if @universe_permissions[universe_id].empty?
-@universe_permissions[universe_id].flatten
-    obtained_permisson = @universe_permissions[universe].any? { |up|  up.permission==permission}
+    @cache_universe_permissions = [] unless @cache_universe_permissions
+    @cache_universe_permissions[universe_id] = [] unless @cache_universe_permissions[universe_id]
+    @cache_universe_permissions[universe_id] << self.universe_permissions.find(:all, :conditions => "universe_id = #{universe_id}") if @cache_universe_permissions[universe_id].empty?
+    @cache_universe_permissions[universe_id].flatten
+    obtained_permisson = @cache_universe_permissions[universe].any? { |up|  up.permission==permission}
     unless obtained_permisson
       self.groups.each do |group|
-        @group_universe_permissions = {} unless @group_universe_permissions
-        @group_universe_permissions[group] = [] unless @group_universe_permissions[group]
-        @group_universe_permissions[group][universe_id] = [] unless @group_universe_permissions[group][universe_id]
-        @group_universe_permissions[group][universe_id] << group.universe_permissions.find(:all, :conditions => "universe_id = #{universe_id}") if @group_universe_permissions[group][universe_id].empty?
-@group_universe_permissions[universe_id].flatten
-        obtained_permisson = @group_universe_permissions[group][universe_id].any? { |up| up.permission==permission}
+        @cache_group_universe_permissions = {} unless @cache_group_universe_permissions
+        @cache_group_universe_permissions[group] = [] unless @cache_group_universe_permissions[group]
+        @cache_group_universe_permissions[group][universe_id] = [] unless @cache_group_universe_permissions[group][universe_id]
+        @cache_group_universe_permissions[group][universe_id] << group.universe_permissions.find(:all, :conditions => "universe_id = #{universe_id}") if @cache_group_universe_permissions[group][universe_id].empty?
+        @cache_group_universe_permissions[universe_id].flatten
+        obtained_permisson = @cache_group_universe_permissions[group][universe_id].any? { |up| up.permission==permission}
         break if obtained_permisson
       end
     end
