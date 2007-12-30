@@ -27,7 +27,7 @@ class ParagraphsController < ApplicationController
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
+    :redirect_to => { :action => :list }
 
   def new
     @paragraphs = Paragraph.new
@@ -161,4 +161,31 @@ class ParagraphsController < ApplicationController
       @story_id = Chapter.find(@chapter_id).story.id
     end
   end
+  
+  def move_comments_up
+    paragraph = Paragraph.find(params[:id])
+    move_comments(paragraph,'up')
+  end
+
+  def move_comments_down
+    paragraph = Paragraph.find(params[:id])
+    move_comment(paragraph,'down')
+  end
+
+  def move_comment(paragraph, direction)
+    if direction == 'up'
+      new_parent = paragraph.chapter.paragraphs.find(:first,:conditions => "position = #{comment.position + 1}")
+    else
+      new_parent = paragraph.chapter.paragraphs.find(:first,:conditions => "position = #{comment.position - 1}")
+    end
+    
+    if new_parent
+      paragraph.pcomments.each do |comment|
+        comment.paragraph_id = new_parent.id
+        comment.save
+      end
+    end
+    redirect_to "chapters/show_draft/#{paragraph.chapter.id}#p#{paragraph.id}"
+  end
+  
 end

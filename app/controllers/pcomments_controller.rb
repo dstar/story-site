@@ -18,6 +18,8 @@ class PcommentsController < ApplicationController
       "markunread"    => ["author","beta-reader",],
       "acknowledge"   => ["author",],
       "unacknowledge" => ["author",],
+      "move_up"   => ["author",],
+      "move_down" => ["author",],
     }
   end
 
@@ -34,7 +36,7 @@ class PcommentsController < ApplicationController
   
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
+    :redirect_to => { :action => :list }
 
   def new
     @pcomment = Pcomment.new
@@ -60,7 +62,7 @@ class PcommentsController < ApplicationController
       if @pcomment.save
         flash[:notice] = 'Paragraph comment was successfully created.'
         redirect_to :controller => 'chapters', :action => 'show_draft',
-        :id => Pcomment.chapterID(@pcomment.id)
+          :id => Pcomment.chapterID(@pcomment.id)
       else
         render :action => 'new'
       end
@@ -86,13 +88,13 @@ class PcommentsController < ApplicationController
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
       @pcomment.update_attribute('flag',2)
-        expire_fragment( :action => "show", :action_suffix => "pcomment_#{@pcomment.id}", :controller => "chapters")
+      expire_fragment( :action => "show", :action_suffix => "pcomment_#{@pcomment.id}", :controller => "chapters")
       if request.xml_http_request?
         @chapter = @paragraph.chapter
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
       else
         redirect_to :controller => 'chapters',
-        :action => 'show_draft', :id => @chapter_id
+          :action => 'show_draft', :id => @chapter_id
       end
     end
   end
@@ -101,7 +103,7 @@ class PcommentsController < ApplicationController
     if @authinfo[:user]
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
-#      @pcomment.update_attribute('flag',1)
+      #      @pcomment.update_attribute('flag',1)
       @pcomment.read_by.push(@authinfo[:user].username) unless @pcomment.read_by.include(@authinfo[:user].username)
       @pcomment.save
       if request.xml_http_request?
@@ -109,7 +111,7 @@ class PcommentsController < ApplicationController
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
       else
         redirect_to :controller => 'chapters',
-        :action => 'show_draft', :id => @chapter_id
+          :action => 'show_draft', :id => @chapter_id
       end
     end
   end
@@ -118,7 +120,7 @@ class PcommentsController < ApplicationController
     if @authinfo[:user]
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
-#      @pcomment.update_attribute('flag',1)
+      #      @pcomment.update_attribute('flag',1)
       @pcomment.read_by.delete(@authinfo[:user].username)
       @pcomment.save
       if request.xml_http_request?
@@ -126,7 +128,7 @@ class PcommentsController < ApplicationController
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
       else
         redirect_to :controller => 'chapters',
-        :action => 'show_draft', :id => @chapter_id
+          :action => 'show_draft', :id => @chapter_id
       end
     end
   end
@@ -159,7 +161,7 @@ class PcommentsController < ApplicationController
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
       else
         redirect_to :controller => 'chapters',
-        :action => 'show_draft', :id => @chapter_id
+          :action => 'show_draft', :id => @chapter_id
       end
     end
   end
@@ -193,6 +195,5 @@ class PcommentsController < ApplicationController
     @page_title = 'Pcomments: #{params[:action]}'
     @breadcrumbs += " > Pcomments: #{params[:action]}"
   end
-
-
+        
 end
