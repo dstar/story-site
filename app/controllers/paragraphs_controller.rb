@@ -164,18 +164,18 @@ class ParagraphsController < ApplicationController
     end
   end
   
-  def move_comments_up
+  def move_comments_next
     paragraph = Paragraph.find(params[:id])
-    move_comments(paragraph,'up')
+    move_comments(paragraph,'next')
   end
 
-  def move_comments_down
+  def move_comments_prev
     paragraph = Paragraph.find(params[:id])
-    move_comment(paragraph,'down')
+    move_comment(paragraph,'prev')
   end
 
   def move_comments(paragraph, direction)
-    if direction == 'up'
+    if direction == 'next'
       new_parent = paragraph.chapter.paragraphs.find(:first,:conditions => "position = #{paragraph.position + 1}")
     else
       new_parent = paragraph.chapter.paragraphs.find(:first,:conditions => "position = #{paragraph.position - 1}")
