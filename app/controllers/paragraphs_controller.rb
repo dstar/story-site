@@ -18,6 +18,7 @@ class ParagraphsController < ApplicationController
   def check_authorization(user)
     needed = @authorization[params[:action]]
     story = Chapter.find(@chapter_id).story
+    logger.debug "story is #{story.inspect}, needed is #{needed}"
     if needed
       needed.each do |req|
         return true if req == "EVERYONE" # check for public action
