@@ -123,7 +123,7 @@ class StoriesController < ApplicationController
       'delete_story' => "Delete Story",
     }
 
-    unless (request.subdomains(0).first == 'playground')
+    unless (request.subdomains(0).first == 'playground') && ! params[:id]
       unless params[:action] == 'new' or params[:action] == 'create'
         @story = Story.find(params[:id])
       else
