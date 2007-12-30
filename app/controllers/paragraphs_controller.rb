@@ -10,8 +10,8 @@ class ParagraphsController < ApplicationController
       "edit"    => [ "author",  ],
       "create"  => [ "author",  ],
       "new"     => [ "author",  ],
-      "move_comments_up"   => ["author",],
-      "move_comments_down" => ["author",],
+      "move_comments_prev"   => ["author",],
+      "move_comments_next" => ["author",],
     }
   end
 
