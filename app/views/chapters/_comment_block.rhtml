@@ -14,7 +14,7 @@
                 <input type="hidden" id="unread_comment_count_<%= para.id %>" value="<%= unread_comments %>" />
                 <input type="hidden" id="unacknowledged_comment_count_<%= para.id %>" value="<%= unacknowledged_comments %>" />
         </form>
-        <a id="<%= ["pcomment",para.id] %>" onclick="Element.toggle('comments<%= para.id %>')">&#182; (<%= total_comments %> comments, <%= unread_comments  %> unread)</a>
+        <a name="<%= ["pcomment",para.id] %>" onclick="Element.toggle('comments<%= para.id %>')">&#182; (<%= total_comments %> comments, <%= unread_comments  %> unread)</a>
         <p><%= link_to_remote 'Edit this paragraph', { :url => "#{index_url}paragraphs/edit/#{para.id}", :update => "parabody#{para.id}" }, {:href => "#{index_url}paragraphs/edit/#{para.id}"} if can_edit %> </p>
         <div class="comments_display" id="comments<%= para.id %>" style="display:<%= display %>">
            <%= %Q|<a href="/paragraphs/move_comments_prev/#{para.id}">&uarr;</a> <a href="/paragraphs/move_comments_next/#{para.id}">&darr;</a>| if can_edit and total_comments > 0%>
