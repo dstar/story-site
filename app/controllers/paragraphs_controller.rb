@@ -171,7 +171,7 @@ class ParagraphsController < ApplicationController
 
   def move_comments_prev
     paragraph = Paragraph.find(params[:id])
-    move_comment(paragraph,'prev')
+    move_comments(paragraph,'prev')
   end
 
   def move_comments(paragraph, direction)
