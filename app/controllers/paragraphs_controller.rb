@@ -174,7 +174,7 @@ class ParagraphsController < ApplicationController
     move_comment(paragraph,'down')
   end
 
-  def move_comment(paragraph, direction)
+  def move_comments(paragraph, direction)
     if direction == 'up'
       new_parent = paragraph.chapter.paragraphs.find(:first,:conditions => "position = #{comment.position + 1}")
     else
