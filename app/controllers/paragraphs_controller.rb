@@ -187,7 +187,7 @@ class ParagraphsController < ApplicationController
         comment.save
       end
     end
-    redirect_to "chapters/show_draft/#{paragraph.chapter.id}#p#{paragraph.id}"
+    redirect_to "#{index_url}chapters/show_draft/#{paragraph.chapter.id}#p#{paragraph.id}"
   end
   
 end
