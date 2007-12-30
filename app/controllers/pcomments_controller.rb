@@ -18,8 +18,6 @@ class PcommentsController < ApplicationController
       "markunread"    => ["author","beta-reader",],
       "acknowledge"   => ["author",],
       "unacknowledge" => ["author",],
-      "move_up"   => ["author",],
-      "move_down" => ["author",],
     }
   end
 
