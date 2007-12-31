@@ -161,6 +161,7 @@ class StyleController < ApplicationController
         else
           @result = "Save failed"
           render :partial => "edit_theme_style", :locals => { :edit_theme_style => @style, :result => @result }
+          logger.error "failed to save style #{@style.inspect}"
         end
       else
         @style = Style.new unless @style
