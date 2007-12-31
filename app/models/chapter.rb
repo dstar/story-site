@@ -64,7 +64,7 @@ class Chapter < ActiveRecord::Base
   end
   
   def required_permission(action)
-    return self.required_permissions.find(:all, :conditions => "status = '#{self.status}' and action = '#{action}'")
+    return self.required_permissions.find(:all, :conditions => "status = '#{self.status}' and action = '#{action}'").collect {|perm| perm.permission}
   end
   
   def self.default_permissions
