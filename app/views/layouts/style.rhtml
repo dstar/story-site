@@ -14,7 +14,7 @@
 		function insertStyle(element) {
 			var style ='<div id="edit_'+element+'_div">\n';
 			style +='<p>\n';
-			style +='<form action="/style/save_style" method="post" onsubmit="new Ajax.Updater(\'edit_'+element+'_div\', \'/style/save_style\', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)});  return false;">\n';
+			style +='<form action="/style/save_style/1" method="post" onsubmit="new Ajax.Updater(\'edit_'+element+'_div\', \'/style/save_style\', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)});  return false;">\n';
 			style +='Element: \n';
 			style +='<input type="text" id="edit_style_element" name="element" value="'+element+'"> \n';
 			style +='Style: \n';
