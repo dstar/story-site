@@ -1,6 +1,6 @@
 <div id="<%= "edit_#{edit_theme_style.element}_div" %>">
 <p>
-<%= form_remote_tag :update => "edit_#{edit_theme_style.element}_div", :url => {:action => "save_theme_style" } %>
+<%= form_remote_tag :update => "edit_#{edit_theme_style.element}_div", :url => "style/save_theme_style/1"  %>
 Element: 
 <input type="text" id="edit_theme_style_element" name="element" value="<%= edit_theme_style.element %>"> 
 Style: 
