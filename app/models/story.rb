@@ -35,7 +35,7 @@ class Story < ActiveRecord::Base
   end
 
   def required_permission(action)
-    return self.required_permissions.find(:first, :conditions => "status = '#{self.status}' and action = '#{action}'")
+    return self.required_permissions.find(:all, :conditions => "status = '#{self.status}' and action = '#{action}'")
   end
   
   def self.default_permissions
