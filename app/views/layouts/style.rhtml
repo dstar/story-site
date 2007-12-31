@@ -14,7 +14,11 @@
 		function insertStyle(element) {
 			var style ='<div id="edit_'+element+'_div">\n';
 			style +='<p>\n';
-			style +='<form action="/style/save_style/1" method="post" onsubmit="new Ajax.Updater(\'edit_'+element+'_div\', \'/style/save_style\', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)});  return false;">\n';
+<% if params[:action] == "edit_theme" %>
+                        style +='<form action="/style/save_theme_style/1" method="post" onsubmit="new Ajax.Updater(\'edit_'+element+'_div\', \'/style/save_style\', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)});  return false;">\n';
+<% else %>
+  style +='<form action="/style/save_style/1" method="post" onsubmit="new Ajax.Updater(\'edit_'+element+'_div\', \'/style/save_style\', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)});  return false;">\n';
+<% end %>
 			style +='Element: \n';
 			style +='<input type="text" id="edit_style_element" name="element" value="'+element+'"> \n';
 			style +='Style: \n';
