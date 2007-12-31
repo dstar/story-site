@@ -154,7 +154,7 @@ class StyleController < ApplicationController
         @style.definition = definition
         @style.theme = @theme
         @style.user = -1
-
+logger.error "trying to save style #{@style.inspect}"
         if @style.save
           @result = "Saved Successfully"
           render :partial => "edit_theme_style", :locals => { :edit_theme_style => @style, :result => @result }
