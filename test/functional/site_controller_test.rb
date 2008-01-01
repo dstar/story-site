@@ -70,9 +70,9 @@ class SiteControllerTest < Test::Unit::TestCase
       :parent => { 
         :tag => "h4", 
         :parent => { 
-          :tag => "li", 
+          :tag => "div", 
           :parent => { 
-            :tag => "div", 
+            :tag => "li", 
             :parent => {
               :tag => "ul", 
               :parent => {
