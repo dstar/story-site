@@ -97,9 +97,6 @@ class SiteControllerTest < Test::Unit::TestCase
     prudence_tag_hash = { :tag => "a", 
       :content => "Prudence, TX Population 1276",
       :attributes => {:href => "http://prudence.playground.pele.cx/"},
-      :parent => { 
-        :tag => "h4", 
-      }
     }
     assert_tag prudence_tag_hash
   end
