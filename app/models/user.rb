@@ -19,11 +19,11 @@ class User < ActiveRecord::Base
       story_id = story
     end
     obtained_permission = self.story_permissions.any? { |sp| sp.story_id=story_id && sp.permission=permission}
-    "QQQ: Obtained_permission is #{obtained_permission}"
+    logger.debug "QQQ: Obtained_permission is #{obtained_permission}"
     unless obtained_permission
       self.groups.each do |group|
         obtained_permission = group.story_permissions.any? { |sp| sp.story_id=story_id && sp.permission=permission}
-        "QQQ2: Obtained_permission is #{obtained_permission}"
+        logger.debug "QQQ2: Obtained_permission is #{obtained_permission}"
         break if obtained_permission
       end
     end
