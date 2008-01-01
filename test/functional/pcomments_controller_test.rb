@@ -59,7 +59,7 @@ class PcommentsControllerTest < Test::Unit::TestCase
 
     num_pcomments = Pcomment.count
 
-    post :create, :pcomments => {:body => "test"}, :paragraph_id => 4
+    post :create, :pcomments => {:body_raw => "test"}, :paragraph_id => 4
 
     assert_response :redirect
     assert_redirected_to :controller => 'chapters', :action => 'show'
@@ -97,7 +97,7 @@ class PcommentsControllerTest < Test::Unit::TestCase
     @request.env["HTTP_REFERER"] = "http://playground.pele.cx/pcomments/list"
     @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
 
-    post :update, :id => 1
+    post :update, :id => 1, :pcomments => {:body_raw => "test"}
     assert_response :redirect
     assert_redirected_to :controller => 'chapters', :action => 'show_draft'
   end
