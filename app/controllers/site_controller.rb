@@ -86,7 +86,6 @@ class SiteController < ApplicationController
   
   def show
     @stories = Story.OrderedList
-    render :action => 'playground', :layout => 'playground' 
   end
   
 end
