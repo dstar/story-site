@@ -13,6 +13,7 @@ class UniversesControllerTest < Test::Unit::TestCase
   fixtures :universe_permissions
   fixtures :site_permissions
   fixtures :php_sessions
+  fixtures :required_permissions
 
   def setup
     @controller = UniversesController.new
@@ -46,22 +47,6 @@ class UniversesControllerTest < Test::Unit::TestCase
     assert assigns(:universe).valid?
   end
 
-  def test_new_unauthed
-    get :new
-    assert_response :redirect
-    assert_redirected_to :controller => 'pcomments', :action => 'show'
-
-  end
-
-  def test_create_unauthed
-    num_universes = Universe.count
-
-    post :create, :universe => {}
-    assert_response :redirect
-    assert_redirected_to :controller => 'pcomments', :action => 'show'
-
-  end
-
   def test_edit_unauthed
     get :edit, :id => 1
     assert_response :redirect
@@ -83,28 +68,6 @@ class UniversesControllerTest < Test::Unit::TestCase
     assert_response :redirect
     assert_redirected_to :controller => 'pcomments', :action => 'show'
 
-  end
-
-  def test_new_authed
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
-    get :new
-
-    assert_response :success
-    assert_template 'new'
-
-    assert_not_nil assigns(:universe)
-  end
-
-  def test_create_authed
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
-    num_universes = Universe.count
-
-    post :create, :universe => { :id => 20}
-
-    assert_response :redirect
-    assert_redirected_to :controller => 'universes', :action => 'list'
-
-    assert_equal num_universes + 1, Universe.count
   end
 
   def test_edit_authed
