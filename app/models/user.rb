@@ -18,16 +18,17 @@ class User < ActiveRecord::Base
     else
       story_id = story
     end
-    obtained_permisson = self.story_permissions.any? { |sp| sp.story_id=story_id && sp.permission=permission}
+    obtained_permission = fa
+    obtained_permission = self.story_permissions.any? { |sp| sp.story_id=story_id && sp.permission=permission}
     "QQQ: Obtained_permission is #{obtained_permission}"
-    unless obtained_permisson
+    unless obtained_permission
       self.groups.each do |group|
-        obtained_permisson = group.story_permissions.any? { |sp| sp.story_id=story_id && sp.permission=permission}
+        obtained_permission = group.story_permissions.any? { |sp| sp.story_id=story_id && sp.permission=permission}
         "QQQ2: Obtained_permission is #{obtained_permission}"
-        break if obtained_permisson
+        break if obtained_permission
       end
     end
-    return obtained_permisson
+    return obtained_permission
   end
 
   def has_universe_permission(universe,permission)
@@ -36,14 +37,14 @@ class User < ActiveRecord::Base
     else
       universe_id = universe
     end
-    obtained_permisson = self.universe_permissions.any? { |up| up.universe_id=universe_id && up.permission=permission}
-    unless obtained_permisson
+    obtained_permission = self.universe_permissions.any? { |up| up.universe_id=universe_id && up.permission=permission}
+    unless obtained_permission
       self.groups.each do |group|
-        obtained_permisson = group.universe_permissions.any? { |up| up.universe_id=universe_id && up.permission=permission}
-        break if obtained_permisson
+        obtained_permission = group.universe_permissions.any? { |up| up.universe_id=universe_id && up.permission=permission}
+        break if obtained_permission
       end
     end
-    return obtained_permisson
+    return obtained_permission
   end
 
   def has_site_permission(permission)
