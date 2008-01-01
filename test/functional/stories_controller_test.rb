@@ -96,7 +96,7 @@ class StoriesControllerTest < Test::Unit::TestCase
   
     def test_new_chapter_unauthed
 #    post :new, :story_id => 7
-    post :new_chapter, :story_id => 7
+    post :new_chapter, :id => 7
 
     assert_response :redirect
     assert_redirected_to :controller => 'pcomments', :action => 'show'
@@ -107,7 +107,7 @@ class StoriesControllerTest < Test::Unit::TestCase
     @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
 
 #    post :new, :story_id => 7
-    post :new, :story_id => 7
+    post :new_chapter, :id => 7
 
     assert_response :success#, "#{pp_s @response.inspect}"
     assert_template 'new_chapter'
@@ -119,7 +119,7 @@ class StoriesControllerTest < Test::Unit::TestCase
     @request.env["HTTP_REFERER"] = "http://playground.pele.cx/chapters/list"
     num_chapters = Chapter.count
 
-    post :create, :chapter => { :story_id => 7}
+    post :create_chapter, :chapter => { :story_id => 7}, :id => 7
 
     assert_response :redirect
     assert_redirected_to :controller => 'pcomments', :action => 'show'
@@ -131,7 +131,7 @@ class StoriesControllerTest < Test::Unit::TestCase
 
     num_chapters = Chapter.count
 
-    post :create, :chapter => {:story_id => 7}
+    post :create_chapter, :chapter => {:story_id => 7}, :id => 7
 
     assert_response :redirect
     assert_redirected_to :controller => 'chapters', :action => 'show_draft'
