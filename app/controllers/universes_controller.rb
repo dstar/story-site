@@ -74,7 +74,7 @@ def new_story
   def update
     @universe = Universe.find(params[:id])
     if @universe.update_attributes(params[:universe])
-      expire_fragment("universe_wstories#{universe.id}")
+      expire_fragment("universe_wstories#{@universe.id}")
       flash[:notice] = 'Universe was successfully updated.'
       redirect_to :action => 'show', :id => @universe.id
     else
