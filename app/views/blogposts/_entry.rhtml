@@ -1,17 +1,16 @@
 <% cache "blogpost_#{entry.id}" do -%>
   <div class="news" name=<%= ["entry",entry.id] %> >
        <h2><%= entry.title %></h2>
-    <%= entry.body.gsub(/<br \/>/, "</p><p>") %>
+    <%= entry.body.gsub(/<br \/>/, "</p><p>") -%>
     <p class="timestamp">Posted on <%= format_time(entry.created_on, "%a, %b %d, %Y") %> by <%= entry.user %></p>
     <% if entry.created_on != entry.updated_on -%>
       <p class="timestamp">Edited on <%= format_time(entry.updated_on, "%a, %b %d, %Y") %></p>
     <% end -%>
-    <p>
   <% end -%>  
     <% if @authinfo[:user] and @authinfo[:user].has_site_permission('blogger')  -%>
-      <% cache "blogpost_admin_links_for_#{entry.id}" do %>
+      <% cache "blogpost_admin_links_for_#{entry.id}" do -%>
                   <%= link_to 'edit', :controller => 'blog', :action => 'edit', :id => entry.id %> |
                   <%= link_to 'delete', :controller => 'blog', :action => 'delete_post', :id => entry.id %>
-      <% end %>
+      <% end -%>
     <% end -%>
 </div>
