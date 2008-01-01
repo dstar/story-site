@@ -59,7 +59,7 @@ class SiteControllerTest < Test::Unit::TestCase
     
     assert_response :success, "Getting the main page should succeed, not redirect"
     assert_template 'show', "The main page should use the show template"
-    
+    assert_equal "prudence.playground.pele.cx", "#{StoryHost('prudence')}"
     #Check to make sure that the Prudence link and header show up in the right place.
     #    prudence_tag_hash = { :tag => "a", 
     #      :content => "Prudence, TX Population 1276",
