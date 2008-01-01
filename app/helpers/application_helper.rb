@@ -3,6 +3,7 @@ module ApplicationHelper
   def StoryHost(story)
     domain_length = request.subdomains.length
     unless story.is_a? String
+      logger.error "Story #{story.inspect} doesn't have a short_title!"
       "#{story.short_title}.#{request.domain(domain_length)}#{request.port_string}"
     else
       "#{story}.#{request.domain(domain_length)}#{request.port_string}"
