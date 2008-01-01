@@ -3,9 +3,11 @@ module ApplicationHelper
   def StoryHost(story)
     domain_length = request.subdomains.length
     unless story.is_a? String
+      att_hash = story.attributes
       unless story.attributes['short_title']
+        logger.error "QQQ: attributes are #{att_hash.keys}"
         logger.error "QQQ: Story #{story.id} doesn't have a short_title!\nQQQ: Class is #{story.class}\nQQQ: Attributes are:\n"
-        story.attributes.each do |att|
+        att_hash[keys].each do |att|
           logger.error "QQQ: #{att} : #{story.attributes[att]}" unless att == 'chapters'
           logger.error "QQQ: #{att} : <skipped>" if att == 'chapters'
         end
