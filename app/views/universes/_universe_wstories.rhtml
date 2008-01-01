@@ -8,7 +8,7 @@
 <% end %>
   <% cache "stories_for_universe_#{universe_wstories.id}" do %>
     <ul>
-    <%= render :partial => "story",
+    <%= render :partial => "stories/story",
         :collection => Story.OrderedListByUniverse(universe_wstories.id) %>
     </ul>
   <% end %>
