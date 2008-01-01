@@ -9,6 +9,7 @@ class UserTest < Test::Unit::TestCase
     u = User.find(3)
     s = Story.find(2)
 
+    mark_test = u.has_story_permission(s,'testing')
     is_author = u.has_story_permission(s,'author')
     assert_equal is_author, "false", "is_author should be false, was #{is_author}"
 
