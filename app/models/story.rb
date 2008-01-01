@@ -29,7 +29,7 @@ class Story < ActiveRecord::Base
   end
   def self.OrderedList()
     find(:all,
-      :select => "stories.id, title, description, sum(chapters.words) as sort, universe_id, keywords",
+      :select => "stories.id, title, description, sum(chapters.words) as sort, universe_id, keywords, short_title, status, file_prefix, on_release",
       :joins => "left outer join chapters on chapters.story_id = stories.id",
       :group => "stories.id", :order => "sort desc")
   end
