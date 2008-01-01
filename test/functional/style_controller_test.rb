@@ -43,7 +43,6 @@ class StyleControllerTest < Test::Unit::TestCase
   end
 
   def test_save_style_unauthed
-    logger.error "Save_style_unauthed test"
     get :save_style
     assert_response :redirect
     assert_redirected_to :controller => 'pcomments', :action => 'show'
