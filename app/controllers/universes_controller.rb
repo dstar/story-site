@@ -54,6 +54,7 @@ class UniversesController < ApplicationController
   
 def new_story
     @story = Story.new
+    @universe = Universe.find(params[:id])
   end
 
   def create_story
