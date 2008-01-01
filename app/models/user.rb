@@ -12,13 +12,14 @@ class User < ActiveRecord::Base
   has_many :site_permissions, :as => :permission_holder
 
   def has_story_permission(story,permission)
-    logger.debug "Permission is #{permission}\n"
+    logger.debug "QQQ: Permission is #{permission}\n"
     if story.is_a?(Story)
       story_id = story.id
     else
       story_id = story
     end
     obtained_permission = self.story_permissions.any? { |sp| sp.story_id=story_id && sp.permission=permission}
+    logger.debug "self.story_permissions are #{self.story_permissions.inspect}"
     logger.debug "QQQ: Obtained_permission is #{obtained_permission}"
     unless obtained_permission
       self.groups.each do |group|
