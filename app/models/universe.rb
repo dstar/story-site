@@ -12,7 +12,9 @@ class Universe < ActiveRecord::Base
   end
   
   def required_permission(action)
-    return self.required_permissions.find(:first, :conditions => "status = '#{self.status}' and action = '#{action}'").collect { |perm| perm.permission}
+    rps = self.required_permissions.find(:first, :conditions => "status = '#{self.status}' and action = '#{action}'")
+
+    return rps.collect { |perm| perm.permission} if rps
   end
   
   def self.default_permissions
