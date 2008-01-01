@@ -3,7 +3,11 @@ module ApplicationHelper
   def StoryHost(story)
     domain_length = request.subdomains.length
     unless story.is_a? String
-      logger.error "Story #{story.inspect} doesn't have a short_title!" unless story.attributes['short_title']
+      logger.error "Story #{story.id} doesn't have a short_title!\n Attributes are:\n" unless story.attributes['short_title']
+      story.attributes.each do |att|
+          puts "#{att} : #{attributes[att]}" unless att == 'chapters'
+          puts "#{att} : <skipped>" if att == 'chapters'
+      end
       "#{story.short_title}.#{request.domain(domain_length)}#{request.port_string}"
     else
       "#{story}.#{request.domain(domain_length)}#{request.port_string}"
