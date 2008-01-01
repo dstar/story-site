@@ -115,8 +115,8 @@ class StoriesControllerTest < Test::Unit::TestCase
     assert_not_nil assigns(:chapter)
   end
 
-  def test_create_story_unauthed
-    @request.env["HTTP_REFERER"] = "http://playground.pele.cx/chapters/list"
+  def test_create_chapter_unauthed
+    @request.env["HTTP_REFERER"] = "http://playground.pele.cx/pcomments/show"
     num_chapters = Chapter.count
 
     post :create_chapter, :chapter => { :story_id => 7}, :id => 7
@@ -125,8 +125,8 @@ class StoriesControllerTest < Test::Unit::TestCase
     assert_redirected_to :controller => 'pcomments', :action => 'show'
   end
 
-  def test_create_story_authed
-    @request.env["HTTP_REFERER"] = "http://playground.pele.cx/chapters/list"
+  def test_create_chapter_authed
+    @request.env["HTTP_REFERER"] = "http://playground.pele.cx/pcomments/show"
     @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
 
     num_chapters = Chapter.count
