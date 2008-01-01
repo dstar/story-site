@@ -81,7 +81,7 @@ class BlogpostsControllerTest < Test::Unit::TestCase
 
     @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
 
-    post :create, :blogpost => {}
+    post :create, :blogpost => {:body_raw => "test"}
 
     assert_response :redirect
     assert_redirected_to :controller => 'blogposts', :action => 'list'
@@ -119,7 +119,7 @@ class BlogpostsControllerTest < Test::Unit::TestCase
 
     @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
 
-    post :update, :id => 1
+    post :update, :id => 1, :blogpost => {:body_raw => "test_update"}
     assert_response :redirect
     assert_redirected_to :action => 'show', :id => 1
   end
