@@ -57,41 +57,43 @@ class SiteControllerTest < Test::Unit::TestCase
   def test_site_page
     get :show
     
-    assert_response :success
-    assert_template 'show'
+    assert_response :success, "Getting the main page should succeed, not redirect"
+    assert_template 'show', "The main page should use the show template"
     
     #Check to make sure that the Prudence link and header show up in the right place.
-    assert_tag :tag => "a", 
+    prudence_tag_hash = { :tag => "a", 
       :content => "Prudence, TX Population 1276",
       :attributes => {:href => "http://prudence.playground.pele.cx/"},
       :parent => { 
-      :tag => "h4", 
-      :parent => { 
-        :tag => "li", 
+        :tag => "h4", 
         :parent => { 
-          :tag => "div", 
-          :parent => {
-            :tag => "ul", 
+          :tag => "li", 
+          :parent => { 
+            :tag => "div", 
             :parent => {
-              :tag => "div", 
-              :attributes => {
-                :class => "world"
-              },
-              :child => {
-                :tag =>"h2",
+              :tag => "ul", 
+              :parent => {
+                :tag => "div", 
                 :attributes => {
-                  :class => "worldtitle"
+                  :class => "world"
                 },
                 :child => {
-                  :tag => "a",
-                  :content => "Demon's Dream"
+                  :tag =>"h2",
+                  :attributes => {
+                    :class => "worldtitle"
+                  },
+                  :child => {
+                    :tag => "a",
+                    :content => "Demon's Dream"
+                  }
                 }
               }
             }
           }
-        }
-      }            
+        }            
+      }
     }
+    assert_tag prudence_tag_hash, "Prudence should have an A tag, with it's name and url"
   end
   
 end
