@@ -49,7 +49,6 @@ class PcommentsController < ApplicationController
     @pcomment = Pcomment.new(params[:pcomment])
     @pcomment.read_by = Array.new
     @pcomment.username = @authinfo[:user].username
-    @pcomment.body_raw = @pcomment.body
     if request.xml_http_request?
       if @pcomment.save
         @chapter = @paragraph.chapter
