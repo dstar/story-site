@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
   def has_site_permission(permission)
     has_permission = false
     if permission == "LOGGED_IN"
+      logger.error "ID is #{self.id}"
       has_permission = self.id != -1 # if our id is -1, we're anonymous
     else
       self.site_permissions.each {|p| has_permission = true if p.permission == permission }
