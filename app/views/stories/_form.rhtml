@@ -17,7 +17,7 @@
 <%= text_area 'story', 'on_release', 'rows' => 5 %></p>
 
 <p><label for="story_universe_id">Universe</label>
-<%= select "story", "universe_id", Universe.find_all.collect {|u| [u.name, u.id ]}, {:include_blank => true} %>
+<%= select "story", "universe_id", Universe.find(:all).collect {|u| [u.name, u.id ]}, {:include_blank => true} %>
 
 <p><label for="story_description">Description</label><br/>
 <%= text_area 'story', 'description' %></p>

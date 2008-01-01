@@ -2,7 +2,7 @@
 
 <!--[form:chapter]-->
 <p><label for="chapter_story_id">Story</label><br/>
-<%= select "chapter", "story_id", Story.find_all.collect {|s| [s.title,
+<%= select "chapter", "story_id", Story.find(:all).collect {|s| [s.title,
 s.id]} %>
 
 <p><label for="chapter_number">Chapter number</label><br/>
