@@ -32,7 +32,7 @@ class SiteControllerTest < Test::Unit::TestCase
 
   end
   
-def test_new_universe_authed
+  def test_new_universe_authed
     @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
     get :new_universe
 
@@ -53,4 +53,45 @@ def test_new_universe_authed
 
     assert_equal num_universes + 1, Universe.count
   end
+  
+  def test_site_page
+    get :show
+    
+    assert_response :success
+    assert_template 'show'
+    
+    #Check to make sure that the Prudence link and header show up in the right place.
+    assert_tag :tag => "a", 
+      :content => "Prudence, TX Population 1276",
+      :attributes => {:href => "http://prudence.playground.pele.cx/"},
+      :parent => { 
+      :tag => "h4", 
+      :parent => { 
+        :tag => "li", 
+        :parent => { 
+          :tag => "div", 
+          :parent => {
+            :tag => "ul", 
+            :parent => {
+              :tag => "div", 
+              :attributes => {
+                :class => "world"
+              },
+              :child => {
+                :tag =>"h2",
+                :attributes => {
+                  :class => "worldtitle"
+                },
+                :child => {
+                  :tag => "a",
+                  :content => "Demon's Dream"
+                }
+              }
+            }
+          }
+        }
+      }            
+    }
+  end
+  
 end
