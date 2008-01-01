@@ -7,6 +7,7 @@ class BlogpostsController < ApplicationController
       "edit"    => [ "blogger", ],
       "create"  => [ "blogger", ],
       "new"     => [ "blogger", ],
+      "archive" => [ "EVERYONE" ]
     }
   end
   
@@ -14,6 +15,7 @@ class BlogpostsController < ApplicationController
     needed = @authorization[params[:action]]
     if needed 
       needed.each do |req|
+        return true if needed == "EVERYONE"
         return true if user.has_site_permission(req)
       end
     end
