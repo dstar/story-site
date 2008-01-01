@@ -101,4 +101,40 @@ class UniversesControllerTest < Test::Unit::TestCase
     }
   end
 
+   def test_new_story_unauthed
+    get :new_story, :id => 1
+    assert_response :redirect
+    assert_redirected_to :controller => 'pcomments', :action => 'show'
+  end
+
+  def test_new_story_auth
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    get :new_story, :universe_id => 1
+
+    assert_response :success
+    assert_template 'new_story'
+
+    assert_not_nil assigns(:story)
+  end
+
+  def test_create_story_unauthed
+
+    post :create_story, :story => {:universe_id => 1, :title => 'a', :short_title => 'a', :description => 'a'}, :universe_id => 1
+
+    assert_response :redirect
+    assert_redirected_to :controller => 'pcomments', :action => 'show'
+  end
+
+  def test_create_story_authed
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    num_stories = Story.count
+
+    post :create_story, :story => {:universe_id => 1, :title => 'a', :short_title => 'a', :description => 'a'}, :universe_id => 1
+
+    assert_response :redirect
+    assert_redirected_to :controller => 'stories', :action => 'show'
+
+    assert_equal num_stories + 1, Story.count
+  end
+  
 end

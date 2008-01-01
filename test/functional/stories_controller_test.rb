@@ -45,42 +45,6 @@ class StoriesControllerTest < Test::Unit::TestCase
 #    assert_valid assigns(:story)
   end
 
-  def test_new_unauthed
-    get :new, :universe_id => 1
-    assert_response :redirect
-    assert_redirected_to :controller => 'pcomments', :action => 'show'
-  end
-
-  def test_new_auth
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
-    get :new, :universe_id => 1
-
-    assert_response :success
-    assert_template 'new'
-
-    assert_not_nil assigns(:story)
-  end
-
-  def test_create_unauthed
-
-    post :create, :story => {:universe_id => 1, :title => 'a', :short_title => 'a', :description => 'a'}, :universe_id => 1
-
-    assert_response :redirect
-    assert_redirected_to :controller => 'pcomments', :action => 'show'
-  end
-
-  def test_create_authed
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
-    num_stories = Story.count
-
-    post :create, :story => {:universe_id => 1, :title => 'a', :short_title => 'a', :description => 'a'}, :universe_id => 1
-
-    assert_response :redirect
-    assert_redirected_to :controller => 'stories', :action => 'list'
-
-    assert_equal num_stories + 1, Story.count
-  end
-
   def test_edit_unauthed
     get :edit, :id => 7
     assert_response :redirect
