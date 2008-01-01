@@ -55,6 +55,9 @@ class SiteControllerTest < Test::Unit::TestCase
   end
   
   def test_site_page
+
+    @request.domain = "playground.playground.pele.cx"
+    
     get :show
     
     assert_response :success, "Getting the main page should succeed, not redirect"
