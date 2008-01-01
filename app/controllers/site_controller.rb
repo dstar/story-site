@@ -30,7 +30,7 @@ class SiteController < ApplicationController
     @universe = Universe.new(params[:universe])
     if @universe.save
       flash[:notice] = 'Universe was successfully created.'
-      redirect_to :action => 'show', :controller => 'universe', :id => @universe.id
+      redirect_to :action => 'show', :controller => 'universes', :id => @universe.id
     else
       render :action => 'new_universe'
     end
