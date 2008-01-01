@@ -18,7 +18,6 @@ class User < ActiveRecord::Base
     else
       story_id = story
     end
-    obtained_permission = fa
     obtained_permission = self.story_permissions.any? { |sp| sp.story_id=story_id && sp.permission=permission}
     "QQQ: Obtained_permission is #{obtained_permission}"
     unless obtained_permission
