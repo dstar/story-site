@@ -75,7 +75,7 @@ class PcommentsController < ApplicationController
     @pcomment = Pcomment.find(params[:id])
     if @pcomment.update_attributes(params[:pcomment])
       flash[:notice] = 'Pcomment was successfully updated.'
-      redirect_to :action => 'show_draft', :id => @pcomment
+      redirect_to :action => 'show_draft', :id => @pcomment.id
     else
       render :action => 'edit'
     end
