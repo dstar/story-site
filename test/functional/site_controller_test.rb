@@ -69,31 +69,31 @@ class SiteControllerTest < Test::Unit::TestCase
       :attributes => {:href => "http://prudence.playground.pele.cx/"},
       :parent => { 
         :tag => "h4", 
-#        :parent => { 
-#          :tag => "div", 
-#          :parent => { 
-#            :tag => "li", 
-#            :parent => {
-#              :tag => "ul", 
-#             :parent => {
-###                :tag => "div", 
-  #              :attributes => {
-  #                :class => "world"
-  #              },
-  #              :child => {
-  #                :tag =>"h2",
-  ##                :attributes => {
-   #                 :class => "worldtitle"
-   #               },
-   #              :child => {
-   #                 :tag => "a",
-   #                 :content => "Demon's Dream"
-   #               }
-   #             }
-   #           }
-   #         }
-   #       }            
-   #     }
+        :parent => { 
+          :tag => "div", 
+          :parent => { 
+            :tag => "li", 
+            :parent => {
+              :tag => "ul", 
+             :parent => {
+                :tag => "div", 
+                :attributes => {
+                  :class => "world"
+                },
+                :child => {
+                  :tag =>"h2",
+                  :attributes => {
+                    :class => "worldtitle"
+                  },
+                 :child => {
+                    :tag => "a",
+                    :content => "Demon's Dream"
+                  }
+                }
+              }
+            }
+          }            
+        }
       }
     }
  
