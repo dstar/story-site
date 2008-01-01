@@ -153,9 +153,9 @@ class StoriesController < ApplicationController
       release_chapter(@chapter) if @chapter.status == 'released'
       process_file(params[:file],@chapter.id) unless params[:file].blank?
       flash[:notice] = 'Chapter was successfully created.'
-      redirect_to :controller => 'stories', :action => 'show_draft', :id => @chapter.story_id
+      redirect_to :controller => 'stories', :action => 'show', :id => @chapter.story_id
     else
-      render :action => 'new'
+      render :action => 'new_chapter'
     end
   end
 
