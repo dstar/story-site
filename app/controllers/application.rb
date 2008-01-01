@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     #We use @session[:key] to pass around the php session_id
     @sid = cookies[:phpbb2mysql_sid]
     unless controller_name == "style" and params[:action] == "show"
-      cookies[:login_redirect_to] = { :value => url_for, :domain => "pele.cx" }
+      cookies[:login_redirect_to] = { :value => request.url, :domain => "pele.cx" }
     end
     @authinfo = Hash.new
     if @sid
