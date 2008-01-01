@@ -49,7 +49,7 @@ def test_new_universe_authed
     post :create_universe, :universe => { :id => 20}
 
     assert_response :redirect
-    assert_redirected_to :controller => 'universes', :action => 'show', :id => 20
+    assert_redirected_to :controller => 'universes', :action => 'show', :id => 4
 
     assert_equal num_universes + 1, Universe.count
   end
