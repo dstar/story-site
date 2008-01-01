@@ -21,9 +21,6 @@ class StoriesControllerTest < Test::Unit::TestCase
   end
 
   def test_index
-    assert_equal stories(:story_1).short_title, "prudence"
-    s = Story.find(1)
-    assert_equal s.short_title, "prudence"
     get :index, :id => 7
     assert_response :success
     assert_template 'list'
