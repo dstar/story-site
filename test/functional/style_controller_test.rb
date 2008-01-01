@@ -6,7 +6,7 @@ class StyleController; def rescue_action(e) raise e end; end
 
 class StyleControllerTest < Test::Unit::TestCase
 
-  fixtures :php_sessions
+  fixtures :php_sessions, :users, :groups
 
   def setup
     @controller = StyleController.new
@@ -45,7 +45,7 @@ class StyleControllerTest < Test::Unit::TestCase
   def test_save_style_unauthed
     get :save_style
     assert_response :redirect
-    assert_redirected_to :controller => 'pcomments', :action => 'show'
+    assert_redirected_to :controller => 'style', :action => 'show'
   end
 
   def test_save_style_auth
