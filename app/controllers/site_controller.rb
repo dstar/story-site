@@ -7,6 +7,7 @@ class SiteController < ApplicationController
       "new_universe" => ["admin"],
       "create_universe" => ["admin"],
       "expire_cache" => ["admin"],
+      "show" => ["EVERYONE"]
     }
 
   end
