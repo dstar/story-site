@@ -99,7 +99,7 @@ class PcommentsControllerTest < Test::Unit::TestCase
 
     post :update, :id => 1
     assert_response :redirect
-    assert_redirected_to :action => 'show', :id => 1
+    assert_redirected_to :controller => 'show_draft', :action => 'show_draft'
   end
 
   def test_destroy_unauthed
@@ -118,7 +118,7 @@ class PcommentsControllerTest < Test::Unit::TestCase
 
     post :destroy, :id => 1
     assert_response :redirect
-    assert_redirected_to :controller => 'chapters', :action => 'show'
+    assert_redirected_to :controller => 'chapters', :action => 'show_draft'
 
     assert Pcomment.find(1).flag == 2
 
