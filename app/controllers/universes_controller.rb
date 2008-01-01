@@ -63,11 +63,12 @@ def new_story
     @story.description.gsub!(/\s+--/, "--")
      if @story.save
       flash[:notice] = 'Story was successfully created.'
-      redirect_to :action => 'show', :controller => 'story', :id => @story.id
+      redirect_to :action => 'show', :controller => 'stories', :id => @story.id
     else
       render :action => 'new_story'
     end
   end
+  
   def edit
     @universe = Universe.find(params[:id])
   end
