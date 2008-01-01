@@ -93,7 +93,7 @@ class SiteControllerTest < Test::Unit::TestCase
         }            
       }
     }
-    assert_tag prudence_tag_hash, "Prudence should have an A tag, with it's name and url"
+    assert_tag prudence_tag_hash
   end
   
 end
