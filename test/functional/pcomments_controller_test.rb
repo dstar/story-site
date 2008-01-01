@@ -59,7 +59,7 @@ class PcommentsControllerTest < Test::Unit::TestCase
 
     num_pcomments = Pcomment.count
 
-    post :create, :pcomments => {}, :paragraph_id => 4
+    post :create, :pcomments => {:body => "test"}, :paragraph_id => 4
 
     assert_response :redirect
     assert_redirected_to :controller => 'chapters', :action => 'show'
