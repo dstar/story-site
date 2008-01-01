@@ -9,8 +9,8 @@ class UserTest < Test::Unit::TestCase
     u = User.find(3)
     s = Story.find(2)
 
-    is_not_author = ! u.has_story_permission(s,'author')
-    assert is_not_author
+    is_author = u.has_story_permission(s,'author')
+    assert_equals is_author, "false"
 
     universe_permissions=StoryPermission.new
     universe_permissions.permission_holder = u
