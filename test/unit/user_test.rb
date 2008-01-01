@@ -12,12 +12,15 @@ class UserTest < Test::Unit::TestCase
     is_author = u.has_story_permission(s,'author')
     assert_equal is_author, false, "is_author should be false, was #{is_author}"
 
-    universe_permissions=StoryPermission.new
-    universe_permissions.permission_holder = u
-    universe_permissions.permission='author'
-    universe_permissions.story_id=s.id      
-    universe_permissions.save
+    story_permission=StoryPermission.new
+    story_permission.permission_holder = u
+    story_permission.permission='author'
+    story_permission.story_id=s.id      
+    story_permission.save
 
+    u.story_permissions << story_permission
+    u.save
+    
     assert u.has_story_permission(s,'author');
 
   end
