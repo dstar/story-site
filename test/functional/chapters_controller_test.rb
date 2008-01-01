@@ -30,51 +30,6 @@ class ChaptersControllerTest < Test::Unit::TestCase
     assert assigns(:chapter).valid?
   end
 
-  def test_new_unauthed
-#    post :new, :story_id => 7
-    post :new, :story_id => 7
-
-    assert_response :redirect
-    assert_redirected_to :controller => 'chapters', :action => 'show'
-  end
-
-  def test_new_authed
-
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
-
-#    post :new, :story_id => 7
-    post :new, :story_id => 7
-
-    assert_response :success#, "#{pp_s @response.inspect}"
-    assert_template 'new'
-
-    assert_not_nil assigns(:chapter)
-  end
-
-  def test_create_unauthed
-    @request.env["HTTP_REFERER"] = "http://playground.pele.cx/chapters/list"
-    num_chapters = Chapter.count
-
-    post :create, :chapter => { :story_id => 7}
-
-    assert_response :redirect
-    assert_redirected_to :controller => 'chapters', :action => 'list'
-  end
-
-  def test_create_authed
-    @request.env["HTTP_REFERER"] = "http://playground.pele.cx/chapters/list"
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
-
-    num_chapters = Chapter.count
-
-    post :create, :chapter => {:story_id => 7}
-
-    assert_response :redirect
-    assert_redirected_to :action => 'show'
-
-    assert_equal num_chapters + 1, Chapter.count
-  end
-
   def test_edit_unauthed
     get :edit, :id => 1
 

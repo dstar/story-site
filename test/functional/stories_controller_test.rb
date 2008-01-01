@@ -93,4 +93,51 @@ class StoriesControllerTest < Test::Unit::TestCase
       Story.find(7)
     }
   end
+  
+    def test_new_chapter_unauthed
+#    post :new, :story_id => 7
+    post :new_chapter, :story_id => 7
+
+    assert_response :redirect
+    assert_redirected_to :controller => 'pcomments', :action => 'show'
+  end
+
+  def test_new_story_authed
+
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+
+#    post :new, :story_id => 7
+    post :new, :story_id => 7
+
+    assert_response :success#, "#{pp_s @response.inspect}"
+    assert_template 'new_chapter'
+
+    assert_not_nil assigns(:chapter)
+  end
+
+  def test_create_story_unauthed
+    @request.env["HTTP_REFERER"] = "http://playground.pele.cx/chapters/list"
+    num_chapters = Chapter.count
+
+    post :create, :chapter => { :story_id => 7}
+
+    assert_response :redirect
+    assert_redirected_to :controller => 'pcomments', :action => 'show'
+  end
+
+  def test_create_authed
+    @request.env["HTTP_REFERER"] = "http://playground.pele.cx/chapters/list"
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+
+    num_chapters = Chapter.count
+
+    post :create, :chapter => {:story_id => 7}
+
+    assert_response :redirect
+    assert_redirected_to :controller => 'chapters', :action => 'show_draft'
+
+    assert_equal num_chapters + 1, Chapter.count
+  end
+
+  
 end
