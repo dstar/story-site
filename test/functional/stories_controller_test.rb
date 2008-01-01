@@ -102,7 +102,7 @@ class StoriesControllerTest < Test::Unit::TestCase
     assert_redirected_to :controller => 'pcomments', :action => 'show'
   end
 
-  def test_new_story_authed
+  def test_new_chapter_authed
 
     @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
 
@@ -125,7 +125,7 @@ class StoriesControllerTest < Test::Unit::TestCase
     assert_redirected_to :controller => 'pcomments', :action => 'show'
   end
 
-  def test_create_authed
+  def test_create_story_authed
     @request.env["HTTP_REFERER"] = "http://playground.pele.cx/chapters/list"
     @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
 
