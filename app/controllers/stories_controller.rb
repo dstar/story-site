@@ -77,16 +77,8 @@ class StoriesController < ApplicationController
   end
 
   def setup_page_vars
-    unless params[:action] == 'new' or params[:action] == 'create'
       @story = Story.find(params[:id])
       @universe = @story.universe
-    else
-      if params[:universe_id]
-        @universe = Universe.find(params[:universe_id])
-      else
-        @universe = Universe.find(params[:story][:universe_id])
-      end
-    end
   end
 
   def handle_url
