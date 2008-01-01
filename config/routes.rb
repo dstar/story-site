@@ -16,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
 #  map.connect ':story', :controller => 'stories', :action => 'showByName', :id => nil
 #  map.connect ':story/:chapter', :controller => 'chapters', :action => 'showByName', :id => nil
 
-  map.index '', :controller => 'stories', :action => 'show'
+  map.index '', :controller => 'site', :action => 'show'
   map.chapter 'html/:chapter', :controller => 'chapters', :action => 'show'
   map.text 'text/:chapter', :controller => 'chapters', :action => 'dumpByFile'
   map.blog 'blog/:action/:id', :controller => 'blogposts'

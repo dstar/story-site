@@ -1,33 +1,14 @@
 class StoriesController < ApplicationController
+  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
+  verify :method => :post, :only => [ :destroy, :create, :update ],
+    :redirect_to => { :action => :list }
 
   def setup_authorize_hash
-    if params[:id] and ! @universe
-      @universe = Story.find(params[:id]).universe
-    end
-    if params[:id] and ! @story
-      @story = Story.find(params[:id])
-    end
-
-    if @universe
-      @universe_id = @universe.id
-    else
-      @universe_id = ''
-    end
-
-    if @story
-      @story_id = @story.id
-    else
-      @story_id = ''
-    end
     @authorization = Story.default_permissions
   end
 
   def check_authorization(user)
-    if (request.subdomains(0).first == 'playground' and params[:action] == 'show') or params[:action] == 'playground'
-      return true
-    end
     return false unless @story
-    logger.debug "SubD is #{request.subdomains(0).first}, action is #{params[:action]}"
     needed = @story.required_permission(params[:action])
     needed = @authorization[@story.status][params[:action]] unless (needed and ! needed.empty?)
     if needed
@@ -46,45 +27,20 @@ class StoriesController < ApplicationController
     render :action => 'list'
   end
 
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-    :redirect_to => { :action => :list }
-
   def list
+      @page_title = 'Story List'
     @stories = Story.OrderedList
   end
 
   def show
-    if (request.subdomains(0).first == 'playground')
-      list
-      render :action => 'playground', :layout => 'playground'
-    else
+      @page_title = @story.title
       @story = Story.find(params[:id])
       render :action => 'show'
-    end
-  end
-
-  def showByName
-    @story = Story.find_by_short_title(params[:story])
-    render :action => 'show'
-  end
-
-  def showBySubD
-    if (request.subdomains(0).first == 'playground')
-      list
-      render :action => 'playground', :layout => 'playground'
-    else
-      @story = story
-      render :action => 'show'
-    end
-  end
-
-  def playground
-    list
-    render :action => 'playground', :layout => 'playground' 
   end
 
   def edit
+      @page_title = "Edit #{@story.title}"
+      @description = @page_title
     @story = Story.find(params[:id])
     @universes = Universe.find(:all)
   end
@@ -104,6 +60,11 @@ class StoriesController < ApplicationController
     end
   end
 
+  def delete_story
+    @page_title = "Delete #{@story.title}"
+    @description = @page_title
+  end
+  
   def destroy
     @story = Story.find(params[:id])
     @story_title = @story.title
@@ -116,56 +77,31 @@ class StoriesController < ApplicationController
   end
 
   def setup_page_vars
-
-    @description = {
-      'permissions'  => "Edit Permissions",
-      'edit'         => "Edit Story",
-      'delete_story' => "Delete Story",
-    }
-
-    unless (request.subdomains(0).first == 'playground') && ! params[:id]
-      unless params[:action] == 'new' or params[:action] == 'create'
-        @story = Story.find(params[:id])
-      else
-        if params[:universe_id]
-          @universe = Universe.find(params[:universe_id])
-        else
-          @universe = Universe.find(params[:story][:universe_id])
-        end
-      end
-
-      case params[:action]
-      when /list/
-        @page_title = 'Story List'
-      when 'new'
-        @page_title = 'New Story'
-      when 'create'
-        @page_title = 'New Story'
-      else
-        @page_title = @story.title
-      end
+    unless params[:action] == 'new' or params[:action] == 'create'
+      @story = Story.find(params[:id])
+      @universe = @story.universe
     else
-      @page_title = "Pele's Playground"
       if params[:universe_id]
         @universe = Universe.find(params[:universe_id])
-      end
-      if params[:story]
-        if params[:story][:universe_id]
-          @universe = Universe.find(params[:story][:universe_id])
-        end
+      else
+        @universe = Universe.find(params[:story][:universe_id])
       end
     end
   end
 
   def handle_url
-    unless (request.subdomains(0).first == 'playground') or params[:action] == 'new' or params[:action] == 'create'
-      story = Story.find_by_short_title(request.subdomains(0).first) unless params[:id]
-      params[:id] = story.id unless params[:id]
+    unless params[:id] or params[:action] == 'new' or params[:action] == 'create'
+      story = Story.find_by_short_title(request.subdomains(0).first)
+      params[:id] = story.id
     end
   end
 
+  def permissions
+    @page_title = "Change Permissions for #{@story.title}"
+    @description = @page_title
+  end
+  
   def permissions_modify
-
     case params[:type]
     when /user/
       permission_holder = User.find_by_username(params[:permission_holder])
@@ -210,6 +146,7 @@ class StoriesController < ApplicationController
   end
 
   def new_chapter
+    @page_title = "New Chapter for #{@story.title}"
     @story = Story.find(params[:id])
     @chapter = Chapter.new
     @chapter.story_id = @story.id

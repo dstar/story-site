@@ -89,7 +89,7 @@ module StoriesHelper
         title_link = "#{@story.title}"
       else 
         title_link = link_to @story.title, "#{index_url(:host => StoryHost('playground'))}stories/show/#{@story.id}" 
-        action_link = " &gt; #{@description[params[:action]]}" if @description[params[:action]] 
+        action_link = " &gt; #{@description}" if @description 
       end 
       return "#{home_link} &gt; #{universe_link} &gt; #{title_link}#{action_link}"
     else 

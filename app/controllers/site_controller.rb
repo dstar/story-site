@@ -72,7 +72,7 @@ class SiteController < ApplicationController
   end
   
   def expire_cache
-#    expire_fragment(/.*/)
+    #    expire_fragment(/.*/)
     CACHE.flush_all
     domain_length = request.subdomains.length
     hostname = request.subdomains[0]
@@ -80,6 +80,12 @@ class SiteController < ApplicationController
   end
 
   def setup_page_vars    
+    @page_title = "Pele's Playground"    
+  end
+  
+  def show
+    @stories = Story.OrderedList
+    render :action => 'playground', :layout => 'playground' 
   end
   
 end
