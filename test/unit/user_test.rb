@@ -10,7 +10,7 @@ class UserTest < Test::Unit::TestCase
     s = Story.find(2)
 
     is_author = u.has_story_permission(s,'author')
-    assert_equal is_author, "false"
+    assert_equal is_author, "false", "is_author should be false, was #{is_author}"
 
     universe_permissions=StoryPermission.new
     universe_permissions.permission_holder = u
