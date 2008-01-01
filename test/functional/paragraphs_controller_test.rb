@@ -23,7 +23,7 @@ class ParagraphsControllerTest < Test::Unit::TestCase
   end
 
   def test_new_unauthed
-    get :new
+    get :new, 'chapter_id' => 17
 
     assert_response :redirect
     assert_redirected_to :controller => 'pcomments', :action => 'show'
@@ -73,7 +73,7 @@ class ParagraphsControllerTest < Test::Unit::TestCase
     @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
     num_paragraphs = Paragraph.count
 
-    post :create, :paragraphs => {'body' => "test1", 'chapter_id' => 17}
+    post :create, :paragraphs => {'body_raw' => "test1", 'chapter_id' => 17}
 
     assert_response :redirect
     assert_redirected_to :action => 'list'
@@ -94,7 +94,7 @@ class ParagraphsControllerTest < Test::Unit::TestCase
 
   def test_update_authed
     @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
-    post :update, :id => 1, :paragraphs => {'body' => "test1"}
+    post :update, :id => 1, :paragraphs => {'body_raw' => "test1"}
     assert_response :redirect
     assert_redirected_to :action => 'show_draft', :controller => 'chapters'
   end
