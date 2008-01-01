@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     @authinfo = Hash.new
     if @sid
       begin
-        @authinfo[:session] = Php_Session.find_by_session_id(@sid)
+        @authinfo[:session] = PhpSession.find_by_session_id(@sid)
         if @authinfo[:session] then
           user = User.find(@authinfo[:session].session_user_id)
           @authinfo[:user] = user
