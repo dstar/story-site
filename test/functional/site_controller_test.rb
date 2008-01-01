@@ -56,7 +56,7 @@ class SiteControllerTest < Test::Unit::TestCase
   
   def test_site_page
 
-    @request.domain = "playground.playground.pele.cx"
+    @request.env["HOST"] = "playground.playground.pele.cx"
     
     get :show
     
