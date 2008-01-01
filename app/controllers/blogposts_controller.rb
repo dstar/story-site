@@ -7,7 +7,10 @@ class BlogpostsController < ApplicationController
       "edit"    => [ "blogger", ],
       "create"  => [ "blogger", ],
       "new"     => [ "blogger", ],
-      "archive" => [ "EVERYONE" ]
+      "archive" => [ "EVERYONE" ],
+      "index"   => [ "EVERYONE" ],
+      "list"    => [ "EVERYONE" ],
+      "show"    => [ "EVERYONE" ],
     }
   end
   
