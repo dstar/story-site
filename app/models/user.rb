@@ -17,14 +17,10 @@ class User < ActiveRecord::Base
     else
       story_id = story
     end
-    logger.debug "QQQ: Permission is #{permission}, Story is #{story_id}\n"
     obtained_permission = self.story_permissions.any? { |sp| sp.story_id==story_id && sp.permission==permission}
-    logger.debug "self.story_permissions are #{self.story_permissions.inspect}"
-    logger.debug "QQQ: Obtained_permission is #{obtained_permission}"
     unless obtained_permission
       self.groups.each do |group|
         obtained_permission = group.story_permissions.any? { |sp| sp.story_id==story_id && sp.permission==permission}
-        logger.debug "QQQ2: Obtained_permission is #{obtained_permission}"
         break if obtained_permission
       end
     end
