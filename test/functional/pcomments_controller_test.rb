@@ -62,7 +62,7 @@ class PcommentsControllerTest < Test::Unit::TestCase
     post :create, :pcomment => {:body_raw => "test"}, :paragraph_id => 4
 
     assert_response :redirect
-    assert_redirected_to :controller => 'chapters', :action => 'show'
+    assert_redirected_to :controller => 'chapters', :action => 'show_draft'
 
     assert_equal num_pcomments + 1, Pcomment.count
   end
