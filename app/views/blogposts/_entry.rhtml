@@ -1,5 +1,5 @@
 <% cache "blogpost_#{entry.id}" do -%>
-  <div class="news" name="<%= ["entry",entry.id] %>" >
+  <div class="news" id="<%= ["entry",entry.id] %>" >
        <h2><%= entry.title %></h2>
     <%= entry.body.gsub(/<br \/>/, "</p><p>") -%>
     <p class="timestamp">Posted on <%= format_time(entry.created_on, "%a, %b %d, %Y") %> by <%= entry.user %></p>
