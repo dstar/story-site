@@ -134,7 +134,7 @@ class StoriesControllerTest < Test::Unit::TestCase
     post :create_chapter, :chapter => {:story_id => 7}, :id => 7
 
     assert_response :redirect
-    assert_redirected_to :controller => 'chapters', :action => 'show_draft'
+    assert_redirected_to :controller => 'stories', :action => 'show'
 
     assert_equal num_chapters + 1, Chapter.count
   end
