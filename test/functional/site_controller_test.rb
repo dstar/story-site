@@ -64,43 +64,45 @@ class SiteControllerTest < Test::Unit::TestCase
     assert_template 'show', "The main page should use the show template"
     
     #Check to make sure that the Prudence link and header show up in the right place.
-    #    prudence_tag_hash = { :tag => "a", 
-    #      :content => "Prudence, TX Population 1276",
-    #      :attributes => {:href => "http://prudence.playground.pele.cx/"},
-    #      :parent => { 
-    #        :tag => "h4", 
-    #        :parent => { 
-    #          :tag => "li", 
-    #          :parent => { 
-    #            :tag => "div", 
-    #            :parent => {
-    #              :tag => "ul", 
-    #              :parent => {
-    #                :tag => "div", 
-    #                :attributes => {
-    #                  :class => "world"
-    #                },
-    #                :child => {
-    #                  :tag =>"h2",
-    #                  :attributes => {
-    #                    :class => "worldtitle"
-    #                  },
-    #                  :child => {
-    #                    :tag => "a",
-    #                    :content => "Demon's Dream"
-    #                }
-    #              }
-    #            }
-    #         }
-    #       }            
-    #     }
-    #   }
- 
-
     prudence_tag_hash = { :tag => "a", 
       :content => "Prudence, TX Population 1276",
       :attributes => {:href => "http://prudence.playground.pele.cx/"},
+      :parent => { 
+        :tag => "h4", 
+        :parent => { 
+          :tag => "li", 
+          :parent => { 
+            :tag => "div", 
+            :parent => {
+              :tag => "ul", 
+              :parent => {
+                :tag => "div", 
+                :attributes => {
+                  :class => "world"
+                },
+                :child => {
+                  :tag =>"h2",
+                  :attributes => {
+                    :class => "worldtitle"
+                  },
+                  :child => {
+                    :tag => "a",
+                    :content => "Demon's Dream"
+                  }
+                }
+              }
+            }
+          }            
+        }
+      }
     }
+ 
+
+    #    prudence_tag_hash = { :tag => "a", 
+    #      :content => "Prudence, TX Population 1276",
+    #      :attributes => {:href => "http://prudence.playground.pele.cx/"},
+    #    }
+
     assert_tag prudence_tag_hash
   end
   
