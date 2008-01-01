@@ -28,19 +28,19 @@ class StoriesController < ApplicationController
   end
 
   def list
-      @page_title = 'Story List'
+    @page_title = 'Story List'
     @stories = Story.OrderedList
   end
 
   def show
-      @page_title = @story.title
-      @story = Story.find(params[:id])
-      render :action => 'show'
+    @page_title = @story.title
+    @story = Story.find(params[:id])
+    render :action => 'show'
   end
 
   def edit
-      @page_title = "Edit #{@story.title}"
-      @description = @page_title
+    @page_title = "Edit #{@story.title}"
+    @description = @page_title
     @story = Story.find(params[:id])
     @universes = Universe.find(:all)
   end
