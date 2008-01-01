@@ -52,6 +52,7 @@ class User < ActiveRecord::Base
     else
       self.site_permissions.each {|p| has_permission = true if p.permission == permission }
     end
+    logger.error "Returning #{has_permission}"
     return has_permission
   end
 

@@ -9,7 +9,7 @@ class UserTest < Test::Unit::TestCase
     u = User.find(3)
     s = Story.find(2)
 
-    assert ! u.has_story_permission(s,'author');
+    assert u.has_story_permission(s,'author') == false;
 
     universe_permissions=StoryPermission.new
     universe_permissions.permission_holder = u
