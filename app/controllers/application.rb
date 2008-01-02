@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   attr_writer :story
   attr_reader :story
 
+  logger.debug "host is #{request.env[:host]}"
+  
   before_filter do |controller|
     controller.handle_url if controller.respond_to? :handle_url
   end
