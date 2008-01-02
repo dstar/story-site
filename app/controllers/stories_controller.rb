@@ -82,7 +82,7 @@ class StoriesController < ApplicationController
   end
 
   def handle_url
-      logger.debug "host is #{request.inspect}"
+      logger.debug "host is #{request.host}, domain is #{request.domain}"
   
     unless params[:id] or params[:action] == 'new' or params[:action] == 'create'
       story = Story.find_by_short_title(request.subdomains(0).first)
