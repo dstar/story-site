@@ -9,6 +9,7 @@ class SiteControllerTest < Test::Unit::TestCase
     @controller = SiteController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    @request.env["HTTP_REFERER"] = "http://playground.pele.cx/pcomments/show"
   end
 
   # Replace this with your real tests.
@@ -19,7 +20,7 @@ class SiteControllerTest < Test::Unit::TestCase
   def test_new_unauthed
     get :new
     assert_response :redirect
-    assert_redirected_to :controller => 'site', :action => 'show'
+    assert_redirected_to :controller => 'pcomments', :action => 'show'
 
   end
 
@@ -28,7 +29,7 @@ class SiteControllerTest < Test::Unit::TestCase
 
     post :create, :universe => {}
     assert_response :redirect
-    assert_redirected_to :controller => 'site', :action => 'show'
+    assert_redirected_to :controller => 'pcomments', :action => 'show'
 
   end
   
