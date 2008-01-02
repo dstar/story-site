@@ -84,7 +84,7 @@ class BlogpostsControllerTest < Test::Unit::TestCase
     post :create, :blogpost => {:body_raw => "test"}
 
     assert_response :redirect
-    assert_redirected_to :controller => 'blogposts', :action => 'list'
+    assert_redirected_to :controller => 'site', :action => 'show'
 
     assert_equal num_blogposts + 1, Blogpost.count
   end
