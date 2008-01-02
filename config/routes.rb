@@ -16,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
 #  map.connect ':story', :controller => 'stories', :action => 'showByName', :id => nil
 #  map.connect ':story/:chapter', :controller => 'chapters', :action => 'showByName', :id => nil
 
-  map.site '', :controller => 'site', :action => 'show', :conditions => { :subdomain => 'playground.playground'}
+  map.site '', :controller => 'site', :action => 'show', :conditions => { :host => 'playground.playground.pele.cx'}
   map.index '', :controller => 'stories', :action => 'show'
   map.chapter 'html/:chapter', :controller => 'chapters', :action => 'show'
   map.text 'text/:chapter', :controller => 'chapters', :action => 'dumpByFile'
