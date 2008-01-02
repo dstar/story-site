@@ -1,5 +1,7 @@
 <h1>Universes</h1>
+<ul>
 <%= render :partial => "universe_wstories", :collection => @universes -%>
+</ul>
 <br />
 <% if @authinfo[:user] and @authinfo[:user].has_site_permission('admin') -%>
 <%= link_to 'New universe', :controller => 'site', :action => 'new_universe' -%>
