@@ -6,9 +6,7 @@
         <% denotation_class = 'read_comments' if total_comments > 0 and unread_comments < 1 -%>
         <% denotation_class = 'unacknowledged_comments' if total_comments > 0 and unacknowledged_comments > 0 and can_edit -%>
         <% logger.debug "QQQ: #{unread_comments} unread comments, #{total_comments} total_comments, #{unacknowledged_comments} unacknowledged comments" -%>
-
 <div class="<%= denotation_class %>" id="comment_span_<%= para.id %>" >
-
         <form action="">
                 <input type="hidden" id="comment_count_<%= para.id %>" value="<%= total_comments %>" />
                 <input type="hidden" id="unread_comment_count_<%= para.id %>" value="<%= unread_comments %>" />
@@ -17,7 +15,7 @@
         <a name="<%= ["pcomment",para.id] %>" onclick="Element.toggle('comments<%= para.id %>')">&#182; (<%= total_comments %> comments, <%= unread_comments  %> unread)</a>
         <p><%= link_to_remote 'Edit this paragraph', { :url => "#{index_url}paragraphs/edit/#{para.id}", :update => "parabody#{para.id}" }, {:href => "#{index_url}paragraphs/edit/#{para.id}"} if can_edit -%> </p>
         <div class="comments_display" id="comments<%= para.id %>" style="display:<%= display %>">
-           <%= %Q|<span class="comments_up" title="Move comments to previous paragraph"><a href="/paragraphs/move_comments_prev/#{para.id}" class="comments_up">&uarr;</a></span> <span class="comments_down" title="Move comments to next paragraph"><a href="/paragraphs/move_comments_next/#{para.id}" class="comments_down">&darr;</a></span>| if can_edit and total_comments > 0 -%>
+           <%= %Q|<span class="comments_up" title="Move comments to previous paragraph"><a href="/paragraphs/move_comments_prev/#{para.id}" class="comments_up">&uarr;</a></span>\n<span class="comments_down" title="Move comments to next paragraph"><a href="/paragraphs/move_comments_next/#{para.id}" class="comments_down">&darr;</a></span>| if can_edit and total_comments > 0 -%>
                 <div class="comments_body" id="comments_body<%= para.id %>">
                         <%= render :partial => 'chapters/pcomm', :collection => para.pcomments -%>
                 </div>
