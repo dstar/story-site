@@ -52,7 +52,7 @@ class StoriesControllerTest < Test::Unit::TestCase
   end
 
   def test_edit_authed
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
     get :edit, :id => 7
 
     assert_response :success
@@ -69,7 +69,7 @@ class StoriesControllerTest < Test::Unit::TestCase
   end
 
   def test_update_authed
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
     post :update, :id => 7, :story => {:universe_id => 1, :title => 'a', :short_title => 'a', :description => 'a'}
     assert_response :redirect
     assert_redirected_to :controller => 'stories', :action => 'show', :id => 7
@@ -82,7 +82,7 @@ class StoriesControllerTest < Test::Unit::TestCase
   end
 
   def test_destroy_authed
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
     assert_not_nil Story.find(7)
 
     post :destroy, :id => 7
@@ -93,7 +93,7 @@ class StoriesControllerTest < Test::Unit::TestCase
       Story.find(7)
     }
   end
-  
+
     def test_new_chapter_unauthed
 #    post :new, :story_id => 7
     post :new_chapter, :id => 7
@@ -104,7 +104,7 @@ class StoriesControllerTest < Test::Unit::TestCase
 
   def test_new_chapter_authed
 
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
 
 #    post :new, :story_id => 7
     post :new_chapter, :id => 7
@@ -127,7 +127,7 @@ class StoriesControllerTest < Test::Unit::TestCase
 
   def test_create_chapter_authed
     @request.env["HTTP_REFERER"] = "http://playground.pele.cx/pcomments/show"
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
 
     num_chapters = Chapter.count
 
@@ -139,5 +139,5 @@ class StoriesControllerTest < Test::Unit::TestCase
     assert_equal num_chapters + 1, Chapter.count
   end
 
-  
+
 end

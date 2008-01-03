@@ -20,6 +20,21 @@ class ChaptersControllerTest < Test::Unit::TestCase
     @request.env["HTTP_REFERER"] = "http://playground.pele.cx/chapters/show"
   end
 
+  def test_show_route
+    opts_default = { :controller => 'chapters', :action => "show", :id=> '219' }
+    assert_recognizes opts_default, "/chapters/show/219", { }, 'Should recognize /chapters/show/219'
+    opts_special = { :controller => 'chapters', :action => "show", :chapter=> 'wos1' }
+    assert_recognizes opts_special, "/html/wos1.html", { }, 'Should recognize /html/wos1.html'
+  end
+
+  def test_dumpByFile_route
+    opts_default = { :controller => 'chapters', :action => "dumpByFile", :id=> '219' }
+    assert_recognizes opts_default, "/chapters/dumpByFile/219", { }, 'Should recognize /chapters/dumpByFile/219'
+    opts_special = { :controller => 'chapters', :action => "dumpByFile", :chapter=> 'wos1' }
+    assert_recognizes opts_special, "/text/wos1.txt", { }, 'Should recognize /text/wos1.txt'
+
+  end
+
   def test_show
     get :show, :id => 1
 
@@ -39,7 +54,7 @@ class ChaptersControllerTest < Test::Unit::TestCase
 
   def test_edit_authed
 
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
 
     get :edit, :id => 1
 
@@ -60,7 +75,7 @@ class ChaptersControllerTest < Test::Unit::TestCase
   def test_update_authed
     @request.env["HTTP_REFERER"] = "http://playground.pele.cx/chapters/list"
 
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
 
     post :update, :id => 1, :chapter => { :status => 'draft' }
     assert_response :redirect
@@ -77,7 +92,7 @@ class ChaptersControllerTest < Test::Unit::TestCase
 
   def test_destroy_authed
 
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
 
     assert_not_nil Chapter.find(1)
 

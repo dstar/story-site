@@ -16,14 +16,14 @@ ActionController::Routing::Routes.draw do |map|
 #  map.connect ':story', :controller => 'stories', :action => 'showByName', :id => nil
 #  map.connect ':story/:chapter', :controller => 'chapters', :action => 'showByName', :id => nil
 
-  map.site '', :controller => 'site', :action => 'show', :conditions => { :host => 'playground.playground.pele.cx'}
-  map.index '', :controller => 'stories', :action => 'show'
-  map.chapter 'html/:chapter', :controller => 'chapters', :action => 'show'
-  map.text 'text/:chapter', :controller => 'chapters', :action => 'dumpByFile'
+  map.chapter 'html/:chapter.html', :controller => 'chapters', :action => 'show'
+  map.text 'text/:chapter.txt', :controller => 'chapters', :action => 'dumpByFile'
   map.blog 'blog/:action/:id', :controller => 'blogposts'
   map.style_action 'style/:action/:theme.:ext', :controller => 'style'
   map.style 'style/:theme', :controller => 'style', :action => 'show'
-  
+  map.site '', :controller => 'site', :action => 'show', :conditions => { :host => 'playground.playground.pele.cx'}
+  map.index '', :controller => 'stories', :action => 'show'
+
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'
   map.connect ':controller/service.wsdl', :action => 'wsdl'
