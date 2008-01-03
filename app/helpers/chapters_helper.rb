@@ -15,7 +15,7 @@ module ChaptersHelper
       if params[:action] == 'show_draft'
         nav_buffer += link_to "Prev", index_url + "chapters/show_draft/" + prevChapter(chapter).id.to_s
       else
-        nav_buffer += link_to 'Prev', chapter_url(:chapter => prevChapter(chapter).gsub(/.html/,''))
+        nav_buffer += link_to 'Prev', chapter_url(:chapter => prevChapter(chapter).file.gsub(/.html/,''))
       end
     else
       nav_buffer += "Prev"
@@ -25,7 +25,7 @@ module ChaptersHelper
       if params[:action] == 'show_draft'
         nav_buffer += link_to "Next", index_url + "chapters/show_draft/" + nextChapter(chapter).id.to_s
       else
-        nav_buffer += link_to 'Next', chapter_url(:chapter => nextChapter(chapter).gsub(/.html/,''))
+        nav_buffer += link_to 'Next', chapter_url(:chapter => nextChapter(chapter).file.gsub(/.html/,''))
       end
     else
       nav_buffer += "Next"
