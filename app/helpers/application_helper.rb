@@ -3,17 +3,6 @@ module ApplicationHelper
   def StoryHost(story)
     domain_length = request.subdomains.length
     unless story.is_a? String
-      att_hash = story.attributes
-      unless story.attributes['short_title']
-        newstory = Story.find(att_hash['id'])
-        newstory_attrs = newstory.attributes
-        logger.error "QQQ: New story attributes are #{newstory_attrs.keys.inspect}"
-        logger.error "QQQ: Story #{story.id} doesn't have a short_title!\nQQQ: Class is #{story.class}\nQQQ: Attributes are:\n"
-        att_hash.keys.each do |att|
-          logger.error "QQQ: #{att} : #{story.attributes[att]}" unless att == 'chapters'
-          logger.error "QQQ: #{att} : <skipped>" if att == 'chapters'
-        end
-      end
       "#{story.short_title}.#{request.domain(domain_length)}#{request.port_string}"
     else
       "#{story}.#{request.domain(domain_length)}#{request.port_string}"
@@ -48,18 +37,18 @@ module ApplicationHelper
     style_links_buffer = ""
     Style.find(:all, :select => 'theme', :conditions => ['user=-1'], :group => 'theme').collect { |s| [s.theme, s.theme] }.each do |theme|
       style_links_buffer += %Q|<link rel="stylesheet" type="text/css" href="http://styles.playground.pele.cx/style/show/#{theme[0]}.css" title="#{theme[0]}" />|
-    end 
+    end
     return style_links_buffer
   end
 
   def php_session_header
     if @authinfo[:user] and @authinfo[:user].user_id != -1
-      return %Q|<div class="userinfo">\nLogged in as #{@authinfo[:user].username} ; <a href="http://playground.pele.cx/forums/login.php?logout=true&amp;redirect=redirect_out.php&amp;sid=<%= @sid %>">Log Out</a>\n</div>\n|
+      return %Q|<div class="userinfo">\nLogged in as #{@authinfo[:user].username} ; <a href="http://playground.pele.cx/forums/login.php?logout=true&amp;redirect=redirect_out.php&amp;sid=#{@sid}">Log Out</a>\n</div>\n|
     else
       return %Q|<div class="userinfo">\n<a href="http://playground.pele.cx/forums/login.php?redirect=redirect_in.php">Log In</a>\n</div>\n|
     end
   end
-  
+
   def style_dropdown
     options_string = ""
     Style.find(:all, :select => 'theme', :conditions => ['user=-1'], :group => 'theme').each {|s| options_string += "<option value='#{s.theme}'>#{s.theme}</option>\n"}
@@ -73,5 +62,5 @@ module ApplicationHelper
 </div>
 EOS
   end
-  
+
 end
