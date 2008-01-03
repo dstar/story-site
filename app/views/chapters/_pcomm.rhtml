@@ -7,9 +7,9 @@
 <% read_by = pcomm.read_by.include?(@authinfo[:user].username) -%>
 <div class="comment<%= "_read" if read_by %>">
         <div class="commentbody">
-                <% cache("show_pcomment_#{pcomm.id}") do %>
+                <% cache("show_pcomment_#{pcomm.id}") do -%>
                         <%= pcomm.body %>
-                <% end %>
+                <% end -%>
           <div class="commentposted">
                 Posted at <%= pcomm.created_at %> by <%= pcomm.username %>.<br />
                 <% unless pcomm.acknowledged.blank? -%>
