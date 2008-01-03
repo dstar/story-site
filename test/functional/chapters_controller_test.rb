@@ -43,6 +43,16 @@ class ChaptersControllerTest < Test::Unit::TestCase
 
     assert_not_nil assigns(:chapter)
     assert assigns(:chapter).valid?
+
+    get :show, :chapter => 'prudence30'
+
+    assert_response :success
+    assert_template 'show'
+
+    assert_not_nil assigns(:chapter)
+    assert assigns(:chapter).valid?
+
+
   end
 
   def test_edit_unauthed
