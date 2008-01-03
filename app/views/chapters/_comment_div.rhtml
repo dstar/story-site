@@ -1,7 +1,7 @@
   <div class="comments">
       <a name="<%= ["pcomment",para.id] %>" onClick="Element.toggle('comments<%= para.id %>')">&#182;</a>
-	  <div class="comments_display" id="comments<%= para.id %>">
-    <%= render :partial => 'pcomm', :collection => Pcomment.listForPara(para.id) %>
-    <span class='comment_link'><%= link_to 'Comment on this paragraph', :controller => 'pcomments', :action => 'new', :paragraph_id => para.id if @authinfo[:user]%></span>
-	</div>
+          <div class="comments_display" id="comments<%= para.id %>">
+    <%= render :partial => 'pcomm', :collection => Pcomment.listForPara(para.id) -%>
+    <span class='comment_link'><%= link_to 'Comment on this paragraph', :controller => 'pcomments', :action => 'new', :paragraph_id => para.id if @authinfo[:user] -%></span>
+        </div>
   </div>
