@@ -15,7 +15,7 @@ module ChaptersHelper
       if params[:action] == 'show_draft'
         nav_buffer += link_to "Prev", index_url + "chapters/show_draft/" + prevChapter(chapter).id.to_s
       else
-        nav_buffer += link_to 'Prev', chapter_url(:chapter => prevChapter(chapter))
+        nav_buffer += link_to 'Prev', chapter_url(:chapter => prevChapter(chapter).gsub(/.html/,''))
       end
     else
       nav_buffer += "Prev"
@@ -25,7 +25,7 @@ module ChaptersHelper
       if params[:action] == 'show_draft'
         nav_buffer += link_to "Next", index_url + "chapters/show_draft/" + nextChapter(chapter).id.to_s
       else
-        nav_buffer += link_to 'Next', chapter_url(:chapter => nextChapter(chapter))
+        nav_buffer += link_to 'Next', chapter_url(:chapter => nextChapter(chapter).gsub(/.html/,''))
       end
     else
       nav_buffer += "Next"
@@ -51,8 +51,8 @@ module ChaptersHelper
     chapno = " &gt; Chapter #{ @chapter.number }" unless params[:action] =~ /list/
     home_link = link_to 'Home', index_url(:host => StoryHost('playground'))
     universe_link =  link_to @chapter.story.universe.name, "#{index_url(:host => StoryHost('playground'))}universes/show/#{@chapter.story.universe.id}"
-    story_link = link_to @chapter.story.title, index_url(:host => StoryHost(@chapter.story)) 
+    story_link = link_to @chapter.story.title, index_url(:host => StoryHost(@chapter.story))
     return "#{home_link} &gt; #{universe_link} &gt; #{story_link}#{chapno}"
   end
-  
+
 end
