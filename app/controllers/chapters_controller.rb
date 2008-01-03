@@ -12,7 +12,7 @@ class ChaptersController < ApplicationController
   end
 
   def check_authorization(user)
-    return false unless @chapter 
+    return false unless @chapter
     needed = @authorization[@chapter.status][params[:action]] unless (needed and ! needed.empty?)
     if needed
       needed.each do |req|
@@ -22,7 +22,7 @@ class ChaptersController < ApplicationController
     end
     return false
   end
-    
+
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
     :redirect_to => { :action => :list }
@@ -54,7 +54,7 @@ class ChaptersController < ApplicationController
   end
 
   def dumpByFile
-    ch = params[:chapter].gsub(/txt/,"html")
+    ch = params[:chapter] + ".txt"
     @chapter = Chapter.find_by_file(ch)
     @headers["Content-Type"] = "text/plain"
     @chapter_to_save = @chapter
@@ -152,8 +152,8 @@ class ChaptersController < ApplicationController
     #    breakpoint "test"
     unless params[:id] or params[:action] == 'index' or params[:action] == 'list' or params[:action] == 'new'
       if params[:chapter] and ! params[:chapter].blank?
-        if params[:chapter].is_a? String          
-          chapter = Chapter.find_by_file(params[:chapter].gsub(/txt$/,"html"))
+        if params[:chapter].is_a? String
+          chapter = Chapter.find_by_file(params[:chapter] + "html")
           if chapter
             params[:id] = chapter.id
           else
