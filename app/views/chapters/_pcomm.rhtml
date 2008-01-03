@@ -8,7 +8,7 @@
 <div class="comment<%= "_read" if read_by %>">
         <div class="commentbody">
                 <% cache("show_pcomment_#{pcomm.id}") do -%>
-                        <%= pcomm.body %>
+                        <%= pcomm.body -%>
                 <% end -%>
           <div class="commentposted">
                 Posted at <%= pcomm.created_at %> by <%= pcomm.username %>.<br />
