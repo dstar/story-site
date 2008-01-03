@@ -153,7 +153,7 @@ class ChaptersController < ApplicationController
     unless params[:id] or params[:action] == 'index' or params[:action] == 'list' or params[:action] == 'new'
       if params[:chapter] and ! params[:chapter].blank?
         if params[:chapter].is_a? String
-          chapter = Chapter.find_by_file(params[:chapter] + "html")
+          chapter = Chapter.find_by_file(params[:chapter] + ".html")
           if chapter
             params[:id] = chapter.id
           else
