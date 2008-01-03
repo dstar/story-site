@@ -32,7 +32,7 @@ class PcommentsControllerTest < Test::Unit::TestCase
 
   def test_new_authed
 
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
 
     get :new, :paragraph_id => 4
 
@@ -55,7 +55,7 @@ class PcommentsControllerTest < Test::Unit::TestCase
 
   def test_create_authed
     @request.env["HTTP_REFERER"] = "http://playground.pele.cx/pcomments/list"
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
 
     num_pcomments = Pcomment.count
 
@@ -75,7 +75,7 @@ class PcommentsControllerTest < Test::Unit::TestCase
 
   def test_edit_authed
 
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
 
     get :edit, :id => 1
 
@@ -95,12 +95,40 @@ class PcommentsControllerTest < Test::Unit::TestCase
 
   def test_update_authed
     @request.env["HTTP_REFERER"] = "http://playground.pele.cx/pcomments/list"
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
 
     post :update, :id => 1, :pcomment => {:body_raw => "test"}
     assert_response :redirect
     assert_redirected_to :controller => 'chapters', :action => 'show_draft'
   end
+
+  def test_markread_unread
+    @request.env["HTTP_REFERER"] = "http://playground.pele.cx/pcomments/list"
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
+
+    comment = Pcomment.find(1)
+
+    assert_nil comment.read_by
+
+    post :markread, :id => 1
+
+    assert_response :redirect
+    assert_redirected_to :controller => 'chapters', :action => 'show_draft'
+
+    comment_read = Pcomment.find(1)
+
+    assert_not_nil comment_read.read_by, "read by should not be nil after marking read"
+    assert comment_read.read_by.include?("dstar"), "read_by should include 'dstar' after marking read"
+
+    post :markunread, :id => 1
+
+    comment_unread = Pcomment.find(1)
+
+    assert_not_nil comment_unread.read_by, "read_by should not be nil after marking unread"
+    assert ! comment_unread.read_by.include?("dstar"), "read_by should not include 'dstar' after marking unread"
+
+  end
+
 
   def test_destroy_unauthed
     assert_not_nil Pcomment.find(1)
@@ -112,7 +140,7 @@ class PcommentsControllerTest < Test::Unit::TestCase
 
   def test_destroy_authed
 
-    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")    
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
 
     assert_not_nil Pcomment.find(1)
 

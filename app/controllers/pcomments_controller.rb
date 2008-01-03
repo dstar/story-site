@@ -31,7 +31,7 @@ class PcommentsController < ApplicationController
     end
     return false
   end
-  
+
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
     :redirect_to => { :action => :list }
@@ -102,7 +102,10 @@ class PcommentsController < ApplicationController
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
       #      @pcomment.update_attribute('flag',1)
-      @pcomment.read_by.push(@authinfo[:user].username) unless @pcomment.read_by.include(@authinfo[:user].username)
+      unless @pcomment.read_by
+        @pcomment.read_by = []
+      end
+      @pcomment.read_by.push(@authinfo[:user].username) unless @pcomment.read_by.include?(@authinfo[:user].username)
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
@@ -193,5 +196,5 @@ class PcommentsController < ApplicationController
     @page_title = 'Pcomments: #{params[:action]}'
     @breadcrumbs += " > Pcomments: #{params[:action]}"
   end
-        
+
 end
