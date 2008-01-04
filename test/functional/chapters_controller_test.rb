@@ -36,7 +36,9 @@ class ChaptersControllerTest < Test::Unit::TestCase
   end
 
   def test_show
-    get :show, :id => 1
+    @request.host = "jaknis.playground.pele.cx"
+
+    get :show, :id => 4
 
     assert_response :success
     assert_template 'show'
@@ -44,13 +46,86 @@ class ChaptersControllerTest < Test::Unit::TestCase
     assert_not_nil assigns(:chapter)
     assert assigns(:chapter).valid?
 
-    get :show, :chapter => 'prudence30'
+    get :show, :chapter => 'jaknis1'
 
     assert_response :success
     assert_template 'show'
 
     assert_not_nil assigns(:chapter)
     assert assigns(:chapter).valid?
+
+    link_hash = {
+      :tag => "a",
+      :content => "Prev",
+    }
+    assert_no_tag link_hash
+
+    link_hash = {
+      :tag => "a",
+      :attributes => {
+        :href => "http://jaknis.playground.pele.cx/html/jaknis2.html"
+      },
+      :content => "Next",
+    }
+    assert_tag link_hash
+
+    link_hash = {
+      :tag => "a",
+      :attributes => {
+        :href => "http://jaknis.playground.pele.cx/"
+      },
+      :content => "Index",
+    }
+    assert_tag link_hash
+
+    @request.host = "oops.playground.pele.cx"
+
+    get :show, :id => 104
+
+    link_hash = {
+      :tag => "a",
+      :attributes => {
+        :href => "http://oops.playground.pele.cx/html/oops12.html"
+      },
+      :content => "Next",
+    }
+    assert_no_tag link_hash
+
+  end
+
+  def test_show_draft
+    @request.host = "oops.playground.pele.cx"
+
+    # unauthed...
+
+    get :show_draft, :id => 104
+
+    assert_response :redirect
+
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
+
+    get :show_draft, :id => 104
+
+    assert_response :success
+    assert_template 'show_draft'
+
+    link_hash = {
+      :tag => "a",
+      :attributes => {
+        :href => "http://oops.playground.pele.cx/chapters/show_draft/105"
+      },
+      :content => "Next",
+    }
+    assert_tag link_hash
+
+    link_hash = {
+      :tag => "a",
+      :attributes => {
+        :href => "http://oops.playground.pele.cx/chapters/show_draft/82"
+      },
+      :content => "Prev",
+    }
+    assert_tag link_hash
 
 
   end

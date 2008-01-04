@@ -36,6 +36,8 @@ class StoriesControllerTest < Test::Unit::TestCase
   end
 
   def test_show
+    @request.host = "jaknis.playground.pele.cx"
+
     get :show, :id => 7
 
     assert_response :success
@@ -43,6 +45,12 @@ class StoriesControllerTest < Test::Unit::TestCase
 
     assert_not_nil assigns(:story)
 #    assert_valid assigns(:story)
+    link_hash = {
+      :tag => "a",
+      :attributes => {
+        :href => "http://jaknis.playground.pele.cx/html/jaknis1.html"}
+    }
+    assert_tag link_hash
   end
 
   def test_edit_unauthed
