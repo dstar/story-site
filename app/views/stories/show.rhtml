@@ -9,7 +9,6 @@ released bits of the ongoing <%= @story.title %> storyline.</p>
 <p><b>Keywords:</b> <%= @story.keywords %></p>
 <hr />
 <div class="body">
-<div>
 <div class="newscolumn">
 
 
@@ -25,9 +24,7 @@ released bits of the ongoing <%= @story.title %> storyline.</p>
 <%= render :partial => "chapter", :collection => Chapter.orderedListByStory(@story.id) %>
 (total wordcount: <%= Wordcount(@story.id) %>)<br/>
 </div>
-</div>
-<div class='donationdrive'>
-<div class='donationbox'>
+<div class='footer'>
 <hr/>
 For Amazon:<br/>
 <!-- Begin Amazon Honor System Paybox -->
@@ -49,6 +46,5 @@ For PayPal:
 <input type="hidden" name="tax" value="0"/>
 <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but21.gif" class="paypal" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
 </form>
-</div>
 </div>
 </div>
