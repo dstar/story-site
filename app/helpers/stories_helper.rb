@@ -68,12 +68,13 @@ module StoriesHelper
 
     link_buffer += "(#{chapter.date}, #{chapter.words} words" if chapter.status == 'released' || can_comment(chapter)
 
-    comment_count = Paragraph.count_by_sql(["select count(*) from paragraphs p, pcomments c where p.chapter_id=? and c.paragraph_id = p.id and c.flag != 2",chapter.id])
+    comment_count = chapter.num_comments
+
     link_buffer += ", #{comment_count} comments" if can_comment(chapter)
 
-    link_buffer += ", <strong>#{chapter.get_num_comments_unread_by(@authinfo[:user].username)} unread</strong>" if  can_comment(chapter) && chapter.get_num_comments_unread_by(@authinfo[:user].username) > 0
+    link_buffer += ", <strong>#{chapter.num_unread_comments(@authinfo[:user])} unread</strong>" if  can_comment(chapter) && chapter.num_unread_comments(@authinfo[:user]) > 0
 
-    link_buffer += ", <span class=\"unacknowledged_count\">#{chapter.get_num_unacknowledged_comments} unacknowledged</span>" if is_author(chapter) && chapter.get_num_unacknowledged_comments > 0
+    link_buffer += ", <span class=\"unacknowledged_count\">#{chapter.num_unacknowledged_comments} unacknowledged</span>" if is_author(chapter) && chapter.num_unacknowledged_comments > 0
 
     link_buffer += ") <br/>\n" if chapter.status == "released" || can_comment(chapter)
 

@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :universe_permissions, :as => :permission_holder
   has_many :site_permissions, :as => :permission_holder
 
+  has_and_belongs_to_many :read_comments, :join_table => 'pcomments_read_by', :class_name => 'Pcomment'
+
   def has_story_permission(story,permission)
     if story.is_a?(Story)
       story_id = story.id

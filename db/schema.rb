@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 40) do
+ActiveRecord::Schema.define(:version => 41) do
 
   create_table "blogposts", :force => true do |t|
     t.text     "body",                     :default => "",      :null => false
@@ -89,6 +89,14 @@ ActiveRecord::Schema.define(:version => 40) do
   end
 
   add_index "pcomments", ["paragraph_id"], :name => "pcomments_paragraph_id_index"
+
+  create_table "pcomments_read_by", :id => false, :force => true do |t|
+    t.integer "pcomment_id", :null => false
+    t.integer "user_id",     :null => false
+  end
+
+  add_index "pcomments_read_by", ["pcomment_id"], :name => "index_pcomments_read_by_on_pcomment_id"
+  add_index "pcomments_read_by", ["user_id"], :name => "index_pcomments_read_by_on_user_id"
 
   create_table "php_sessions", :force => true do |t|
     t.string  "session_id",        :limit => 32, :default => "",    :null => false

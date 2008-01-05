@@ -10,6 +10,7 @@
                 <% cache("show_pcomment_#{pcomm.id}") do -%>
                         <%= pcomm.body -%>
                 <% end -%>
+        </div>
           <div class="commentposted">
                 Posted at <%= pcomm.created_at %> by <%= pcomm.username %>.<br />
                 <% unless pcomm.acknowledged.blank? -%>
@@ -24,5 +25,4 @@
                 <% end -%>
                 <br />
           </div>
-        </div>
 </div>
