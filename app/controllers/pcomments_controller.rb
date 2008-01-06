@@ -102,6 +102,7 @@ class PcommentsController < ApplicationController
       @chapter_id = Pcomment.chapterID(@pcomment.id)
       #      @pcomment.update_attribute('flag',1)
       @pcomment.readers << @authinfo[:user] unless @pcomment.readers.include?(@authinfo[:user])
+      @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
