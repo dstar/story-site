@@ -106,9 +106,11 @@ class PcommentsControllerTest < Test::Unit::TestCase
     @request.env["HTTP_REFERER"] = "http://playground.pele.cx/pcomments/list"
     @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
 
-    comment = Pcomment.find(1)
+    user = User.find(3)
 
-    assert_nil comment.read_by
+    comment = Pcomment.find(2)
+
+    assert_equal 0, comment.readers.length
 
     post :markread, :id => 1
 
@@ -117,15 +119,15 @@ class PcommentsControllerTest < Test::Unit::TestCase
 
     comment_read = Pcomment.find(1)
 
-    assert_not_nil comment_read.read_by, "read by should not be nil after marking read"
-    assert comment_read.read_by.include?("dstar"), "read_by should include 'dstar' after marking read"
+    assert_not_nil comment_read.readers, "read by should not be nil after marking read"
+    assert comment_read.readers.include?(user), "read_by should include 'dstar' after marking read"
 
     post :markunread, :id => 1
 
     comment_unread = Pcomment.find(1)
 
-    assert_not_nil comment_unread.read_by, "read_by should not be nil after marking unread"
-    assert ! comment_unread.read_by.include?("dstar"), "read_by should not include 'dstar' after marking unread"
+    assert_not_nil comment_unread.readers, "read_by should not be nil after marking unread"
+    assert ! comment_unread.readers.include?(user), "read_by should not include 'dstar' after marking unread"
 
   end
 

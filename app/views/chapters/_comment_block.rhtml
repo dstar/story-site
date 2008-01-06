@@ -1,5 +1,5 @@
         <% total_comments = para.pcomments.inject(0) {|i, pc| i += 1 if pc.flag < 2} -%>
-        <% unread_comments = para.pcomments.inject(0) {|i,x| if x.flag < 2 and not x.read_by.include?(@authinfo[:user].username) then i += 1 else i += 0 end} -%>
+        <% unread_comments = Pcomment.count(:conditions => "paragraph_id = #{para.id} and id not in (select prb.pcomment_id from pcomments_read_by prb where prb.user_id = #{@authinfo[:user].id})") -%>
         <% unacknowledged_comments = para.pcomments.inject(0) {|i, x| if x.flag < 2 and x.acknowledged.blank? then i += 1 else i += 0 end} -%>
         <% can_edit = (@authinfo[:user] and @authinfo[:user].has_story_permission(@chapter.story,'author') ) -%>
         <% denotation_class = 'unread_comments' if unread_comments > 0 -%>

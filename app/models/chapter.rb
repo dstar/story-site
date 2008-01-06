@@ -33,7 +33,7 @@ class Chapter < ActiveRecord::Base
   end
 
   def num_comments
-    return Pcomment.count_by_sql(["select pc.* from pcomments pc, paragraphs p where p.chapter_id = ?  and pc.paragraph_id = p.id",self.id])
+    return Pcomment.count(:conditions => "paragraphs.chapter_id = #{self.id}", :include => :paragraph)
   end
 
   def get_unread_comments(user)

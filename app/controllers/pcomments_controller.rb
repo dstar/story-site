@@ -47,7 +47,6 @@ class PcommentsController < ApplicationController
 
   def create
     @pcomment = Pcomment.new(params[:pcomment])
-    @pcomment.read_by = Array.new
     @pcomment.username = @authinfo[:user].username
     if request.xml_http_request?
       if @pcomment.save
@@ -102,11 +101,7 @@ class PcommentsController < ApplicationController
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
       #      @pcomment.update_attribute('flag',1)
-      unless @pcomment.read_by
-        @pcomment.read_by = []
-      end
-      @pcomment.read_by.push(@authinfo[:user].username) unless @pcomment.read_by.include?(@authinfo[:user].username)
-      @pcomment.save
+      @pcomment.readers << @authinfo[:user] unless @pcomment.readers.include?(@authinfo[:user])
       if request.xml_http_request?
         @chapter = @paragraph.chapter
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
@@ -122,7 +117,7 @@ class PcommentsController < ApplicationController
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
       #      @pcomment.update_attribute('flag',1)
-      @pcomment.read_by.delete(@authinfo[:user].username)
+      @pcomment.readers.delete(@authinfo[:user])
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
@@ -139,7 +134,7 @@ class PcommentsController < ApplicationController
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
       @pcomment.acknowledged = @authinfo[:user].username
-      @pcomment.read_by.push(@authinfo[:user].username)
+      @pcomment.readers.push(@authinfo[:user].username)
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
@@ -155,7 +150,7 @@ class PcommentsController < ApplicationController
       @pcomment = Pcomment.find(params[:id])
       @chapter_id = Pcomment.chapterID(@pcomment.id)
       @pcomment.acknowledged = ""
-      @pcomment.read_by.delete(@authinfo[:user].username)
+      @pcomment.readers.delete(@authinfo[:user].username)
       @pcomment.save
       if request.xml_http_request?
         @chapter = @paragraph.chapter
