@@ -64,7 +64,7 @@ class StoriesController < ApplicationController
     @page_title = "Delete #{@story.title}"
     @description = @page_title
   end
-  
+
   def destroy
     @story = Story.find(params[:id])
     @story_title = @story.title
@@ -83,7 +83,7 @@ class StoriesController < ApplicationController
 
   def handle_url
       logger.debug "host is #{request.host}, domain is #{request.domain}"
-  
+
     unless params[:id] or params[:action] == 'new' or params[:action] == 'create'
       story = Story.find_by_short_title(request.subdomains(0).first)
       params[:id] = story.id
@@ -94,7 +94,7 @@ class StoriesController < ApplicationController
     @page_title = "Change Permissions for #{@story.title}"
     @description = @page_title
   end
-  
+
   def permissions_modify
     case params[:type]
     when /user/
@@ -124,7 +124,7 @@ class StoriesController < ApplicationController
     render :action => 'permissions'
   end
 
- 
+
 
   def permissions_destroy
     case params[:type]
@@ -161,5 +161,36 @@ class StoriesController < ApplicationController
     end
   end
 
+  def process_file(file, chapter_id)
+    paragraph_buffer = String.new
+    para_count = 1
+    word_count = 0
+    file_string = file.read
+    file_string.gsub!(/\r/,'')
+    lines = file_string.split(/\n\n/)
+    lines.each { |line|
+      line.gsub!(/^\n/,' ')
+      line.gsub!(/(\w)\n(\w)/,'\1 \2')
+      line.gsub!(/\n/,' ')
+      line.gsub!(/^\s*|\s*$/,'')
+      line.gsub!(/#/,'***') if line == "#"
+      line.gsub!(/\s+--/, "--")
+      word_count += line.scan(/\w+/).length
+
+      para = Paragraph.new()
+      para.body_raw = line
+      para.position = para_count
+      para.chapter_id = chapter_id
+
+      para.save
+
+      para_count += 1
+    }
+
+    @chapter.words = word_count
+    @chapter.file = file.original_filename
+    @chapter.save
+    dump_to_file(@chapter)
+  end
 
 end
