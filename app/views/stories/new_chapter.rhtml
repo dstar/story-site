@@ -1,6 +1,6 @@
 <h1>New chapter</h1>
 
-<% form_tag( {:action => 'create', :id => @story.id}, :multipart => true) do -%>
+<% form_tag( {:action => 'create_chapter', :id => @story.id}, :multipart => true) do -%>
   <%= render :partial => 'new_chapter_form' %>
   <%= submit_tag "Create Chapter" %>
 <% end -%>
