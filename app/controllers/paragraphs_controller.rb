@@ -86,7 +86,7 @@ class ParagraphsController < ApplicationController
 
         insert_at = @paragraph.position + 1
 
-        paras.each do |body| 
+        paras.each do |body|
           para = Paragraph.new(:chapter_id => @paragraph.chapter_id, :body_raw => body);
           para.save
           para.insert_at(insert_at)
@@ -108,8 +108,8 @@ class ParagraphsController < ApplicationController
         dump_to_file(@paragraph.chapter)
 
         expire_fragment( :action => "show", :action_suffix => "paragraph_#{@paragraph.id}", :controller => "chapters")
-        expire_fragment( :action => "show", :action_suffix => "chapter_#{@chapter.id}", :controller => "chapters") # need to expire the cache for the full chapter page as well
-        
+        expire_fragment( :action => "show", :action_suffix => "chapter_#{@paragraph.chapter.id}", :controller => "chapters") # need to expire the cache for the full chapter page as well
+
         render :partial => 'chapters/parabody', :locals => { :parabody => @paragraph }
 
       else
@@ -125,6 +125,7 @@ class ParagraphsController < ApplicationController
         @paragraph.chapter.update_attribute("words",word_count)
         dump_to_file(@paragraph.chapter)
         expire_fragment( :action => "show", :action_suffix => "paragraph_#{@paragraph.id}", :controller => "chapters" )
+        expire_fragment( :action => "show", :action_suffix => "chapter_#{@paragraph.chapter.id}", :controller => "chapters") # need to expire the cache for the full chapter page as well
         logger.debug("redirecting to #{url_for :controller => 'chapters', :action => 'show_draft', :id => @paragraph.chapter.id, :anchor => "pcomment#{@paragraph.id}"}")
         redirect_to :controller => 'chapters', :action => 'show_draft', :id => @paragraph.chapter.id, :anchor => "pcomment#{@paragraph.id}"
       else
@@ -153,7 +154,7 @@ class ParagraphsController < ApplicationController
   end
 
   def setup_page_vars
-    if params[:id] 
+    if params[:id]
       @paragraph = Paragraph.find(params[:id])
       @chapter_id = @paragraph.chapter.id
       @story_id = @paragraph.chapter.story.id
@@ -163,7 +164,7 @@ class ParagraphsController < ApplicationController
       @story_id = Chapter.find(@chapter_id).story.id
     end
   end
-  
+
   def move_comments_next
     paragraph = Paragraph.find(params[:id])
     move_comments(paragraph,'next')
@@ -180,7 +181,7 @@ class ParagraphsController < ApplicationController
     else
       new_parent = paragraph.chapter.paragraphs.find(:first,:conditions => "position = #{paragraph.position - 1}")
     end
-    
+
     if new_parent
       paragraph.pcomments.each do |comment|
         comment.paragraph_id = new_parent.id
@@ -189,5 +190,5 @@ class ParagraphsController < ApplicationController
     end
     redirect_to "#{index_url}chapters/show_draft/#{paragraph.chapter.id}#pcomment#{paragraph.id}"
   end
-  
+
 end
