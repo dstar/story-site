@@ -1,1 +1,5 @@
-<% cache("show#paragraph_#{parabody.id}") do %><p><%= parabody.body %></p><% end %>
+<% cache("show#paragraph_#{parabody.id}") do -%>
+<div class="parabody" id="<%= ["parabody",parabody.id] %>">
+    <p><%= parabody.body %></p>
+</div>
+<% end -%>

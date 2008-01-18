@@ -34,11 +34,9 @@
 
                         if (unread_comments > 0) {
                                 Element.addClassName(element,"unread_comments");
-                                alert("unread_comments");
                         } else {
                                 if (total_comments > 0) {
                                         Element.addClassName(element,"read_comments");
-                                        alert("unread_comments");
                                 }
                         }
 
@@ -63,15 +61,12 @@
 
                         if (unacknowledged_comments > 0) {
                                 Element.addClassName(element,"unacknowledged_comments");
-                                alert("unacknowledged_comments");
                         } else {
                                 if (unread_comments > 0) {
                                         Element.addClassName(element,"unread_comments");
-                                        alert("unread_comments");
                                 } else {
                                         if (total_comments > 0) {
                                                 Element.addClassName(element,"read_comments");
-                                                alert("unread_comments");
                                         }
                                 }
                         }

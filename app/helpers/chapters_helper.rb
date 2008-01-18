@@ -55,4 +55,10 @@ module ChaptersHelper
     return "#{home_link} &gt; #{universe_link} &gt; #{story_link}#{chapno}"
   end
 
+  def comment_denotation_class(paragraph)
+    return 'unacknowledged_comments' if paragraph.total_comments > 0 and paragraph.unacknowledged_comments > 0 and @authinfo[:user] and @authinfo[:user].has_story_permission(chapter.story,'author')
+    return 'read_comments' if paragraph.total_comments > 0 and paragraph.unread_comments(@authinfo[:user]) < 1
+    return 'unread_comments' if paragraph.unread_comments(@authinfo[:user]) > 0
+  end
+
 end

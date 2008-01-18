@@ -27,4 +27,16 @@ class Paragraph < ActiveRecord::Base
     "show#paragraph_#{self.id}"
   end
 
+  def total_comments
+    Pcomment.count(:conditions => "paragraph_id = #{self.id} and flag < 2")
+  end
+
+  def unread_comments(user)
+    Pcomment.count(:conditions => "paragraph_id = #{self.id} and id not in (select prb.pcomment_id from pcomments_read_by prb where prb.user_id = #{user.id})")
+  end
+
+  def unacknowledged_comments
+    self.pcomments.inject(0) {|i, x| if x.flag < 2 and x.acknowledged.blank? then i += 1 else i += 0 end}
+  end
+
 end
