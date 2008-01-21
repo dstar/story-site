@@ -15,7 +15,7 @@ class UniversesController < ApplicationController
   end
 
   def check_authorization(user)
-    if (! @universe) 
+    if (! @universe)
       return true # If we don't have @universe, we're listing the universes, which is okay.
     end
     needed = @universe.required_permission(params[:action])
@@ -28,11 +28,11 @@ class UniversesController < ApplicationController
     end
     return false
   end
-  
+
   def story_add_owner
-    @story=Story.find(params[:id])
+    @story=Story.find(params[:story_id])
   end
-  
+
   def index
     list
     render :action => 'list'
@@ -51,7 +51,7 @@ class UniversesController < ApplicationController
     @stories = Story.OrderedListByUniverse(@universe.id)
   end
 
-  
+
 def new_story
     @story = Story.new
     @universe = Universe.find(params[:id])
@@ -68,7 +68,7 @@ def new_story
       render :action => 'new_story'
     end
   end
-  
+
   def edit
     @universe = Universe.find(params[:id])
   end
@@ -110,12 +110,12 @@ def new_story
     when /group/
       permission_holder = Group.find_by_group_name(params[:permission_holder])
     end
-    
+
     if permission_holder and params[:permission]
       universe_permissions=UniversePermission.new
       universe_permissions.permission_holder = permission_holder
       universe_permissions.permission=params[:permission]
-      universe_permissions.universe_id=params[:universe_id]      
+      universe_permissions.universe_id=params[:universe_id]
       unless universe_permissions.save
         flash[:notice] = "Permission Add Failed"
       end
@@ -129,11 +129,11 @@ def new_story
       flash[:notice]=message
       render :action => 'permissions'
     end
-    
+
     render :action => 'permissions'
   end
 
- 
+
 
   def permissions_destroy
     case params[:type]
@@ -142,7 +142,7 @@ def new_story
     when /Group/
       permission_holder = Group.find_by_group_name(params[:permission_holder])
     end
-    
+
     permission = UniversePermission.find_by_permission_holder_type_and_permission_holder_id_and_permission_and_universe_id(params[:type], permission_holder.id,params[:permission],params[:universe_id])
     permission.destroy
     render :action => 'permissions'
