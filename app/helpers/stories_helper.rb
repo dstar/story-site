@@ -1,6 +1,7 @@
 module StoriesHelper
   def Wordcount(story_id)
-    if @authinfo[:user] && ( StoryPermission.has_permission(@authinfo[:user], { 'id' => story_id, 'permission' => 'author'}) || StoryPermission.has_permission(@authinfo[:user], { 'id' => story_id, 'permission' => 'beta-reader'}) )
+    story = Story.find(story_id)
+    if is_author(story) || is_beta_reader(story)
       Story.count_by_sql ["select sum(words) from chapters where story_id = ?", story_id]
     else
       Story.count_by_sql ["select sum(words) from chapters where story_id = ? AND status = 'released'", story_id]
@@ -9,8 +10,14 @@ module StoriesHelper
 
   def nav_links(story)
     nav_buffer = ""
-    if @authinfo[:user] && (story && @authinfo[:user].has_universe_permission(@universe.id,'owner') || @authinfo[:user].has_story_permission(story.id,'author') )
-      nav_buffer += link_to 'Edit Story Permissions', :controller => 'stories', :action => 'permissions', :id => story.id
+    if  is_universe_owner(@story) || is_author(@story)
+
+      if is_author(@story)
+        nav_buffer += link_to 'Edit Story Permissions', :controller => 'stories', :action => 'permissions', :id => story.id
+      elsif is_universe_owner(@story)
+        nav_buffer += link_to 'Add Author', :controller => 'universes', :action => 'story_add_owner', :story_id => story.id
+      end
+
       nav_buffer +=  " | "
       nav_buffer += link_to 'Edit Story', :action => 'edit', :id => story
       nav_buffer +=  " | "
@@ -19,6 +26,14 @@ module StoriesHelper
       nav_buffer += link_to 'Add Chapter', :controller => 'stories', :action => 'new_chapter', :id => story.id
     end
     return nav_buffer
+  end
+
+  def is_universe_owner(story)
+    if @authinfo[:user] && @authinfo[:user].has_universe_permission(story.universe.id,'owner')
+      return true
+    else
+      return false
+    end
   end
 
   def can_delete?(story)
@@ -30,21 +45,21 @@ module StoriesHelper
   end
 
   def can_comment(chapter)
-    if is_author(chapter) || is_beta_reader(chapter)
+    if is_author(chapter.story) || is_beta_reader(chapter.story)
       return true
     end
     return false
   end
 
-  def is_author(chapter)
-    if @authinfo[:user] && @authinfo[:user].has_story_permission(chapter.story.id,'author')
+  def is_author(story)
+    if @authinfo[:user] && @authinfo[:user].has_story_permission(story.id,'author')
       return true
     end
     return false
   end
 
-  def is_beta_reader(chapter)
-    if @authinfo[:user] && @authinfo[:user].has_story_permission(chapter.story.id,'beta-reader')
+  def is_beta_reader(story)
+    if @authinfo[:user] && @authinfo[:user].has_story_permission(story.id,'beta-reader')
       return true
     end
     return false
@@ -53,7 +68,7 @@ module StoriesHelper
   def build_chapter_links(chapter)
     link_buffer = ""
 
-    link_buffer += link_to "(Edit)", :controller => 'chapters', :action => 'edit', :id => chapter.id if is_author(chapter)
+    link_buffer += link_to "(Edit)", :controller => 'chapters', :action => 'edit', :id => chapter.id if is_author(chapter.story)
     link_buffer += " "
 
     if chapter.status == 'released' || can_comment(chapter)
