@@ -1,2 +1,14 @@
-<p>Username: <% @user.username %> </p>
-<p class="timestamp"
+<p>Username: <%= @user.username %> </p>
+<p class="timestamp"> Member since <%= Time.at(@user.user_regdate) %>
+<% stories = @user.story_permissions.find(:all,:conditions => "permission = 'author'").collect {|s| s.story}-%>
+<% if stories -%>
+<p> Author of <%= stories.length %> <% if stories.length > 1 %>stories: <% else %> story: <% end %></p>
+<ul>
+  <% stories.each do |s| -%>
+  <% last_chapter = s.chapters.find(:first, :order => "date_released desc", :conditions => "status = 'released'") -%>
+  <% if last_chapter -%>
+  <%= "<li> #{s.title} (#{s.chapters.length} chapters, #{s.chapters.inject(0) { |i,k| i = i + k.words}} words, last updated on #{last_chapter.date_released})" %> </li>
+  <% end -%>
+  <% end -%>
+</ul>
+<% end -%>

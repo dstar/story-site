@@ -10,13 +10,13 @@ class Universe < ActiveRecord::Base
       :joins => "left outer join stories on stories.universe_id = universes.id",
       :group => "universes.id", :order => "sort desc")
   end
-  
+
   def required_permission(action)
     rps = self.required_permissions.find(:first, :conditions => "status = '#{self.status}' and action = '#{action}'")
 
     return rps.collect { |perm| perm.permission} if rps
   end
-  
+
   def self.default_permissions
     return  { nil => {
         "destroy"             => [ "owner",],
@@ -30,8 +30,8 @@ class Universe < ActiveRecord::Base
         "index" => [ "EVERYONE",],
         "list" => [ "EVERYONE",],
         "show" => [ "EVERYONE",],
-        "story_owner_add"           => [ "owner", ],
-        "story_owner_add_save"      => [ "owner", ],
+        "story_add_owner"           => [ "owner", ],
+        "story_add_owner_save"      => [ "owner", ],
         "create_universe"              => [ "admin", ],
         "new_universe"                 => [ "admin", ],
       }
