@@ -15,7 +15,7 @@ module StoriesHelper
       if is_author(@story)
         nav_buffer += link_to 'Edit Story Permissions', :controller => 'stories', :action => 'permissions', :id => story.id
       elsif is_universe_owner(@story)
-        nav_buffer += link_to 'Add Author', :controller => 'universes', :action => 'story_add_owner', :story_id => story.id
+        nav_buffer += link_to 'Add Author', :controller => 'universes', :action => 'story_add_owner', :story_id => story.id, :id => story.universe.id
       end
 
       nav_buffer +=  " | "
