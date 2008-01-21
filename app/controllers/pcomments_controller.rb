@@ -139,6 +139,7 @@ class PcommentsController < ApplicationController
       @pcomment.acknowledged = @authinfo[:user].username
       @pcomment.readers.push(@authinfo[:user])
       @pcomment.save
+      expire_fragment("show_pcomment_#{@pcomment.id}")
       if request.xml_http_request?
         @chapter = @paragraph.chapter
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
@@ -155,6 +156,7 @@ class PcommentsController < ApplicationController
       @pcomment.acknowledged = ""
       @pcomment.readers.delete(@authinfo[:user])
       @pcomment.save
+      expire_fragment("show_pcomment_#{@pcomment.id}")
       if request.xml_http_request?
         @chapter = @paragraph.chapter
         render :partial => 'chapters/comment_block', :controller => "chapter", :locals => {:para => @pcomment.paragraph, :display => "block"}
