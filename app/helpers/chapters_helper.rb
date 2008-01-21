@@ -56,7 +56,7 @@ module ChaptersHelper
   end
 
   def comment_denotation_class(paragraph)
-    return 'unacknowledged_comments' if paragraph.total_comments > 0 and paragraph.unacknowledged_comments > 0 and @authinfo[:user] and @authinfo[:user].has_story_permission(chapter.story,'author')
+    return 'unacknowledged_comments' if paragraph.total_comments > 0 and paragraph.unacknowledged_comments > 0 and @authinfo[:user] and @authinfo[:user].has_story_permission(paragraph.chapter.story,'author')
     return 'read_comments' if paragraph.total_comments > 0 and paragraph.unread_comments(@authinfo[:user]) < 1
     return 'unread_comments' if paragraph.unread_comments(@authinfo[:user]) > 0
   end
