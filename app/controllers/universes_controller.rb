@@ -148,7 +148,7 @@ def new_story
     render :action => 'permissions'
   end
 
- def story_owner_add_save
+ def story_add_owner_save
 
     case params[:type]
     when /user/
