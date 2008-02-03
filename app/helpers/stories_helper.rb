@@ -44,8 +44,8 @@ module StoriesHelper
     end
   end
 
-  def can_comment(chapter)
-    if is_author(chapter.story) || is_beta_reader(chapter.story)
+  def can_comment(story)
+    if is_author(story) || is_beta_reader(story)
       return true
     end
     return false
@@ -71,7 +71,7 @@ module StoriesHelper
     link_buffer += link_to "(Edit)", :controller => 'chapters', :action => 'edit', :id => chapter.id if is_author(chapter.story)
     link_buffer += " "
 
-    if chapter.status == 'released' || can_comment(chapter)
+    if chapter.status == 'released' || can_comment(chapter.story)
       link_buffer += "<em><strong>" if chapter.status == 'draft'
       link_buffer += link_to "Part #{chapter.number}", chapter_url(:chapter => chapter.file.gsub(/.html/,''))
       link_buffer += " "
@@ -79,19 +79,19 @@ module StoriesHelper
       link_buffer += "<em>NEW!</em> " if (Date.today - chapter.date < 7)
     end
 
-    link_buffer += link_to("Comment ", :controller => 'chapters', :action => 'show_draft', :id => chapter.id) if can_comment(chapter)
+    link_buffer += link_to("Comment ", :controller => 'chapters', :action => 'show_draft', :id => chapter.id) if can_comment(chapter.story)
 
-    link_buffer += "(#{chapter.date}, #{chapter.words} words" if chapter.status == 'released' || can_comment(chapter)
+    link_buffer += "(#{chapter.date}, #{chapter.words} words" if chapter.status == 'released' || can_comment(chapter.story)
 
     comment_count = chapter.num_comments
 
-    link_buffer += ", #{comment_count} comments" if can_comment(chapter)
+    link_buffer += ", #{comment_count} comments" if can_comment(chapter.story)
 
-    link_buffer += ", <strong>#{chapter.num_unread_comments(@authinfo[:user])} unread</strong>" if  can_comment(chapter) && chapter.num_unread_comments(@authinfo[:user]) > 0
+    link_buffer += ", <strong>#{chapter.num_unread_comments(@authinfo[:user])} unread</strong>" if  can_comment(chapter.story) && chapter.num_unread_comments(@authinfo[:user]) > 0
 
-    link_buffer += ", <span class=\"unacknowledged_count\">#{chapter.num_unacknowledged_comments} unacknowledged</span>" if is_author(chapter) && (chapter.num_unacknowledged_comments > 0)
+    link_buffer += ", <span class=\"unacknowledged_count\">#{chapter.num_unacknowledged_comments} unacknowledged</span>" if is_author(chapter.story) && (chapter.num_unacknowledged_comments > 0)
 
-    link_buffer += ") <br/>\n" if chapter.status == "released" || can_comment(chapter)
+    link_buffer += ") <br/>\n" if chapter.status == "released" || can_comment(chapter.story)
 
     return link_buffer
   end
