@@ -89,7 +89,7 @@ module StoriesHelper
 
     link_buffer += ", <strong>#{chapter.num_unread_comments(@authinfo[:user])} unread</strong>" if  can_comment(chapter) && chapter.num_unread_comments(@authinfo[:user]) > 0
 
-    link_buffer += ", <span class=\"unacknowledged_count\">#{chapter.num_unacknowledged_comments} unacknowledged</span>" if is_author(chapter) && chapter.num_unacknowledged_comments > 0
+    link_buffer += ", <span class=\"unacknowledged_count\">#{chapter.num_unacknowledged_comments} unacknowledged</span>" if is_author(chapter) && (chapter.num_unacknowledged_comments > 0)
 
     link_buffer += ") <br/>\n" if chapter.status == "released" || can_comment(chapter)
 
