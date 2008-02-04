@@ -90,6 +90,7 @@ class ParagraphsController < ApplicationController
           para = Paragraph.new(:chapter_id => @paragraph.chapter_id, :body_raw => body);
           para.save
           para.insert_at(insert_at)
+          para.save
           insert_at += 1
           need_page_reload = true
         end

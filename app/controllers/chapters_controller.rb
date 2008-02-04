@@ -47,7 +47,7 @@ class ChaptersController < ApplicationController
   end
 
   def show_draft
-    @chapter = Chapter.find(params[:id], :include => [{:paragraphs => :pcomments}])
+    @chapter = Chapter.find(params[:id], :include => [{:paragraphs => :pcomments}], :order => "position")
   end
 
   def dumpByFile
