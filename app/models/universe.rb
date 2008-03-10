@@ -4,6 +4,8 @@ class Universe < ActiveRecord::Base
   has_many :universe_permissions
   has_many :required_permissions, :as => :permissionable
 
+  validates_presence_of :description, :name
+
   def self.OrderedListByStoryCount
     find(:all,
       :select => "name, universes.description, count(stories.id) as sort, universes.id",

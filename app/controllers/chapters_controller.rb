@@ -86,6 +86,8 @@ class ChaptersController < ApplicationController
     if @chapter.save
       flash[:notice] = 'Chapter was successfully updated.'
       expire_fragment( :action => "show", :action_suffix => "chapter_#{@chapter.id}", :controller => "chapters")
+      expire_fragment("story_list#{@chapter.story.id}true" )
+      expire_fragment("story_list#{@chapter.story.id}false" )
       redirect_to :controller => 'stories', :action => 'show', :id => @chapter.story_id
     else
       render :action => 'edit'

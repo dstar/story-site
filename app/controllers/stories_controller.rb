@@ -151,6 +151,7 @@ class StoriesController < ApplicationController
   def create_chapter
     @chapter = Chapter.new(params[:chapter])
     @chapter.date_uploaded = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless @chapter.date_uploaded
+    @chapter.file = "#{@chapter.story.short_title}#{@chapter.number}.html"
     if @chapter.save
       release_chapter(@chapter) if @chapter.status == 'released'
       process_file(params[:file],@chapter.id) unless params[:file].blank?
