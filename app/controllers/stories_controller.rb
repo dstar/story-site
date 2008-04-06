@@ -189,7 +189,6 @@ class StoriesController < ApplicationController
     }
 
     @chapter.words = word_count
-    @chapter.file = file.original_filename
     @chapter.save
     dump_to_file(@chapter)
   end
