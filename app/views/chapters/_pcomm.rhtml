@@ -5,12 +5,10 @@
 <% story = @chapter.story -%>
 <% is_author = (local_user and local_user.has_story_permission(story,'author') ) -%>
 <% read_by = pcomm.readers.include?(@authinfo[:user]) -%>
-<% cache("show_pcomment_#{pcomm.id}") do -%>
- <% if read_by -%>
-   <%= pcomm.body.gsub(/comment_body_paragraph/, "comment_body_paragraph comment_read") %>
- <% else -%>
-   <%= pcomm.body %>
- <% end -%>
+<% if read_by -%>
+  <%= pcomm.body.gsub(/comment_body_paragraph/, "comment_body_paragraph comment_read") %>
+<% else -%>
+  <%= pcomm.body %>
 <% end -%>
    <div class="commentposted">
      Posted at <%= pcomm.created_at %> by <%= pcomm.username %>.<br />
