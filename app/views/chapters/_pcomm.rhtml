@@ -24,8 +24,8 @@
      <%= link_to_remote '(Mark comment as read)',{ :url => {:controller => 'pcomments', :action => 'markread', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}", :complete => "denote_comments('#{pcomm.paragraph_id}')"}, {:href => index_url + "pcomments/markread?id=#{pcomm.id}"} unless read_by  %>
 <% end -%>
 <% if is_author -%>
-     <%= link_to_remote '(Acknowledge)', {:url => {:controller => 'pcomments', :action => 'acknowledge', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}", :complete => "denote_comments('#{pcomm.paragraph_id}')"}, {:href => index_url + "pcomments/acknowledge?id=#{pcomm.id}"} if pcomm.acknowledged.blank?  %>
-     <%= link_to_remote '(Un-acknowledge)',{ :url => {:controller => 'pcomments', :action => 'unacknowledge', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}", :complete => "denote_comments('#{pcomm.paragraph_id}')"}, {:href => index_url + "pcomments/unacknowledge?id=#{pcomm.id}"} unless pcomm.acknowledged.blank?  %>
+     <%= link_to_remote '(Acknowledge)', {:url => {:controller => 'pcomments', :action => 'acknowledge', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}", :complete => "handle_acknowledgement('#{pcomm.paragraph_id}')"}, {:href => index_url + "pcomments/acknowledge?id=#{pcomm.id}"} if pcomm.acknowledged.blank?  %>
+     <%= link_to_remote '(Un-acknowledge)',{ :url => {:controller => 'pcomments', :action => 'unacknowledge', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}", :complete => "handle_acknowledgement('#{pcomm.paragraph_id}')"}, {:href => index_url + "pcomments/unacknowledge?id=#{pcomm.id}"} unless pcomm.acknowledged.blank?  %>
 <% end -%>
      <br />
   </div>
