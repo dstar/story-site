@@ -1,9 +1,9 @@
 module ChaptersHelper
   def nextChapter(chapter)
-    Chapter.find(:first, :conditions => ["story_id = ? and number > ?",chapter.story_id, number])
+    Chapter.find(:first, :conditions => ["story_id = ? and number > ?",chapter.story_id, chapter.number], :order => "number")
   end
   def prevChapter(chapter)
-    Chapter.find(:first, :conditions => ["story_id = ? and number < ?",chapter.story_id, number])
+    Chapter.find(:first, :conditions => ["story_id = ? and number < ?",chapter.story_id, chapter.number],:order => "number DESC")
   end
 
   def chapter_navigation(chapter)
