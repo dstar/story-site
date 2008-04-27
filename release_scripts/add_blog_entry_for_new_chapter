@@ -14,8 +14,16 @@ end
 
 @chapter = Chapter.find_by_story_id_and_number(@story.id, chapter_num)
 @url = "http://#{title}.playground.pele.cx"
-
+news_string = "<p><a href='#{@url}'>#{@story.title}</a> Chapter #{@chapter.number} (#{@chapter.words} words) is up!</p>"
+Dir.chdir("/home/httpd/html/playground")
 add_news = IO.popen("/home/httpd/html/playground/add_news_entry.pl -b #{title} -t \"#{@story.title}\"", "w+")
 RAILS_DEFAULT_LOGGER.error "Could not open add_news_entry.pl!"
-add_news.puts "<p><a href='#{@url}'>#{@story.title}</a> Chapter #{@chapter.number} (#{@chapter.words} words) is up!</p>"
+add_news.puts news_string
 add_news.close_write
+
+user = User.find(3)
+blogpost = Blogpost.new
+blogpost.body_raw = news_string
+blogpost.title = "#{@story.title} Chapter #{@chapter.number} Up"
+blogpost.user = user.username
+blogpost.save
