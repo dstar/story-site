@@ -1,5 +1,5 @@
 <div id="user">
-<%= start_form_tag :action => 'permissions_destroy', :id => @story.id %>
+<% form_tag :action => 'permissions_destroy', :id => @story.id do %>
 <% if current_permissions.permission_holder.is_a?(User) %>
 <% name = current_permissions.permission_holder.username %>
 <% else %>
@@ -11,5 +11,5 @@
 <input type="hidden" value="<%= @story.id %>" name="story_id" >
 <input type="submit" value="Delete Permission">
 Name: <%= name %> Type: <%= current_permissions.permission_holder_type %> Permission: <%= current_permissions.permission %>
-</form>
+<% end %>
 </div>
