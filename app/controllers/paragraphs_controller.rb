@@ -169,11 +169,13 @@ class ParagraphsController < ApplicationController
   def move_comments_next
     paragraph = Paragraph.find(params[:id])
     move_comments(paragraph,'next')
+    redirect_to "#{index_url}chapters/show_draft/#{paragraph.chapter.id}#pcomment#{paragraph.id}"
   end
 
   def move_comments_prev
     paragraph = Paragraph.find(params[:id])
     move_comments(paragraph,'prev')
+    redirect_to "#{index_url}chapters/show_draft/#{paragraph.chapter.id}#pcomment#{paragraph.id}"
   end
 
   def move_comments(paragraph, direction)
@@ -189,7 +191,6 @@ class ParagraphsController < ApplicationController
         comment.save
       end
     end
-    redirect_to "#{index_url}chapters/show_draft/#{paragraph.chapter.id}#pcomment#{paragraph.id}"
   end
 
 end
