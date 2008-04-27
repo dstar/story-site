@@ -7,20 +7,7 @@ class PcommentsController < ApplicationController
       @paragraph = @pcomment.paragraph
     end
     @story_id = @paragraph.chapter.story.id
-
-    @authorization = {
-      "destroy"       => ["author",],
-      "update"        => ["author",],
-      "edit"          => ["author",],
-      "create"        => ["beta-reader","author",],
-      "new"           => ["author","beta-reader",],
-      "markread"      => ["author","beta-reader",],
-      "markunread"    => ["author","beta-reader",],
-      "acknowledge"   => ["author",],
-      "unacknowledge" => ["author",],
-      "move_next"     => ["author",],
-      "move_prev"     => ["author",],
-    }
+    @authorization = Pcomment.default_permissions
   end
 
   def check_authorization(user)
@@ -35,7 +22,7 @@ class PcommentsController < ApplicationController
   end
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
+  verify :method => :post, :only => [ :destroy, :create, :update, :move_next, :move_prev, :markread, :markunread, :acknowledge, :unacknowledge ],
     :redirect_to => { :action => :list }
 
   def new
