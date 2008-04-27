@@ -22,7 +22,11 @@ class PcommentsController < ApplicationController
   end
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update, :move_next, :move_prev, :markread, :markunread, :acknowledge, :unacknowledge ],
+  #
+  # verify :method => :post, :only => [ :destroy, :create, :update, :move_next, :move_prev, :markread, :markunread, :acknowledge, :unacknowledge ],
+
+  # The list _should_ be the one above, but I have to figure out the best way to make a post link
+  verify :method => :post, :only => [ :destroy, :create, :update ],
     :redirect_to => { :action => :list }
 
   def new

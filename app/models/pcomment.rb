@@ -42,16 +42,39 @@ class Pcomment < ActiveRecord::Base
   end
 
   def move(direction)
+    logger.debug "QQQ: Pcomment#move called with direction '#{direction}'"
+
+    logger.debug "QQQ: Pcomment#move: position currently '#{self.paragraph.position}', paragraph currently '#{self.paragraph.id}'"
+
     if direction == 'next'
-      new_parent = self.lower_item
+      new_parent = self.paragraph.lower_item
     else
-      new_parent = self.higher_item
+      new_parent = self.paragraph.higher_item
     end
 
+    logger.debug "QQQ: Pcomment#move: new_parent is '#{new_parent.id}'"
+
     if new_parent
-      self.paragraph_id = new_parent.id
+      self.paragraph = new_parent
       self.save
+      logger.debug "QQQ: Pcomment#move: position NOW '#{self.paragraph.position}', paragraph currently '#{self.paragraph.id}'"
     end
+  end
+
+  def self.default_permissions
+    return {
+      "destroy"       => ["author",],
+      "update"        => ["author",],
+      "edit"          => ["author",],
+      "create"        => ["beta-reader","author",],
+      "new"           => ["author","beta-reader",],
+      "markread"      => ["author","beta-reader",],
+      "markunread"    => ["author","beta-reader",],
+      "acknowledge"   => ["author",],
+      "unacknowledge" => ["author",],
+      "move_next"     => ["author",],
+      "move_prev"     => ["author",],
+    }
   end
 
 end

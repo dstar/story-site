@@ -2,6 +2,7 @@
   <u><%= storylist.name -%></u>
   <ul>
     <% Story.OrderedListByUniverse(storylist.id).each do |story| -%>
+      <% can_comment = false %>
       <% can_comment = true if @authinfo[:user] && ( @authinfo[:user].has_story_permission(story,'author') || @authinfo[:user].has_story_permission(story,'beta-reader') ) %>
       <% cache "story_list#{story.id}#{can_comment}" do %>
         <li><a href="<%=index_url(:host => StoryHost(story)) %>"><%= story.title %></a>

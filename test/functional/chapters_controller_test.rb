@@ -104,6 +104,7 @@ class ChaptersControllerTest < Test::Unit::TestCase
 
     @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
 
+
     get :show_draft, :id => 104
 
     assert_response :success

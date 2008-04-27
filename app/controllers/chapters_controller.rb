@@ -88,6 +88,7 @@ class ChaptersController < ApplicationController
       expire_fragment( :action => "show", :action_suffix => "chapter_#{@chapter.id}", :controller => "chapters")
       expire_fragment("story_list#{@chapter.story.id}true" )
       expire_fragment("story_list#{@chapter.story.id}false" )
+      CACHE.set("storylist_last_updated", Date.today)
       redirect_to :controller => 'stories', :action => 'show', :id => @chapter.story_id
     else
       render :action => 'edit'

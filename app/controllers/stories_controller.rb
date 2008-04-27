@@ -53,6 +53,7 @@ class StoriesController < ApplicationController
       expire_fragment("story_list#{@story.id}#true")
       expire_fragment("story_list#{@story.id}#false")
       expire_fragment("stories_for_universe#{@story.id}")
+      CACHE.set("storylist_last_updated", Date.today)
       flash[:notice] = 'Story was successfully updated.'
       redirect_to :action => 'show', :id => @story.id
     else

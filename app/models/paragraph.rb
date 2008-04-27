@@ -40,7 +40,9 @@ class Paragraph < ActiveRecord::Base
   end
 
   def move_comments(direction)
+      logger.debug "QQQ: Paragraph#move_comments called with direction '#{direction}'"
     self.pcomments.each do |comment|
+      logger.debug "QQQ: Paragraph#move_comments calling Pcomment#move with direction '#{direction}' for #{comment.id}"
       comment.move(direction)
     end
   end

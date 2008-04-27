@@ -153,4 +153,40 @@ class PcommentsControllerTest < Test::Unit::TestCase
     assert Pcomment.find(1).flag == 2
 
   end
+
+  def test_move_unauthed
+    assert_not_nil Pcomment.find(1)
+
+    post :move_next, :id => 1
+    assert_response :redirect
+    assert_redirected_to :controller => 'pcomments', :action => 'show'
+
+    post :move_prev, :id => 1
+    assert_response :redirect
+    assert_redirected_to :controller => 'pcomments', :action => 'show'
+
+  end
+
+  def test_move_authed
+
+    @request.cookies["phpbb2mysql_sid"] = CGI::Cookie.new("phpbb2mysql_sid", "test")
+
+    assert_not_nil Pcomment.find(1)
+
+    old_position = Pcomment.find(1).paragraph.position
+
+    post :move_next, :id => 1
+    assert_response :redirect
+    assert_redirected_to :controller => 'chapters', :action => 'show_draft'
+
+    assert_equal  old_position + 1, Pcomment.find(1).paragraph.position, "Expected position to be #{ old_position + 1}, but it was #{Pcomment.find(1).paragraph.id}"
+
+    post :move_prev, :id => 1
+    assert_response :redirect
+    assert_redirected_to :controller => 'chapters', :action => 'show_draft'
+
+    assert_equal old_position, Pcomment.find(1).paragraph.position
+
+  end
+
 end
