@@ -197,4 +197,17 @@ class PcommentsController < ApplicationController
     @breadcrumbs += " > Pcomments: #{params[:action]}"
   end
 
+  def move_comments_next
+    comment = Pcomment.find(params[:id])
+    comment.move('next')
+    redirect_to "#{index_url}chapters/show_draft/#{comment.paragraph.chapter.id}#pcomment#{comment.paragraph.id}"
+  end
+
+  def move_comments_prev
+    comment = Pcomment.find(params[:id])
+    comment.move('prev')
+    redirect_to "#{index_url}chapters/show_draft/#{comment.paragraph.chapter.id}#pcomment#{comment.paragraph.id}"
+  end
+
+
 end

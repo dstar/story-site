@@ -168,29 +168,15 @@ class ParagraphsController < ApplicationController
 
   def move_comments_next
     paragraph = Paragraph.find(params[:id])
-    move_comments(paragraph,'next')
+    paragraph.move_comments('next')
     redirect_to "#{index_url}chapters/show_draft/#{paragraph.chapter.id}#pcomment#{paragraph.id}"
   end
 
   def move_comments_prev
     paragraph = Paragraph.find(params[:id])
-    move_comments(paragraph,'prev')
+    paragraph.move_comments('prev')
     redirect_to "#{index_url}chapters/show_draft/#{paragraph.chapter.id}#pcomment#{paragraph.id}"
   end
 
-  def move_comments(paragraph, direction)
-    if direction == 'next'
-      new_parent = paragraph.chapter.paragraphs.find(:first,:conditions => "position = #{paragraph.position + 1}")
-    else
-      new_parent = paragraph.chapter.paragraphs.find(:first,:conditions => "position = #{paragraph.position - 1}")
-    end
-
-    if new_parent
-      paragraph.pcomments.each do |comment|
-        comment.paragraph_id = new_parent.id
-        comment.save
-      end
-    end
-  end
 
 end

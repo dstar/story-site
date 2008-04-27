@@ -40,4 +40,18 @@ class Pcomment < ActiveRecord::Base
     self.body.gsub!(/$/,"</p>")
     self.body.gsub!(/<p class='comment_body_paragraph'><\/p>/, "")
   end
+
+  def move(direction)
+    if direction == 'next'
+      new_parent = self.lower_item
+    else
+      new_parent = self.higher_item
+    end
+
+    if new_parent
+      self.paragraph_id = new_parent.id
+      self.save
+    end
+  end
+
 end

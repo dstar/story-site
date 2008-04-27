@@ -39,4 +39,10 @@ class Paragraph < ActiveRecord::Base
     self.pcomments.inject(0) {|i, x| if x.flag < 2 and x.acknowledged.blank? then i += 1 else i += 0 end}
   end
 
+  def move_comments(direction)
+    self.pcomments.each do |comment|
+      comment.move(direction)
+    end
+  end
+
 end
