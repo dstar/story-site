@@ -18,6 +18,8 @@ class PcommentsController < ApplicationController
       "markunread"    => ["author","beta-reader",],
       "acknowledge"   => ["author",],
       "unacknowledge" => ["author",],
+      "move_next"     => ["author",],
+      "move_prev"     => ["author",],
     }
   end
 
@@ -197,13 +199,13 @@ class PcommentsController < ApplicationController
     @breadcrumbs += " > Pcomments: #{params[:action]}"
   end
 
-  def move_comments_next
+  def move_next
     comment = Pcomment.find(params[:id])
     comment.move('next')
     redirect_to "#{index_url}chapters/show_draft/#{comment.paragraph.chapter.id}#pcomment#{comment.paragraph.id}"
   end
 
-  def move_comments_prev
+  def move_prev
     comment = Pcomment.find(params[:id])
     comment.move('prev')
     redirect_to "#{index_url}chapters/show_draft/#{comment.paragraph.chapter.id}#pcomment#{comment.paragraph.id}"
