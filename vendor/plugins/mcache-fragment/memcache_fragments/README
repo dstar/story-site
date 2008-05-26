@@ -1,0 +1,52 @@
+=MemcacheFragments
+
+== About
+
+memcache_fragments is a very simple plugin (10 lines of code!) that 
+
+1. makes rails fragment caching play nice with robot coop's memcache-client by wrapping its get/set methods with read/write methods that rails expects.
+
+2. makes it easy to do time based fragment expiry using this syntax:
+
+  <% cache 'my/cache/key', :expire => 10.minutes do %>
+	...
+  <% end %>
+
+
+== Installing and using memcache_fragments
+
+You'll first need the memcache-client gem from robot coop
+  $ sdo gem install memcache-client
+
+Now install the plugin
+
+  $ script/plugin install memcache_fragments
+
+Alternatively, you can use the gem
+
+  $ sudo gem install memcache_fragments
+  
+  # in environment.rb
+  require 'memcache_fragments'
+
+== Setting up the fragment cache
+
+See the docs from memcache-client, but I found placing this in your environment.rb (or specific environment) to be the easiest:
+
+  CACHE = MemCache.new :c_threshold => 10_000,:compression => true,:debug => false,:namespace => 'mycachespace',:readonly => false,:urlencode => false
+  CACHE.servers = 'localhost:11211'
+ 
+  config.action_controller.session_store = :mem_cache_store
+  config.action_controller.fragment_cache_store = CACHE, {}
+  ActionController::CgiRequest::DEFAULT_SESSION_OPTIONS.merge!({ 'cache' => CACHE })
+
+That's it! Now launch memcached (it helps to go in debug mode at first)
+
+  $ memcached -vv
+
+Launch your app and you should see it using the memcached instance for both sessions and fragment caching. 
+
+== Bugs 
+
+Author: Yan Pritzker yan@fifteenreasons.com | http://planyp.us | http://skwp.wordpress.com
+This plugin is alpha quality. Please report any bugs to yan@fifteenreasons.com.
