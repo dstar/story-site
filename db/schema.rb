@@ -194,66 +194,66 @@ ActiveRecord::Schema.define(:version => 41) do
   end
 
   create_table "users", :id => false, :force => true do |t|
-    t.integer "user_id",                 :limit => 8,                                 :default => 0,           :null => false
-    t.boolean "user_active",                                                          :default => true
-    t.string  "username",                :limit => 25,                                :default => "",          :null => false
-    t.string  "user_password",           :limit => 32,                                :default => "",          :null => false
-    t.integer "user_session_time",                                                    :default => 0,           :null => false
-    t.integer "user_session_page",       :limit => 5,                                 :default => 0,           :null => false
-    t.integer "user_lastvisit",                                                       :default => 0,           :null => false
-    t.integer "user_lastvisit_chat",                                                  :default => 0,           :null => false
-    t.integer "user_regdate",                                                         :default => 0,           :null => false
-    t.integer "user_level",              :limit => 4,                                 :default => 0
-    t.integer "user_posts",              :limit => 8,                                 :default => 0,           :null => false
-    t.decimal "user_timezone",                          :precision => 5, :scale => 2, :default => 0.0,         :null => false
+    t.integer "user_id",                 :limit => 8,                                               :default => 0,           :null => false
+    t.boolean "user_active",                                                                        :default => true
+    t.string  "username",                :limit => 25,                                              :default => "",          :null => false
+    t.string  "user_password",           :limit => 32,                                              :default => "",          :null => false
+    t.integer "user_session_time",                                                                  :default => 0,           :null => false
+    t.integer "user_session_page",       :limit => 5,                                               :default => 0,           :null => false
+    t.integer "user_lastvisit",                                                                     :default => 0,           :null => false
+    t.integer "user_lastvisit_chat",                                                                :default => 0,           :null => false
+    t.integer "user_regdate",                                                                       :default => 0,           :null => false
+    t.integer "user_level",              :limit => 4,                                               :default => 0
+    t.integer "user_posts",              :limit => 8,                                               :default => 0,           :null => false
+    t.decimal "user_timezone",                                        :precision => 5, :scale => 2, :default => 0.0,         :null => false
     t.integer "user_style",              :limit => 4
     t.string  "user_lang"
-    t.string  "user_dateformat",         :limit => 14,                                :default => "d M Y H:i", :null => false
-    t.integer "user_new_privmsg",        :limit => 5,                                 :default => 0,           :null => false
-    t.integer "user_unread_privmsg",     :limit => 5,                                 :default => 0,           :null => false
-    t.integer "user_last_privmsg",                                                    :default => 0,           :null => false
+    t.string  "user_dateformat",         :limit => 14,                                              :default => "d M Y H:i", :null => false
+    t.integer "user_new_privmsg",        :limit => 5,                                               :default => 0,           :null => false
+    t.integer "user_unread_privmsg",     :limit => 5,                                               :default => 0,           :null => false
+    t.integer "user_last_privmsg",                                                                  :default => 0,           :null => false
     t.integer "user_emailtime"
     t.boolean "user_viewemail"
     t.boolean "user_attachsig"
-    t.boolean "user_setbm",                                                           :default => false,       :null => false
-    t.boolean "user_allowhtml",                                                       :default => true
-    t.boolean "user_allowbbcode",                                                     :default => true
-    t.boolean "user_allowsmile",                                                      :default => true
-    t.boolean "user_allowavatar",                                                     :default => true,        :null => false
-    t.boolean "user_allow_pm",                                                        :default => true,        :null => false
-    t.boolean "user_allow_viewonline",                                                :default => true,        :null => false
-    t.boolean "user_notify",                                                          :default => true,        :null => false
-    t.boolean "user_notify_pm",                                                       :default => false,       :null => false
-    t.boolean "user_popup_pm",                                                        :default => false,       :null => false
-    t.integer "user_rank",                                                            :default => 0
+    t.boolean "user_setbm",                                                                         :default => false,       :null => false
+    t.boolean "user_allowhtml",                                                                     :default => true
+    t.boolean "user_allowbbcode",                                                                   :default => true
+    t.boolean "user_allowsmile",                                                                    :default => true
+    t.boolean "user_allowavatar",                                                                   :default => true,        :null => false
+    t.boolean "user_allow_pm",                                                                      :default => true,        :null => false
+    t.boolean "user_allow_viewonline",                                                              :default => true,        :null => false
+    t.boolean "user_notify",                                                                        :default => true,        :null => false
+    t.boolean "user_notify_pm",                                                                     :default => false,       :null => false
+    t.boolean "user_popup_pm",                                                                      :default => false,       :null => false
+    t.integer "user_rank",                                                                          :default => 0
     t.string  "user_avatar",             :limit => 100
-    t.integer "user_avatar_type",        :limit => 4,                                 :default => 0,           :null => false
+    t.integer "user_avatar_type",        :limit => 4,                                               :default => 0,           :null => false
     t.string  "user_email"
     t.string  "user_icq",                :limit => 15
     t.string  "user_website",            :limit => 100
     t.string  "user_from",               :limit => 100
     t.text    "user_sig"
     t.string  "user_sig_bbcode_uid",     :limit => 10
-    t.text    "user_pips",                                                                                     :null => false
-    t.string  "user_pips_bbcode_uid",    :limit => 10,                                :default => "",          :null => false
-    t.text    "user_pips_parsed",                                                                              :null => false
+    t.text    "user_pips",                                                                                                   :null => false
+    t.string  "user_pips_bbcode_uid",    :limit => 10,                                              :default => "",          :null => false
+    t.text    "user_pips_parsed",                                                                                            :null => false
     t.string  "user_aim"
     t.string  "user_yim"
     t.string  "user_msnm"
     t.string  "user_occ",                :limit => 100
-    t.string  "user_skype",                                                           :default => "",          :null => false
+    t.string  "user_skype",                                                                         :default => "",          :null => false
     t.string  "user_interests"
     t.string  "user_actkey",             :limit => 32
     t.string  "user_newpasswd",          :limit => 32
-    t.string  "user_topic_view",         :limit => 10,                                 :default => "threads",   :null => false
+    t.enum    "user_topic_view",         :limit => [:flat, :threads],                               :default => :threads,    :null => false
     t.string  "user_pubname"
-    t.integer "user_thread_indent_px",   :limit => 6,                                 :default => 5,           :null => false
-    t.integer "user_thread_cutofflevel", :limit => 6,                                 :default => 12,          :null => false
-    t.integer "user_view_log",           :limit => 4,                                 :default => 0,           :null => false
-    t.boolean "user_index_mode",                                                      :default => false,       :null => false
+    t.integer "user_thread_indent_px",   :limit => 6,                                               :default => 5,           :null => false
+    t.integer "user_thread_cutofflevel", :limit => 6,                                               :default => 12,          :null => false
+    t.integer "user_view_log",           :limit => 4,                                               :default => 0,           :null => false
+    t.boolean "user_index_mode",                                                                    :default => false,       :null => false
     t.text    "user_unread_topics"
-    t.integer "user_login_tries",        :limit => 5,                                 :default => 0,           :null => false
-    t.integer "user_last_login_try",                                                  :default => 0,           :null => false
+    t.integer "user_login_tries",        :limit => 5,                                               :default => 0,           :null => false
+    t.integer "user_last_login_try",                                                                :default => 0,           :null => false
   end
 
 end
