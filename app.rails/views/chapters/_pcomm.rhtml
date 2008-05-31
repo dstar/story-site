@@ -1,0 +1,34 @@
+<% is_author = false -%>
+<% local_user = nil -%>
+<% story = nil -%>
+<% local_user = @authinfo[:user] if @authinfo[:user] -%>
+<% story = @chapter.story -%>
+<% is_author = (local_user and local_user.has_story_permission(story,'author') ) -%>
+<% read_by = pcomm.readers.include?(@authinfo[:user]) -%>
+<% if read_by -%>
+  <%= pcomm.body.gsub(/comment_body_paragraph/, "comment_body_paragraph comment_read") %>
+<% else -%>
+  <%= pcomm.body %>
+<% end -%>
+   <div class="commentposted">
+     Posted at <%= pcomm.created_at %> by <%= pcomm.username %>.<br />
+<% unless pcomm.acknowledged.blank? -%>
+     Acknowledged by <%= pcomm.acknowledged %><br />
+<% end -%>
+<% if is_author -%>
+     <%= %Q|<span class="comments_up" title="Move comment to previous paragraph"><a href="/pcomments/move_prev/#{pcomm.id}" class="comments_up">&uarr;</a></span>| %>
+     <%= %Q|<span class="comments_down" title="Move comment to next paragraph"><a href="/pcomments/move_next/#{pcomm.id}" class="comments_down">&darr;</a></span>| %>
+     <%= link_to_remote '(Delete comment)', { :url => { :controller => 'pcomments', :action => 'destroy', :id => pcomm.id }, :confirm => 'Are you sure?', :update => "comment_block_#{pcomm.paragraph_id}", :complete => "denote_comments('#{pcomm.paragraph_id}')"}, {:href => index_url + "pcomments/destroy?id=#{pcomm.id}"} %>
+<% end -%>
+<% if read_by -%>
+     <%= link_to_remote '(Mark comment as unread)', { :url => {:controller => 'pcomments', :action => 'markunread', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}", :complete => "denote_comments('#{pcomm.paragraph_id}')"}, {:href => index_url + "pcomments/markunread?id=#{pcomm.id}"} if read_by %>
+<% else -%>
+     <%= link_to_remote '(Mark comment as read)',{ :url => {:controller => 'pcomments', :action => 'markread', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}", :complete => "denote_comments('#{pcomm.paragraph_id}')"}, {:href => index_url + "pcomments/markread?id=#{pcomm.id}"} unless read_by  %>
+<% end -%>
+<% if is_author -%>
+     <%= link_to_remote '(Acknowledge)', {:url => {:controller => 'pcomments', :action => 'acknowledge', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}", :complete => "handle_acknowledgement('#{pcomm.paragraph_id}')"}, {:href => index_url + "pcomments/acknowledge?id=#{pcomm.id}"} if pcomm.acknowledged.blank?  %>
+     <%= link_to_remote '(Un-acknowledge)',{ :url => {:controller => 'pcomments', :action => 'unacknowledge', :id => pcomm.id}, :update => "comment_block_#{pcomm.paragraph_id}", :complete => "handle_acknowledgement('#{pcomm.paragraph_id}')"}, {:href => index_url + "pcomments/unacknowledge?id=#{pcomm.id}"} unless pcomm.acknowledged.blank?  %>
+<% end -%>
+     <br />
+  </div>
+

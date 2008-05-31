@@ -1,0 +1,19 @@
+<html>
+<head>
+  <title>Blogposts: <%= controller.action_name %></title>
+<%= javascript_include_tag "prototype" %>
+<%= style_links %>
+  <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
+</head>
+<body>
+<%= php_session_header %>
+<%= style_dropdown %>
+
+<%= breadcrumbs %>
+
+<p style="color: red"><%= flash[:notice] %></p>
+
+<%= @content_for_layout %>
+
+</body>
+</html>

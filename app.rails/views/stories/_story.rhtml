@@ -1,0 +1,8 @@
+<% cache "story_#{story.id}" do -%>  
+<% inactive_tag = " (Not Active Yet)" if story.chapters.empty? -%>
+  <li><div <%= "class='inactive_story'" if story.chapters.empty? %>><h4><a href = "<%= index_url(:host => StoryHost(story)) %>"><%= story.title %></a><%= inactive_tag %></h4>
+  <% kw = "" -%>
+  <% kw = "\n\n(Keywords: #{story.keywords})" if story.keywords and not story.keywords.empty? -%>
+  <%= our_markdown(story.description + kw).gsub(/<br \/>/, "</p><p>") -%></div>
+  </li>
+<% end -%>

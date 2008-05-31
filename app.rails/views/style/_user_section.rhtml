@@ -1,0 +1,11 @@
+<div id="users">
+<center><h2> <%= @authinfo[:user].username %>'s styles for theme <%= @theme %> </h2></center>
+<div id="user_styles">
+<%= render :partial => "edit_style", :collection => @user_styles %>
+</div>
+<form action="" method="">
+<input type="TEXT" name="new_element" size="10" id="new_element">
+<input type="BUTTON" value="Add Element" name="Add Element"
+onClick="new Insertion.Bottom('user_styles', insertStyle(Form.Element.getValue('new_element')));Element.remove('save result')">
+</form>
+</div>

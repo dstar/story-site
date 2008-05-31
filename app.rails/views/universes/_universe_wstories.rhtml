@@ -1,0 +1,15 @@
+  <div class="world">
+<% cache "universe_wstories#{universe_wstories.id}" do %>
+    <h2 class="worldtitle"><%= link_to universe_wstories.name,
+        :controller => 'universes',
+        :action => 'show',
+        :id => universe_wstories.id %></h2>
+    <%= our_markdown(universe_wstories.description) %>
+<% end %>
+  <% cache "stories_for_universe_#{universe_wstories.id}" do %>
+    <ul>
+    <%= render :partial => "stories/story",
+        :collection => Story.OrderedListByUniverse(universe_wstories.id) %>
+    </ul>
+  <% end %>
+  </div>

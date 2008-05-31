@@ -1,0 +1,13 @@
+<h1>Comment on <%= @pcomment.paragraph.chapter.story.title %> Chapter <%= @pcomment.paragraph.chapter.number %> </h1>
+
+<p> Paragraph: </p>
+<div class="parabody">
+    <%= @pcomment.paragraph.body_raw %>
+</div>
+
+<% form_tag :action => 'create' do -%>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Create" %>
+<% end -%>
+
+<%= link_to 'Back', :action => 'list' %>

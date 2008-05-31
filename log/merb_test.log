@@ -1,0 +1,484 @@
+Sat, 31 May 2008 19:15:23 GMT  ~  info  ~  Logfile created
+ ~ Loaded TEST Environment...
+ ~ loading gem 'merb_activerecord' ...
+ ~ loading gem 'activerecord' ...
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~ Loaded TEST Environment...
+ ~ loading gem 'merb_activerecord' ...
+ ~ loading gem 'activerecord' ...
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~ Loaded TEST Environment...
+ ~ loading gem 'merb_activerecord' ...
+ ~ loading gem 'activerecord' ...
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~ Loaded TEST Environment...
+ ~ loading gem 'merb_activerecord' ...
+ ~ loading gem 'activerecord' ...
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~ Loaded TEST Environment...
+ ~ loading gem 'merb_activerecord' ...
+ ~ loading gem 'activerecord' ...
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~ Loaded TEST Environment...
+ ~ loading gem 'merb_activerecord' ...
+ ~ loading gem 'activerecord' ...
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~ Loaded TEST Environment...
+ ~ loading gem 'merb_activerecord' ...
+ ~ loading gem 'activerecord' ...
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~   [4;36;1mSQL (0.000137)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+ ~   [4;35;1mUser Columns (0.000000)[0m   [0mMysql::Error: Table 'playground_test.users' doesn't exist: SHOW FIELDS FROM `users`[0m
+ ~   [4;36;1mUser Columns (0.000000)[0m   [0;1mMysql::Error: Table 'playground_test.users' doesn't exist: SHOW FIELDS FROM `users`[0m
+ ~ Loaded TEST Environment...
+ ~ loading gem 'merb_activerecord' ...
+ ~ loading gem 'activerecord' ...
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~ Loaded TEST Environment...
+ ~ loading gem 'merb_activerecord' ...
+ ~ loading gem 'activerecord' ...
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~   [4;36;1mSQL (0.000137)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+ ~   [4;35;1mChapter Columns (0.001537)[0m   [0mSHOW FIELDS FROM `chapters`[0m
+ ~   [4;36;1mChapter Load (0.000455)[0m   [0;1mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;35;1mChapter Load (0.000174)[0m   [0mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;36;1mChapter Load (0.000188)[0m   [0;1mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;35;1mUser Columns (0.001753)[0m   [0mSHOW FIELDS FROM `users`[0m
+ ~   [4;36;1mUser Load (0.000458)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`user_id` = 3) [0m
+ ~   [4;35;1mUser Load (0.000176)[0m   [0mSELECT * FROM `users` WHERE (`users`.`user_id` = 3) [0m
+ ~ Loaded TEST Environment...
+ ~ loading gem 'merb_activerecord' ...
+ ~ loading gem 'activerecord' ...
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~   [4;36;1mSQL (0.000140)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+ ~   [4;35;1mChapter Columns (0.001575)[0m   [0mSHOW FIELDS FROM `chapters`[0m
+ ~   [4;36;1mChapter Load (0.000158)[0m   [0;1mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;35;1mChapter Load (0.000173)[0m   [0mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;36;1mChapter Load (0.000225)[0m   [0;1mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;35;1mUser Columns (0.001716)[0m   [0mSHOW FIELDS FROM `users`[0m
+ ~   [4;36;1mUser Load (0.000183)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`user_id` = 3) [0m
+ ~   [4;35;1mUser Load (0.000160)[0m   [0mSELECT * FROM `users` WHERE (`users`.`user_id` = 3) [0m
+ ~ Loaded TEST Environment...
+ ~ loading gem 'merb_activerecord' ...
+ ~ loading gem 'activerecord' ...
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~   [4;36;1mSQL (0.000135)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+ ~   [4;35;1mChapter Columns (0.001379)[0m   [0mSHOW FIELDS FROM `chapters`[0m
+ ~   [4;36;1mChapter Load (0.000150)[0m   [0;1mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;35;1mChapter Load (0.000172)[0m   [0mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;36;1mChapter Load (0.000190)[0m   [0;1mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;35;1mUser Columns (0.001577)[0m   [0mSHOW FIELDS FROM `users`[0m
+ ~   [4;36;1mUser Load (0.000167)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`user_id` = 3) [0m
+ ~   [4;35;1mUser Load (0.000171)[0m   [0mSELECT * FROM `users` WHERE (`users`.`user_id` = 3) [0m
+ ~ Loaded TEST Environment...
+ ~ loading gem 'merb_activerecord' ...
+ ~ loading gem 'activerecord' ...
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~   [4;36;1mSQL (0.000194)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+ ~   [4;35;1mChapter Columns (0.001403)[0m   [0mSHOW FIELDS FROM `chapters`[0m
+ ~   [4;36;1mChapter Load (0.000164)[0m   [0;1mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;35;1mChapter Load (0.000219)[0m   [0mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;36;1mChapter Load (0.000221)[0m   [0;1mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;35;1mUser Columns (0.001555)[0m   [0mSHOW FIELDS FROM `users`[0m
+ ~   [4;36;1mUser Load (0.000184)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`user_id` = 3) [0m
+ ~   [4;35;1mUser Load (0.000178)[0m   [0mSELECT * FROM `users` WHERE (`users`.`user_id` = 3) [0m
+ ~ Loaded TEST Environment...
+ ~ loading gem 'merb_activerecord' ...
+ ~ loading gem 'activerecord' ...
+ ~ Connecting to database...
+ ~ Compiling routes...
+ ~ Using 'share-nothing' cookie sessions (4kb limit per client)
+ ~   [4;36;1mSQL (0.000138)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+ ~   [4;35;1mChapter Columns (0.001785)[0m   [0mSHOW FIELDS FROM `chapters`[0m
+ ~   [4;36;1mChapter Load (0.000468)[0m   [0;1mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;35;1mParagraph Load (0.003003)[0m   [0mSELECT * FROM `paragraphs` WHERE (chapter_id = 17) [0m
+ ~   [4;36;1mParagraph Columns (0.001167)[0m   [0;1mSHOW FIELDS FROM `paragraphs`[0m
+ ~   [4;35;1mPcomment Load (0.000553)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 1) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000458)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 2) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000439)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 3) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000458)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 4) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000485)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 5) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000419)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 6) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000447)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 7) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000412)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 8) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000398)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 9) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000393)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 10) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000430)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 11) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000398)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 12) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000405)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 13) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000389)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 14) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000388)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 15) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000390)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 16) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000389)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 17) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000428)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 18) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000398)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 19) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000394)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 20) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000394)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 21) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000470)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 22) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000400)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 23) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000391)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 24) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000393)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 25) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000397)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 26) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000428)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 27) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000443)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 28) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000413)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 29) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000393)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 30) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000415)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 31) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000422)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 32) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000399)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 33) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000392)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 34) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000493)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 35) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000408)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 36) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000391)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 37) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000389)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 38) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000391)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 39) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000424)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 40) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000385)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 41) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000391)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 42) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000411)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 43) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000413)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 44) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000403)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 45) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000407)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 46) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000387)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 47) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000391)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 48) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000389)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 49) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000398)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 50) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000393)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 51) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000412)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 52) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000573)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 53) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000399)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 54) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000394)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 55) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000598)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 56) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000404)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 57) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000397)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 58) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000398)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 59) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000410)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 60) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000385)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 61) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000386)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 62) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000397)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 63) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000391)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 64) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000388)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 65) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000381)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 66) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000382)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 67) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000420)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 68) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000388)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 69) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000387)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 70) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000379)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 71) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000467)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 72) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000395)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 73) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000389)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 74) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000419)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 75) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000385)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 76) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000421)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 77) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000408)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 78) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000387)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 79) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000385)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 80) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000399)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 81) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000384)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 82) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000382)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 83) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000427)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 84) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000521)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 85) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000423)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 86) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000380)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 87) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000382)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 88) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000375)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 89) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000415)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 90) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000447)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 91) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000403)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 92) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000393)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 93) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000431)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 94) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000393)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 95) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000403)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 96) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000399)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 97) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000389)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 98) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000402)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 99) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000390)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 100) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000384)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 101) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000397)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 102) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000479)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 103) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000409)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 104) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000379)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 105) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000380)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 106) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000404)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 107) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000389)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 108) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000391)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 109) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000392)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 110) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000381)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 111) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000396)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 112) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000393)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 113) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000377)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 114) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000386)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 115) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000373)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 116) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000390)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 117) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000379)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 118) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000376)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 119) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000385)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 120) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000386)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 121) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000576)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 122) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000392)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 123) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000406)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 124) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000635)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 125) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000463)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 126) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000390)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 127) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000392)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 128) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000397)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 129) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000398)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 130) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000383)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 131) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000377)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 132) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000416)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 133) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000496)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 134) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000403)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 135) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000384)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 136) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000383)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 137) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000566)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 138) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000427)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 139) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000383)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 140) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000378)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 141) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000373)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 142) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000401)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 143) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000380)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 144) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000377)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 145) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000383)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 146) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000822)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 147) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000427)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 148) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000386)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 149) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000381)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 150) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000392)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 151) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000385)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 152) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000387)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 153) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000389)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 154) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000381)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 155) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000417)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 156) ORDER BY id[0m
+ ~   [4;35;1mPcomment Columns (0.001177)[0m   [0mSHOW FIELDS FROM `pcomments`[0m
+ ~   [4;36;1mSQL (0.000786)[0m   [0;1mSELECT count(DISTINCT `pcomments`.id) AS count_all FROM `pcomments` LEFT OUTER JOIN `paragraphs` ON `paragraphs`.id = `pcomments`.paragraph_id WHERE (paragraphs.chapter_id = 17) [0m
+ ~   [4;35;1mChapter Load (0.000162)[0m   [0mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;36;1mUser Columns (0.001556)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+ ~   [4;35;1mUser Load (0.000690)[0m   [0mSELECT * FROM `users` WHERE (`users`.`user_id` = 3) [0m
+ ~   [4;36;1mParagraph Load (0.003553)[0m   [0;1mSELECT * FROM `paragraphs` WHERE (paragraphs.chapter_id = 17) ORDER BY position[0m
+ ~   [4;35;1mPcomment Load (0.000181)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 1) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000089)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 2) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000173)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 3) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000093)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 4) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000088)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 5) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000084)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 6) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000082)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 7) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000082)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 8) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000083)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 9) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000080)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 10) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000081)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 11) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000079)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 12) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000083)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 13) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000079)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 14) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000102)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 15) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000083)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 16) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000081)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 17) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000080)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 18) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000079)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 19) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000079)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 20) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000081)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 21) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000081)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 22) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000081)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 23) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 24) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000080)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 25) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000082)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 26) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000116)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 27) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000084)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 28) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000078)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 29) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000080)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 30) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000080)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 31) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000082)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 32) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000080)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 33) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000079)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 34) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000076)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 35) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000079)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 36) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000085)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 37) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000088)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 38) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000079)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 39) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000080)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 40) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000083)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 41) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000082)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 42) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000081)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 43) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000080)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 44) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000080)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 45) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000079)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 46) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000079)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 47) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000081)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 48) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000078)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 49) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000086)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 50) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000081)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 51) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 52) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000077)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 53) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000082)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 54) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000080)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 55) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 56) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000078)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 57) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000079)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 58) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000077)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 59) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000081)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 60) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000078)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 61) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000086)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 62) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000082)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 63) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000081)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 64) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000079)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 65) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 66) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000079)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 67) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000077)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 68) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000077)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 69) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000075)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 70) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000078)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 71) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000077)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 72) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000105)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 73) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000082)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 74) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000078)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 75) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000077)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 76) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000080)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 77) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000079)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 78) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000080)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 79) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 80) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000078)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 81) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 82) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000078)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 83) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000088)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 84) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000089)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 85) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000079)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 86) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000076)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 87) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000076)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 88) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000077)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 89) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 90) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000076)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 91) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000080)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 92) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000079)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 93) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000079)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 94) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000079)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 95) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 96) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000088)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 97) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000081)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 98) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000081)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 99) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000083)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 100) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000079)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 101) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000080)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 102) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000079)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 103) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000081)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 104) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000085)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 105) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 106) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000081)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 107) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000079)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 108) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000087)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 109) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000079)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 110) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000077)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 111) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000080)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 112) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000080)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 113) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000080)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 114) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000082)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 115) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000081)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 116) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000082)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 117) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000081)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 118) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000079)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 119) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 120) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000080)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 121) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000081)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 122) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000078)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 123) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 124) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000080)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 125) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000077)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 126) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000080)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 127) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000077)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 128) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000076)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 129) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000080)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 130) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000082)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 131) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 132) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000081)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 133) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 134) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000078)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 135) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 136) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000083)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 137) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 138) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000081)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 139) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000080)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 140) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000080)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 141) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000077)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 142) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000078)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 143) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 144) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000088)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 145) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 146) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000083)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 147) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000086)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 148) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000079)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 149) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000076)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 150) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000079)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 151) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 152) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000078)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 153) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 154) ORDER BY id[0m
+ ~   [4;35;1mPcomment Load (0.000080)[0m   [0mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 155) ORDER BY id[0m
+ ~   [4;36;1mPcomment Load (0.000078)[0m   [0;1mSELECT * FROM `pcomments` WHERE (pcomments.paragraph_id = 156) ORDER BY id[0m
+ ~   [4;35;1mJoin Table Columns (0.000880)[0m   [0mSHOW FIELDS FROM `pcomments_read_by`[0m
+ ~   [4;36;1mUser Load (0.000565)[0m   [0;1mSELECT * FROM `users` INNER JOIN pcomments_read_by ON users.user_id = pcomments_read_by.user_id WHERE (pcomments_read_by.pcomment_id = 2 ) [0m
+ ~   [4;35;1mJoin Table Columns (0.000860)[0m   [0mSHOW FIELDS FROM `pcomments_read_by`[0m
+ ~   [4;36;1mUser Load (0.000815)[0m   [0;1mSELECT * FROM `users` INNER JOIN pcomments_read_by ON users.user_id = pcomments_read_by.user_id WHERE (pcomments_read_by.pcomment_id = 1 ) [0m
+ ~   [4;35;1mJoin Table Columns (0.000934)[0m   [0mSHOW FIELDS FROM `pcomments_read_by`[0m
+ ~   [4;36;1mUser Load (0.000504)[0m   [0;1mSELECT * FROM `users` INNER JOIN pcomments_read_by ON users.user_id = pcomments_read_by.user_id WHERE (pcomments_read_by.pcomment_id = 3 ) [0m
+ ~   [4;35;1mJoin Table Columns (0.000807)[0m   [0mSHOW FIELDS FROM `pcomments_read_by`[0m
+ ~   [4;36;1mUser Load (0.000591)[0m   [0;1mSELECT * FROM `users` INNER JOIN pcomments_read_by ON users.user_id = pcomments_read_by.user_id WHERE (pcomments_read_by.pcomment_id = 8 ) [0m
+ ~   [4;35;1mJoin Table Columns (0.000806)[0m   [0mSHOW FIELDS FROM `pcomments_read_by`[0m
+ ~   [4;36;1mUser Load (0.000499)[0m   [0;1mSELECT * FROM `users` INNER JOIN pcomments_read_by ON users.user_id = pcomments_read_by.user_id WHERE (pcomments_read_by.pcomment_id = 4 ) [0m
+ ~   [4;35;1mJoin Table Columns (0.000797)[0m   [0mSHOW FIELDS FROM `pcomments_read_by`[0m
+ ~   [4;36;1mUser Load (0.000556)[0m   [0;1mSELECT * FROM `users` INNER JOIN pcomments_read_by ON users.user_id = pcomments_read_by.user_id WHERE (pcomments_read_by.pcomment_id = 5 ) [0m
+ ~   [4;35;1mJoin Table Columns (0.000805)[0m   [0mSHOW FIELDS FROM `pcomments_read_by`[0m
+ ~   [4;36;1mUser Load (0.000510)[0m   [0;1mSELECT * FROM `users` INNER JOIN pcomments_read_by ON users.user_id = pcomments_read_by.user_id WHERE (pcomments_read_by.pcomment_id = 7 ) [0m
+ ~   [4;35;1mJoin Table Columns (0.001059)[0m   [0mSHOW FIELDS FROM `pcomments_read_by`[0m
+ ~   [4;36;1mUser Load (0.000512)[0m   [0;1mSELECT * FROM `users` INNER JOIN pcomments_read_by ON users.user_id = pcomments_read_by.user_id WHERE (pcomments_read_by.pcomment_id = 6 ) [0m
+ ~   [4;35;1mPcomment Count (0.000630)[0m   [0mselect count(p.id) from pcomments pc, paragraphs p where p.chapter_id = 17 and pc.id not in (select prb.pcomment_id from pcomments_read_by prb where prb.user_id = 3) and pc.paragraph_id = p.id[0m
+ ~   [4;36;1mChapter Load (0.000181)[0m   [0;1mSELECT * FROM `chapters` WHERE (`chapters`.`id` = 17) [0m
+ ~   [4;35;1mUser Load (0.000105)[0m   [0mSELECT * FROM `users` WHERE (`users`.`user_id` = 3) [0m
+ ~   [4;36;1mPcomment Count (0.000078)[0m   [0;1mselect count(p.id) from pcomments pc, paragraphs p where p.chapter_id = 17 and pc.id not in (select prb.pcomment_id from pcomments_read_by prb where prb.user_id = 3) and pc.paragraph_id = p.id[0m
+ ~   [4;35;1mSQL (0.000104)[0m   [0mSELECT count(DISTINCT `pcomments`.id) AS count_all FROM `pcomments` LEFT OUTER JOIN `paragraphs` ON `paragraphs`.id = `pcomments`.paragraph_id WHERE (paragraphs.chapter_id = 17) [0m
+ ~   [4;36;1mUser Load (0.000192)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`user_id` = 3) [0m
+ ~   [4;35;1mStory Columns (0.001398)[0m   [0mSHOW FIELDS FROM `stories`[0m
+ ~   [4;36;1mStory Load (0.000485)[0m   [0;1mSELECT * FROM `stories` WHERE (`stories`.`id` = 2) [0m
+ ~   [4;35;1mStoryPermission Load (0.000591)[0m   [0mSELECT * FROM `story_permissions` WHERE (story_permissions.permission_holder_id = 3 AND story_permissions.permission_holder_type = 'User') [0m
+ ~   [4;36;1mStoryPermission Columns (0.000941)[0m   [0;1mSHOW FIELDS FROM `story_permissions`[0m
+ ~   [4;35;1mGroup Load (0.000796)[0m   [0mSELECT groups.* FROM groups INNER JOIN memberships ON groups.group_id = memberships.group_id WHERE ((memberships.user_id = 3)) [0m
+ ~   [4;36;1mGroup Columns (0.001047)[0m   [0;1mSHOW FIELDS FROM `groups`[0m
+ ~   [4;35;1mStoryPermission Load (0.000551)[0m   [0mSELECT * FROM `story_permissions` WHERE (story_permissions.permission_holder_id = 76 AND story_permissions.permission_holder_type = 'Group') [0m
+ ~   [4;36;1mUser Load (0.000177)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`user_id` = 3) [0m
+ ~   [4;35;1mStory Load (0.000097)[0m   [0mSELECT * FROM `stories` WHERE (`stories`.`id` = 2) [0m
+ ~   [4;36;1mSQL (0.000124)[0m   [0;1mBEGIN[0m
+ ~   [4;35;1mStoryPermission Create (0.000406)[0m   [0mINSERT INTO `story_permissions` (`permission_holder_type`, `permission_holder_id`, `permission`, `story_id`) VALUES('User', 3, 'author', 2)[0m
+ ~   [4;36;1mSQL (0.015310)[0m   [0;1mCOMMIT[0m
+ ~   [4;35;1mSQL (0.000081)[0m   [0mBEGIN[0m
+ ~   [4;36;1mStoryPermission Update (0.000364)[0m   [0;1mUPDATE `story_permissions` SET `permission_holder_id` = 3, `permission_holder_type` = 'User', `story_id` = 2, `permission` = 'author' WHERE `id` = 5[0m
+ ~   [4;35;1mSQL (0.000109)[0m   [0mCOMMIT[0m
+ ~   [4;36;1mSQL (0.000055)[0m   [0;1mBEGIN[0m
+ ~   [4;35;1mStoryPermission Load (0.000495)[0m   [0mSELECT * FROM `story_permissions` WHERE (story_permissions.permission_holder_id = 3 AND story_permissions.permission_holder_type = 'User') [0m
+ ~   [4;36;1mUser Update (0.000640)[0m   [0;1mUPDATE `users` SET `user_newpasswd` = '', `user_regdate` = 1060089312, `user_yim` = '', `user_email` = 'dstar@pele.cx', `username` = 'dstar', `user_password` = 'e2bf022040c93b4fbab034dbc3921d4d', `user_active` = 1, `user_dateformat` = 'F d Y', `user_msnm` = '', `user_icq` = '', `user_website` = 'http://strangelove.pele.cx', `user_timezone` = '-5.0', `user_aim` = 'dstar3k', `user_lastvisit` = 1146707782, `user_actkey` = '' WHERE `user_id` = 3[0m
+ ~   [4;35;1mSQL (0.000155)[0m   [0mCOMMIT[0m

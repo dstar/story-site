@@ -1,0 +1,7 @@
+--- 
+php_session_test: 
+  session_id: test
+  session_user_id: 3
+php_session_test_beta_reader: 
+  session_id: beta_test
+  session_user_id: 17

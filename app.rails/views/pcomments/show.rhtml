@@ -1,0 +1,8 @@
+<% for column in Pcomment.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @pcomments.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @pcomments %> |
+<%= link_to 'Back', :action => 'list' %>

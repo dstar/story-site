@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+first:
+  id: 1
+  permission_holder_id: 3
+  permission_holder_type: User
+  permission: admin
+
+second:
+  id: 2
+  permission_holder_id: 3
+  permission_holder_type: User
+  permission: blogger
+

@@ -1,0 +1,10 @@
+<%= link_to 'Home', index_url(:host => StoryHost('playground')) %>
+<% if params[:id] %>
+&gt; <%= link_to @pcomment.paragraph.chapter.story.universe.name, url_for(:controller => 'universes', :action => 'show', :id => @pcomment.paragraph.chapter.story.universe.id) %>
+&gt; <%= link_to @pcomment.paragraph.chapter.story.title, url_for(:controller => 'stories', :action => 'show', :id => @pcomment.paragraph.chapter.story.id) %>
+&gt; Chapter <%= link_to @pcomment.paragraph.chapter.number, url_for(:controller => 'chapters', :action => 'show', :id => @pcomment.paragraph.chapter.id) %>
+<% else %>
+&gt; <%= link_to @paragraph.chapter.story.universe.name, url_for(:controller => 'universes', :action => 'show', :id => @paragraph.chapter.story.universe.id) %>
+&gt; <%= link_to @paragraph.chapter.story.title, url_for(:controller => 'stories', :action => 'show', :id => @paragraph.chapter.story.id) %>
+&gt; Chapter <%= link_to @paragraph.chapter.number, url_for(:controller => 'chapters', :action => 'show', :id => @paragraph.chapter.id) %>
+<% end %>
