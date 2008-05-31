@@ -1,9 +1,0 @@
-<h1>Editing story</h1>
-
-<% form_tag :action => 'update', :id => @story do -%>
-  <%= render :partial => 'form' %>
-  <%= submit_tag 'Edit' %>
-<% end -%>
-
-<%= link_to 'Show Story', :action => 'show', :id => @story %> |
-<%= link_to 'Story List', :action => 'list' %>

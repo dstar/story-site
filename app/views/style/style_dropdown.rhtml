@@ -1,8 +1,0 @@
-<div>
-<% themes = Style.find(:all, :select => 'theme', :conditions => ['user=-1'], :group => 'theme').collect { |s| [s.theme, s.theme] } %>
-<form action="">
-<select id="styleselect" onchange="setActiveStyleSheet(Form.Element.getValue('styleselect'));">
-<%= options_for_select(themes) %>
-</select>
-</form>
-</div>

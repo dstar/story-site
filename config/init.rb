@@ -39,12 +39,17 @@ Gem.path.unshift(Merb.root / "gems")
 # If you want modules and classes from libraries organized like
 # merbapp/lib/magicwand/lib/magicwand.rb to autoload,
 # uncomment this.
-# Merb.push_path(:lib, Merb.root / "lib") # uses **/*.rb as path glob.
+Merb.push_path(:lib, Merb.root / "lib") # uses **/*.rb as path glob.
 
 
 
 
 # ==== Dependencies
+
+Merb::BootLoader.before_app_loads do
+  require Merb.root / "lib/acts_as_list/lib/active_record/acts/list.rb"
+  require Merb.root / "lib/acts_as_list/init.rb"
+end
 
 # These are some examples of how you might specify dependencies.
 # Dependencies load is delayed to one of later Merb app
@@ -75,7 +80,7 @@ end
 # use_orm :datamapper
 
 # Uncomment for ActiveRecord ORM
-# use_orm :activerecord
+use_orm :activerecord
 
 # Uncomment for Sequel ORM
 # use_orm :sequel
@@ -93,7 +98,7 @@ end
 # merb_rspec is installed by default if you did gem install
 # merb.
 #
-# use_test :test_unit
+use_test :test_unit
 # use_test :rspec
 
 
