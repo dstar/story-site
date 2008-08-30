@@ -1,4 +1,4 @@
-# This file is auto-generated from the current state of the database. Instead of editing this file,
+# This file is auto-generated from the current state of the database. Instead of editing this file, 
 # please use the migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 #
@@ -141,14 +141,14 @@ ActiveRecord::Schema.define(:version => 41) do
   end
 
   create_table "stories", :force => true do |t|
-    t.string  "title",       :default => "",      :null => false
-    t.integer "flag",        :default => 0,       :null => false
-    t.integer "universe_id", :default => 0,       :null => false
-    t.string  "short_title", :default => "",      :null => false
-    t.integer "order",       :default => 0,       :null => false
-    t.string  "file_prefix", :default => "",      :null => false
-    t.string  "status",      :default => "draft"
-    t.text    "description",                      :null => false
+    t.string  "title",                        :default => "",      :null => false
+    t.integer "flag",                         :default => 0,       :null => false
+    t.integer "universe_id",                  :default => 0,       :null => false
+    t.string  "short_title",                  :default => "",      :null => false
+    t.integer "order",                        :default => 0,       :null => false
+    t.string  "file_prefix",                  :default => "",      :null => false
+    t.string  "status",                       :default => "draft"
+    t.text    "description",                                       :null => false
     t.string  "keywords"
     t.string  "on_release"
     t.string  "required_chapter_permissions"
@@ -194,14 +194,14 @@ ActiveRecord::Schema.define(:version => 41) do
   end
 
   create_table "users", :id => false, :force => true do |t|
-    t.integer "user_id",         :default => 0,           :null => false
-    t.boolean "user_active",     :default => true
-    t.string  "username",        :default => "",          :null => false
-    t.string  "user_password",   :default => "",          :null => false
-    t.integer "user_lastvisit",  :default => 0,           :null => false
-    t.integer "user_regdate",    :default => 0,           :null => false
-    t.string  "user_dateformat", :default => "d M Y H:i", :null => false
-    t.decimal "user_timezone",   :precision => 5, :scale => 2, :default => 0.0,         :null => false
+    t.integer "user_id",                                                      :default => 0,           :null => false
+    t.boolean "user_active",                                                  :default => true
+    t.string  "username",                                                     :default => "",          :null => false
+    t.string  "user_password",                                                :default => "",          :null => false
+    t.integer "user_lastvisit",                                               :default => 0,           :null => false
+    t.integer "user_regdate",                                                 :default => 0,           :null => false
+    t.string  "user_dateformat",                                              :default => "d M Y H:i", :null => false
+    t.decimal "user_timezone",                  :precision => 5, :scale => 2, :default => 0.0,         :null => false
     t.string  "user_email"
     t.string  "user_icq"
     t.string  "user_aim"

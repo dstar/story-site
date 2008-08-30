@@ -1,0 +1,10 @@
+  <div class="comments">
+      <a name="<%= ["pcomment",para.id] %>" onClick="Element.toggle('comments<%= para.id %>')">&#182;</a>
+          <div class="comments_display" id="comments<%= para.id %>">
+    <%= render :partial => 'pcomm', :collection => Pcomment.listForPara(para.id) -%>
+<div class="comment">
+<!-- ugly hack, but the links end up next to the meta-info for the last para if I don't, and I _don't know why_. -->
+</div>
+    <span class='comment_link'><%= link_to 'Comment on this paragraph', :controller => 'pcomments', :action => 'new', :paragraph_id => para.id if @authinfo[:user] -%></span>
+        </div>
+  </div>

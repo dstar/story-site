@@ -1,0 +1,4 @@
+<% themes = Style.find(:all, :select => 'theme', :conditions => ['user=-1'], :group => 'theme').collect { |s| [s.theme, s.theme] } %>
+<% themes.each do |theme| %>
+<link rel="stylesheet" type="text/css" href="http://styles.playground.pele.cx/style/<%= theme[0] %>.css" title="<%= theme[0] %>" />
+<% end %>

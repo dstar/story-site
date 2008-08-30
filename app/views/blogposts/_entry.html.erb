@@ -1,0 +1,16 @@
+<% cache "blogpost_#{entry.id}" do -%>
+  <div class="news" id="<%= ["entry",entry.id] %>" >
+       <h2><%= entry.title %></h2>
+    <%= entry.body %>
+    <p class="timestamp">Posted on <%= entry.created_on.to_s("%a, %b %d.to_s(%Y") %> by <%= entry.user %></p>
+    <% if entry.created_on != entry.updated_on -%>
+      <p class="timestamp">Edited on <%= entry.updated_on.to_s("%a, %b %d.to_s(%Y") %></p>
+    <% end -%>
+  <% end -%>
+    <% if @authinfo[:user] and @authinfo[:user].has_site_permission('blogger')  -%>
+      <% cache "blogpost_admin_links_for_#{entry.id}" do -%>
+                  <%= link_to 'edit', :controller => 'blog', :action => 'edit', :id => entry.id %> |
+                  <%= link_to 'delete', :controller => 'blog', :action => 'delete_post', :id => entry.id %>
+      <% end -%>
+    <% end -%>
+</div>

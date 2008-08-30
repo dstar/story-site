@@ -90,6 +90,27 @@ class Chapter < ActiveRecord::Base
     }
   end
 
+  def dump_to_file
+
+    paragraphs = self.paragraphs
+
+    text = ""
+
+    paragraphs.each do |p|
+      text << "#{p.body_raw}\n\n"
+    end
+
+    prefix = self.story.file_prefix
+
+    dirname = "#{Merb.root}/text_files/#{prefix}"
+    Dir.mkdir(dirname) unless File.exist?(dirname)
+
+    out = File.new("#{dirname}/#{prefix}#{self.number}.txt",File::CREAT|File::TRUNC|File::RDWR, 0644)
+    out.write(text)
+    out.close
+
+  end
+
   private
   def check_release_status
     if self.status == "released"

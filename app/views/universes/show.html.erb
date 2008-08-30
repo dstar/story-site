@@ -1,0 +1,7 @@
+<%= render :partial => "universe", :object => @universe %>
+
+<%= nav_links(@universe) %>
+<h2>Stories</h2>
+<ul>
+<%= render :partial => "stories/story", :collection => @stories %>
+</ul>

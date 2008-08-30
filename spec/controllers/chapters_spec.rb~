@@ -1,0 +1,26 @@
+require File.join( File.dirname(__FILE__), "..", "spec_helper" )
+
+describe "Chapter" do
+
+  before(:each) do
+    @env = { :http_referer => "http://playground.pele.cx/blogposts/show",
+      :http_host => "jaknis.playground.pele.cx"
+    }
+  end
+
+  it "should have working routes"
+
+  describe "show" do
+    it "should respond correctly" do
+      unauthed_action(Chapters, :show, {}, @env).should respond_successfully
+    end
+
+    it "should render the show action" do
+      unauthed_action(Chapters, :show, {}, @env).should respond_successfully do
+        self.should_receive(:render).with('show')
+      end
+    end
+  end
+
+
+end

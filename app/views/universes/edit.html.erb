@@ -1,0 +1,9 @@
+<h1>Editing universe</h1>
+
+<% form_tag :action => 'update', :id => @universe do %>
+  <%= render :partial => 'form' -%>
+  <%= submit_tag 'Edit' -%>
+<% end -%>
+
+<%= link_to 'Show Universe', :action => 'show', :id => @universe %> |
+<%= link_to 'Universe list', :action => 'list' %>

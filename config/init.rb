@@ -49,6 +49,11 @@ Merb.push_path(:lib, Merb.root / "lib") # uses **/*.rb as path glob.
 Merb::BootLoader.before_app_loads do
   require Merb.root / "lib/acts_as_list/lib/active_record/acts/list.rb"
   require Merb.root / "lib/acts_as_list/init.rb"
+  require 'memcache'
+  require 'merb-cache'
+  require 'merb_helpers'
+  require 'merb-assets'
+  require 'merb_has_flash'
 end
 
 # These are some examples of how you might specify dependencies.
@@ -156,3 +161,24 @@ end
 # And the result is:
 # irb> "wife".plural
 # => wives
+
+Merb::Plugins.config[:merb_cache] = {
+    :cache_html_directory => Merb.dir_for(:public) / "cache",
+
+    #:store => "database",
+    #:table_name => "merb_cache",
+
+    #:disable => "development", # disable merb-cache in development
+    #:disable => true, # disable merb-cache in all environments
+
+    #:store => "file",
+    #:cache_directory => Merb.root_path("tmp/cache"),
+
+    :store => "memcache",
+    :host => "127.0.0.1:11211",
+    :namespace => "playground-#{Merb.env}",
+    :no_tracking => "false",
+
+    #:store => "memory",
+    # store could be: file, memcache, memory, database, dummy, ...
+}

@@ -10,7 +10,7 @@
 #
 #   r.match("/books/:book_id/:action").
 #     to(:controller => "books")
-#   
+#
 # Or, use placeholders in the "to" results for more complicated routing, e.g.:
 #
 #   r.match("/admin/:module/:controller/:action/:id").
@@ -21,6 +21,13 @@
 
 Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do |r|
+
+  r.match("/html/:chapter.html").defer_to do |request,params|
+    params.merge :controller => 'stories', :action => 'show', :short_title => request.subdomains[0] if true
+  end
+
+  r.match("/text/:chapter.txt").to(:controller => 'stories', :action => 'dumpByFile')
+
   # RESTful routes
   # r.resources :posts
 
@@ -29,7 +36,8 @@ Merb::Router.prepare do |r|
   # routes, you may want to comment/remove this line to prevent
   # clients from calling your create or destroy actions with a GET
   r.default_routes
-  
+
   # Change this for your home page to be available at /
   # r.match('/').to(:controller => 'whatever', :action =>'index')
+
 end

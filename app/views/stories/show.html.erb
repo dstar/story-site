@@ -1,0 +1,50 @@
+<%= nav_links(@story) %>
+<h1><%= @story.title %> Web Archive</h1>
+
+<p>Welcome to the "<%= @story.title %>" web archive. Here you'll find all
+released bits of the ongoing <%= @story.title %> storyline.</p>
+<img src="http://playground.pele.cx/images/progbar.png" class="progbar" alt="Progress Bar" />
+
+<%= our_markdown(@story.description).gsub(/<br \/>/, "</p><p>")  %>
+<p><b>Keywords:</b> <%= @story.keywords %></p>
+<hr />
+<div class="body">
+<div class="newscolumn">
+
+
+<%= render :partial => 'blogposts/entry', :collection => Blogpost.frontpagelist %>
+
+<%= link_to "Older News", :controller => 'blogposts', :action => 'archive', :page => '2' %>
+
+
+</div>
+<div class="chaptercolumn">
+
+<h2>Chapters</h2>
+<%= render :partial => "chapter", :collection => Chapter.orderedListByStory(@story.id) %>
+(total wordcount: <%= Wordcount(@story.id) %>)<br/>
+</div>
+<div class='footer'>
+<hr/>
+For Amazon:<br/>
+<!-- Begin Amazon Honor System Paybox -->
+<img src="http://s1.amazon.com/exec/varzea/tipbox/A3KYNW76KISCQ/T149MHFJJA7CS4" usemap="#T149MHFJJA7CS4" class="amazon" alt="Amazon Honor System" />
+<map name="T149MHFJJA7CS4" id="T149MHFJJA7CS4">
+<area coords="13,64,108,117" href="http://s1.amazon.com/exec/varzea/pay/T149MHFJJA7CS4" alt="Click Here to Pay" target="_top"/>
+<area coords="13,133,108,145" href="http://s1.amazon.com/exec/varzea/subst/fx/help/how-we-know.html" alt="Learn More" target="_top"/>
+</map>
+<!-- End Amazon Honor System Paybox -->
+
+<hr/>
+For PayPal:
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_xclick"/>
+<input type="hidden" name="business" value="velvet@pele.cx"/>
+<input type="hidden" name="item_name" value="Boost the Writers' Egos"/>
+<input type="hidden" name="no_note" value="1"/>
+<input type="hidden" name="currency_code" value="USD"/>
+<input type="hidden" name="tax" value="0"/>
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but21.gif" class="paypal" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
+</form>
+</div>
+</div>

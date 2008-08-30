@@ -1,0 +1,10 @@
+<h1>Listing chapters</h1>
+
+<p>
+<% for chapter in @chapters -%>
+  <%= chapter.story.title -%>
+  <%= link_to ["Chapter ", chapter.number], :action => "show", :id => chapter -%>
+  (<%= chapter.words %>)
+  <br/>
+<% end -%>
+</p>

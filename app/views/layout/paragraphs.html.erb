@@ -1,0 +1,27 @@
+%# <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http//www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> %>
+<html>
+<head>
+  <title>Paragraphs: <%= action_name %></title>
+<%= javascript_include_tag "prototype" %>
+  <%= style_links %>
+  <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
+        <script type="text/javascript">
+                function confirmSubmit() {
+                        var agree=confirm("Are you sure you wish to continue?");
+                        if (agree)
+                                return true ;
+                        else
+                                return false ;
+                }
+        </script>
+</head>
+<body>
+<%= php_session_header %>
+<%= style_dropdown %>
+<p style="color: red"><%= flash[:notice] %></p>
+
+<%= catch_content :for_layout %>
+
+</body>
+</html>

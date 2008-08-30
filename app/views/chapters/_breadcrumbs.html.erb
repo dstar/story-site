@@ -1,0 +1,7 @@
+<%= link_to 'Home', index_url(:host => StoryHost('playground')) %>
+&gt; <%= universe_link =  link_to @chapter.story.universe.name, url_for( :host => StoryHost('playground'), :controller => 'universes', :action => 'show', :id => @chapter.story.universe.id) %>
+&gt; <%= link_to @chapter.story.title, index_url(:host => StoryHost(@chapter.story)) %>
+<% unless params[:action] =~ /list/ %>
+&gt; Chapter <%= @chapter.number %>
+<% end %>
+

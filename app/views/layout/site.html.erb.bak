@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <title>Welcome to Pele's Playground!</title>
+  <%= javascript_include_tag "prototype" %>
+  <%= calendar_date_select_includes "blue" %>
+  <%= style_links %>
+  <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
+</head>
+<body>
+<%= php_session_header %>
+<%= style_dropdown %>
+<% if @authinfo[:user] and @authinfo[:user].has_site_permission('admin') %>
+        <%= link_to 'Edit Site Permissions', :controller => 'site_permissions', :action => 'permissions' %> |
+        <%= link_to 'Expire cache', :controller => 'site', :action => 'expire_cache' %> |
+        <%= link_to 'Add Commitment', :controller => 'stories', :action => 'add_commitment' %> |
+<% end %>
+<% if @authinfo[:user] and @authinfo[:user].has_site_permission('blogger') %>
+        <%= link_to 'New blogpost', :controller => 'blogposts', :action => 'new' %>
+<% end %>
+
+<p style="color: red"><%= flash[:notice] %></p>
+
+<%= @content_for_layout %>
+
+</body>
+</html>

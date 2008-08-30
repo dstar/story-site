@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title><% if action_name =~ /list|index/ %>
+  Story List
+  <% else %>
+  <%= @story.title %>
+  <% end %>
+  </title>
+  <%= javascript_include_tag "prototype" %>
+  <%= calendar_date_select_includes "blue" %>
+  <%= style_links %>
+  <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
+</head>
+<body>
+<%= php_session_header %>
+<%= style_dropdown %>
+<%= breadcrumbs %>
+
+
+
+<p style="color: red"><%= flash[:notice] %></p>
+
+<%= catch_content :for_layout %>
+
+</body>
+</html>

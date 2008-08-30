@@ -1,0 +1,1 @@
+dependency "merb_helpers"

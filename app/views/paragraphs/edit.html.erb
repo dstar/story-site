@@ -1,0 +1,11 @@
+[<h1>Editing paragraphs</h1>
+<%form_tag :action => 'confirm_delete', :id => @paragraphs do -%>
+    <%= submit_tag("Delete Paragraph", {:confirm => "Are you sure?"}) -%>
+<% end -%>
+<%form_tag :action => 'update', :id => @paragraphs do -%>
+  <%= render :partial => 'form' -%>
+  <%= submit_tag 'Edit' -%>
+<% end -%>
+
+<hr/>
+

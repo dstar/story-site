@@ -1,0 +1,17 @@
+<h1>Editing chapter</h1>
+
+<%form_tag( { :action => 'update', :id => @chapter.id }, :multipart => true) do -%>
+  <p><label for="chapter_status">Status</label><br/>
+  <%= select "chapter", "status", [ ["Draft","draft"], ["Released", "released"] ] -%>
+<% if @chapter.status != "released" -%>
+  <p><label for="release_on">Release on</label><br/>
+  <%= calendar_date_select_tag "release_on", @chapter.release_on, :time => true %>
+<% end -%>
+  <p><label for="file">File</label><br/>
+  <%= file_field_tag "file" %>
+
+  <%= submit_tag "Update Chapter" %>
+<% end -%>
+
+<%= link_to 'Show', :action => 'show', :id => @chapter %> |
+<%= link_to 'Back', :action => 'list' %>

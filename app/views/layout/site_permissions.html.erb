@@ -1,0 +1,19 @@
+<html>
+<head>
+  <title>
+  Site Permissions
+  </title>
+  <%= javascript_include_tag "prototype" %>
+  <%= style_links %>
+  <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
+  <%= javascript_include_tag "prototype" %>
+</head>
+<body>
+<%= php_session_header %>
+<%= style_dropdown %>
+<p style="color: red"><%= flash[:notice] %></p>
+
+<%= catch_content :for_layout %>
+
+</body>
+</html>

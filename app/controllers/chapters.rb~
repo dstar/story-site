@@ -1,0 +1,31 @@
+class Chapters < Application
+
+  def setup_authorize_hash
+    if params[:id] and ! @story_id
+      @story_id = Chapter.find(params[:id]).story.id
+    end
+    if params[:id] and ! @chapter
+      @chapter = Chapter.find(params[:id])
+    end
+
+    @authorization = Chapter.default_permissions
+  end
+
+  def check_authorization(user)
+    return false unless @chapter
+    needed = @authorization[@chapter.status][params[:action]] unless (needed and ! needed.empty?)
+    if needed
+      needed.each do |req|
+        return true if req == "EVERYONE" # check for public action
+        return true if user.has_story_permission(@chapter.story, req) # Else check that we have the required permission
+      end
+    end
+    return false
+  end
+
+  def show
+    @chapter = Chapter.find(params[:id])
+    render
+  end
+
+end

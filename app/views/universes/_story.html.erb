@@ -1,0 +1,7 @@
+<% inactive_tag = " (Not Active)" if story.chapters.empty? -%>
+<div>
+  <li><h4><a href = "<% index_url(:host => StoryHost(story)) %>"><%= story.title %><%= inactive_tag %></a></h4>
+  <p><b>Keywords:</b><%= story.keywords %></p>
+  <%= our_markdown(story.description) %>
+  </li>
+</div>

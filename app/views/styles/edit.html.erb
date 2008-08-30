@@ -1,0 +1,29 @@
+<div id="defaults">
+
+<pre>
+
+dump: <% @default_styles.join("<br>") %>
+dump: <% @default_styles.inspect %>
+
+<%
+
+    $stderr.write("#{@default_styles.join("\n")}\n")
+    $stderr.write("#{@default_styles.inspect}\n")
+%>
+
+
+<%
+
+   "#{@default_styles.each {|e| e.element} }" 
+%>
+<%=
+    $stderr.write("#{@default_styles.inspect}\n")
+%>
+</pre>
+<center><h2> Default styles for theme <%= @theme %> </h2></center>
+<% render :partial => "show_style", :collection => @default_styles %>
+</div>
+<div id="users">
+<center><h2> User styles for theme <%= @theme %> </h2></center>
+<% render :partial => "edit_style", :collection => @user_styles %>
+</div>

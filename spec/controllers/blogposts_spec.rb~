@@ -1,0 +1,123 @@
+require File.join( File.dirname(__FILE__), "..", "spec_helper" )
+
+describe Blogposts do
+
+  before(:each) do
+    @env = { :http_referer => "http://playground.pele.cx/blogposts/show"}
+    Blogpost.connection.begin_db_transaction
+  end
+
+  after(:each) do
+    Blogpost.connection.rollback_db_transaction
+  end
+
+  describe "#index" do
+
+    it "should respond correctly" do
+      unauthed_action(Blogposts, :index, {}, @env).should respond_successfully
+    end
+
+    it "should render the list action" do
+      unauthed_action(Blogposts, :index, {}, @env).should respond_successfully do
+        self.should_receive(:render).with('list')
+      end
+    end
+  end
+
+  describe "#list" do
+
+    it "should respond correctly" do
+      unauthed_action(Blogposts, :list, {}, @env).should respond_successfully
+    end
+
+    it "should render the list action" do
+      unauthed_action(Blogposts, :list, {}, @env).should respond_successfully do
+        self.should_receive(:render).with('list')
+      end
+    end
+
+    it "should get all blog posts" do
+      Blogpost.should_receive(:find).with(:all,:order => 'created_on desc')
+      unauthed_action(Blogposts, :list, {}, @env)
+    end
+
+  end
+
+  describe "#show" do
+
+    it "should respond correctly" do
+      unauthed_action(Blogposts, :show, {:id => 1}, @env).should respond_successfully
+    end
+
+    it "should render the show action" do
+      unauthed_action(Blogposts, :show, {:id => 1}, @env).should respond_successfully do
+        self.should_receive(:render).with('show')
+      end
+    end
+
+    it "should get the blog post" do
+      blogpost = Blogpost.find(1)
+      Blogpost.should_receive(:find).with('1').and_return(blogpost)
+      unauthed_action(Blogposts, :show, {:id => 1}, @env)
+    end
+  end
+
+  describe "#new" do
+
+    it "Should not allow unauthed requests" do
+      unauthed_action(Blogposts, :new, {:id => 1}, @env).should redirect_to("http://playground.pele.cx/blogposts/show")
+    end
+
+    it "should allow authenticated requests" do
+      authed_action(Blogposts, :new, {:id => 1}, @env).should respond_successfully {
+        self.should_receive(:render).with('new')
+      }
+    end
+  end
+
+  describe "#create" do
+    it "should not allow unauthed creates" do
+      unauthed_create(Blogposts, :create, { :blogpost => {:body_raw => ""} },@env, "http://playground.pele.cx/blogposts/show")
+    end
+
+    it "should allow authed creates" do
+      authed_create(Blogposts, :create, { :blogpost => {:body_raw => ""} },@env, "/site/show")
+    end
+
+    it "should fix the flash line"
+
+  end
+
+  describe "#edit" do
+    it "should not allow unauthed edits" do
+      unauthed_action(Blogposts, :edit, { :blogpost => {:body_raw => ""} },@env).should redirect_to("http://playground.pele.cx/blogposts/show")
+    end
+
+    it "should allow authed edits" do
+      authed_action(Blogposts, :edit, { :id => 1, :blogpost => {:body_raw => ""} },@env).should respond_successfully
+    end
+  end
+
+  describe "#update" do
+    it "should not allow unauthed updates" do
+      unauthed_action(Blogposts, :update, { :blogpost => {:body_raw => ""} },@env).should redirect_to("http://playground.pele.cx/blogposts/show")
+
+    end
+
+    it "should allow authed updates" do
+      authed_action(Blogposts, :update, { :id=> 1, :blogpost => {:body_raw => ""} },@env).should redirect_to("/show/1")
+    end
+  end
+
+  describe "#destroy" do
+    it "should not allow unauthed destroys" do
+      unauthed_action(Blogposts, :destroy, { :blogpost => {:body_raw => ""} },@env).should redirect_to("http://playground.pele.cx/blogposts/show")
+
+    end
+
+    it "should allow authed destroys" do
+      Blogpost.find(1).should_not be_nil
+      authed_action(Blogposts, :destroy, { :id=> 1, :blogpost => {:body_raw => ""} },@env).should redirect_to("/list")
+    end
+  end
+end

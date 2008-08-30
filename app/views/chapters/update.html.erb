@@ -1,0 +1,14 @@
+<h1>New chapter</h1>
+
+<%= start_form_tag( {:action => 'create'}, :multipart => true) %>
+
+
+  <%= select "chapter", "status", [ ["Draft","draft"], ["Released", "released"] ] %>
+
+  <p><label for="file">File</label><br/>
+  <%= file_field_tag "file" %>
+
+  <%= submit_tag "Update Chapter" %>
+<%= end_form_tag %>
+
+<%= link_to 'Back', :action => 'list' %>

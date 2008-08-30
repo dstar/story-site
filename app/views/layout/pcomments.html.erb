@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http//www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+  <title>Comment on <%= @pcomment.paragraph.chapter.story.title %> Chapter <%= @pcomment.paragraph.chapter.number %></title>
+<%= javascript_include_tag "prototype" %>
+  <%= style_links %>
+  <script type="text/javascript" src="http://playground.pele.cx/includes/styleswitcher.js"></script>
+</head>
+<body>
+<%= php_session_header %>
+<%= style_dropdown %>
+<%= breadcrumbs %>
+<p style="color: red"><%= flash[:notice] %></p>
+
+<%= catch_content :for_layout %>
+
+</body>
+</html>
