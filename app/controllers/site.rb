@@ -87,16 +87,20 @@ class Site < Application
   end
 
   def show
-    last_updated = Merb::Controller._cache.get("storylist_last_updated")
+    last_updated = Merb::Controller._cache.store.cache_get("storylist_last_updated")
     last_updated = Date.new(0) unless last_updated.is_a? Date
     if (Date.today - last_updated) >= 1
       Story.find(:all).each do |story|
         expire("story_list#{story.id}#true")
         expire("story_list#{story.id}#false")
       end
-      Merb::Controller._cache.set("storylist_last_updated", Date.today)
+      Merb::Controller._cache.store.cache_set("storylist_last_updated", Date.today)
     end
     @stories = Story.OrderedList
+    Merb.logger.debug "QQQ4: About to call Blogposts.frontpagelist"
+    @blogposts_to_show = Blogpost.frontpagelist
+    Merb.logger.debug "QQQ4: About to call render"
+    render :show
   end
 
 end

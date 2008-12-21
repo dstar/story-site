@@ -4,7 +4,7 @@
 
 <%= chapter_navigation(@chapter) %>
 <div class="full">
-<%= render :partial => "para", :collection => @chapter.paragraphs %>
+<%= partial "para", :with => @chapter.paragraphs %>
 <div class="paragraph">
 <%= chapter_navigation(@chapter) %>
 </div>

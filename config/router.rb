@@ -23,13 +23,28 @@ Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do |r|
 
   r.match("/html/:chapter.html").defer_to do |request,params|
-    params.merge :controller => 'stories', :action => 'show', :short_title => request.subdomains[0] if true
+    params.merge :controller => 'chapters', :action => 'show', :short_title => request.subdomains[0]
+  end.name(:chapter)
+
+  r.match("/text/:chapter.txt").defer_to do |request,params|
+    params.merge :controller => 'chapters', :action => 'show', :short_title => request.subdomains[0], :format => "text"
+  end.name(:text)
+
+  r.match('/').defer_to do |request, params|
+    if request.subdomains[0] != 'playground'
+    Merb.logger.debug "QQQ6: request.subdomains[0] is #{request.subdomains[0]}"
+    params.merge :controller => 'stories', :action => 'show', :short_title => request.subdomains[0]
+    else
+    Merb.logger.debug "QQQ7: request.subdomains[0] is #{request.subdomains[0]}"
+    params.merge :controller => 'site', :action => 'show'
+    end
+
   end
 
-  r.match("/text/:chapter.txt").to(:controller => 'stories', :action => 'dumpByFile')
-
   # RESTful routes
-  # r.resources :posts
+#  r.resources :chapters
+#  r.resources :stories
+#  r.resources :universes
 
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based

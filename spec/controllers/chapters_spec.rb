@@ -8,8 +8,6 @@ describe "Chapter" do
     }
   end
 
-  it "should have working routes"
-
   it "should have view specs"
 
   describe "#show" do

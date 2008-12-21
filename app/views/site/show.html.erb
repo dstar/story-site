@@ -39,18 +39,18 @@ great degree.</p>
 <a href="#contact">Contact Us</a><br />
 </div>
 
-<%= render :partial => 'blogposts/entry', :collection => Blogpost.frontpagelist %>
+<%= partial :entry, :with => @blogposts_to_show %>
 
 <%= link_to "Older News", :controller => 'blogposts', :action => 'archive', :page => '2' %>
 
 </div>
 
 <div class="worldlistbox">
-<%= render :partial => "universes/storylist", :collection => Universe.OrderedListByStoryCount %>
+<%= partial "universes/storylist", :with => Universe.OrderedListByStoryCount %>
 </div>
 
 <div class="storiescolumn">
-<%= render :partial => "universes/universe_wstories", :collection => Universe.find(:all) %>
+<%= partial "universes/universe_wstories", :with => Universe.find(:all) %>
 </div>
 
 <div class="donationdrive">

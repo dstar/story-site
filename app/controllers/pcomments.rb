@@ -80,7 +80,7 @@ class Pcomments < Application
     if request.xml_http_request?
       if @pcomment.save
         @chapter = @paragraph.chapter
-        partial 'chapters/comment_block', :controller => "chapter", :para => @pcomment.paragraph, :display => "block"
+        partial 'chapters/comment_block', :controller => "chapter", :para => @pcomment.paragraph, :display_style => "block"
       else
         partial 'new_comment'
       end
@@ -118,7 +118,7 @@ class Pcomments < Application
       expire("chapters#show#pcomment_#{@pcomment.id}")
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        partial 'chapters/comment_block', :controller => "chapter",:para => @pcomment.paragraph, :display => "block"
+        partial 'chapters/comment_block', :controller => "chapter",:para => @pcomment.paragraph, :display_style => "block"
       else
         redirect "/chapters/show_draft/#{chapter_id}#pcomment#{paragraph_id}"
       end
@@ -135,7 +135,7 @@ class Pcomments < Application
       expire("show_pcomment_#{@pcomment.id}")
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        partial 'chapters/comment_block', :controller => "chapter",:para => @pcomment.paragraph, :display => "block"
+        partial 'chapters/comment_block', :controller => "chapter",:para => @pcomment.paragraph, :display_style => "block"
       else
         redirect "/chapters/show_draft/#{@chapter_id}#pcomment#{@pcomment.paragraph.id}"
       end
@@ -152,7 +152,7 @@ class Pcomments < Application
       expire("show_pcomment_#{@pcomment.id}")
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        partial 'chapters/comment_block', :controller => "chapter",:para => @pcomment.paragraph, :display => "block"
+        partial 'chapters/comment_block', :controller => "chapter",:para => @pcomment.paragraph, :display_style => "block"
       else
         redirect "/chapters/show_draft/#{@chapter_id}#pcomment#{@pcomment.paragraph.id}"
       end
@@ -169,7 +169,7 @@ class Pcomments < Application
       expire("show_pcomment_#{@pcomment.id}")
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        partial 'chapters/comment_block', :controller => "chapter",:para => @pcomment.paragraph, :display => "block"
+        partial 'chapters/comment_block', :controller => "chapter",:para => @pcomment.paragraph, :display_style => "block"
       else
         redirect "/chapters/show_draft/#{@chapter_id}#pcomment#{@pcomment.paragraph.id}"
       end
@@ -186,7 +186,7 @@ class Pcomments < Application
       expire("show_pcomment_#{@pcomment.id}")
       if request.xml_http_request?
         @chapter = @paragraph.chapter
-        partial 'chapters/comment_block', :controller => "chapter",:para => @pcomment.paragraph, :display => "block"
+        partial 'chapters/comment_block', :controller => "chapter",:para => @pcomment.paragraph, :display_style => "block"
       else
         redirect "/chapters/show_draft/#{@chapter_id}#pcomment#{@pcomment.paragraph.id}"
       end

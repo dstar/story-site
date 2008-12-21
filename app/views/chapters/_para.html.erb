@@ -8,7 +8,8 @@
   <!-- end parabody -->
   <% if action_name == 'show_draft' -%>
         <div class="comments comments_display <%= comment_denotation_class(para) %>" id="comment_block_<%= para.id %>" >
-          <%= render :partial => 'comment_block', :locals => { :para => para, :display_style => 'style="display: none"' } -%>
+        <% display_style = 'style="display: none"' -%>
+          <%= partial 'comment_block', { :para => para, :display_style => display_style } -%>
         </div>
         <!-- end comments_div -->
         <!-- end comments -->

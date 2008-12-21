@@ -37,8 +37,7 @@ describe "Stories" do
 
     it "should get the story" do
       story = Story.find(1)
-      Story.should_receive(:find).with('1').and_return(story)
-      unauthed_action(Stories, :show, {:id => 1}, @env)
+      unauthed_action(Stories, :show, {:id => 1}, @env).assigns(:story).should == story
     end
   end
 

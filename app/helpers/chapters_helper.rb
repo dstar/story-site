@@ -12,19 +12,19 @@ module ChaptersHelper
     nav_buffer = '<p class="navigation">'
     if prevChapter(chapter) and can_see_chapter(prevChapter(chapter))
       if action_name == 'show_draft'
-        nav_buffer += link_to "Prev", index_url + "chapters/show_draft/" + prevChapter(chapter).id.to_s
+        nav_buffer += link_to "Prev", index_url(StoryHost(chapter.story)) + "chapters/show_draft/" + prevChapter(chapter).id.to_s
       else
-        nav_buffer += link_to 'Prev', chapter_url(:chapter => prevChapter(chapter).file.gsub(/.html/,''))
+        nav_buffer += link_to 'Prev', url(:chapter,:chapter => prevChapter(chapter).file.gsub(/.html/,''))
       end
     else
       nav_buffer += "Prev"
     end
-    nav_buffer += " | " + link_to('Index', index_url) + " | "
+    nav_buffer += " | " + link_to('Index', index_url(StoryHost(chapter.story))) + " | "
     if nextChapter(chapter) and can_see_chapter(nextChapter(chapter))
       if action_name == 'show_draft'
-        nav_buffer += link_to "Next", index_url + "chapters/show_draft/" + nextChapter(chapter).id.to_s
+        nav_buffer += link_to "Next", index_url(StoryHost(chapter.story)) + "chapters/show_draft/" + nextChapter(chapter).id.to_s
       else
-        nav_buffer += link_to 'Next', chapter_url(:chapter => nextChapter(chapter).file.gsub(/.html/,''))
+        nav_buffer += link_to 'Next', url(:chapter, :chapter => nextChapter(chapter).file.gsub(/.html/,''))
       end
     else
       nav_buffer += "Next"

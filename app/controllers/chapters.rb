@@ -24,13 +24,22 @@ class Chapters < Application
   end
 
   def show
-    @chapter = Chapter.find(params[:id])
-    render 'show'
+    provides :text
+
+    Merb.logger.debug "QQQ8: content_type is #{content_type}"
+
+    case content_type
+    when :text
+      filename = "#{Merb.root}/text_files/#{params[:short_title]}/#{params[:short_title]}#{@chapter.number}.txt"
+      raise NotFound unless File.exists? filename
+      @file = File.read(filename)
+    end
+    render :show
   end
 
   def show_draft
     @chapter = Chapter.find(params[:id], :include => [{:paragraphs => :pcomments}], :order => "position")
-    render 'show_draft'
+    render :show_draft
   end
 
   def setup_page_vars
@@ -43,7 +52,16 @@ class Chapters < Application
       else
         @page_title = @chapter.story.title
       end
+    else
 
+      if params[:chapter].is_a? String
+        chapter = Chapter.find_by_file(params[:chapter] + ".html")
+        if chapter
+          params[:id] = chapter.id
+        else
+          raise NotFound
+        end
+      end
     end
 
   end
@@ -57,18 +75,15 @@ class Chapters < Application
           if chapter
             params[:id] = chapter.id
           else
-            render :status => 404, :file => "#{Merb.root}/public/404.html"
-            false
+            raise NotFound
           end
         elsif params[:chapter].is_a? Hash and params[:chapter][:story_id]
           @story_id = params[:chapter][:story_id]
         else
-          render :status => 404, :file => "#{Merb.root}/public/404.html"
-          false
+          raise NotFound
         end
       else
-        render :status => 404, :file => "#{Merb.root}/public/404.html"
-        false
+        raise NotFound
       end
     end
 
@@ -77,8 +92,7 @@ class Chapters < Application
         @story_id = Story.find(params[:story_id]).id
         @story_id = @story_id.to_i if @story_id.is_a? String
       else
-        render :status => 404, :file => "#{Merb.root}/public/404.html"
-        false
+        raise NotFound
       end
     end
   end

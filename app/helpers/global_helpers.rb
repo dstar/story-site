@@ -5,9 +5,9 @@ module Merb
   def StoryHost(story)
     domain_length = request.subdomains.length
     unless story.is_a? String
-      "#{story.short_title}.#{request.domain(domain_length)}#{request.port}"
+      "#{story.short_title}.#{request.domain(domain_length)}:#{request.port}"
     else
-      "#{story}.#{request.domain(domain_length)}#{request.port}"
+      "#{story}.#{request.domain(domain_length)}:#{request.port}"
     end
   end
 
@@ -15,6 +15,12 @@ module Merb
       buffer = %Q|<form onsubmit="new Ajax.Updater('#{parameters[:update]}', '#{parameters[:url]}', { asynchronous:true, evalScripts:true, parameters:Form.serialize(this)}); return false;" method="post" action="@parameters[:url]">|;
       buffer += yield
       buffer += "</form>"
+    end
+
+    def link_to_remote(text,options, html_opts)
+      oncomplete = ""
+      oncomplete = ", onComplete:function(request){#{options[:complete]}}" if options[:complete]
+      %Q|<a href="#{ html_opts[:href]}" onclick="new Ajax.Updater('#{options[:update]}', '#{options[:url]}', { asynchronous:true, evalScripts:true #{oncomplete}}); return false;">#{text}</a>|;
     end
 
   def format_time(time, format)
@@ -69,6 +75,14 @@ EOS
 
     javascript + stylesheet
 
+  end
+
+  def index_url(server)
+    "http://#{server}/"
+  end
+
+  def our_markdown(text)
+    text.gsub(/\s*--\s*/,"&mdash; ")
   end
 
   end

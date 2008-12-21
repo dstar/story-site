@@ -12,7 +12,7 @@ released bits of the ongoing <%= @story.title %> storyline.</p>
 <div class="newscolumn">
 
 
-<%= render :partial => 'blogposts/entry', :collection => Blogpost.frontpagelist %>
+<%= partial 'blogposts/entry', :with => Blogpost.frontpagelist %>
 
 <%= link_to "Older News", :controller => 'blogposts', :action => 'archive', :page => '2' %>
 
@@ -21,7 +21,7 @@ released bits of the ongoing <%= @story.title %> storyline.</p>
 <div class="chaptercolumn">
 
 <h2>Chapters</h2>
-<%= render :partial => "chapter", :collection => Chapter.orderedListByStory(@story.id) %>
+<%= partial "chapter", :with => Chapter.orderedListByStory(@story.id) %>
 (total wordcount: <%= Wordcount(@story.id) %>)<br/>
 </div>
 <div class='footer'>
