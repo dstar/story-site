@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'merb-core'
+require 'merb-core/test'
 require 'spec' # Satiates Autotest and anyone else not using the Rake tasks
 require 'activerecord'
 require 'active_record/fixtures'
@@ -12,45 +13,37 @@ Spec::Runner.configure do |config|
   config.include(Merb::Test::ControllerHelper)
 end
 
+config = Merb::Orms::ActiveRecord.configurations[Merb.environment.to_sym]
+ActiveRecord::Base.establish_connection(config)
+test_folder = 'spec'
+ (ENV['FIXTURES'] ? ENV['FIXTURES'].split(/,/) : Dir.glob(File.join(Merb.root, test_folder, 'fixtures', '*.{yml,csv}'))).each do |fixture_file|
+  Fixtures.create_fixtures(File.join(test_folder, 'fixtures'), File.basename(fixture_file, '.*'))
+end
+
 def self.use_transactional_fixtures
   true
 end
 
-def authed_action(controller, action, params = { }, env = { })
-  dispatch_to(controller, action, params, env) { |c|
-    c.cookies[:phpbb2mysql_sid] = "test"
-  }
+def authed_action(controller, action, id, methd = "GET", params = { })
+  request("http://playground.playground.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
+  request("http://playground.playground.pele.cx/#{controller}/#{action}/#{id}", :method => methd, :params => params)
 end
 
-def unauthed_action(controller, action, params = { }, env = { })
-  dispatch_to(controller, action, params, env)
-end
-
-def unauthed_create(controller, model, action, params = { }, env = { }, destination = "")
-  lambda {
-    unauthed_action(controller, action, params, env).should redirect_to(destination) {
-      self.should_not_receive(:create)
-    }
-  }.should_not change(controller, :count)
-end
-
-def authed_create(controller, model, action, params = { }, env = { }, redirect = "")
-  lambda {
-    authed_action(controller, action, params, env).should redirect_to(redirect) {
-      self.should_receive(:create)
-    }
-  }.should change(controller, :count)
+def unauthed_action(controller, action, id, methd = "GET", params = { })
+  request("http://playground.playground.pele.cx/logout", :method => "GET")
+  request("http://playground.playground.pele.cx/#{controller}/#{action}/#{id}", :method => methd, :params => params)
 end
 
 # Specs for edit action
 def edit_specs(controller, update_params)
   describe "#edit" do
     it "should not allow unauthed edits" do
-      unauthed_action(controller, :edit, update_params ,@env).should redirect_to("http://playground.pele.cx/blogposts/show")
+      #      unauthed_action(controller, :edit, update_params ,@env).should redirect_to("http://playground.pele.cx/blogposts/show")
+      unauthed_action(controller, :edit, update_params[:id], "GET", update_params).should redirect
     end
 
     it "should allow authed edits" do
-      authed_action(controller, :edit, update_params,@env).should respond_successfully
+      authed_action(controller, :edit, update_params[:id], "GET", update_params).should be_successful
     end
   end
 end
@@ -59,12 +52,14 @@ end
 def update_specs(controller, update_params, update_redir)
   describe "#update" do
     it "should not allow unauthed updates" do
-      unauthed_action(controller, :update, update_params, @env).should redirect_to("http://playground.pele.cx/blogposts/show")
+      unauthed_action(controller, :update, update_params[:id], "POST", update_params).should redirect_to("http://playground.playground.pele.cx/")
+      #      unauthed_action(controller, :update, update_params, @env).should redirect_to("http://playground.pele.cx/blogposts/show")
 
     end
 
     it "should allow authed updates" do
-      authed_action(controller, :update, update_params, @env).should redirect_to(update_redir)
+      authed_action(controller, :update, update_params[:id], "POST", update_params).should_not redirect_to("http://playground.playground.pele.cx/")
+      #authed_action(controller, :update, update_params, @env).should redirect_to(update_redir)
     end
 
   end
@@ -74,12 +69,11 @@ end
 def destroy_specs(controller, update_params, model)
   describe "#destroy" do
     it "should not allow unauthed destroys" do
-      lambda { unauthed_action(controller, :destroy, update_params, @env) }.should_not change(model,:count)
-
+      lambda { unauthed_action(controller, :destroy, update_params[:id], "POST", update_params) }.should_not change(model,:count)
     end
 
     it "should allow authed destroys" do
-      lambda{ authed_action(controller, :destroy, update_params, @env)}.should change(model,:count)
+      lambda { authed_action(controller, :destroy, update_params[:id], "POST", update_params)}.should change(model,:count)
     end
   end
 end
@@ -88,12 +82,13 @@ end
 def create_specs(controller, create_params, model)
   describe "#create" do
     it "should not allow unauthed creates" do
-      lambda { unauthed_action(controller, :create, create_params, @env)}.should_not change(model,:count)
-
+      request("http://playground.playground.pele.cx/logout", :method => "GET")
+      lambda { request("http://playground.playground.pele.cx/#{controller}/create/", :method => "POST", :params => create_params)}.should_not change(model,:count)
     end
 
     it "should allow authed creates" do
-      lambda { authed_action(controller, :create, create_params, @env)}.should change(model,:count)
+      request("http://playground.playground.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
+      lambda { request("http://playground.playground.pele.cx/#{controller}/create/", :method => "POST", :params => create_params) }.should change(model,:count)
     end
   end
 end

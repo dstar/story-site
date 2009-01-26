@@ -1,0 +1,907 @@
+--- 
+style_23: 
+  theme: light
+  id: 23
+  element: a.img
+  definition: "color : #f9dbbe"
+  user: -1
+style_170: 
+  theme: default
+  id: 170
+  element: h2
+  definition: "font-family : arial, 'sans serif'; "
+  user: -1
+style_141: 
+  theme: default
+  id: 141
+  element: div.world
+  definition: "margin : 0em .2em .2em 0em; "
+  user: -1
+style_51: 
+  theme: light
+  id: 51
+  element: td.donations
+  definition: " text-align : left; text-indent : 0; "
+  user: -1
+style_24: 
+  theme: light
+  id: 24
+  element: div.playgroundnewscolumn
+  definition: " float : left; width : 29%; border-width : thin; border-style : none; padding : 0em 0em .2em .2em; "
+  user: -1
+style_171: 
+  theme: default
+  id: 171
+  element: div.storiescolumn
+  definition: " float : right; width : 69%; padding : 0em .2em .2em .2em; border-width : thin; border-style : solid; "
+  user: -1
+style_142: 
+  theme: default
+  id: 142
+  element: a.genmed:hover
+  definition: " background-color : #2A425B; color : #D6D6E7; "
+  user: -1
+style_52: 
+  theme: light
+  id: 52
+  element: p.ad
+  definition: "border-width : thin; border-style : solid; margin-bottom : 5px; background-color : silver; font-size : 120%; padding : 1em 1em 1em 1em; "
+  user: -1
+style_25: 
+  theme: light
+  id: 25
+  element: div.amazon
+  definition: " float : right; width : 50%; "
+  user: -1
+style_172: 
+  theme: default
+  id: 172
+  element: p
+  definition: "text-indent : 30pt; margin-top : .5em; margin-bottom : .5em;"
+  user: -1
+style_143: 
+  theme: default
+  id: 143
+  element: h3
+  definition: "font-family : arial, 'sans serif'; "
+  user: -1
+style_53: 
+  theme: light
+  id: 53
+  element: a.name:hover
+  definition: " background-color : #2A425B; color : #D6D6E7; "
+  user: -1
+style_26: 
+  theme: light
+  id: 26
+  element: div.note
+  definition: "border-width : thin; border-style : solid; margin-bottom : 5px; background-color : silver; padding : 1em 1em 1em 1em; "
+  user: -1
+style_173: 
+  theme: default
+  id: 173
+  element: div.footer
+  definition: "clear : both; "
+  user: -1
+style_144: 
+  theme: default
+  id: 144
+  element: ul.stories
+  definition: "list-style-type : none; padding : 0em .5em 0em .5em; "
+  user: -1
+style_54: 
+  theme: light
+  id: 54
+  element: a.topictitle:hover
+  definition: " background-color : #2A425B; color : #D6D6E7; "
+  user: -1
+style_200: 
+  theme: default
+  id: 200
+  element: div.unread_comments
+  definition: "background-color : #222841; border : solid; border-color : #DBFAFA; padding-left: 5px"
+  user: -1
+style_145: 
+  theme: default
+  id: 145
+  element: a.forumlink:hover
+  definition: " background-color : #2A425B; color : #D6D6E7; "
+  user: -1
+style_55: 
+  theme: light
+  id: 55
+  element: a:link
+  definition: "color : darkred; border-color : #f9dbbe"
+  user: -1
+style_27: 
+  theme: light
+  id: 27
+  element: a.mainmenu:hover
+  definition: " background-color : #2A425B; color : #D6D6E7; "
+  user: -1
+style_201: 
+  theme: default
+  id: 201
+  element: p
+  definition: "font-family : \"arial\", sans-serif; text-indent : 30pt; font-size : 12pt;"
+  user: 17
+style_174: 
+  theme: default
+  id: 174
+  element: p.navigation
+  definition: "text-align : center; "
+  user: -1
+style_146: 
+  theme: default
+  id: 146
+  element: font
+  definition: " font-family : Verdana, Arial, Helvetica, sans-serif "
+  user: -1
+style_56: 
+  theme: light
+  id: 56
+  element: a.postdetails:hover
+  definition: " color : #A0522D; text-decoration : underline; "
+  user: -1
+style_28: 
+  theme: light
+  id: 28
+  element: body
+  definition: "background-color : #f9dbbe;"
+  user: -1
+style_202: 
+  theme: default
+  id: 202
+  element: div.paragraph
+  definition: "width : 100%; line-height : 18px; margin : 0em 0em 0em 0em; padding : .2em .2em .2em .2em; border-width : thin; border-style : none; clear : both;"
+  user: 17
+style_175: 
+  theme: default
+  id: 175
+  element: a.gensmall:hover
+  definition: " background-color : #2A425B; color : #D6D6E7; "
+  user: -1
+style_147: 
+  theme: default
+  id: 147
+  element: div.welcome
+  definition: "border-width : thin; border-style : none; margin-left : 12%; margin-right : 12%; "
+  user: -1
+style_57: 
+  theme: light
+  id: 57
+  element: div.donationdrive
+  definition: " float : right; margin : 0em 0em .2em 0em; padding : 0em .2em .2em .2em; border-width : thin; border-style : solid; "
+  user: -1
+style_29: 
+  theme: light
+  id: 29
+  element: a.cattitle:hover
+  definition: " text-decoration : underline; "
+  user: -1
+style_203: 
+  theme: default
+  id: 203
+  element: div.parabody
+  definition: "float : left; width : 69%; font-family : serif; font-size : 18pt; line-height : 25px;"
+  user: 17
+style_148: 
+  theme: default
+  id: 148
+  element: a.postlink:hover
+  definition: " text-decoration : underline; color : #A0522D"
+  user: -1
+style_58: 
+  theme: light
+  id: 58
+  element: div.whats_coming
+  definition: "border-width : thin; border-style : solid; margin-bottom : 5px; background-color : silver; padding : 1em 1em 1em 1em; "
+  user: -1
+style_176: 
+  theme: default
+  id: 176
+  element: h2.worldtitle
+  definition: "text-align : center; "
+  user: -1
+style_204: 
+  theme: default
+  id: 204
+  element: div.parabody p
+  definition: "font-family : serif; font-size : 130%; line-height : 110%;"
+  user: 17
+style_149: 
+  theme: default
+  id: 149
+  element: a.topictitle:visited
+  definition: " text-decoration : underline; "
+  user: -1
+style_59: 
+  theme: light
+  id: 59
+  element: a:hover
+  definition: "color : red"
+  user: -1
+style_177: 
+  theme: default
+  id: 177
+  element: div.commentbody
+  definition: "font-size : 90%; clear : both"
+  user: -1
+style_205: 
+  theme: light
+  id: 205
+  element: div.unacknowledged_comments
+  definition: "background-color : #898b8e; border : solid; padding-left: 5px; border-color : #FF0000;"
+  user: -1
+style_178: 
+  theme: default
+  id: 178
+  element: div.paragraph
+  definition: "width : 100%; margin-bottom : .1em; margin-top : 0em; padding : 0em .2em 0em .2em; border-width : thin; border-style : none; clear : both;"
+  user: -1
+style_206: 
+  theme: default
+  id: 206
+  element: div.unacknowledged_comments
+  definition: "background-color : #222841; border : solid; border-color : #FF0000; padding-left: 5px"
+  user: -1
+style_179: 
+  theme: default
+  id: 179
+  element: div.parabody
+  definition: "float : left; width : 69%; padding : 0"
+  user: -1
+style_30: 
+  theme: light
+  id: 30
+  element: p.donation
+  definition: "border-width : thin; border-style : dashed; background-color : silver; padding : 1em 1em 1em 1em; "
+  user: -1
+style_207: 
+  theme: default
+  id: 207
+  element: span.unacknowledged_count
+  definition: "color: #ff0000;"
+  user: -1
+style_150: 
+  theme: default
+  id: 150
+  element: div.newscolumn
+  definition: " float : right; width : 69%; padding : 0em .2em .2em .2em; border-width : thin; border-style : solid; "
+  user: -1
+style_31: 
+  theme: light
+  id: 31
+  element: ul.chapters
+  definition: "list-style-type : none; padding : 0em .5em 0em .5em; "
+  user: -1
+style_208: 
+  theme: light
+  id: 208
+  element: span.unacknowledged_count
+  definition: "color: #ff0000;"
+  user: -1
+style_151: 
+  theme: default
+  id: 151
+  element: a:visited
+  definition: "color : #CC6600"
+  user: -1
+style_60: 
+  theme: light
+  id: 60
+  element: div.body
+  definition: "margin : 0 auto; "
+  user: -1
+style_32: 
+  theme: light
+  id: 32
+  element: div.chaptercolumn
+  definition: " float : left; width : 25%; border-width : thin; border-style : solid; "
+  user: -1
+style_209: 
+  theme: default
+  id: 209
+  element: div.inactive_story
+  definition: "filter : alpha(opacity=60); opacity : 0.6; -moz-opacity : 0.6;"
+  user: -1
+style_61: 
+  theme: light
+  id: 61
+  element: div.worldlist
+  definition: "float : left;"
+  user: -1
+style_123: 
+  theme: default
+  id: 123
+  element: a.nav:hover
+  definition: " text-decoration : underline; "
+  user: -1
+style_1: 
+  theme: ""
+  id: 1
+  element: ""
+  definition: ""
+  user: 0
+style_33: 
+  theme: light
+  id: 33
+  element: div.world
+  definition: "margin : 0em .2em .2em 0em; "
+  user: -1
+style_180: 
+  theme: default
+  id: 180
+  element: div.full
+  definition: "width : 100%; margin : 0em 0em 0em 0em; padding : .2em .2em .2em .2em; border-width : thin; border-style : none; clear : both;"
+  user: -1
+style_181: 
+  theme: default
+  id: 181
+  element: div.commentposted
+  definition: "font-size : 70%; font-style : italic; float : right;"
+  user: -1
+style_152: 
+  theme: default
+  id: 152
+  element: h1
+  definition: "text-align : center; "
+  user: -1
+style_62: 
+  theme: light
+  id: 62
+  element: h2
+  definition: "font-family : arial, 'sans serif'; "
+  user: -1
+style_124: 
+  theme: default
+  id: 124
+  element: input
+  definition: " text-indent : 2px; "
+  user: -1
+style_2: 
+  theme: ""
+  id: 2
+  element: ""
+  definition: ""
+  user: 0
+style_34: 
+  theme: light
+  id: 34
+  element: a.genmed:hover
+  definition: " background-color : #2A425B; color : #D6D6E7; "
+  user: -1
+style_182: 
+  theme: default
+  id: 182
+  element: div.comments
+  definition: " float : right; width : 29%; "
+  user: -1
+style_153: 
+  theme: default
+  id: 153
+  element: li.new
+  definition: "font-size : 120%; "
+  user: -1
+style_63: 
+  theme: light
+  id: 63
+  element: div.storiescolumn
+  definition: " float : right; width : 69%; padding : 0em .2em .2em .2em; border-width : thin; border-style : solid; "
+  user: -1
+style_125: 
+  theme: default
+  id: 125
+  element: table
+  definition: "font-family : arial, 'sans serif'; text-indent : 30pt; "
+  user: -1
+style_35: 
+  theme: light
+  id: 35
+  element: h3
+  definition: "font-family : arial, 'sans serif'; "
+  user: -1
+style_183: 
+  theme: light
+  id: 183
+  element: div.commentbody
+  definition: " font-size : 90%; "
+  user: -1
+style_154: 
+  theme: default
+  id: 154
+  element: div.paypal
+  definition: " float : left; "
+  user: -1
+style_64: 
+  theme: light
+  id: 64
+  element: p
+  definition: "font-family : arial, 'sans serif'; text-indent : 30pt; "
+  user: -1
+style_126: 
+  theme: default
+  id: 126
+  element: div.news
+  definition: "border-width : thin; border-style : solid; margin-bottom : 5px; padding : .2em .2em .2em .2em; font-size : 90%; "
+  user: -1
+style_36: 
+  theme: light
+  id: 36
+  element: ul.stories
+  definition: "list-style-type : none; padding : 0em .5em 0em .5em; "
+  user: -1
+style_210: 
+  theme: light
+  id: 210
+  element: div.inactive_story
+  definition: "filter : alpha(opacity=60); opacity : 0.6; -moz-opacity : 0.6;"
+  user: -1
+style_184: 
+  theme: light
+  id: 184
+  element: div.paragraph
+  definition: "width : 100%; margin-bottom : .1em; margin-top : 0em; padding : 0em .2em 0em .2em; border-width : thin; border-style : none; clear : both;"
+  user: -1
+style_65: 
+  theme: light
+  id: 65
+  element: div.footer
+  definition: "clear : both; "
+  user: -1
+style_127: 
+  theme: default
+  id: 127
+  element: a.copyright:hover
+  definition: " color : #B8BED2; text-decoration : underline; "
+  user: -1
+style_37: 
+  theme: light
+  id: 37
+  element: a.forumlink:hover
+  definition: " background-color : #2A425B; color : #D6D6E7; "
+  user: -1
+style_155: 
+  theme: default
+  id: 155
+  element: a:active
+  definition: "color : gold"
+  user: -1
+style_66: 
+  theme: light
+  id: 66
+  element: p.navigation
+  definition: "text-align : center; "
+  user: -1
+style_128: 
+  theme: default
+  id: 128
+  element: a.gen:hover
+  definition: " background-color : #2A425B; color : #D6D6E7; "
+  user: -1
+style_38: 
+  theme: light
+  id: 38
+  element: font
+  definition: " font-family : Verdana, Arial, Helvetica, sans-serif "
+  user: -1
+style_156: 
+  theme: default
+  id: 156
+  element: div.donationbox
+  definition: "margin : 0 auto; "
+  user: -1
+style_212: 
+  theme: default
+  id: 212
+  element: span.comments_up
+  definition: "border-width : thin; border-style : solid; color : gold"
+  user: -1
+style_185: 
+  theme: light
+  id: 185
+  element: div.parabody
+  definition: "float : left; width : 69%; padding : 0"
+  user: -1
+style_67: 
+  theme: light
+  id: 67
+  element: a.gensmall:hover
+  definition: " background-color : #2A425B; color : #D6D6E7; "
+  user: -1
+style_129: 
+  theme: default
+  id: 129
+  element: div.worldlistbox
+  definition: " float : right; width : 69%; margin : 0em 0em .2em 0em; padding : 0em .2em .2em .2em; border-width : thin; border-style : solid; "
+  user: -1
+style_39: 
+  theme: light
+  id: 39
+  element: div.welcome
+  definition: "border-width : thin; border-style : none; margin-left : 12%; margin-right : 12%; "
+  user: -1
+style_157: 
+  theme: default
+  id: 157
+  element: hr
+  definition: "text-align : center; "
+  user: -1
+style_213: 
+  theme: default
+  id: 213
+  element: span.comments_down
+  definition: "border-width : thin; border-style : solid; color : gold;"
+  user: -1
+style_186: 
+  theme: light
+  id: 186
+  element: div.full
+  definition: "width : 100%; margin : 0em 0em 0em 0em; padding : .2em .2em .2em .2em; border-width : thin; border-style : none; clear : both;"
+  user: -1
+style_68: 
+  theme: light
+  id: 68
+  element: h2.worldtitle
+  definition: "text-align : center; "
+  user: -1
+style_158: 
+  theme: default
+  id: 158
+  element: td
+  definition: " font-family : Verdana, Arial, Helvetica, sans-serif; font-size : 80% "
+  user: -1
+style_214: 
+  theme: light
+  id: 214
+  element: span.comments_up
+  definition: "border-width : thin; border-style : solid"
+  user: -1
+style_187: 
+  theme: light
+  id: 187
+  element: div.commentposted
+  definition: "font-size : 70%; font-style : italic; float : right;"
+  user: -1
+style_159: 
+  theme: default
+  id: 159
+  element: td.donations
+  definition: " text-align : left; text-indent : 0; "
+  user: -1
+style_215: 
+  theme: light
+  id: 215
+  element: span.comments_down
+  definition: "border-width : thin; border-style : solid"
+  user: -1
+style_188: 
+  theme: light
+  id: 188
+  element: div.comments
+  definition: " float : right; width : 29%; "
+  user: -1
+style_189: 
+  theme: default
+  id: 189
+  element: div.comment_read
+  definition: "filter:alpha(opacity=50); opacity: 0.5; -moz-opacity:0.5; "
+  user: -1
+style_130: 
+  theme: default
+  id: 130
+  element: h2.chapterheading
+  definition: "padding-left : .3em; "
+  user: -1
+style_40: 
+  theme: light
+  id: 40
+  element: a.postlink:hover
+  definition: " text-decoration : underline; color : #A0522D"
+  user: -1
+style_131: 
+  theme: default
+  id: 131
+  element: a.img
+  definition: "color : #001831"
+  user: -1
+style_41: 
+  theme: light
+  id: 41
+  element: a.topictitle:visited
+  definition: " text-decoration : underline; "
+  user: -1
+style_13: 
+  theme: light
+  id: 13
+  element: a.nav:hover
+  definition: " text-decoration : underline; "
+  user: -1
+style_160: 
+  theme: default
+  id: 160
+  element: p.ad
+  definition: "border-width : thin; border-style : solid; margin-bottom : 5px; background-color : silver; font-size : 120%; padding : 1em 1em 1em 1em; "
+  user: -1
+style_218: 
+  theme: default
+  id: 218
+  element: div.comment
+  definition: "clear : both"
+  user: -1
+style_132: 
+  theme: default
+  id: 132
+  element: div.playgroundnewscolumn
+  definition: " float : left; width : 29%; border-width : thin; border-style : none; padding : 0em 0em .2em .2em; "
+  user: -1
+style_42: 
+  theme: light
+  id: 42
+  element: div.newscolumn
+  definition: " float : right; width : 69%; padding : 0em .2em .2em .2em; border-width : thin; border-style : solid; "
+  user: -1
+style_14: 
+  theme: light
+  id: 14
+  element: input
+  definition: " text-indent : 2px; "
+  user: -1
+style_161: 
+  theme: default
+  id: 161
+  element: a.name:hover
+  definition: " background-color : #2A425B; color : #D6D6E7; "
+  user: -1
+style_219: 
+  theme: default
+  id: 219
+  element: span.comment_link
+  definition: "clear : both"
+  user: -1
+style_190: 
+  theme: light
+  id: 190
+  element: div.comment_read
+  definition: "filter:alpha(opacity=50); opacity: 0.5; -moz-opacity:0.5; "
+  user: -1
+style_133: 
+  theme: default
+  id: 133
+  element: div.amazon
+  definition: " float : right; width : 50%; "
+  user: -1
+style_43: 
+  theme: light
+  id: 43
+  element: a:visited
+  definition: "color : darkred"
+  user: -1
+style_162: 
+  theme: default
+  id: 162
+  element: a.topictitle:hover
+  definition: " background-color : #2A425B; color : #D6D6E7; "
+  user: -1
+style_191: 
+  theme: light
+  id: 191
+  element: img.progbar
+  definition: "display: block; margin-left: auto; margin-right: auto;"
+  user: -1
+style_44: 
+  theme: light
+  id: 44
+  element: h1
+  definition: "text-align : center; "
+  user: -1
+style_134: 
+  theme: default
+  id: 134
+  element: div.note
+  definition: "border-width : thin; border-style : solid; margin-bottom : 5px; background-color : silver; padding : 1em 1em 1em 1em; "
+  user: -1
+style_192: 
+  theme: default
+  id: 192
+  element: img.progbar
+  definition: "display: block; margin-left: auto; margin-right: auto;"
+  user: -1
+style_45: 
+  theme: light
+  id: 45
+  element: li.new
+  definition: "font-size : 120%; "
+  user: -1
+style_17: 
+  theme: light
+  id: 17
+  element: table
+  definition: "font-family : arial, 'sans serif'; text-indent : 30pt; "
+  user: -1
+style_163: 
+  theme: default
+  id: 163
+  element: a:link
+  definition: "color : gold; border-color : #001831"
+  user: -1
+style_135: 
+  theme: default
+  id: 135
+  element: a.mainmenu:hover
+  definition: " background-color : #2A425B; color : #D6D6E7; "
+  user: -1
+style_46: 
+  theme: light
+  id: 46
+  element: div.paypal
+  definition: " float : left; "
+  user: -1
+style_18: 
+  theme: light
+  id: 18
+  element: div.news
+  definition: "border-width : thin; border-style : solid; margin-bottom : 5px; padding : .2em .2em .2em .2em; font-size : 90%; "
+  user: -1
+style_164: 
+  theme: default
+  id: 164
+  element: a.postdetails:hover
+  definition: " color : #A0522D; text-decoration : underline; "
+  user: -1
+style_136: 
+  theme: default
+  id: 136
+  element: body
+  definition: "color : #DBFAFA; background-color : #001831;"
+  user: -1
+style_220: 
+  theme: light
+  id: 220
+  element: span.comment_link
+  definition: "clear : both"
+  user: -1
+style_47: 
+  theme: light
+  id: 47
+  element: a:active
+  definition: "color : red"
+  user: -1
+style_19: 
+  theme: light
+  id: 19
+  element: a.copyright:hover
+  definition: " color : #B8BED2; text-decoration : underline; "
+  user: -1
+style_165: 
+  theme: default
+  id: 165
+  element: div.donationdrive
+  definition: " float : right; margin : 0em 0em .2em 0em; padding : 0em .2em .2em .2em; border-width : thin; border-style : solid; "
+  user: -1
+style_137: 
+  theme: default
+  id: 137
+  element: a.cattitle:hover
+  definition: " text-decoration : underline; "
+  user: -1
+style_221: 
+  theme: default
+  id: 221
+  element: img.amazon
+  definition: "border-style : none"
+  user: -1
+style_195: 
+  theme: default
+  id: 195
+  element: ul
+  definition: "list-style-type : none; padding : 0em .5em 0em .5em; list-style-position : outside;"
+  user: -1
+style_166: 
+  theme: default
+  id: 166
+  element: div.whats_coming
+  definition: "border-width : thin; border-style : solid; margin-bottom : 5px; background-color : silver; padding : 1em 1em 1em 1em; "
+  user: -1
+style_138: 
+  theme: default
+  id: 138
+  element: p.donation
+  definition: "border-width : thin; border-style : dashed; background-color : silver; padding : 1em 1em 1em 1em; "
+  user: -1
+style_48: 
+  theme: light
+  id: 48
+  element: div.donationbox
+  definition: "margin : 0 auto; "
+  user: -1
+style_222: 
+  theme: light
+  id: 222
+  element: img.amazon
+  definition: "border-style : none"
+  user: -1
+style_167: 
+  theme: default
+  id: 167
+  element: a:hover
+  definition: "color : gold"
+  user: -1
+style_139: 
+  theme: default
+  id: 139
+  element: ul.chapters
+  definition: "list-style-type : none; padding : 0em .5em 0em .5em; "
+  user: -1
+style_49: 
+  theme: light
+  id: 49
+  element: hr
+  definition: "text-align : center; "
+  user: -1
+style_196: 
+  theme: light
+  id: 196
+  element: ul
+  definition: "list-style-type : none; padding : 0em .5em 0em .5em; list-style-position : outside;"
+  user: -1
+style_168: 
+  theme: default
+  id: 168
+  element: div.body
+  definition: "margin : 0 auto; "
+  user: -1
+style_197: 
+  theme: light
+  id: 197
+  element: div.read_comments
+  definition: "background-color : #a9abae"
+  user: -1
+style_169: 
+  theme: default
+  id: 169
+  element: div.worldlist
+  definition: "float : left;"
+  user: -1
+style_20: 
+  theme: light
+  id: 20
+  element: a.gen:hover
+  definition: " background-color : #2A425B; color : #D6D6E7; "
+  user: -1
+style_198: 
+  theme: default
+  id: 198
+  element: div.read_comments
+  definition: "background-color : #112336"
+  user: -1
+style_21: 
+  theme: light
+  id: 21
+  element: div.worldlistbox
+  definition: " float : right; width : 69%; margin : 0em 0em .2em 0em; padding : 0em .2em .2em .2em; border-width : thin; border-style : solid; "
+  user: -1
+style_140: 
+  theme: default
+  id: 140
+  element: div.chaptercolumn
+  definition: " float : left; width : 25%; border-width : thin; border-style : solid; "
+  user: -1
+style_199: 
+  theme: light
+  id: 199
+  element: div.unread_comments
+  definition: "background-color : #898b8e; border : solid; padding-left: 5px"
+  user: -1
+style_22: 
+  theme: light
+  id: 22
+  element: h2.chapterheading
+  definition: "padding-left : .3em; "
+  user: -1
+style_50: 
+  theme: light
+  id: 50
+  element: td
+  definition: " font-family : Verdana, Arial, Helvetica, sans-serif; font-size : 80% "
+  user: -1

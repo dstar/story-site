@@ -13,26 +13,37 @@ describe "Paragraphs" do
 
   describe "#move_comments_prev" do
     it "should not allow unauthed moves" do
-      unauthed_action(Paragraphs, :move_comments_prev, {:id=>4},@env).should redirect_to("http://playground.pele.cx/blogposts/show")
+
+      response = request("http://playground.playground.pele.cx/paragraphs/move_comments_prev/4", :method => "POST")
+      response.should redirect_to("http://playground.playground.pele.cx/")
 
     end
 
     it "should allow authed moves" do
       Pcomment.find(1).paragraph.id.should == 4
-      authed_action(Paragraphs, :move_comments_prev, {:id => 4},@env).should redirect_to("/chapters/show_draft/17#pcomment4")
+
+      request("http://playground.playground.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
+      response = request("http://playground.playground.pele.cx/paragraphs/move_comments_prev/4", :method => "POST")
+      response.should redirect_to("/chapters/show_draft/17#pcomment4")
+
       Pcomment.find(1).paragraph.id.should == 3
     end
   end
 
   describe "#move_comments_next" do
     it "should not allow unauthed moves" do
-      unauthed_action(Paragraphs, :move_comments_next, {:id=>3},@env).should redirect_to("http://playground.pele.cx/blogposts/show")
+      response = request("http://playground.playground.pele.cx/paragraphs/move_comments_next/3", :method => "POST")
+      response.should redirect_to("http://playground.playground.pele.cx/")
 
     end
 
     it "should allow authed moves" do
       Pcomment.find(1).paragraph.id.should == 3
-      authed_action(Paragraphs, :move_comments_next, {:id => 3},@env).should redirect_to("/chapters/show_draft/17#pcomment3")
+
+      request("http://playground.playground.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
+      response = request("http://playground.playground.pele.cx/paragraphs/move_comments_next/3", :method => "POST")
+      response.should redirect_to("/chapters/show_draft/17#pcomment3")
+
       Pcomment.find(1).paragraph.id.should == 4
     end
   end

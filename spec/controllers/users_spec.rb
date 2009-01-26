@@ -16,21 +16,9 @@ describe "Users" do
   describe "#show" do
 
     it "should respond correctly" do
-      unauthed_action(Users, :show, {:id => 3}, @env).should respond_successfully
-    end
-
-    it "should render the show action" do
-      unauthed_action(Users, :show, {:id => 3}, @env).should respond_successfully do
-        self.should_receive(:render).with('show')
-      end
-    end
-
-    it "should get the users" do
-      user = User.find(3)
-      unauthed_action(Users, :show, {:id => 3}, @env) { |c|
-        c.user.should_equal user
-      }
+      response = unauthed_action(Users, :show, 3)
+      response.should respond_successfully
+      response.should have_xpath("//p[text()='Username: dstar ']")
     end
   end
-
 end

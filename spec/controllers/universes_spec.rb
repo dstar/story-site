@@ -16,19 +16,13 @@ describe "Universes" do
   describe "#show" do
 
     it "should respond correctly" do
-      unauthed_action(Universes, :show, {:id => 1}, @env).should respond_successfully
+      unauthed_action(Universes, :show, 1).should respond_successfully
     end
 
     it "should render the show action" do
-      unauthed_action(Universes, :show, {:id => 1}, @env).should respond_successfully do
-        self.should_receive(:render).with('show')
-      end
-    end
-
-    it "should get the universes" do
-      universe = Universe.find(1)
-      Universe.should_receive(:find).with('1').at_least(1).and_return(universe)
-      unauthed_action(Universes, :show, {:id => 1}, @env)
+      story_count = Universe.find(1).stories.length
+      response = unauthed_action(Universes, :show, 1)
+      response.should have_xpath("//li[position()='#{story_count}']")
     end
   end
 

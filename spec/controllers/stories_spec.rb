@@ -26,18 +26,14 @@ describe "Stories" do
   describe "#show" do
 
     it "should respond correctly" do
-      unauthed_action(Stories, :show, {:id => 1}, @env).should respond_successfully
+      response = request("http://playground.playground.pele.cx/stories/show/7", :method => "GET")
+      response.should have_xpath("//h1[text()='Jason and Kylie, Naked in School Web Archive']")
     end
 
-    it "should render the show action" do
-      unauthed_action(Stories, :show, {:id => 1}, @env).should respond_successfully do
-        self.should_receive(:render).with('show')
-      end
-    end
-
-    it "should get the story" do
-      story = Story.find(1)
-      unauthed_action(Stories, :show, {:id => 1}, @env).assigns(:story).should == story
+    it "should should have a link for each chapter in the story" do
+      num_chapters = Story.find(7).chapters.length
+      response = request("http://playground.playground.pele.cx/stories/show/7", :method => "GET")
+      response.should have_xpath("//div[@class='chaptercolumn']/a[position()=#{num_chapters}]")
     end
   end
 
