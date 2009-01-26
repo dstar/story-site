@@ -1,5 +1,5 @@
 # This file is auto-generated from the current state of the database. Instead of editing this file, 
-# please use the migrations feature of ActiveRecord to incrementally modify your database, and
+# please use the migrations feature of Active Record to incrementally modify your database, and
 # then regenerate this schema definition.
 #
 # Note that this schema.rb definition is the authoritative source for your database schema. If you need
@@ -12,21 +12,21 @@
 ActiveRecord::Schema.define(:version => 41) do
 
   create_table "blogposts", :force => true do |t|
-    t.string   "user",       :limit => 45, :null => false
-    t.text     "body",                     :null => false
+    t.text     "body",                                          :null => false
+    t.datetime "created_on"
+    t.string   "user",       :limit => 45, :default => "dstar", :null => false
     t.text     "title"
     t.datetime "updated_on"
-    t.datetime "created_on"
     t.text     "body_raw"
   end
 
   create_table "chapters", :force => true do |t|
-    t.integer  "story_id",      :default => 0,       :null => false
-    t.integer  "number",        :default => 0,       :null => false
-    t.integer  "words",         :default => 0,       :null => false
-    t.string   "file",          :default => "",      :null => false
-    t.string   "status",        :default => "draft"
+    t.integer  "story_id",                    :default => 0,       :null => false
+    t.integer  "number",                      :default => 0,       :null => false
+    t.integer  "words",                       :default => 0,       :null => false
     t.date     "date_uploaded"
+    t.string   "file",          :limit => 45, :default => "",      :null => false
+    t.string   "status",                      :default => "draft"
     t.string   "last_state"
     t.string   "last_status"
     t.string   "released"
@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(:version => 41) do
   end
 
   create_table "credits", :force => true do |t|
-    t.string  "credit_type", :default => "Author", :null => false
     t.integer "user_id",                           :null => false
     t.integer "story_id",                          :null => false
+    t.string  "credit_type", :default => "Author", :null => false
   end
 
   create_table "donations", :force => true do |t|
@@ -53,38 +53,38 @@ ActiveRecord::Schema.define(:version => 41) do
   end
 
   create_table "groups", :id => false, :force => true do |t|
-    t.integer "group_type",        :default => 1,    :null => false
-    t.string  "group_name",        :default => "",   :null => false
-    t.string  "group_description", :default => "",   :null => false
-    t.integer "group_moderator",   :default => 0,    :null => false
-    t.boolean "group_single_user", :default => true, :null => false
-    t.integer "group_id",                            :null => false
+    t.integer "group_id",          :limit => 8,  :default => 0,    :null => false
+    t.integer "group_type",                      :default => 1,    :null => false
+    t.string  "group_name",        :limit => 40, :default => "",   :null => false
+    t.string  "group_description",               :default => "",   :null => false
+    t.integer "group_moderator",   :limit => 8,  :default => 0,    :null => false
+    t.boolean "group_single_user",               :default => true, :null => false
   end
 
   create_table "memberships", :id => false, :force => true do |t|
-    t.integer "group_id",     :default => 0, :null => false
-    t.integer "user_id",      :default => 0, :null => false
+    t.integer "group_id",     :limit => 8, :default => 0, :null => false
+    t.integer "user_id",      :limit => 8, :default => 0, :null => false
     t.boolean "user_pending"
   end
 
   create_table "paragraphs", :force => true do |t|
     t.integer "chapter_id", :default => 0, :null => false
+    t.text    "body",                      :null => false
     t.integer "position",   :default => 1, :null => false
     t.integer "flag",       :default => 0, :null => false
-    t.text    "body",                      :null => false
     t.text    "body_raw"
   end
 
   add_index "paragraphs", ["chapter_id"], :name => "chapter_index"
 
   create_table "pcomments", :force => true do |t|
-    t.integer  "paragraph_id", :default => 0,         :null => false
-    t.string   "username",     :default => "no user", :null => false
-    t.integer  "flag",         :default => 0,         :null => false
-    t.text     "body",                                :null => false
+    t.integer  "paragraph_id",               :default => 0,         :null => false
+    t.text     "body",                                              :null => false
+    t.datetime "created_at"
+    t.string   "username",     :limit => 45, :default => "no user", :null => false
+    t.integer  "flag",                       :default => 0,         :null => false
     t.text     "read_by"
     t.string   "acknowledged"
-    t.datetime "created_at"
     t.text     "body_raw"
   end
 
@@ -99,14 +99,14 @@ ActiveRecord::Schema.define(:version => 41) do
   add_index "pcomments_read_by", ["user_id"], :name => "index_pcomments_read_by_on_user_id"
 
   create_table "php_sessions", :force => true do |t|
-    t.string  "session_id",        :default => "",    :null => false
-    t.integer "session_user_id",   :default => 0,     :null => false
-    t.integer "session_start",     :default => 0,     :null => false
-    t.integer "session_time",      :default => 0,     :null => false
-    t.string  "session_ip",        :default => "0",   :null => false
-    t.integer "session_page",      :default => 0,     :null => false
-    t.boolean "session_logged_in", :default => false, :null => false
-    t.integer "session_admin",     :default => 0,     :null => false
+    t.string  "session_id",        :limit => 32, :default => "",    :null => false
+    t.integer "session_user_id",   :limit => 8,  :default => 0,     :null => false
+    t.integer "session_start",                   :default => 0,     :null => false
+    t.integer "session_time",                    :default => 0,     :null => false
+    t.string  "session_ip",        :limit => 8,  :default => "0",   :null => false
+    t.integer "session_page",                    :default => 0,     :null => false
+    t.boolean "session_logged_in",               :default => false, :null => false
+    t.integer "session_admin",     :limit => 2,  :default => 0,     :null => false
   end
 
   create_table "required_permissions", :force => true do |t|
@@ -141,14 +141,14 @@ ActiveRecord::Schema.define(:version => 41) do
   end
 
   create_table "stories", :force => true do |t|
-    t.string  "title",                        :default => "",      :null => false
-    t.integer "flag",                         :default => 0,       :null => false
-    t.integer "universe_id",                  :default => 0,       :null => false
-    t.string  "short_title",                  :default => "",      :null => false
-    t.integer "order",                        :default => 0,       :null => false
-    t.string  "file_prefix",                  :default => "",      :null => false
-    t.string  "status",                       :default => "draft"
-    t.text    "description",                                       :null => false
+    t.string  "title",                                      :default => "",      :null => false
+    t.text    "description",                                                     :null => false
+    t.integer "flag",                                       :default => 0,       :null => false
+    t.integer "universe_id",                                :default => 0,       :null => false
+    t.string  "short_title",                  :limit => 45, :default => "",      :null => false
+    t.integer "order",                                      :default => 0,       :null => false
+    t.string  "file_prefix",                  :limit => 45, :default => "",      :null => false
+    t.string  "status",                                     :default => "draft"
     t.string  "keywords"
     t.string  "on_release"
     t.string  "required_chapter_permissions"
@@ -162,14 +162,14 @@ ActiveRecord::Schema.define(:version => 41) do
     t.string  "permission"
   end
 
-  add_index "story_permissions", ["story_id"], :name => "story_permissions_story_id_index"
   add_index "story_permissions", ["permission_holder_id"], :name => "story_permissions_permission_holder_id_index"
+  add_index "story_permissions", ["story_id"], :name => "story_permissions_story_id_index"
 
   create_table "styles", :force => true do |t|
-    t.text    "element",    :null => false
-    t.text    "definition", :null => false
-    t.text    "theme",      :null => false
-    t.integer "user",       :null => false
+    t.text    "element",                 :null => false
+    t.text    "definition",              :null => false
+    t.text    "theme",                   :null => false
+    t.integer "user",       :limit => 8, :null => false
   end
 
   create_table "targets", :force => true do |t|
@@ -187,29 +187,73 @@ ActiveRecord::Schema.define(:version => 41) do
   end
 
   create_table "universes", :force => true do |t|
-    t.string  "name",        :default => "", :null => false
-    t.integer "flag",        :default => 0,  :null => false
-    t.text    "description",                 :null => false
+    t.string  "name",        :limit => 45, :default => "", :null => false
+    t.text    "description",                               :null => false
+    t.integer "flag",                      :default => 0,  :null => false
     t.string  "status"
   end
 
   create_table "users", :id => false, :force => true do |t|
-    t.integer "user_id",                                                      :default => 0,           :null => false
-    t.boolean "user_active",                                                  :default => true
-    t.string  "username",                                                     :default => "",          :null => false
-    t.string  "user_password",                                                :default => "",          :null => false
-    t.integer "user_lastvisit",                                               :default => 0,           :null => false
-    t.integer "user_regdate",                                                 :default => 0,           :null => false
-    t.string  "user_dateformat",                                              :default => "d M Y H:i", :null => false
-    t.decimal "user_timezone",                  :precision => 5, :scale => 2, :default => 0.0,         :null => false
+    t.integer "user_id",                 :limit => 8,                                 :default => 0,           :null => false
+    t.boolean "user_active",                                                          :default => true
+    t.string  "username",                :limit => 25,                                :default => "",          :null => false
+    t.string  "user_password",           :limit => 32,                                :default => "",          :null => false
+    t.integer "user_session_time",                                                    :default => 0,           :null => false
+    t.integer "user_session_page",       :limit => 8,                                 :default => 0,           :null => false
+    t.integer "user_lastvisit",                                                       :default => 0,           :null => false
+    t.integer "user_lastvisit_chat",                                                  :default => 0,           :null => false
+    t.integer "user_regdate",                                                         :default => 0,           :null => false
+    t.integer "user_level",                                                           :default => 0
+    t.integer "user_posts",              :limit => 8,                                 :default => 0,           :null => false
+    t.decimal "user_timezone",                          :precision => 5, :scale => 2, :default => 0.0,         :null => false
+    t.integer "user_style"
+    t.string  "user_lang"
+    t.string  "user_dateformat",         :limit => 14,                                :default => "d M Y H:i", :null => false
+    t.integer "user_new_privmsg",        :limit => 8,                                 :default => 0,           :null => false
+    t.integer "user_unread_privmsg",     :limit => 8,                                 :default => 0,           :null => false
+    t.integer "user_last_privmsg",                                                    :default => 0,           :null => false
+    t.integer "user_emailtime"
+    t.boolean "user_viewemail"
+    t.boolean "user_attachsig"
+    t.boolean "user_setbm",                                                           :default => false,       :null => false
+    t.boolean "user_allowhtml",                                                       :default => true
+    t.boolean "user_allowbbcode",                                                     :default => true
+    t.boolean "user_allowsmile",                                                      :default => true
+    t.boolean "user_allowavatar",                                                     :default => true,        :null => false
+    t.boolean "user_allow_pm",                                                        :default => true,        :null => false
+    t.boolean "user_allow_viewonline",                                                :default => true,        :null => false
+    t.boolean "user_notify",                                                          :default => true,        :null => false
+    t.boolean "user_notify_pm",                                                       :default => false,       :null => false
+    t.boolean "user_popup_pm",                                                        :default => false,       :null => false
+    t.integer "user_rank",                                                            :default => 0
+    t.string  "user_avatar",             :limit => 100
+    t.integer "user_avatar_type",                                                     :default => 0,           :null => false
     t.string  "user_email"
-    t.string  "user_icq"
+    t.string  "user_icq",                :limit => 15
+    t.string  "user_website",            :limit => 100
+    t.string  "user_from",               :limit => 100
+    t.text    "user_sig"
+    t.string  "user_sig_bbcode_uid",     :limit => 10
+    t.text    "user_pips",                                                                                     :null => false
+    t.string  "user_pips_bbcode_uid",    :limit => 10,                                :default => "",          :null => false
+    t.text    "user_pips_parsed",                                                                              :null => false
     t.string  "user_aim"
     t.string  "user_yim"
     t.string  "user_msnm"
-    t.string  "user_website",    :limit => 100
-    t.string  "user_actkey",     :limit => 32
-    t.string  "user_newpasswd",  :limit => 32
+    t.string  "user_occ",                :limit => 100
+    t.string  "user_skype",                                                           :default => "",          :null => false
+    t.string  "user_interests"
+    t.string  "user_actkey",             :limit => 32
+    t.string  "user_newpasswd",          :limit => 32
+    t.string  "user_topic_view",         :limit => 16,                                :default => "threads",   :null => false
+    t.string  "user_pubname"
+    t.integer "user_thread_indent_px",   :limit => 8,                                 :default => 5,           :null => false
+    t.integer "user_thread_cutofflevel", :limit => 8,                                 :default => 12,          :null => false
+    t.integer "user_view_log",                                                        :default => 0,           :null => false
+    t.boolean "user_index_mode",                                                      :default => false,       :null => false
+    t.text    "user_unread_topics"
+    t.integer "user_login_tries",        :limit => 8,                                 :default => 0,           :null => false
+    t.integer "user_last_login_try",                                                  :default => 0,           :null => false
   end
 
 end
