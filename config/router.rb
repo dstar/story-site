@@ -22,35 +22,42 @@
 Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do |r|
 
+  slice(:MerbAuthSlicePassword, :name_prefix => nil, :path_prefix => "auth", :default_routes => false )
+
   r.match("/html/:chapter.html").defer_to do |request,params|
-    params.merge :controller => 'chapters', :action => 'show', :short_title => request.subdomains[0]
+    params.merge :controller => 'chapters', :action => 'show', :short_title => :subdomain[1]
   end.name(:chapter)
 
   r.match("/text/:chapter.txt").defer_to do |request,params|
-    params.merge :controller => 'chapters', :action => 'show', :short_title => request.subdomains[0], :format => "text"
+    params.merge :controller => 'chapters', :action => 'show', :short_title => :subdomain[1], :format => "text"
   end.name(:text)
 
   r.match('/').defer_to do |request, params|
-    if request.subdomains[0] != 'playground'
-    Merb.logger.debug "QQQ6: request.subdomains[0] is #{request.subdomains[0]}"
+    if request.subdomains[0] != 'playground' && request.subdomains[0].to_i != 127
+    Merb.logger.debug "QQQ6: :request is #{request.domain.inspect}"
+    Merb.logger.debug "QQQ6: :request is #{request.subdomains.inspect}"
     params.merge :controller => 'stories', :action => 'show', :short_title => request.subdomains[0]
     else
-    Merb.logger.debug "QQQ7: request.subdomains[0] is #{request.subdomains[0]}"
+#    Merb.logger.debug "QQQ7: :subdomain[1] is #{:subdomain[1]}"
     params.merge :controller => 'site', :action => 'show'
     end
 
   end
-
-  # RESTful routes
-#  r.resources :chapters
-#  r.resources :stories
-#  r.resources :universes
 
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based
   # routes, you may want to comment/remove this line to prevent
   # clients from calling your create or destroy actions with a GET
   r.default_routes
+
+  # RESTful routes
+  r.resources :chapters
+  r.resources :stories
+  r.resources :universes
+  r.resources :blogposts
+  r.resources :paragraphs
+  r.resources :pcomments
+
 
   # Change this for your home page to be available at /
   # r.match('/').to(:controller => 'whatever', :action =>'index')

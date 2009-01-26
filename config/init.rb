@@ -46,14 +46,17 @@ Merb.push_path(:lib, Merb.root / "lib") # uses **/*.rb as path glob.
 
 # ==== Dependencies
 
+dependency "teamon-merb-flash", :require_as => "merb-flash"
+dependency 'merb-auth-core'
+dependency 'merb-auth-more'
+dependency 'merb-auth-slice-password'
+
 Merb::BootLoader.before_app_loads do
   require Merb.root / "lib/acts_as_list/lib/active_record/acts/list.rb"
   require Merb.root / "lib/acts_as_list/init.rb"
-  require 'memcache'
-  require 'merb-cache'
   require 'merb_helpers'
   require 'merb-assets'
-  require 'merb_has_flash'
+#  require 'merb_has_flash'
 end
 
 # These are some examples of how you might specify dependencies.
@@ -103,8 +106,8 @@ use_orm :activerecord
 # merb_rspec is installed by default if you did gem install
 # merb.
 #
-use_test :test_unit
-# use_test :rspec
+#use_test :test_unit
+ use_test :rspec
 
 
 #
@@ -116,8 +119,9 @@ Merb::Config.use do |c|
   # with the cookie session store. If not specified, defaults to '_session_id'.
   c[:session_id_key] = '_merb_session_id'
 
-  c[:session_secret_key]  = 'f46796f39efbb9cda332ed2a73fe4ba96ce27624'
   c[:session_store] = 'cookie'
+  c[:session_secret_key]  = 'f46796f39efbb9cda332ed2a73fe4ba96ce27624'
+  c[:use_mutex] = false
 end
 
 
@@ -161,24 +165,11 @@ end
 # And the result is:
 # irb> "wife".plural
 # => wives
-
-Merb::Plugins.config[:merb_cache] = {
-    :cache_html_directory => Merb.dir_for(:public) / "cache",
-
-    #:store => "database",
-    #:table_name => "merb_cache",
-
-    #:disable => "development", # disable merb-cache in development
-    #:disable => true, # disable merb-cache in all environments
-
-    #:store => "file",
-    #:cache_directory => Merb.root_path("tmp/cache"),
-
-    :store => "memcache",
-    :host => "127.0.0.1:11211",
-    :namespace => "playground-#{Merb.env}",
-    :no_tracking => "false",
-
-    #:store => "memory",
-    # store could be: file, memcache, memory, database, dummy, ...
-}
+dependency 'merb-cache' do
+  Merb::Cache.setup do
+    unless defined?(CACHE_SETUP)
+      register(:default, Merb::Cache::MemcachedStore,:servers => ["127.0.0.1:11211"], :namespace => "playground-#{Merb.env}")
+    end
+    CACHE_SETUP = true
+  end
+end
