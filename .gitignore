@@ -1,0 +1,13 @@
+# Ignore emacs tmp and backup files
+*~
+*\#*
+
+# Ignore log directory
+log/
+# Ignore database.yml
+config/database.yml
+
+# Ignore eclipse files
+.loadpath
+.project
+.settings/
