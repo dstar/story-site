@@ -1,2 +1,2 @@
-<%= render :partial => "default_section" %></body>
-<%= render :partial => "user_section" if @authinfo[:user] %></body>
+<%= partial :default_section %></body>
+<%= partial :user_section if @authinfo[:user] %></body>

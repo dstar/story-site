@@ -1,5 +1,7 @@
 class Styles < Application
 
+  before :setup_everything
+
   def setup_authorize_hash
     @authorization = {
       "customize"        => [ "LOGGED_IN", ],
@@ -24,11 +26,11 @@ class Styles < Application
   end
 
   def style_dropdown
-    render 'style_dropdown', :layout => false
+    render :style_dropdown, :layout => false
   end
 
   def style_links
-    render 'style_links', :layout => false
+    render :style_links, :layout => false
   end
 
   def show
@@ -45,7 +47,6 @@ class Styles < Application
       @styles = @user_styles
 
       @user_styles_names = @user_styles.collect { |e| e.element}
-      $stderr.write("\n\n#{@user_styles_names.inspect}\n\n")
       @default_styles.each do |element|
         @styles << element unless @user_styles_names.include?(element.element)
       end
@@ -69,14 +70,14 @@ class Styles < Application
       @stylesheet = @stylesheet + "#{element} { #{style} }\n"
     end
     headers['Content-Type'] = "text/css"
-    render 'show', :layout => false
+    render :show, :layout => false
   end
 
   def edit_theme
     @theme = cookies[:style]
     @theme = 'default' unless @theme
     @theme_styles = Style.find_all_by_theme_and_user(@theme,-1, :order => 'element ASC')
-    render 'edit_theme'
+    render :edit_theme
   end
 
   def customize
@@ -84,7 +85,7 @@ class Styles < Application
     @theme = 'default' unless @theme
     @default_styles = Style.find_all_by_theme_and_user(@theme,-1)
     @user_styles = Style.find_all_by_theme_and_user(@theme,@authinfo[:user].id)
-    render 'customize'
+    render :customize
   end
 
   def save_style
@@ -155,7 +156,7 @@ class Styles < Application
         @style.definition = definition
         @style.theme = @theme
         @style.user = -1
-logger.error "trying to save style #{@style.inspect}"
+
         if @style.save
           @result = "Saved Successfully"
           partial "edit_theme_style", :edit_theme_style => @style, :result => @result

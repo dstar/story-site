@@ -1,6 +1,7 @@
 class Paragraph < ActiveRecord::Base
   belongs_to :chapter
-  has_many :pcomments, :order => 'id'
+  has_many :pcomments, :order => 'id', :conditions => 'flag < 2'
+#  has_many :unread_pcomments, :order => 'id', :conditions => "paragraph_id = #{self.id} and id not in (select prb.pcomment_id from pcomments_read_by prb where prb.user_id = #{user.id})"
 
   acts_as_list :scope => "chapter_id"
 
@@ -28,11 +29,20 @@ class Paragraph < ActiveRecord::Base
   end
 
   def total_comments
-    Pcomment.count(:conditions => "paragraph_id = #{self.id} and flag < 2")
+#    Pcomment.count(:conditions => "paragraph_id = #{self.id} and flag < 2")
+    self.pcomments.length || 0
+  end
+
+  def self.unread_comments_for_chapter(chapter,user)
+#    Pcomment.count(:conditions => "paragraph_id = #{self.id} and id not in (select prb.pcomment_id from pcomments_read_by prb where prb.user_id = #{user.id})")
+#    self.unread_pcomments.length
+    conditions = "paragraphs.chapter_id = #{chapter} and"
+    conditions += " pcomments.id not in (select prb.pcomment_id from pcomments_read_by prb where prb.user_id = #{user.id})"
+    @chapter_unread_comments ||= Pcomment.count(:conditions => conditions, :joins => [{ :paragraph => :chapter}], :group => "paragraphs.id").to_hash
   end
 
   def unread_comments(user)
-    Pcomment.count(:conditions => "paragraph_id = #{self.id} and id not in (select prb.pcomment_id from pcomments_read_by prb where prb.user_id = #{user.id})")
+    Paragraph.unread_comments_for_chapter(self.chapter.id, user)[self.id] || 0
   end
 
   def unacknowledged_comments

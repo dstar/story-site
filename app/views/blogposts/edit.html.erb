@@ -1,9 +1,9 @@
 <h1>Editing blogpost</h1>
 
-<% form_tag :action => 'update', :id => @blogpost do -%>
-  <%= render :partial => 'form' %>
-  <%= submit_tag 'Edit' %>
-<% end -%>
+<%= form_for @blogpost, :action => resource(@blogpost)  do -%>
+  <%= partial 'blogpost_form' %>
+  <%= submit 'Edit' %>
+<% end =%>
 
 <%= link_to 'Show', :action => 'show', :id => @blogpost %> |
 <%= link_to 'Back', :action => 'list' %>

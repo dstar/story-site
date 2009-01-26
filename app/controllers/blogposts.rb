@@ -1,5 +1,7 @@
 class Blogposts < Application
 
+  before :setup_everything
+
   def setup_authorize_hash
     @authorization = {
       "destroy" => [ "blogger", ],
@@ -46,46 +48,47 @@ class Blogposts < Application
   end
 
   def index
-    list
+    @blogposts = Blogpost.find(:all, :order => 'created_on desc')
+    render :list
   end
 
   def list
     @blogposts = Blogpost.find(:all, :order => 'created_on desc')
-    render 'list'
+    Merb.logger.debug "QQQ16: @blogposts is #{@blogposts.inspect}"
+    render :list
   end
 
   def show
     @blogpost = Blogpost.find(params[:id])
+    Merb.logger.debug "QQQ18: @blogpost is #{@blogpost.inspect}"
     render
   end
 
   def new
     @blogpost = Blogpost.new
-    render 'new'
+    render :new
   end
 
   def create
     @blogpost = Blogpost.new(params[:blogpost])
     @blogpost.user = @authinfo[:user].username
     if @blogpost.save
-      flash[:notice] = 'Blogpost was successfully created.'
-      redirect("/site/show")
+      redirect "/blogposts/list", :message => {:notice => 'Blogpost was successfully created.' }
     else
-      render 'new'
+      render :action => 'new'
     end
   end
 
   def edit
     @blogpost = Blogpost.find(params[:id])
-    render 'edit'
+    render :edit
   end
 
   def update
     @blogpost = Blogpost.find(params[:id])
     if @blogpost.update_attributes(params[:blogpost])
-      flash[:notice] = 'Blogpost was successfully updated.'
       expire("blogpost_#{@blogpost.id}")
-      redirect "/show/#{@blogpost.id}"
+      redirect "/blogposts/show/#{@blogpost.id}", :message => {:notice => 'Blogpost was successfully updated.' }
     else
       render :action => 'edit'
     end

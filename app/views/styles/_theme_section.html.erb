@@ -1,7 +1,7 @@
 <div id="theme">
 <center><h2> Styles for theme <%= @theme %> </h2></center>
 <div id="theme_styles">
-<%= render :partial => "edit_theme_style", :collection => @theme_styles %>
+<%= partial :edit_theme_style, :with => @theme_styles %>
 </div>
 <form action="" method="">
 <input type="TEXT" name="new_element" size="10" id="new_element">

@@ -1,5 +1,7 @@
 class Pcomments < Application
 
+  before :setup_everything
+
   def setup_authorize_hash
     if ! @paragraph
       @paragraph = @pcomment.paragraph
@@ -86,26 +88,24 @@ class Pcomments < Application
       end
     else
       if @pcomment.save
-        flash[:notice] = 'Paragraph comment was successfully created.'
-        redirect "/chapters/show_draft/#{@pcomment.paragraph.chapter.id}#pcomment#{@pcomment.paragraph.id}"
+        redirect "/chapters/show_draft/#{@pcomment.paragraph.chapter.id}#pcomment#{@pcomment.paragraph.id}", :message => {:notice => 'Paragraph comment was successfully created.' }
       else
-        render 'new'
+        render :new
       end
     end
   end
 
   def edit
     @pcomment = Pcomment.find(params[:id])
-    render 'edit'
+    render :edit
   end
 
   def update
     @pcomment = Pcomment.find(params[:id])
     if @pcomment.update_attributes(params[:pcomment])
-      flash[:notice] = 'Pcomment was successfully updated.'
-      redirect "/chapters/show_draft/#{@pcomment.paragraph.chapter.id}#pcomment#{@pcomment.paragraph.id}"
+      redirect "/chapters/show_draft/#{@pcomment.paragraph.chapter.id}#pcomment#{@pcomment.paragraph.id}", :message => {:notice => 'Pcomment was successfully updated.' }
     else
-      render 'edit'
+      render :edit
     end
   end
 

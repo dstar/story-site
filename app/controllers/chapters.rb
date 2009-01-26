@@ -1,5 +1,7 @@
 class Chapters < Application
 
+  before :setup_everything
+  
   def setup_authorize_hash
     if params[:id] and ! @story_id
       @story_id = Chapter.find(params[:id]).story.id
@@ -12,8 +14,11 @@ class Chapters < Application
   end
 
   def check_authorization(user)
+    Merb.logger.debug "QQQ13: request input is #{request.env.inspect}"
+    Merb.logger.debug "QQQ13: cookies are #{cookies.inspect}"
     return false unless @chapter
     needed = @authorization[@chapter.status][action_name] unless (needed and ! needed.empty?)
+    Merb.logger.debug "QQQ14: needed is #{needed.inspect}"
     if needed
       needed.each do |req|
         return true if req == "EVERYONE" # check for public action
@@ -38,7 +43,8 @@ class Chapters < Application
   end
 
   def show_draft
-    @chapter = Chapter.find(params[:id], :include => [{:paragraphs => :pcomments}], :order => "position")
+#    @chapter = Chapter.find(params[:id], :include => [{:paragraphs => :pcomments}], :order => "position")
+    @chapter = Chapter.find(params[:id], :include => [{:paragraphs => :pcomments}])
     render :show_draft
   end
 
@@ -63,7 +69,7 @@ class Chapters < Application
         end
       end
     end
-
+  Merb.logger.debug "QQQ14: Setting up variables"
   end
 
   def handle_url

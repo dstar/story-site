@@ -1,9 +1,9 @@
-<h1>Editing pcomments</h1>
+<h1>Editing Comment</h1>
 
-<% form_tag :action => 'update', :id => @pcomments do -%>
-  <%= render :partial => 'form' -%>
+<%= form_for @pcomment, :action => resource(@pcomment) do -%>
+  <%= partial :form, :with => @pcomment -%>
   <%= submit_tag 'Edit' -%>
-<% end -%>
+<% end =%>
 
 <%= link_to 'Show', :action => 'show', :id => @pcomments %> |
 <%= link_to 'Back', :action => 'list' %>

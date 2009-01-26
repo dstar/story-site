@@ -1,7 +1,7 @@
-<%= render :partial => "universe", :object => @universe %>
+<%= partial :universe, :with => @universe %>
 
 <%= nav_links(@universe) %>
 <h2>Stories</h2>
 <ul>
-<%= render :partial => "stories/story", :collection => @stories %>
+<%= partial "stories/story", :with => @stories %>
 </ul>

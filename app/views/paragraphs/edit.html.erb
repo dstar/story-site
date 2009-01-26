@@ -1,11 +1,11 @@
-[<h1>Editing paragraphs</h1>
-<%form_tag :action => 'confirm_delete', :id => @paragraphs do -%>
+<h1>Editing paragraphs</h1>
+<%= form_for @paragraphs, :action => "/paragraphs/confirm_delete/#{@paragraphs.id}" do -%>
     <%= submit_tag("Delete Paragraph", {:confirm => "Are you sure?"}) -%>
-<% end -%>
-<%form_tag :action => 'update', :id => @paragraphs do -%>
-  <%= render :partial => 'form' -%>
+<% end =%>
+<%= form_for @paragraphs, :action => resource(@paragraphs) do -%>
+  <%= partial :form, :with => @paragraphs -%>
   <%= submit_tag 'Edit' -%>
-<% end -%>
+<% end =%>
 
 <hr/>
 

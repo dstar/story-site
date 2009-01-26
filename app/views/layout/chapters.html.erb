@@ -81,7 +81,7 @@
 <%= php_session_header %>
 <%= style_dropdown%>
 <p><%= breadcrumbs %></p>
-<p style="color: red"><%= flash[:notice] %></p>
+<p style="color: red"><%= h(message[:notice]) %></p>
 
 <%= catch_content :for_layout %>
 

@@ -1,5 +1,7 @@
 class Users < Application
 
+  before :setup_everything
+
   def setup_authorize_hash
   end
 
@@ -13,7 +15,8 @@ class Users < Application
   end
 
   def show
-    render 'show'
+    Merb.logger.debug("QQQ12: _session_secret_key is #{request._session_secret_key}")
+    render :show
   end
 
 end

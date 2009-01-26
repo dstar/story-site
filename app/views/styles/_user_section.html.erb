@@ -1,7 +1,7 @@
 <div id="users">
 <center><h2> <%= @authinfo[:user].username %>'s styles for theme <%= @theme %> </h2></center>
 <div id="user_styles">
-<%= render :partial => "edit_style", :collection => @user_styles %>
+<%= partial :edit_style, :with => @user_styles %>
 </div>
 <form action="" method="">
 <input type="TEXT" name="new_element" size="10" id="new_element">

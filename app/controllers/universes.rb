@@ -1,5 +1,7 @@
 class Universes < Application
 
+  before :setup_everything
+
   def setup_authorize_hash
     if params[:id] and ! @universe
       @universe = Story.find(params[:id]).universe
@@ -40,20 +42,20 @@ class Universes < Application
 
   def list
     @universes = Universe.find(:all)
-    render 'list'
+    render :list
   end
 
   def show
     @universe = Universe.find(params[:id])
     @stories = Story.OrderedListByUniverse(@universe.id)
-    render 'show'
+    render :show
   end
 
 
   def new_story
     @story = Story.new
     @universe = Universe.find(params[:id])
-    render 'new_story'
+    render :new_story
   end
 
   def create_story
@@ -61,26 +63,26 @@ class Universes < Application
     @story.file_prefix = @story.short_title unless @story.file_prefix
     @story.description.gsub!(/\s+--/, "--")
      if @story.save
-      flash[:notice] = 'Story was successfully created.'
+      message[:notice] = 'Story was successfully created.'
       redirect "/stories/show/#{@story.id}"
     else
-      render 'new_story'
+      render :new_story
     end
   end
 
   def edit
     @universe = Universe.find(params[:id])
-    render 'edit'
+    render :edit
   end
 
   def update
     @universe = Universe.find(params[:id])
     if @universe.update_attributes(params[:universe])
       expire("universe_wstories#{@universe.id}")
-      flash[:notice] = 'Universe was successfully updated.'
+      message[:notice] = 'Universe was successfully updated.'
       redirect "/universes/show/#{@universe.id}"
     else
-      render 'edit'
+      render :edit
     end
   end
 
@@ -104,6 +106,8 @@ class Universes < Application
 
   def permissions_modify
 
+    msg = nil
+
     case params[:type]
     when /user/
       permission_holder = User.find_by_username(params[:permission_holder])
@@ -117,19 +121,19 @@ class Universes < Application
       universe_permissions.permission=params[:permission]
       universe_permissions.universe_id=@universe.id
       unless universe_permissions.save
-        flash[:notice] = "Permission Add Failed"
+        message[:notice] = "Permission Add Failed"
       end
     else
       unless permission_holder
-        message = "Unknown User/Group."
+        msg = "Unknown User/Group."
       end
       unless params[:permission]
-        message = "No Permission Selected."
+        msg = "No Permission Selected."
       end
-      flash[:notice]=message
+      message[:notice]=msg
     end
 
-    render 'permissions'
+    render :permissions
   end
 
   def permissions_destroy
@@ -142,10 +146,12 @@ class Universes < Application
 
     permission = UniversePermission.find_by_permission_holder_type_and_permission_holder_id_and_permission_and_universe_id(params[:type], permission_holder.id,params[:permission],@universe.id)
     permission.destroy
-    render 'permissions'
+    render :permissions
   end
 
  def story_add_owner_save
+
+   msg = nil
 
     case params[:type]
     when /user/
@@ -160,16 +166,16 @@ class Universes < Application
       story_permission.permission=params[:permission]
       story_permission.story_id=params[:story_id]
       unless story_permission.save
-        flash[:notice] = "Permission Add Failed"
+        message[:notice] = "Permission Add Failed"
       end
     else
       unless permission_holder
-        message = "Unknown User/Group."
+        msg = "Unknown User/Group."
       end
       unless params[:permission]
-        message = "No Permission Selected."
+        msg = "No Permission Selected."
       end
-      flash[:notice]=message
+      message[:notice]=msg
     end
 
    render '/stories/permissions'

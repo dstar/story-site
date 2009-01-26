@@ -1,9 +1,2 @@
 <%= error_messages_for 'paragraphs' %>
-
-<!--[form:paragraphs]-->
-<p><label for="paragraphs_body">Body</label><br/>
-<%= text_area 'paragraphs', 'body_raw', "rows" => 10, "cols" => 80 %></p>
-
-
-<!--[eoform:paragraphs]-->
-
+<p><%= text_area :body_raw, :rows => 10, :cols => 80, :label => "Body" %></p>

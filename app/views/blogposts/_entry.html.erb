@@ -1,4 +1,6 @@
+<% Merb.logger.debug "QQQ17.2: Entry is #{entry.inspect}" %>
 <% cache "blogpost_#{entry.id}" do -%>
+<% Merb.logger.debug "QQQ17: Entry is #{entry.inspect}" %>
   <div class="news" id="<%= ["entry",entry.id] %>" >
        <h2><%= entry.title %></h2>
     <%= entry.body %>

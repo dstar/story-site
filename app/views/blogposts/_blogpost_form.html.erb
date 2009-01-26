@@ -1,11 +1,8 @@
 <%= error_messages_for 'blogpost' %>
 
-<!--[form:blogpost]-->
-<p><label for="blogpost_title">Title</label><br/>
-<%= text_field 'blogpost', 'title'  %></p>
+<p><%= text_field :title, :label => 'Title'  %></p>
 
-<p><label for="blogpost_body">Body</label><br/>
-<%= text_area 'blogpost', 'body_raw'  %></p>
+<p><%= text_area :body_raw, :label => "Body"  %></p>
 
 <!--[eoform:blogpost]-->
 

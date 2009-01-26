@@ -1,6 +1,6 @@
 <p>Username: <%= @user.username %> </p>
 <p class="timestamp"> Member since <%= Time.at(@user.user_regdate) %>
-<% stories = @user.story_permissions.find(:all,:conditions => "permission = 'author'").collect {|s| s.story}-%>
+<% stories = @user.story_permissions.find(:all,:conditions => "permission = 'author'").collect {|s| s.story}.compact-%>
 <% if stories -%>
 <p> Author of <%= stories.length %> <% if stories.length > 1 %>stories: <% else %> story: <% end %></p>
 <ul>

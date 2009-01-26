@@ -1,5 +1,5 @@
 <h1>Listing blogposts</h1>
 
-<%= render :partial => 'entry', :collection => @blogposts %>
+<%= partial  'entry', :with => @blogposts %>
 
 <%= link_to 'New blogpost', :action => 'new' %>

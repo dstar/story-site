@@ -4,7 +4,7 @@
     <% Story.OrderedListByUniverse(storylist.id).each do |story| -%>
       <% can_comment = false %>
       <% can_comment = true if @authinfo[:user] && ( @authinfo[:user].has_story_permission(story,'author') || @authinfo[:user].has_story_permission(story,'beta-reader') ) %>
-      <% cache "story_list#{story.id}#{can_comment}" do %>
+      <% cache "story_list#{story.id}#{can_comment}", :expire_in => 24.hours do %>
         <li><a href="<%=index_url(StoryHost(story)) %>"><%= story.title %></a>
           <% if can_comment -%>
             <% newest_chapter = story.chapters.find(:first, :order => "number DESC" ) -%>

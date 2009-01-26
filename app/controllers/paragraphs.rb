@@ -1,5 +1,7 @@
 class Paragraphs < Application
 
+  before :setup_everything
+
   def setup_authorize_hash
     @authorization = {
       "destroy" => [ "author",  ],
@@ -43,15 +45,13 @@ class Paragraphs < Application
       @editbody = @paragraphs.body_raw
       partial 'paraedit'
     end
-    render 'edit'
+    render :edit
   end
 
   def update
     @paragraph = Paragraph.find(params[:id])
-    @orig = @paragraph
 
     saved_successfully = true
-
     need_page_reload = false
 
     begin
@@ -93,25 +93,24 @@ class Paragraphs < Application
       if request.xml_http_request? and not need_page_reload
         partial 'chapters/parabody', :parabody => @paragraph
       else
-        flash[:notice] = 'Paragraph was successfully updated.'
-        redirect "/chapters/show_draft/#{@paragraph.chapter.id}#pcomment#{@paragraph.id}"
+        redirect "/chapters/show_draft/#{@paragraph.chapter.id}#pcomment#{@paragraph.id}", :message => {:notice => 'Paragraph was successfully updated.' }
       end
     else
       if request.xml_http_request?
         @paragraph = Paragraph.find(params[:id])
         @editbody = params[:paragraphs]['body_raw']
-        render 'paraedit'
+        render :paraedit
       else
-        render 'edit'
+        render :edit
       end
     end
   end
 
   def confirm_delete
     if request.xml_http_request?
-      render :partial => 'confirm_delete'
+      partial :confirm_delete
     end
-    render 'confirm_delete'
+    render :confirm_delete
   end
 
   def destroy

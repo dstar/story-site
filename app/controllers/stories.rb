@@ -1,4 +1,7 @@
 class Stories < Application
+
+  before :setup_everything
+
   def setup_authorize_hash
     @authorization = Story.default_permissions
   end
@@ -41,7 +44,7 @@ class Stories < Application
     @description = @page_title
     @story = Story.find(params[:id])
     @universes = Universe.find(:all)
-    render 'edit'
+    render :edit
   end
 
   def update
@@ -52,26 +55,24 @@ class Stories < Application
       expire("story_list#{@story.id}#true")
       expire("story_list#{@story.id}#false")
       expire("stories_for_universe#{@story.id}")
-      cache_set("storylist_last_updated", Date.today)
-      flash[:notice] = 'Story was successfully updated.'
-      redirect "/stories/show/#{@story.id}"
+      redirect "/stories/show/#{@story.id}", :message => {:notice => 'Story was successfully updated.' }
     else
-      render 'edit'
+      render :edit
     end
   end
 
   def delete_story
     @page_title = "Delete #{@story.title}"
     @description = @page_title
-    render 'delete_story'
+    render :delete_story
   end
 
   def destroy
     @story_title = @story.title
     if @story.destroy
-      flash[:notice] = '#{@story_title} was successfully deleted.'
+      message[:notice] = '#{@story_title} was successfully deleted.'
     else
-      flash[:notice] = '#{@story_title} was not deleted: .'
+      message[:notice] = '#{@story_title} was not deleted: .'
     end
     redirect "/universes/show/#{@universe.id}"
   end

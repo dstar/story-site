@@ -4,10 +4,12 @@ module Merb
 
   def StoryHost(story)
     domain_length = request.subdomains.length
+    port_string = ":#{request.port}" if request.port != 80
+    Merb.logger.debug "QQQ19: Subdomains => #{request.subdomains.inspect}, domain=> #{request.domain.inspect}"
     unless story.is_a? String
-      "#{story.short_title}.#{request.domain(domain_length)}:#{request.port}"
+      "#{story.short_title}.#{request.domain(domain_length)}#{port_string}"
     else
-      "#{story}.#{request.domain(domain_length)}:#{request.port}"
+      "#{story}.#{request.domain(domain_length)}#{port_string}"
     end
   end
 
@@ -66,7 +68,7 @@ EOS
   end
 
   def submit_tag(text, attrs ={ })
-    submit_button(text, attrs)
+    submit(text, attrs)
   end
 
   def calendar_date_select_includes(name)

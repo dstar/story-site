@@ -17,9 +17,7 @@
 <%= style_dropdown %>
 <%= breadcrumbs %>
 
-
-
-<p style="color: red"><%= flash[:notice] %></p>
+<p style="color: red"><%= h(message[:notice]) %></p>
 
 <%= catch_content :for_layout %>
 

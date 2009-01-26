@@ -3,7 +3,7 @@ class Chapter < ActiveRecord::Base
   has_many :paragraphs, :order => 'position'
 
   has_many :required_permissions, :as => :permissionable
-
+  
   before_save :check_release_status
 
   def self.orderedListByStory(story_id)

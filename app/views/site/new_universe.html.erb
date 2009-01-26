@@ -1,8 +1,8 @@
 <h1>New universe</h1>
 
-<%form_tag :action => 'create_universe' do -%>
-  <%= render :partial => 'universes/form' %>
+<%= form_for @universe, :action => '/site/create_universe' do -%>
+  <%= partial 'universes/form', :with => @universe %>
   <%= submit_tag "Create Universe" %>
-<% end -%>
+<% end =%>
 
 <%= link_to 'Back', index_url(:host => StoryHost('playground')) %>

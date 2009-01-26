@@ -19,7 +19,9 @@ class User < ActiveRecord::Base
     else
       story_id = story
     end
+    Merb.logger.debug "QQQ14: permissions are #{self.story_permissions}, story is #{story_id}"
     obtained_permission = self.story_permissions.any? { |sp| sp.story_id==story_id && sp.permission==permission}
+    Merb.logger.debug "QQQ14: obtained_permission is #{obtained_permission}"
     unless obtained_permission
       self.groups.each do |group|
         obtained_permission = group.story_permissions.any? { |sp| sp.story_id==story_id && sp.permission==permission}
@@ -64,4 +66,11 @@ class User < ActiveRecord::Base
   #  end
 
   set_primary_key "user_id"
+  
+    def self.authenticate(login, password)
+      @u = find(:first, :conditions => ["#{Merb::Authentication::Strategies::Basic::Base.login_param} = ?", login])
+      Merb.logger.debug "QQQ14: User is #{login}, @u is #{@u.inspect}, encrypted password is #{Digest::MD5.hexdigest(password)}"
+      @u && @u.user_password == Digest::MD5.hexdigest(password) ? @u : nil
+    end
+
 end

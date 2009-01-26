@@ -1,27 +1,9 @@
-<%= error_messages_for 'story' %>
-
-<!--[form:story]-->
-<p><label for="story_title">Title</label><br/>
-<%= text_field 'story', 'title' %></p>
-
-<p><label for="story_short_title">Short title</label><br/>
-<%= text_field 'story', 'short_title' %></p>
-
-<p><label for="story_file_prefix">File prefix</label><br/>
-<%= text_field 'story', 'file_prefix' %></p>
-
-<p><label for="story_keywords">Keywords</label><br/>
-<%= text_field 'story', 'keywords' %></p>
-
-<p><label for="story_keywords">Scripts to run on release</label><br/>
-<%= text_area 'story', 'on_release', 'rows' => 5 %></p>
-
-<p><label for="story_universe_id">Universe</label>
-<%= select "story", "universe_id", Universe.find(:all).collect {|u| [u.name, u.id ]}, {:include_blank => true} %>
-
-<p><label for="story_description">Description</label><br/>
-<%= text_area 'story', 'description' %></p>
-<%= hidden_field 'story', 'flag' %>
-
-<!--[eoform:story]-->
-
+<%= error_messages_for :story %>
+<p><%= text_field :title, :label => "Title" %></p>
+<p><%= text_field :short_title, :label => "Short title" %></p>
+<p><%= text_field :file_prefix, :label => "File prefix" %></p>
+<p><%= text_field :keywords, :label => "Keywords" %></p>
+<p><%= text_area :on_release, :rows => 5, :label => "Scripts to run on release" %></p>
+<p><%= select :universe_id, :label => "Universe", :collection => Universe.find(:all), :text_method => :name, :value_method => :id %>
+<p><%= text_area :description, :label => "Description" %></p>
+<%= hidden_field :flag %>

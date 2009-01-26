@@ -1,5 +1,7 @@
 class Site < Application
 
+  before :setup_everything
+
   def setup_authorize_hash
 
     @authorization          = {
@@ -26,26 +28,27 @@ class Site < Application
 
   def new_universe
     @universe = Universe.new
-    render 'new_universe'
+    render :new_universe
   end
 
   def create_universe
     @universe = Universe.new(params[:universe])
     if @universe.save
-      flash[:notice] = 'Universe was successfully created.'
-      redirect "/universes/show/#{@universe.id}"
+      redirect "/universes/show/#{@universe.id}", :message => {:notice => 'Universe was successfully created.' }
     else
       Merb::logger.debug("QQQ: did not create universe with params = #{params[:universe]}")
-      render 'new_universe'
+      render :new_universe
     end
   end
 
   def universe_add_owner
     @universe = Universe.find(params[:id])
-    render 'universe_add_owner'
+    render :universe_add_owner
   end
 
   def universe_owner_add_save
+
+    msg = nil
 
     case params[:type]
     when /user/
@@ -60,25 +63,26 @@ class Site < Application
       universe_permissions.permission=params[:permission]
       universe_permissions.universe_id=params[:universe_id]
       unless universe_permissions.save
-        flash[:notice] = "Permission Add Failed"
+        msg = "Permission Add Failed"
       end
     else
       unless permission_holder
-        message = "Unknown User/Group."
+        msg = "Unknown User/Group."
       end
       unless params[:permission]
-        message = "No Permission Selected."
+        msg = "No Permission Selected."
       end
-      flash[:notice]=message
-      render 'permissions'
+      message[:notice]=msg
+      render :universe_add_owner
     end
 
-    render 'permissions'
+    redirect url(:controller => :universes, :action => :permissions, :id => params[:universe_id]), :message => {:notice => msg }
+
   end
 
   def expire_cache
     #    expire_fragment(/.*/)
-    Merb::Controller._cache.store.expire_all
+    Merb::Cache[:default].delete_all
     redirect "http://#{request.host}/"
   end
 
@@ -87,15 +91,6 @@ class Site < Application
   end
 
   def show
-    last_updated = Merb::Controller._cache.store.cache_get("storylist_last_updated")
-    last_updated = Date.new(0) unless last_updated.is_a? Date
-    if (Date.today - last_updated) >= 1
-      Story.find(:all).each do |story|
-        expire("story_list#{story.id}#true")
-        expire("story_list#{story.id}#false")
-      end
-      Merb::Controller._cache.store.cache_set("storylist_last_updated", Date.today)
-    end
     @stories = Story.OrderedList
     Merb.logger.debug "QQQ4: About to call Blogposts.frontpagelist"
     @blogposts_to_show = Blogpost.frontpagelist

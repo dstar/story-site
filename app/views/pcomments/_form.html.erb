@@ -1,8 +1,4 @@
-<%= error_messages_for 'pcomment' %>
+<%= error_messages_for :pcomments %>
+<%= text_area :body_raw, :rows => 5, :label => "Comment" %></p>
+<%= hidden_field :paragraph_id %>
 
-<!--[form:pcomments]-->
-<p><label for="pcomment_body">Comment:</label><br/>
-<%= text_area 'pcomment', 'body_raw', "rows" => 5   %></p>
-
-<%= hidden_field "pcomment", "paragraph_id" %>
-<!--[eoform:pcomments]-->

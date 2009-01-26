@@ -1,10 +1,10 @@
 <div id="<%= "show_#{show_style.element}_div" %>">
 <p>
-<%= form_remote_tag :update => "show_#{show_style.element}_div", :url => "/styles/save_style" %>
+<%= form_remote_tag :update => "show_#{show_style.element}_div", :url => "/styles/save_style" do %>
 Element:
 <input type="text" id="show_style_element" name="show_style[element]" value="<%= show_style.element %>"  disabled= "true">
 Style:
 <input type="text" id="show_style_definition" name="show_style[definition]" value="<%= show_style.definition %>"  disabled= "true">
-<%= end_form_tag %>
+<% end =%>
 </p>
 </div>
