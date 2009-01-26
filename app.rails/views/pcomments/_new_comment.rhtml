@@ -1,8 +1,0 @@
-<%= render :partial => 'chapters/pcomm', :collection => Pcomment.listForPara(@pcomment.paragraph_id) %>
-<% url_hash = { :controller => 'pcomments', :action => 'create' } -%>
-<% complete_string = "denote_comments('comment_block_#{@pcomment.paragraph_id}')" -%>
-<% update_string = "comment_block_#{@pcomment.paragraph_id}" -%>
-<% form_remote_tag :update => update_string , :url => url_hash , :complete => complete_string do -%>
-  <%= render :partial => 'form' %>
-  <%= submit_tag "Create" %>
-<% end %>

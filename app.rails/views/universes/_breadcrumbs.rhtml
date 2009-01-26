@@ -1,8 +1,0 @@
-<%= link_to 'Home', index_url(:host => StoryHost('playground')) %>
-<% unless params[:action] =~ /list|index|create|new/ %>
-&gt; <%= @universe.name %>
-<% else %>
- <% if params[:action] == 'list' or params[:action] == 'index' %>
-    &gt; Universe List
- <% end %>
-<% end %>
