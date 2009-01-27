@@ -70,11 +70,11 @@ class Stories < Application
   def destroy
     @story_title = @story.title
     if @story.destroy
-      message[:notice] = '#{@story_title} was successfully deleted.'
+      msg = '#{@story_title} was successfully deleted.'
     else
-      message[:notice] = '#{@story_title} was not deleted: .'
+      msg = '#{@story_title} was not deleted: .'
     end
-    redirect "/universes/show/#{@universe.id}"
+    redirect "/universes/show/#{@universe.id}", :message => { :notice => msg }
   end
 
 

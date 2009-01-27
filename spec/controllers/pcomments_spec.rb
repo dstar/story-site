@@ -120,7 +120,7 @@ describe "Pcomments" do
       Pcomment.find(1).acknowledged.should be_nil
 
       # Mark it read, so that we're in the state expected by the pcomment spec. Ugly hack -- need transactional tests.
-      response = request("http://playground.playground.pele.cx/pcomments/markunread/1", :method => "POST")
+      response = request("http://playground.playground.pele.cx/pcomments/markread/1", :method => "POST")
 
     end
   end

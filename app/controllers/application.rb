@@ -75,11 +75,12 @@ class Application < Merb::Controller
   end
 
   def admonish(msg)
-    message[:notice] = msg
+#    message[:notice] = msg
     #    Merb.logger.debug("Request is #{request.inspect}")
     destination = request.referer
     destination ||= "http://" + StoryHost("playground") + "/"
-    redirect destination
+    Merb.logger.debug "QQQ21: message[:notice] is #{message.inspect}"
+    redirect destination, :message => {:notice => msg }
     throw :halt
   end
 

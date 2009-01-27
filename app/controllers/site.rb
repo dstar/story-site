@@ -95,6 +95,7 @@ class Site < Application
     Merb.logger.debug "QQQ4: About to call Blogposts.frontpagelist"
     @blogposts_to_show = Blogpost.frontpagelist
     Merb.logger.debug "QQQ4: About to call render"
+    Merb.logger.debug "QQQ21: message[:notice] is #{message.inspect}"
     render :show
   end
 

@@ -12,10 +12,10 @@
 <%= php_session_header %>
 <%= style_dropdown %>
 <% if @authinfo[:user] and @authinfo[:user].has_site_permission('admin') %>
-        <%= link_to 'Edit Site Permissions', :controller => 'site_permissions', :action => 'permissions' %> |
-        <%= link_to 'Expire cache', :controller => 'site', :action => 'expire_cache' %> |
-        <%= link_to 'Add Commitment', :controller => 'stories', :action => 'add_commitment' %> |
-        <%= link_to 'New Universe', :controller => 'site', :action => 'new_universe' %> |
+        <%= link_to 'Edit Site Permissions', absolute_url(:controller => 'site_permissions', :action => 'permissions') %> |
+        <%= link_to 'Expire cache', absolute_url(:controller => 'site', :action => 'expire_cache') %> |
+        <%= link_to 'Add Commitment', absolute_url(:controller => 'stories', :action => 'add_commitment') %> |
+        <%= link_to 'New Universe', absolute_url(:controller => 'site', :action => 'new_universe') %> |
 <% end %>
 <% if @authinfo[:user] and @authinfo[:user].has_site_permission('blogger') %>
         <%= link_to 'New blogpost', :controller => 'blogposts', :action => 'new' %>

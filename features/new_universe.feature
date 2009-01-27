@@ -6,10 +6,14 @@ Feature: Creating a new Universe
 #  Scenario: Invalid Permissions
 #    Given I am not authenticated
 #    When I go to http://playground.playground.pele.cx/site/new_universe
-#    Then I should see an error message
+#    Then I should see "You are not authorized for this action!"
+
+#  Scenario: Logging in (Remove Me)
+#    Given I am logged in as "dstar" with password "test password"
+#    Then I should see "Logged in as dstar"
 
   Scenario: Valid Permissions
-    Given I am logged in as "test user" with password "test password"
+    Given I am logged in as "dstar" with password "test password"
     When I go to http://playground.playground.pele.cx/
     And I follow "New Universe"
     And I fill in "Universe" with "Test Universe"

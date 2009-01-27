@@ -63,8 +63,7 @@ class Universes < Application
     @story.file_prefix = @story.short_title unless @story.file_prefix
     @story.description.gsub!(/\s+--/, "--")
      if @story.save
-      message[:notice] = 'Story was successfully created.'
-      redirect "/stories/show/#{@story.id}"
+       redirect "/stories/show/#{@story.id}", :message => { :notice => 'Story was successfully created.'}
     else
       render :new_story
     end
@@ -79,8 +78,7 @@ class Universes < Application
     @universe = Universe.find(params[:id])
     if @universe.update_attributes(params[:universe])
       expire("universe_wstories#{@universe.id}")
-      message[:notice] = 'Universe was successfully updated.'
-      redirect "/universes/show/#{@universe.id}"
+      redirect "/universes/show/#{@universe.id}", :message => { :notice => 'Universe was successfully updated.'}
     else
       render :edit
     end
