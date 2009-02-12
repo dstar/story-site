@@ -5,7 +5,7 @@
 </head>
 <body>
 <%= php_session_header %>
-<p style="color: red"><%= h(message[:notice]) %></p>
+<p style="color: red"><%= show_messages %></p>
 
 <%= catch_content :for_layout %>
 
