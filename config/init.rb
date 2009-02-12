@@ -46,6 +46,7 @@ Merb.push_path(:lib, Merb.root / "lib") # uses **/*.rb as path glob.
 
 # ==== Dependencies
 
+dependency "jsmestad-merb_cucumber", :require_as => "merb_cucumber"
 dependency "teamon-merb-flash", :require_as => "merb-flash"
 dependency 'merb-auth-core'
 dependency 'merb-auth-more'
@@ -54,8 +55,9 @@ dependency 'merb-auth-slice-password'
 Merb::BootLoader.before_app_loads do
   require Merb.root / "lib/acts_as_list/lib/active_record/acts/list.rb"
   require Merb.root / "lib/acts_as_list/init.rb"
-  require 'merb_helpers'
+  require 'merb-helpers'
   require 'merb-assets'
+  require 'extlib'
 #  require 'merb_has_flash'
 end
 
@@ -169,7 +171,7 @@ dependency 'merb-cache' do
   Merb::Cache.setup do
     unless defined?(CACHE_SETUP)
       register(:default, Merb::Cache::MemcachedStore,:servers => ["127.0.0.1:11211"], :namespace => "playground-#{Merb.env}")
+      CACHE_SETUP = true
     end
-    CACHE_SETUP = true
   end
 end
