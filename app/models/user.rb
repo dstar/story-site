@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_many :sessions
 
   has_many :credits
-  has_many :stories, :through => :credits
+#  has_many :stories, :through => :credits
 
   has_many :memberships
   has_many :groups, :through => :memberships
@@ -66,11 +66,41 @@ class User < ActiveRecord::Base
   #  end
 
   set_primary_key "user_id"
-  
-    def self.authenticate(login, password)
-      @u = find(:first, :conditions => ["#{Merb::Authentication::Strategies::Basic::Base.login_param} = ?", login])
-      Merb.logger.debug "QQQ14: User is #{login}, @u is #{@u.inspect}, encrypted password is #{Digest::MD5.hexdigest(password)}"
-      @u && @u.user_password == Digest::MD5.hexdigest(password) ? @u : nil
+
+  def self.authenticate(login, password)
+    @u = find(:first, :conditions => ["#{Merb::Authentication::Strategies::Basic::Base.login_param} = ?", login])
+    Merb.logger.debug "QQQ14: User is #{login}, @u is #{@u.inspect}, encrypted password is #{Digest::MD5.hexdigest(password)}"
+    @u && @u.user_password == Digest::MD5.hexdigest(password) ? @u : nil
+  end
+
+  def stories
+    begin
+      Story.find(self.story_permissions.select { |sp| sp.permission=="author"}.collect {|sp| sp.story_id})
+    rescue ActiveRecord::RecordNotFound
+      us = []
+      self.story_permissions.select { |sp| sp.permission=="author"}.collect {|sp| sp.story_id}.each {|ui| us << Story.find_by_id(ui)}
+      us.compact
     end
+  end
+
+  def universes
+    begin
+      Universe.find(self.universe_permissions.select { |up| up.permission=="owner"}.collect {|up| up.universe_id})
+    rescue ActiveRecord::RecordNotFound
+      us = []
+      self.universe_permissions.select { |sp| sp.permission=="owner"}.collect {|sp| sp.universe_id}.each {|ui| us << Universe.find_by_id(ui)}
+      us.compact
+    end
+  end
+
+  def self.default_permissions
+    return  {
+      "create_story" => [ "admin",],
+      "new_story" => [ "admin",],
+      "index" => [ "EVERYONE",],
+      "list" => [ "EVERYONE",],
+      "show" => [ "EVERYONE",],
+    }
+  end
 
 end
