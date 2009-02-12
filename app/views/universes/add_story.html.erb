@@ -1,0 +1,11 @@
+<h1>Add story</h1>
+
+<%= form :action => url(:controller => 'universes', :action => 'append_story', :id => @universe.id)  do -%>
+<%= @add_story_error if @add_story_error %>
+<p><label for="title">Title</label><%= text_field :name => :title %></p>
+<p>Or</p>
+<p><label for="short_title">Short Title</label><%= text_field :name => :short_title%></p>
+  <%= submit_tag "Add Story" -%>
+<% end =%>
+
+<%= link_to 'Back', :action => 'show', :id => @universe.id -%>
