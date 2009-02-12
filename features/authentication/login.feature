@@ -25,5 +25,4 @@ Feature: Login
     And I fill in "password" with "test password"
     And I press "Log In"
     Then the login request should succeed
-    Then I should see a notice message
     Then I should see "Logged in as dstar"
