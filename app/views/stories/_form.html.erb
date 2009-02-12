@@ -1,9 +1,8 @@
-<%= error_messages_for :story %>
 <p><%= text_field :title, :label => "Title" %></p>
 <p><%= text_field :short_title, :label => "Short title" %></p>
 <p><%= text_field :file_prefix, :label => "File prefix" %></p>
 <p><%= text_field :keywords, :label => "Keywords" %></p>
-<p><%= text_area :on_release, :rows => 5, :label => "Scripts to run on release" %></p>
-<p><%= select :universe_id, :label => "Universe", :collection => Universe.find(:all), :text_method => :name, :value_method => :id %>
-<p><%= text_area :description, :label => "Description" %></p>
+<p><label for="story_on_release">Scripts to run on release</label><%= text_area :on_release, :id => 'story_on_release', :rows => 5, :label => "Scripts to run on release" %></p>
+<p><%= select :universe_id, :label => "Universe", :collection => @authinfo[:user].universes, :text_method => :name, :value_method => :id %>
+<p><label for="story_description">Description</label><%= text_area :description, :id => 'story_description', :label => "Description" %></p>
 <%= hidden_field :flag %>
