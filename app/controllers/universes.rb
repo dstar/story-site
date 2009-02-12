@@ -51,24 +51,6 @@ class Universes < Application
     render :show
   end
 
-
-  def new_story
-    @story = Story.new
-    @universe = Universe.find(params[:id])
-    render :new_story
-  end
-
-  def create_story
-    @story = Story.new(params[:story])
-    @story.file_prefix = @story.short_title unless @story.file_prefix
-    @story.description.gsub!(/\s+--/, "--")
-     if @story.save
-       redirect "/stories/show/#{@story.id}", :message => { :notice => 'Story was successfully created.'}
-    else
-      render :new_story
-    end
-  end
-
   def edit
     @universe = Universe.find(params[:id])
     render :edit
@@ -97,8 +79,13 @@ class Universes < Application
     when /create|new/
       @page_title = 'New Universe'
     else
-      @universe = Universe.find(params[:id])
-      @page_title = @universe.name
+      begin
+        @universe = Universe.find(params[:id])
+        @page_title = @universe.name
+      rescue ActiveRecord::RecordNotFound
+        redirect "/", :message => { :error => 'Could not find requested Universe.'}
+        throw :halt
+      end
     end
   end
 
@@ -178,4 +165,27 @@ class Universes < Application
 
    render '/stories/permissions'
   end
+
+ def add_story
+   @stories = @authinfo[:user].stories
+   render :add_story
+ end
+
+ def append_story
+   @story = Story.find_by_title(params[:title])
+   @story ||= Story.find_by_short_title(params[:short_title])
+   if @story
+     @story.universe = @universe
+     @story.save
+     redirect url(:controller => "universes", :action => "show", :id => @universe.id), :message => "#{@story.title} was successfully added."
+   else
+     search_text = params[:title]
+     search_text = params[:short_title] if params[:title].blank?
+     search_param = "title" unless params[:title].blank?
+     search_param = "short title" unless search_param and params[:short_title].blank?
+     @add_story_error = "Could not find story with #{search_param} '#{search_text}'."
+     render :add_story
+   end
+ end
+
 end
