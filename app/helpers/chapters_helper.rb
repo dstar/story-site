@@ -37,7 +37,7 @@ module ChaptersHelper
   def edit_link(chapter)
     Merb.logger.debug "QQQ14 @authinfo is #{@authinfo.inspect}"
     if @authinfo[:user] and @authinfo[:user].has_story_permission(chapter.story,'author')
-      link_to 'Edit', :action => 'edit', :id => chapter.id
+      link_to 'Edit', url(:action => 'edit', :id => chapter.id)
     end
   end
 

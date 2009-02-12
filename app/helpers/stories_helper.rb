@@ -14,17 +14,17 @@ module StoriesHelper
     if  is_universe_owner(@story) || is_author(@story)
 
       if is_author(@story)
-        nav_buffer += link_to 'Edit Story Permissions', :controller => 'stories', :action => 'permissions', :id => story.id
+        nav_buffer += link_to 'Edit Story Permissions', url(:controller => 'stories', :action => 'permissions', :id => story.id)
       elsif is_universe_owner(@story)
-        nav_buffer += link_to 'Add Author', :controller => 'universes', :action => 'story_add_owner', :story_id => story.id, :id => story.universe.id
+        nav_buffer += link_to 'Add Author', url(:controller => 'universes', :action => 'story_add_owner', :story_id => story.id, :id => story.universe.id)
       end
 
       nav_buffer +=  " | "
-      nav_buffer += link_to 'Edit Story', :action => 'edit', :id => story
+      nav_buffer += link_to 'Edit Story', url(:action => 'edit', :id => story)
       nav_buffer +=  " | "
-      nav_buffer += link_to 'Delete Story', :action => 'delete_story', :id => story
+      nav_buffer += link_to 'Delete Story', url(:action => 'delete_story', :id => story)
       nav_buffer +=  " | "
-      nav_buffer += link_to 'Add Chapter', :controller => 'stories', :action => 'new_chapter', :id => story.id
+      nav_buffer += link_to 'Add Chapter', url(:controller => 'stories', :action => 'new_chapter', :id => story.id)
     end
     return nav_buffer
   end
@@ -69,7 +69,7 @@ module StoriesHelper
   def build_chapter_links(chapter)
     link_buffer = ""
 
-    link_buffer += link_to "(Edit)", :controller => 'chapters', :action => 'edit', :id => chapter.id if is_author(chapter.story)
+    link_buffer += link_to "(Edit)", url(:controller => 'chapters', :action => 'edit', :id => chapter.id) if is_author(chapter.story)
     link_buffer += " "
 
     if chapter.status == 'released' || can_comment(chapter.story)
