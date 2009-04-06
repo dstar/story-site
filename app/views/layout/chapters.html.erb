@@ -19,28 +19,6 @@
                 }
         </script>
         <script type="text/javascript">
-                function denote_comments(para_id) {
-                        var element = document.getElementById("comment_block_"+para_id);
-                        var total_comments = Form.Element.getValue("comment_count_"+para_id);
-                        var unread_comments = Form.Element.getValue("unread_comment_count_"+para_id);
-
-                        if (Element.hasClassName(element,"unread_comments")) {
-                                Element.removeClassName(element,"unread_comments");
-                        }
-
-                        if (Element.hasClassName(element,"read_comments")) {
-                                Element.removeClassName(element,"read_comments");
-                        }
-
-                        if (unread_comments > 0) {
-                                Element.addClassName(element,"unread_comments");
-                        } else {
-                                if (total_comments > 0) {
-                                        Element.addClassName(element,"read_comments");
-                                }
-                        }
-
-                }
                 function handle_acknowledgement(para_id) {
                         var element = document.getElementById("comment_block_"+para_id);
                         var total_comments = Form.Element.getValue("comment_count_"+para_id);
