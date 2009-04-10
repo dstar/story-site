@@ -22,7 +22,9 @@ module Merb
     def link_to_remote(text,options, html_opts)
       oncomplete = ""
       oncomplete = ", onComplete:function(request){#{options[:complete]}}" if options[:complete]
-      %Q|<a href="#{ html_opts[:href]}" onclick="new Ajax.Updater('#{options[:update]}', '#{options[:url]}', { asynchronous:true, evalScripts:true #{oncomplete}}); return false;">#{text}</a>|;
+      opts = ""
+      html_opts.keys.each { |k| opts += "#{k}=#{html_opts[k]} "}
+      %Q|<a #{opts}onclick="new Ajax.Updater('#{options[:update]}', '#{options[:url]}', { asynchronous:true, evalScripts:true #{oncomplete}}); return false;">#{text}</a>|;
     end
 
     def format_time(time, format)
@@ -43,7 +45,7 @@ module Merb
 
     def php_session_header
       if @authinfo[:user] and @authinfo[:user].user_id != -1
-        return %Q|<div class="userinfo">\nLogged in as <a href="#{url(:controller => "users", :action => "show", :id => @authinfo[:user].id)}">#{@authinfo[:user].username}</a> ; <a href="http://playground.pele.cx/forums/login.php?logout=true&amp;redirect=redirect_out.php&amp;sid=#{@sid}">Log Out</a>\n</div>\n|
+        return %Q|<div class="userinfo">\nLogged in as <a href="#{url(:controller => "users", :action => "show", :id => @authinfo[:user].id)}">#{@authinfo[:user].username}</a> ; <a href="http://playground.pele.cx/forums/login.php?logout=true&amp;redirect=redirect_out.php&amp;sid=#{@sid}">Log Out</a>\n</div>\n| #"
       else
         return %Q|<div class="userinfo">\n<a href="http://playground.pele.cx/forums/login.php?redirect=redirect_in.php">Log In</a>\n</div>\n|
       end
