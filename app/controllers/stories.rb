@@ -51,10 +51,6 @@ class Stories < Application
     @story = Story.find(params[:id])
     params[:story][:description].gsub!(/\s+--/, "--")
     if @story.update_attributes(params[:story])
-      expire("story_#{@story.id}")
-      expire("story_list#{@story.id}#true")
-      expire("story_list#{@story.id}#false")
-      expire("stories_for_universe#{@story.id}")
       redirect "/stories/show/#{@story.id}", :message => {:notice => 'Story was successfully updated.' }
     else
       render :edit
@@ -77,5 +73,71 @@ class Stories < Application
     redirect "/universes/show/#{@universe.id}", :message => { :notice => msg }
   end
 
+  def create_chapter
+    Merb.logger.debug "QQQ28: file field is #{@tempfile.inspect}"
+    Merb.logger.debug "QQQ28: file field methods are #{params[:file].methods.collect { |m| m.match /.*file.*/}.compact}"
+    @chapter = Chapter.new(params[:chapter])
+    @chapter.story = @story
+    @chapter.date_uploaded = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless @chapter.date_uploaded
+    @chapter.file = "#{@chapter.story.short_title}_#{@chapter.number}.html"
+    if @chapter.save
+      @chapter.process_file(params[:file][:tempfile]) unless params[:file].blank?
+      redirect "/stories/show/#{@chapter.story_id}", :message => { :notice => 'Chapter was successfully created.'}
+    else
+      render :new_chapter
+    end
+  end
+
+  def new_chapter
+    @chapter = Chapter.new
+    @chapter.number = @story.chapters.length+1
+    render :new_chapter
+  end
+
+  def permissions
+    @page_title = "Change Permissions for #{@story.title}"
+    @description = @page_title
+  end
+
+  def permissions_modify
+    case params[:type]
+    when /user/
+      permission_holder = User.find_by_username(params[:permission_holder])
+    when /group/
+      permission_holder = Group.find_by_group_name(params[:permission_holder])
+    end
+
+    if permission_holder and params[:permission]
+      universe_permissions=StoryPermission.new
+      universe_permissions.permission_holder = permission_holder
+      universe_permissions.permission=params[:permission]
+      universe_permissions.story_id=params[:story_id]
+      unless universe_permissions.save
+        message[:notice] = "Permission Add Failed"
+      end
+    else
+      unless permission_holder
+        message[:notice] = "Unknown User/Group."
+      end
+      unless params[:permission]
+        message[:notice] = "No Permission Selected."
+      end
+    end
+
+    render :permissions
+  end
+
+  def permissions_destroy
+    case params[:type]
+    when /User/
+      permission_holder = User.find_by_username(params[:permission_holder])
+    when /Group/
+      permission_holder = Group.find_by_group_name(params[:permission_holder])
+    end
+
+    permission = StoryPermission.find_by_permission_holder_type_and_permission_holder_id_and_permission_and_story_id(params[:type], permission_holder.id,params[:permission],params[:story_id])
+    permission.destroy
+    render :permissions
+  end
 
 end
