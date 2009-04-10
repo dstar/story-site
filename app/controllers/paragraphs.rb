@@ -56,7 +56,7 @@ class Paragraphs < Application
 
     begin
       @paragraph.transaction do
-        paras = params[:paragraphs][:body_raw].gsub(/\r/,"").split(/^\s*$/).collect {|p| p.gsub(/^\r?\n/,"")}
+        paras = params[:paragraph][:body_raw].gsub(/\r/,"").split(/^\s*$/).collect {|p| p.gsub(/^\r?\n/,"")}
 
         @paragraph.body_raw = paras.shift
         @paragraph.save!
@@ -87,8 +87,6 @@ class Paragraphs < Application
       # need to expire the cache for the full chapter page as well as the cache
       # for the paragraph.
 
-      expire( "chapters#show#paragraph_#{@paragraph.id}" )
-      expire( "chapters#show#chapter_#{@paragraph.chapter.id}")
 
       if request.xml_http_request? and not need_page_reload
         partial 'chapters/parabody', :parabody => @paragraph
@@ -117,7 +115,6 @@ class Paragraphs < Application
     paragraph = Paragraph.find(params[:id])
     next_paragraph = paragraph.lower_item
 
-    expire( :action => "show", :action_suffix => "paragraph_#{paragraph.id}", :controller => "chapters")
     paragraph.destroy
 
     next_paragraph.chapter.dump_to_file
