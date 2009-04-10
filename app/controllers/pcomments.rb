@@ -30,7 +30,7 @@ class Pcomments < Application
       Merb::logger.debug("QQQ: [#{action_name}] @pcomment is #{@pcomment.inspect}")
       Merb::logger.debug("QQQ: [#{action_name}] @pcomment.paragraph is #{@pcomment.paragraph.inspect}")
 
-      universe_link =  %Q|<a href="universes/show/#{ @pcomment.paragraph.chapter.story.universe.id}">#{@pcomment.paragraph.chapter.story.universe.name}</a>|
+      author_link =  %Q|<a href="/users/show/#{@pcomment.paragraph.chapter.story.authors.first.id}">#{@pcomment.paragraph.chapter.story.authors.first.username}</a>|
       story_link = %Q|<a href="/stories/show/#{@pcomment.paragraph.chapter.story.id}">#{@pcomment.paragraph.chapter.story.title}</a>|
       chapter_link =   %Q|<a href="/chapters/show/#{@pcomment.paragraph.chapter.id}">Chapter #{@pcomment.paragraph.chapter.number}</a>|
     else
@@ -41,13 +41,13 @@ class Pcomments < Application
       end
 
       home_link = %Q{<a href="http://#{request.host}/">Home</a>}
-      universe_link =  %Q|<a href="/universes/show/#{@paragraph.chapter.story.universe.id}">#{@paragraph.chapter.story.universe.name}</a>|
+      author_link =  %Q|<a href="/users/show/#{@paragraph.chapter.story.authors.first.id}">#{@paragraph.chapter.story.authors.first.username}</a>|
       story_link = %Q|<a href="/stories/show/#{@paragraph.chapter.story.id}">#{@paragraph.chapter.story.title}</a>|
       chapter_link =   %Q|<a href="/chapters/show/#{@paragraph.chapter.id}">Chapter #{@paragraph.chapter.number}</a>|
     end
 
     @breadcrumbs = "#{home_link}"
-    @breadcrumbs += " > #{universe_link }"
+    @breadcrumbs += " > #{author_link }"
     @breadcrumbs += " > #{story_link }"
     @breadcrumbs += " > #{chapter_link }"
 
@@ -74,6 +74,7 @@ class Pcomments < Application
       @chapter = @paragraph.chapter
       partial 'new_comment'
     end
+    render :new
   end
 
   def create
