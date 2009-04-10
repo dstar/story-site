@@ -56,9 +56,11 @@ class Application < Merb::Controller
         @authinfo = Hash.new
       end
     elsif session.user
+      Merb.logger.debug("QQQ25: we have session.user -- session is #{session.inspect}")
       @authinfo = Hash.new
       @authinfo[:user] = session.user
     end
+    Merb.logger.debug("QQQ25: no user in @authinfo[:user]! session is #{session.inspect}") unless @authinfo[:user]
     @authinfo[:user] ||= User.find(-1)
   end
 
@@ -82,15 +84,6 @@ class Application < Merb::Controller
     Merb.logger.debug "QQQ21: message[:notice] is #{message.inspect}"
     redirect destination, :message => {:notice => msg }
     throw :halt
-  end
-
-  def expire(key)
-    Merb::Cache[:default].delete(key)
-  end
-
-  def cache(key, opts = {}, conditions = {}, &block)
-    opts[:cache_key] = key
-    fetch_fragment opts, conditions, &block
   end
 
 end
