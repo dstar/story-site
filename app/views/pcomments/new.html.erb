@@ -5,9 +5,9 @@
     <%= @pcomment.paragraph.body_raw %>
 </div>
 
-<% form_tag :action => 'create' do -%>
-  <%= render :partial => 'form' %>
+<%= form_for @pcomment, :action => "/pcomments/create/#{@pcomment.id}" do -%>
+  <%= partial 'form' %>
   <%= submit_tag "Create" %>
-<% end -%>
+<% end =%>
 
 <%= link_to 'Back', :action => 'list' %>

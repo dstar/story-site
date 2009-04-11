@@ -1,8 +1,9 @@
 <h1>New chapter</h1>
 
-<% form_tag( {:action => 'create_chapter', :id => @story.id}, :multipart => true) do -%>
-  <%= render :partial => 'new_chapter_form' %>
+<%= form_for @chapter, :action => "/stories/create_chapter/#{@story.id}" do -%>
+  <%= error_messages_for :chapter %>
+  <%= partial 'new_chapter_form' %>
   <%= submit_tag "Create Chapter" %>
-<% end -%>
+<% end =%>
 
-<%= link_to 'Back', :action => 'list' %>
+<%= link_to 'Back', "/stories/show/#{@story.id}" %>

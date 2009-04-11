@@ -2,7 +2,7 @@
 <%= form_for @paragraphs, :action => "/paragraphs/confirm_delete/#{@paragraphs.id}" do -%>
     <%= submit_tag("Delete Paragraph", {:confirm => "Are you sure?"}) -%>
 <% end =%>
-<%= form_for @paragraphs, :action => resource(@paragraphs) do -%>
+<%= form_for @paragraphs, :action => "/paragraphs/update/#{@paragraphs.id}" do -%>
   <%= partial :form, :with => @paragraphs -%>
   <%= submit_tag 'Edit' -%>
 <% end =%>

@@ -3,6 +3,6 @@
     <%= submit_tag("Delete Paragraph", {:confirm => "Are you sure?"}) %>
 <% end -%>
 <% form_remote_tag :update => "parabody#{@paragraphs.id}", :url => "/paragraphs/update/#{@paragraphs.id}" do -%>
-    <%= render :partial => 'form' %>
+    <%= partial 'form', :with => @paragraphs%>
     <%= submit_tag 'Edit' %>
 <% end -%>
