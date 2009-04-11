@@ -1,15 +1,9 @@
 <%= error_messages_for 'chapter' %>
 
 <!--[form:chapter]-->
-<p><label for="chapter_story_id">Story</label><br/>
-<%= select "chapter", "story_id", Story.find(:all).collect {|s| [s.title,
-s.id]} %>
+<p><%= text_field :number, :label => "Chapter number" %></p>
 
-<p><label for="chapter_number">Chapter number</label><br/>
-<%= text_field 'chapter', 'number' %>
-
-<p><label for="file">File</label><br/>
-<%= file_field_tag "file" %>
+<p><%= file_field :name => :file, :label => "File" %></p>
 
 <!--[eoform:chapter]-->
 
