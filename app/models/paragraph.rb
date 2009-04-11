@@ -1,11 +1,16 @@
 class Paragraph < ActiveRecord::Base
   belongs_to :chapter
-  has_many :pcomments, :order => 'id', :conditions => 'flag < 2'
+  has_many :pcomments, :order => 'id', :conditions => 'flag < 2', :dependent => :destroy
 #  has_many :unread_pcomments, :order => 'id', :conditions => "paragraph_id = #{self.id} and id not in (select prb.pcomment_id from pcomments_read_by prb where prb.user_id = #{user.id})"
 
   acts_as_list :scope => "chapter_id"
 
   before_save :format_body
+  after_save :expire_paragraph_cache
+  after_save :notify_chapter_of_change
+
+  after_destroy :expire_paragraph_cache
+  after_destroy :notify_chapter_of_change
 
   def self.paraList(chapter_id)
     find(:all,
@@ -55,6 +60,20 @@ class Paragraph < ActiveRecord::Base
       logger.debug "QQQ: Paragraph#move_comments calling Pcomment#move with direction '#{direction}' for #{comment.id}"
       comment.move(direction)
     end
+  end
+
+  def comment_updated
+    self.expire_paragraph_cache
+    self.notify_chapter_of_change
+  end
+
+  private
+  def expire_paragraph_cache
+    expire(self.cache_key)
+  end
+
+  def notify_chapter_of_change
+    self.chapter.paragraph_updated
   end
 
 end
