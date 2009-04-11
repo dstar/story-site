@@ -8,17 +8,35 @@ if (local_gem_dir = File.join(File.dirname(__FILE__), '..', 'gems')) && $BUNDLE.
 end
 
 require "merb-core"
-require "spec"
+require 'spec/ruby'
+#require 'spec/matchers'
+require 'spec/expectations'
+#require 'spec/example'
+#require 'spec/version'
+#require 'spec/dsl'
 require "merb_cucumber/world/webrat"
 require "merb_cucumber/helpers/activerecord"
-require "features/steps/common_steps.rb"
 
 # Uncomment if you want transactional fixtures
 # Merb::Test::World::Base.use_transactional_fixtures
 
 # Quick fix for post features running Rspec error, see
 # http://gist.github.com/37930
-def Spec.run? ; true; end
+#def Spec.run? ; true; end
 
 Merb.start_environment(:testing => true, :adapter => 'runner', :environment => ENV['MERB_ENV'] || 'test')
 
+ActiveRecord::Base.logger = Logger.new("/dev/null")
+
+module MiscHelpers
+  def xpath_search(xpath,node=nil)
+    node ||= @_webrat_session.dom
+    node.xpath(xpath)
+    #Webrat::XML.xpath_search(node, xpath)
+  end
+end
+
+World do |world|
+  world.extend MiscHelpers
+  world
+end

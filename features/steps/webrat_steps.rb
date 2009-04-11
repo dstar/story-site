@@ -14,25 +14,25 @@ When /^I follow "(.*)"$/ do |link|
 end
 
 When /^I fill in "(.*)" with "(.*)"$/ do |field, value|
-  @response = fill_in(field, :with => value) 
+  @response = fill_in(field, :with => value)
 end
 
 When /^I select "(.*)" from "(.*)"$/ do |value, field|
-  @response = select(value, :from => field) 
+  @response = select(value, :from => field)
 end
 
 When /^I check "(.*)"$/ do |field|
-  @response = check(field) 
+  @response = check(field)
 end
 
 When /^I uncheck "(.*)"$/ do |field|
-  @response = uncheck(field) 
+  @response = uncheck(field)
 end
 
 When /^I choose "(.*)"$/ do |field|
   @response = choose(field)
 end
 
-When /^I attach the file at "(.*)" to "(.*)" $/ do |path, field|
+When /^I attach the file at "(.*)" to "(.*)" *$/ do |path, field|
   @response = attach_file(field, path)
 end

@@ -3,7 +3,7 @@ Feature: Site Main Page
   The site main page should be understandable and work
 
   Scenario: Finding Universes from the Main Page as a guest
-    Given I am unauthenticated
+    Given I am not authenticated
     And I have a story "Test Story 1"
     And I have a universe "Test Universe 1"
     When I go to http://playground.playground.pele.cx/
