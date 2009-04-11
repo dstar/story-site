@@ -22,14 +22,20 @@
 Merb.logger.info("Compiling routes...")
 Merb::Router.prepare do |r|
 
+  #add_slice FiverunsTuneupMerb
   slice(:MerbAuthSlicePassword, :name_prefix => nil, :path_prefix => "auth", :default_routes => false )
 
   r.match("/html/:chapter.html").defer_to do |request,params|
-    params.merge :controller => 'chapters', :action => 'show', :short_title => :subdomain[1]
+    params[:controller] = 'chapters'
+    params[:action] = 'show'
+    params[:short_title] = request.subdomains[0] if request.subdomains[0]
+    params
+    #    Merb.logger.debug "QQQ32: params are #{params.inspect}"
   end.name(:chapter)
 
   r.match("/text/:chapter.txt").defer_to do |request,params|
-    params.merge :controller => 'chapters', :action => 'show', :short_title => :subdomain[1], :format => "text"
+    params.merge :controller => 'chapters', :action => 'show', :format => "text"
+    params.merge :short_title => request.subdomains[0] if request.subdomains[0]
   end.name(:text)
 
   r.match('/').defer_to do |request, params|
