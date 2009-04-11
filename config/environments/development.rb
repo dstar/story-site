@@ -5,3 +5,4 @@ Merb::Config.use { |c|
   c[:reload_time] = 0.5
   c[:log_auto_flush ] = true
 }
+dependency 'fiveruns_tuneup_merb'
