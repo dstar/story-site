@@ -1,10 +1,6 @@
 <div class="paragraph">
   <a name="<%= ["p",para.id] %>"></a>
-<% cache("show#paragraph_#{para.id}") do -%>
-  <div class="parabody" id="<%= ["parabody",para.id] %>">
-    <p><%= para.body %></p>
-  </div>
-<% end -%>
+  <%= partial 'parabody', :with => para -%>
   <!-- end parabody -->
   <% if action_name == 'show_draft' -%>
         <div class="comments comments_display <%= comment_denotation_class(para) %>" id="comment_block_<%= para.id %>" >
