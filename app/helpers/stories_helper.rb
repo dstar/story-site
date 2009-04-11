@@ -30,7 +30,7 @@ module StoriesHelper
   end
 
   def is_universe_owner(story)
-    if @authinfo[:user] && @authinfo[:user].has_universe_permission(story.universe.id,'owner')
+    if @authinfo[:user] && story.universe && @authinfo[:user].has_universe_permission(story.universe.id,'owner')
       return true
     else
       return false
@@ -74,13 +74,13 @@ module StoriesHelper
 
     if chapter.status == 'released' || can_comment(chapter.story)
       link_buffer += "<em><strong>" if chapter.status == 'draft'
-      link_buffer += link_to "Part #{chapter.number}", url(:chapter, :chapter => chapter.file.gsub(/.html/,''))
+      link_buffer += link_to "Part #{chapter.number}", "/html/#{chapter.file}"
       link_buffer += " "
       link_buffer += "DRAFT</em></strong> " if chapter.status == 'draft'
       link_buffer += "<em>NEW!</em> " if (Date.today - chapter.date < 7)
     end
 
-    link_buffer += link_to("Comment ", url(:controller => 'chapters', :action => 'show_draft', :id => chapter.id)) if can_comment(chapter.story)
+    link_buffer += link_to("Comment ", url(:controller => 'chapters', :action => 'show_draft', :id => chapter.id), :id => "chapter_#{chapter.number}_draft") if can_comment(chapter.story)
 
     link_buffer += "(#{chapter.date}, #{chapter.words} words" if chapter.status == 'released' || can_comment(chapter.story)
 
@@ -98,23 +98,24 @@ module StoriesHelper
   end
 
   def breadcrumbs
-    home_link = link_to 'Home', "http://#{StoryHost('playground')}/"
+    base_url = "http://#{StoryHost('playground')}/"
+    home_link = link_to 'Home', base_url
 
     unless action_name == 'new' || action_name == 'create' || action_name == 'list' || action_name == 'index'
-      universe_link = link_to @story.universe.name, "http://#{StoryHost('playground')}universes/show/#{@story.universe.id}"
+      author_link = link_to @story.authors.first.username, "#{base_url}/users/show/#{@story.authors.first.id}"
       if action_name == 'show'
         title_link = "#{@story.title}"
       else
-        title_link = link_to @story.title, "http://#{StoryHost('playground')}stories/show/#{@story.id}"
+        title_link = link_to @story.title, "#{base_url}/stories/show/#{@story.id}"
         action_link = " &gt; #{@description}" if @description
       end
-      return "#{home_link} &gt; #{universe_link} &gt; #{title_link}#{action_link}"
+      return "#{home_link} &gt; #{author_link} &gt; #{title_link}#{action_link}"
     else
       if action_name == 'list' || action_name == 'index'
         return "#{home_link} &gt; Story List"
       else
-        universe_link = link_to @universe.name, "http://#{StoryHost('playground')}universes/show/#{@universe.id}"
-        return "#{home_link} &gt; #{universe_link}"
+        author_link = link_to @author.name, "#{base_url}/authors/show/#{@author.id}"
+        return "#{home_link} &gt; #{author_link}"
       end
 
     end
