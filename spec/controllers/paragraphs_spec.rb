@@ -9,7 +9,7 @@ describe "Paragraphs" do
     }
   end
 
-  most_controllers_specs(Paragraphs, {:id => 2, :paragraphs => {:body_raw => " a"} }, "/chapters/show_draft/17#pcomment2", Paragraph, nil, false)
+  most_controllers_specs(Paragraphs, {:id => 2, :paragraph => {:body_raw => " a"} }, "/chapters/show_draft/17#pcomment2", Paragraph, nil, false)
 
   describe "#move_comments_prev" do
     it "should not allow unauthed moves" do
