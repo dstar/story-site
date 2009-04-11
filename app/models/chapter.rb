@@ -3,8 +3,10 @@ class Chapter < ActiveRecord::Base
   has_many :paragraphs, :order => 'position'
 
   has_many :required_permissions, :as => :permissionable
-  
-  before_save :check_release_status
+
+  after_save :check_release_status
+  after_save :expire_chapter_fragment
+  after_save :notify_story_of_change
 
   def self.orderedListByStory(story_id)
     find(:all,
@@ -111,6 +113,47 @@ class Chapter < ActiveRecord::Base
 
   end
 
+  def process_file(file)
+#    Merb.logger.debug "QQQ27: file field is #{file_parameter.inspect}"
+    paragraph_buffer = String.new
+    para_count = 1
+    word_count = 0
+    file_string = file.read
+    file_string.gsub!(/\r/,'')
+    lines = file_string.split(/\n\n/)
+    lines.each { |line|
+      line.gsub!(/^\n/,' ')
+      line.gsub!(/(\w)\n(\w)/,'\1 \2')
+      line.gsub!(/\n/,' ')
+      line.gsub!(/^\s*|\s*$/,'')
+      line.gsub!(/#/,'***') if line == "#"
+      line.gsub!(/\s+--/, "--")
+      word_count += line.scan(/\w+/).length
+
+      para = Paragraph.new()
+      para.body_raw = line
+      para.position = para_count
+      para.chapter_id = self.id
+
+      para.save
+
+      para_count += 1
+    }
+
+    self.words = word_count
+    self.save
+    dump_to_file
+  end
+
+  def cache_key
+    "show#chapter_#{self.id}"
+  end
+
+  def paragraph_updated
+    expire_chapter_fragment
+    notify_story_of_change
+  end
+
   private
   def check_release_status
     if self.status == "released"
@@ -137,6 +180,14 @@ class Chapter < ActiveRecord::Base
       self.released = false
     end
     self.last_status = self.status
+  end
+
+  def expire_chapter_fragment
+    expire(self.cache_key)
+  end
+
+  def notify_story_of_change
+    self.story.chapter_updated
   end
 
 end
