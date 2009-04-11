@@ -1,3 +1,6 @@
+* migrate pcomments.body to not have paragraph markup
+
+
 Notes:
 
 There _shouldn't_ be any problems simply unzipping this and loading the
