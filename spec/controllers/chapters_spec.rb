@@ -13,8 +13,6 @@ describe "Chapter" do
     }
   end
 
-  it "should have view specs"
-
   describe "#show" do
     response = nil
     it "should respond correctly" do
