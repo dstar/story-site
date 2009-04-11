@@ -3,20 +3,14 @@ Feature: Login
   A regular user of the system
   Must authenticate before using the app
 
-  Scenario Outline: Failed Login
+  Scenario: Failed Login
     Given I am not authenticated
     When I go to http://playground.playground.pele.cx/login
-    And I fill in "username" with "<mail>"
-    And I fill in "password" with "<password>"
+    And I fill in "username" with "not_a_user"
+    And I fill in "password" with "not_a_password"
     And I press "Log In"
     Then the login request should fail
     Then I should see an error message
-
-    Examples:
-      | mail           | password       |
-      | not_an_address | nil            |
-      | not@not        | 123455         |
-      | 123@abc.com    | wrong_paasword |
 
   Scenario: Successful Login
     Given I am not authenticated
@@ -25,4 +19,4 @@ Feature: Login
     And I fill in "password" with "test password"
     And I press "Log In"
     Then the login request should succeed
-    Then I should see "Logged in as dstar"
+    Then I should see "Logged in as <a href=\"/users/show/3\">dstar</a>"
