@@ -39,4 +39,19 @@ class Universe < ActiveRecord::Base
       }
     }
   end
+
+  def cache_key
+    "universe_wstories#{self.id}"
+  end
+
+  def story_updated
+    expire_universe_fragment
+  end
+
+  private
+  def expire_universe_fragment
+    expire(self)
+    expire("stories_for_universe_#{self.id}")
+  end
+
 end
