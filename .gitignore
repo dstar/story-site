@@ -11,3 +11,10 @@ config/database.yml
 .loadpath
 .project
 .settings/
+
+#ignore text files
+text_files/*
+
+#ignore temp files
+tmp/
+
