@@ -19,9 +19,9 @@ class User < ActiveRecord::Base
     else
       story_id = story
     end
-    Merb.logger.debug "QQQ14: permissions are #{self.story_permissions}, story is #{story_id}"
+#    Merb.logger.debug "QQQ14: permissions are #{self.story_permissions}, story is #{story_id}"
     obtained_permission = self.story_permissions.any? { |sp| sp.story_id==story_id && sp.permission==permission}
-    Merb.logger.debug "QQQ14: obtained_permission is #{obtained_permission}"
+#    Merb.logger.debug "QQQ14: obtained_permission is #{obtained_permission}"
     unless obtained_permission
       self.groups.each do |group|
         obtained_permission = group.story_permissions.any? { |sp| sp.story_id==story_id && sp.permission==permission}
