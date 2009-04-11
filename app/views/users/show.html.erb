@@ -4,11 +4,8 @@
 <% unless @user.stories.empty? -%>
 <p> Author of <%= @user.stories.length %> <% if @user.stories.length > 1 %>stories: <% else %> story: <% end %></p>
 <ul>
-  <% @user.stories.each do |s| -%>
-  <% last_chapter = s.chapters.find(:first, :order => "date_released desc", :conditions => "status = 'released'") -%>
-  <% if last_chapter -%>
-  <%= "<li> #{s.title} (#{s.chapters.length} chapters, #{s.chapters.inject(0) { |i,k| i = i + k.words}} words, last updated on #{last_chapter.date_released})" %> </li>
-  <% end -%>
+  <% stories_list.each do |s| -%>
+  <%= s -%>
   <% end -%>
 </ul>
 <% end -%>
