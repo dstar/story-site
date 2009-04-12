@@ -1,10 +1,10 @@
 <% if @authinfo[:use_id] and @authinfo[:user].has_site_permission('blogger') %>
 <p>Are you <b>SURE</b> you want to delete this post?</p>
 
-<%= render :partial => 'entry', :collection => [@blogpost] %>
+<%= partial :entry, :with => [@blogpost] %>
 
 <%= start_form_tag :action => 'destroy' %>
-	<input type="hidden" name="id" value="<%= @blogpost.id %>" >
+        <input type="hidden" name="id" value="<%= @blogpost.id %>" >
 <%= submit_tag "Yes" %>
 <%= end_form_tag %>
 

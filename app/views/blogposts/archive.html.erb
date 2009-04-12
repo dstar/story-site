@@ -3,7 +3,7 @@
 <%= link_to 'Previous page', { :page => @blogpost_pages.current.previous } if @blogpost_pages.current.previous %>
 <%= link_to 'Next page', { :page => @blogpost_pages.current.next } if @blogpost_pages.current.next %>
 
-<%= render :partial => 'entry', :collection => @blogposts %>
+<%= partial :entry, :with => @blogposts %>
 
 <%= link_to 'Previous page', { :page => @blogpost_pages.current.previous } if @blogpost_pages.current.previous %>
 <%= link_to 'Next page', { :page => @blogpost_pages.current.next } if @blogpost_pages.current.next %>

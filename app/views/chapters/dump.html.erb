@@ -1,1 +1,1 @@
-<%= render :partial => "chapters/dumppara", :collection => Paragraph.paraList(@chapter_to_save.id) %>
+<%= partial "chapters/dumppara", :with => Paragraph.paraList(@chapter_to_save.id) %>

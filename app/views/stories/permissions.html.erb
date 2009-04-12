@@ -1,3 +1,3 @@
-<%= render :partial => "new_form" %>
+<%= partial :new_form %>
 <b/>
-<%= render :partial => "current_permissions", :collection => StoryPermission.find_all_by_story_id(@story.id)  %>
+<%= partial :current_permissions, :with => StoryPermission.find_all_by_story_id(@story.id)  %>
