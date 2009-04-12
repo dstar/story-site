@@ -1,4 +1,4 @@
   <div>
-    <h2><%= link_to universe.name, :action => 'show', :id => universe %></h2>
+    <h2><%= link_to universe.name, "/universes/show/#{universe.id}" %></h2>
     <%= our_markdown(universe.description) %>
   </div>

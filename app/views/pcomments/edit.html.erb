@@ -5,5 +5,5 @@
   <%= submit_tag 'Edit' -%>
 <% end =%>
 
-<%= link_to 'Show', :action => 'show', :id => @pcomments %> |
-<%= link_to 'Back', :action => 'list' %>
+<%= link_to 'Show', "/pcomments/show/#{@pcomments.id}" %> |
+<%= link_to 'Back', '/pcomments/list' %>

@@ -13,5 +13,5 @@
   <%= submit_tag "Update Chapter" %>
 <% end -%>
 
-<%= link_to 'Show', :action => 'show', :id => @chapter %> |
-<%= link_to 'Back', :action => 'list' %>
+<%= link_to 'Show', "/chapters/show/#{@chapter.id}" %> |
+<%= link_to 'Back', '/chapters/list' %>

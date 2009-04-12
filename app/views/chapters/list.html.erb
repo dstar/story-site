@@ -3,7 +3,7 @@
 <p>
 <% for chapter in @chapters -%>
   <%= chapter.story.title -%>
-  <%= link_to ["Chapter ", chapter.number], :action => "show", :id => chapter -%>
+  <%= link_to ["Chapter ", chapter.number], "/chapters/show/#{chapter.id}" -%>
   (<%= chapter.words %>)
   <br/>
 <% end -%>

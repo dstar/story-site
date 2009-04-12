@@ -12,9 +12,9 @@
   <% for column in Paragraph.content_columns %>
     <td><%=h paragraphs.send(column.name) %></td>
   <% end %>
-    <td><%= link_to 'Show', :action => 'show', :id => paragraphs %></td>
-    <td><%= link_to 'Edit', :action => 'edit', :id => paragraphs %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => paragraphs }, :confirm => 'Are you sure?', :post => true %></td>
+    <td><%= link_to 'Show', "/paragraphs/show/#{paragraphs.id}" %></td>
+    <td><%= link_to 'Edit', "/paragraphs/edit/#{paragraphs.id}" %></td>
+    <td><%= link_to 'Destroy', "/paragraphs/destroy/#{paragraphs.id}", :confirm => 'Are you sure?', :post => true %></td>
   </tr>
 <% end %>
 </table>
@@ -22,4 +22,4 @@
 
 <br />
 
-<%= link_to 'New paragraphs', :action => 'new' %>
+<%= link_to 'New paragraphs', '/paragraphs/new' %>

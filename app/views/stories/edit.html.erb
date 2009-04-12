@@ -5,5 +5,5 @@
   <%= submit_tag 'Edit' %>
 <% end =%>
 
-<%= link_to 'Show Story', :action => 'show', :id => @story %> |
-<%= link_to 'Story List', :action => 'list' %>
+<%= link_to 'Show Story', "/stories/show/#{@story.id}" %> |
+<%= link_to 'Story List', '/stories/list' %>

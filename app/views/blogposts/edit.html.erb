@@ -5,5 +5,5 @@
   <%= submit 'Edit' %>
 <% end =%>
 
-<%= link_to 'Show', :action => 'show', :id => @blogpost %> |
-<%= link_to 'Back', :action => 'list' %>
+<%= link_to 'Show', "/blogposts/show/#{@blogpost.id}" %> |
+<%= link_to 'Back', '/blogposts/list' %>
