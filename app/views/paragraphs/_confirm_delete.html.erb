@@ -2,5 +2,5 @@
 
 <% form_tag :action => 'destroy', :id => @paragraph do %>
     <p><strong>Are you sure you want to delete this paragraph?</strong></p>
-    <p><%= submit_tag "Yes" %> <%= link_to "NO", :controller => 'chapters', :action => 'show_draft', :id => @paragraph.chapter.id, :anchor => "p#{@paragraph.id}" %></p>
+    <p><%= submit_tag "Yes" %> <%= link_to "NO", "/chapters/show_draft/#{@paragraph.chapter.id}#p#{@paragraph.id}" %></p>
 <% end %>

@@ -12,11 +12,11 @@
   <% for column in Pcomment.content_columns %>
     <td><%=h pcomment.send(column.name) %></td>
   <% end %>
-    <td><%= link_to 'Show', :controller => 'chapters', :action => 'show',
-      :id => Pcomment.chapterID(pcomment.id),
-      :anchor => ["p",pcomment.paragraph_id] %></td>
-    <td><%= link_to 'Edit', :action => 'edit', :id => pcomment %></td>
-    <td><%= link_to 'Delete', { :action => 'destroy', :id => pcomment }, :confirm => 'Are you sure?', :post => true %></td>
+  <% show_anchor = "+" + ["p",pcomment.paragraph_id] -%>
+  <% show_link = "/chapters/show/#{Pcomment.chapterID(pcomment.id)#{show_anchor}" -%>
+    <td><%= link_to 'Show', show_link %></td>
+    <td><%= link_to 'Edit', "/paragraphs/edit/#{pcomment.id}" %></td>
+    <td><%= link_to 'Delete', "/paragraphs/destroy/#{pcomment.id}", :confirm => 'Are you sure?', :post => true %></td>
   </tr>
 <% end %>
 </table>
