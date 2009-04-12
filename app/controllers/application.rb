@@ -29,7 +29,7 @@ class Application < Merb::Controller
 
      @sid = cookies[:phpbb2mysql_sid]
 
-    Merb.logger.debug "QQQ8: Sid is #{@sid}"
+#    Merb.logger.debug "QQQ8: Sid is #{@sid}"
 
     unless controller_name == "style" and action_name == "show"
       cookies[:login_redirect_to] = { :value => request.path, :domain => "pele.cx" }
@@ -56,21 +56,21 @@ class Application < Merb::Controller
         @authinfo = Hash.new
       end
     elsif session.user
-      Merb.logger.debug("QQQ25: we have session.user -- session is #{session.inspect}")
+#      Merb.logger.debug("QQQ25: we have session.user -- session is #{session.inspect}")
       @authinfo = Hash.new
       @authinfo[:user] = session.user
     end
-    Merb.logger.debug("QQQ25: no user in @authinfo[:user]! session is #{session.inspect}") unless @authinfo[:user]
+#    Merb.logger.debug("QQQ25: no user in @authinfo[:user]! session is #{session.inspect}") unless @authinfo[:user]
     @authinfo[:user] ||= User.find(-1)
   end
 
   def authorize
-    Merb.logger.debug("QQQ12: #{request._session_secret_key }")
+#    Merb.logger.debug("QQQ12: #{request._session_secret_key }")
     if check_authorization(@authinfo[:user])
-      Merb.logger.debug("QQQ2: #{ @authinfo[:user].id } is authorized for #{action_name}")
+#      Merb.logger.debug("QQQ2: #{ @authinfo[:user].id } is authorized for #{action_name}")
       true
     else
-      Merb.logger.debug("QQQ2: #{ @authinfo[:user].id } is NOT authorized for #{action_name}")
+#      Merb.logger.debug("QQQ2: #{ @authinfo[:user].id } is NOT authorized for #{action_name}")
       admonish("You are not authorized for this action!")
     end
 
@@ -81,7 +81,8 @@ class Application < Merb::Controller
     #    Merb.logger.debug("Request is #{request.inspect}")
     destination = request.referer
     destination ||= "http://" + StoryHost("playground") + "/"
-    Merb.logger.debug "QQQ21: message[:notice] is #{message.inspect}"
+#    Merb.logger.debug "QQQ21: message[:notice] is #{message.inspect}"
+    Merb.logger.debug "QQQ33: Admonishing #{@authinfo[:user].username} #{message.inspect}"
     redirect destination, :message => {:notice => msg }
     throw :halt
   end
