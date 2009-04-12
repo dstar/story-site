@@ -5,7 +5,7 @@ module Merb
     def StoryHost(story)
       domain_length = request.subdomains.length
       port_string = ":#{request.port}" if request.port != 80
-      Merb.logger.debug "QQQ19: Subdomains => #{request.subdomains.inspect}, domain=> #{request.domain.inspect}"
+#      Merb.logger.debug "QQQ19: Subdomains => #{request.subdomains.inspect}, domain=> #{request.domain.inspect}"
       unless story.is_a? String
         "#{story.short_title}.#{request.domain(domain_length)}#{port_string}"
       else

@@ -36,7 +36,7 @@ class Site < Application
     if @universe.save
       redirect "/universes/show/#{@universe.id}", :message => {:notice => 'Universe was successfully created.' }
     else
-      Merb::logger.debug("QQQ: did not create universe with params = #{params[:universe]}")
+#      Merb::logger.debug("QQQ: did not create universe with params = #{params[:universe]}")
       render :new_universe
     end
   end
@@ -92,10 +92,10 @@ class Site < Application
 
   def show
     @stories = Story.OrderedList
-    Merb.logger.debug "QQQ4: About to call Blogposts.frontpagelist"
+#    Merb.logger.debug "QQQ4: About to call Blogposts.frontpagelist"
     @blogposts_to_show = Blogpost.frontpagelist
-    Merb.logger.debug "QQQ4: About to call render"
-    Merb.logger.debug "QQQ21: message[:notice] is #{message.inspect}"
+#    Merb.logger.debug "QQQ4: About to call render"
+#    Merb.logger.debug "QQQ21: message[:notice] is #{message.inspect}"
     render :show
   end
 

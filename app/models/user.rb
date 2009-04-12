@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
 
   def self.authenticate(login, password)
     @u = find(:first, :conditions => ["#{Merb::Authentication::Strategies::Basic::Base.login_param} = ?", login])
-    Merb.logger.debug "QQQ14: User is #{login}, @u is #{@u.inspect}, encrypted password is #{Digest::MD5.hexdigest(password)}"
+#    Merb.logger.debug "QQQ14: User is #{login}, @u is #{@u.inspect}, encrypted password is #{Digest::MD5.hexdigest(password)}"
     @u && @u.user_password == Digest::MD5.hexdigest(password) ? @u : nil
   end
 

@@ -42,9 +42,9 @@ class Pcomment < ActiveRecord::Base
   end
 
   def move(direction)
-    logger.debug "QQQ: Pcomment#move called with direction '#{direction}'"
+#    logger.debug "QQQ: Pcomment#move called with direction '#{direction}'"
 
-    logger.debug "QQQ: Pcomment#move: position currently '#{self.paragraph.position}', paragraph currently '#{self.paragraph.id}'"
+#    logger.debug "QQQ: Pcomment#move: position currently '#{self.paragraph.position}', paragraph currently '#{self.paragraph.id}'"
 
     if direction == 'next'
       new_parent = self.paragraph.lower_item
@@ -52,12 +52,12 @@ class Pcomment < ActiveRecord::Base
       new_parent = self.paragraph.higher_item
     end
 
-    logger.debug "QQQ: Pcomment#move: new_parent is '#{new_parent.id}'"
+#    logger.debug "QQQ: Pcomment#move: new_parent is '#{new_parent.id}'"
 
     if new_parent
       self.paragraph = new_parent
       self.save
-      logger.debug "QQQ: Pcomment#move: position NOW '#{self.paragraph.position}', paragraph currently '#{self.paragraph.id}'"
+#      logger.debug "QQQ: Pcomment#move: position NOW '#{self.paragraph.position}', paragraph currently '#{self.paragraph.id}'"
     end
   end
 

@@ -7,20 +7,20 @@ class Stories < Application
   end
 
   def check_authorization(user)
-    Merb.logger.debug("QQQ3: [#{action_name}] params[:id] is #{params[:id]}")
-    Merb.logger.debug("QQQ3: [#{action_name}] @story is #{@story.inspect}")
-    Merb.logger.debug("QQQ3: [#{action_name}] @authorization is #{@authorization.inspect}")
+#    Merb.logger.debug("QQQ3: [#{action_name}] params[:id] is #{params[:id]}")
+#    Merb.logger.debug("QQQ3: [#{action_name}] @story is #{@story.inspect}")
+#    Merb.logger.debug("QQQ3: [#{action_name}] @authorization is #{@authorization.inspect}")
     return false unless @story
     needed = @story.required_permission(action_name)
     needed = @authorization[@story.status][action_name] unless (needed and ! needed.empty?)
     if needed
       needed.each do |req|
-        Merb.logger.debug("QQQ4: [#{action_name}] Checking #{req}; #{user.username}.has_story_permission(#{@story.id},#{req}) == #{user.has_story_permission(@story,req)}")
+#        Merb.logger.debug("QQQ4: [#{action_name}] Checking #{req}; #{user.username}.has_story_permission(#{@story.id},#{req}) == #{user.has_story_permission(@story,req)}")
         return true if req == "EVERYONE" # check for public action
         return true if user.has_story_permission(@story, req) # Else check that we have the required permission
       end
     end
-    Merb.logger.debug("QQQ3: [#{action_name}] returning false!")
+#    Merb.logger.debug("QQQ3: [#{action_name}] returning false!")
     return false
   end
 
@@ -74,8 +74,8 @@ class Stories < Application
   end
 
   def create_chapter
-    Merb.logger.debug "QQQ28: file field is #{@tempfile.inspect}"
-    Merb.logger.debug "QQQ28: file field methods are #{params[:file].methods.collect { |m| m.match /.*file.*/}.compact}"
+#    Merb.logger.debug "QQQ28: file field is #{@tempfile.inspect}"
+#    Merb.logger.debug "QQQ28: file field methods are #{params[:file].methods.collect { |m| m.match /.*file.*/}.compact}"
     @chapter = Chapter.new(params[:chapter])
     @chapter.story = @story
     @chapter.date_uploaded = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless @chapter.date_uploaded

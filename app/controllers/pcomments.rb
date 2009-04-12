@@ -26,9 +26,9 @@ class Pcomments < Application
 
       @pcomment = Pcomment.find(params[:id])
 
-      Merb::logger.debug("QQQ: [#{action_name}] params[:id] is #{params[:id]}")
-      Merb::logger.debug("QQQ: [#{action_name}] @pcomment is #{@pcomment.inspect}")
-      Merb::logger.debug("QQQ: [#{action_name}] @pcomment.paragraph is #{@pcomment.paragraph.inspect}")
+#      Merb::logger.debug("QQQ: [#{action_name}] params[:id] is #{params[:id]}")
+#      Merb::logger.debug("QQQ: [#{action_name}] @pcomment is #{@pcomment.inspect}")
+#     Merb::logger.debug("QQQ: [#{action_name}] @pcomment.paragraph is #{@pcomment.paragraph.inspect}")
 
       author_link =  %Q|<a href="/users/show/#{@pcomment.paragraph.chapter.story.authors.first.id}">#{@pcomment.paragraph.chapter.story.authors.first.username}</a>|
       story_link = %Q|<a href="/stories/show/#{@pcomment.paragraph.chapter.story.id}">#{@pcomment.paragraph.chapter.story.title}</a>|

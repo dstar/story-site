@@ -22,7 +22,7 @@ class Users < Application
   end
 
   def show
-    Merb.logger.debug("QQQ12: _session_secret_key is #{request._session_secret_key}")
+#    Merb.logger.debug("QQQ12: _session_secret_key is #{request._session_secret_key}")
     render :show
   end
 

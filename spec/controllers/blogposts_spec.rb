@@ -24,7 +24,7 @@ describe Blogposts do
     it "should respond correctly" do
       response = request("http://playground.playground.pele.cx/blogposts/show/1", :method => "GET")
       response.should be_successful
-      Merb.logger.debug "QQQ17: #{response.body.inspect}"
+#      Merb.logger.debug "QQQ17: #{response.body.inspect}"
       response.should have_xpath("//div[@id='entry1'][@class='news']")
 
     end

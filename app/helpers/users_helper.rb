@@ -15,7 +15,7 @@ module Merb
     # visible chapter')
 
     def stories_list
-      Merb.logger.debug "QQQ26: @user.stories == #{@user.stories.inspect}"
+#      Merb.logger.debug "QQQ26: @user.stories == #{@user.stories.inspect}"
       stories_list = []
       stories = @user.stories.collect { |s| [s,s.chapters.find(:first, :order => "date_released desc"), s.chapters.find(:first, :order => "date_released desc", :conditions => "status = 'released'")]}
 
@@ -32,7 +32,7 @@ module Merb
       end
 
 
-      Merb.logger.debug "QQQ27: stories_list for #{@authinfo[:user].username} == #{stories_list.inspect}"
+#      Merb.logger.debug "QQQ27: stories_list for #{@authinfo[:user].username} == #{stories_list.inspect}"
       return stories_list
 
     end

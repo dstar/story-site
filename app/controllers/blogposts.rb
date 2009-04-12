@@ -17,12 +17,12 @@ class Blogposts < Application
   end
 
   def check_authorization(user)
-    Merb.logger.debug("QQQ: #{ action_name} => User: #{user.id}, #{self.request.cookies.inspect}")
+#    Merb.logger.debug("QQQ: #{ action_name} => User: #{user.id}, #{self.request.cookies.inspect}")
     needed = @authorization[action_name]
     if needed
       needed.each do |req|
         return true if req == "EVERYONE"
-        Merb.logger.debug("QQQ: User #{user.id}has #{req}") if user.has_site_permission(req)
+#        Merb.logger.debug("QQQ: User #{user.id}has #{req}") if user.has_site_permission(req)
         return true if user.has_site_permission(req)
       end
     end
@@ -54,13 +54,13 @@ class Blogposts < Application
 
   def list
     @blogposts = Blogpost.find(:all, :order => 'created_on desc')
-    Merb.logger.debug "QQQ16: @blogposts is #{@blogposts.inspect}"
+#    Merb.logger.debug "QQQ16: @blogposts is #{@blogposts.inspect}"
     render :list
   end
 
   def show
     @blogpost = Blogpost.find(params[:id])
-    Merb.logger.debug "QQQ18: @blogpost is #{@blogpost.inspect}"
+#    Merb.logger.debug "QQQ18: @blogpost is #{@blogpost.inspect}"
     render
   end
 
