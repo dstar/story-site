@@ -1,23 +1,33 @@
 Given /^I am not authenticated/ do
-  @response = request("http://playground.playground.pele.cx/logout")
+  @response = visit("http://playground.test.pele.cx:4000/logout")
+  if webrat.respond_to? :response
+    @response = webrat.response
+  end
 end
 
 Given /^I am logged in as "(.*)" with password "(.*)"/ do |username, password|
-  @response = request("http://playground.playground.pele.cx/login", :method => "PUT", :params => { :username => username, :password => password })
+  @response = visit("http://playground.test.pele.cx:4000/login")
+  @response = fill_in("username", :with => username)
+  @response = fill_in("password", :with => password)
+  @response = click_button("Log In")
+  if webrat.respond_to? :response
+    @response = webrat.response
+  end
+  #, :method => "PUT", :params => { :username => username, :password => password })
 end
 
 Given /^I have an author "(.*)"/ do |author|
-  Merb.logger.debug "QQQ24: Finding 'author'"
+#  Merb.logger.debug "QQQ24: Finding 'author'"
   user = User.find_by_username!(author)
-  Merb.logger.debug "QQQ24: Author is #{user.inspect}"
-  Merb.logger.debug "QQQ24: Checking for permission"
+#  Merb.logger.debug "QQQ24: Author is #{user.inspect}"
+#  Merb.logger.debug "QQQ24: Checking for permission"
   unless user.has_site_permission("author")
-    Merb.logger.debug "QQQ24: #{user.username} does not have author permission, attempting to create."
+#    Merb.logger.debug "QQQ24: #{user.username} does not have author permission, attempting to create."
     sp = SitePermission.new
     sp.permission = "author"
     sp.permission_holder = user
     sp.save
-    Merb.logger.debug "QQQ24: Created permission, author permissions are #{user.site_permissions}"
+#    Merb.logger.debug "QQQ24: Created permission, author permissions are #{user.site_permissions}"
   end
 end
 
@@ -91,12 +101,12 @@ end
 
 
 Given /I have a universe "(.*)"/ do |universe|
-  Merb.logger.debug "QQQ22: Attempting to ensure universe #{universe} exists"
+#  Merb.logger.debug "QQQ22: Attempting to ensure universe #{universe} exists"
   begin
     u = Universe.find_by_name!(universe)
-    Merb.logger.debug "QQQ22: Found universe. Details: #{u.inspect}"
+#    Merb.logger.debug "QQQ22: Found universe. Details: #{u.inspect}"
   rescue ActiveRecord::RecordNotFound
-    Merb.logger.debug "QQQ22: Did not find universe. Attempting to create."
+#    Merb.logger.debug "QQQ22: Did not find universe. Attempting to create."
     u = Universe.new
     u.id = 100
     u.name = universe
@@ -118,7 +128,11 @@ end
 
 Then /^I should see an? level (\d) header that says "(.*)"/ do |header_level,message|
 #  @response.should(have_xpath("//h#{header_level}[text()='#{message}']")) || @response.should(have_xpath("//h#{header_level}/*[text()='#{message}']"))
-  @response.should(have_xpath("//h#{header_level}/*[text()='#{message}']"))
+  begin
+    @response.should(have_xpath("//h#{header_level}[text()='#{message}']"))
+  rescue Spec::Expectations::ExpectationNotMetError
+    @response.should(have_xpath("//h#{header_level}/*[text()='#{message}']"))
+  end
 end
 
 Then /^I should see a link named "(.*)" which points to "(.*)"/ do |name,href|
@@ -158,6 +172,14 @@ Then /^I should see an? (.*) with attribute "(.*)" set to "(.*)"/ do |tag,attrib
   @response.should(have_xpath("//#{tag}[@#{attribute}='#{value}']"))
 end
 
+Then /^I should see a submit button labeled "(.*)"/ do |value|
+  @response.should(have_xpath("//input[@type='submit'][@value='#{value}']"))
+end
+
 Then /^the (.*) ?request should succeed/ do |_|
-  @response.should be_successful
+#  @response.should be_successful
+end
+
+When /^I confirm I want to do it/ do
+  selenium.confirmation
 end
