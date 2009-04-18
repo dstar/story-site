@@ -1,38 +1,52 @@
 def get_current_chapter
+
+  Merb.logger.debug "QQQ44: Getting current chapter"
+
   if webrat.respond_to? 'selenium'
-    story_id = selenium.location.gsub(/.*\//,'')
+    this_url = selenium.location
+    Merb.logger.debug "QQQ44: selenium.location is #{selenium.location}"
   else
-    story_id = current_url.gsub(/.*\//,'')
+    this_url = current_url
   end
-  Story.find(story_id).chapters.last
+
+  path = URI.parse(this_url).path
+
+  first_element_regexp = Regexp.new("^/(.*?)/")
+  last_element_regexp = Regexp.new("/([^/]*?)$")
+
+  first_element = path.match(first_element_regexp)[1]
+  last_element = path.match(last_element_regexp)[1]
+
+  Merb.logger.debug "QQQ44: Url is #{this_url}, first element is #{first_element}, last element is #{last_element}"
+  if first_element.match(/stories/)
+    Merb.logger.debug "QQQ44: doing Story.find(#{last_element}).chapters.last"
+    Story.find(last_element).chapters.last
+  else
+    if last_element.match(/\./)
+      Merb.logger.debug "QQQ46: doing Chapter.find_by_file(#{last_element}), resulting in #{Chapter.find_by_file(last_element)}"
+      Chapter.find_by_file(last_element)
+    else
+      Merb.logger.debug "QQQ46: doing Chapter.find(#{last_element}), resulting in #{Chapter.find(last_element)}"
+      Chapter.find(last_element)
+    end
+  end
 end
 
 Then /I should see "(.*)" in the (\d+)(?:st|nd|rd|th) paragraph's text/ do |text,paragraph_number| #'
   if webrat.respond_to? 'selenium'
-    chapter_id = selenium.location.gsub(/.*\//,'')
-    paragraph_id = Chapter.find(chapter_id).paragraphs[paragraph_number.to_i - 1].id
-    p_xpath = "//div[@id='parabody#{paragraph_id}']/p[contains(text(),'#{text}')]"
-    Merb.logger.debug "QQQ42: xpath is #{p_xpath}"
-    @response.should(have_xpath(p_xpath))
-
-#    paragraph = selenium.text("xpath=//div[@id='parabody#{paragraph_id}']")
-  else
-    paragraph = webrat.dom.xpath("/html/body/div[@class='full']/div[@class='paragraph'][#{paragraph_number.to_i}]")
-    paragraph.to_s.should =~ /#{text}/m
+    Merb.logger.debug "QQQ45: current_url is: #{webrat.method(:selenium)}"
   end
+  chapter = get_current_chapter
+  Merb.logger.debug "QQQ46: chapter is #{chapter.inspect}"
+  paragraph_id = chapter.paragraphs[paragraph_number.to_i - 1].id
+  p_xpath = "//div[@id='parabody#{paragraph_id}']/p[contains(text(),'#{text}')]"
+  @response.should(have_xpath(p_xpath))
 end
 
 Then /I should not see "(.*)" in the (\d+)(?:st|nd|rd|th) paragraph's text/ do |text,paragraph_number| #'
-  if webrat.respond_to? 'selenium'
-    chapter_id = selenium.location.gsub(/.*\//,'')
-    paragraph_id = Chapter.find(chapter_id).paragraphs[paragraph_number.to_i - 1].id
-    p_xpath = "//div[@id='parabody#{paragraph_id}']/p[contains(text(),'#{text}')]"
-    Merb.logger.debug "QQQ42: xpath is #{p_xpath}"
-    @response.should_not(have_xpath(p_xpath))
-  else
-    paragraph = webrat.dom.xpath("/html/body/div[@class='full']/div[@class='paragraph'][#{paragraph_number.to_i}]")
-    paragraph.to_s.should_not =~ /#{text}/m
-  end
+  paragraph_id = get_current_chapter.paragraphs[paragraph_number.to_i - 1].id
+  p_xpath = "//div[@id='parabody#{paragraph_id}']/p[contains(text(),'#{text}')]"
+  @response.should_not(have_xpath(p_xpath))
 end
 
 Then /I should see a link to the chapter I just uploaded/ do
