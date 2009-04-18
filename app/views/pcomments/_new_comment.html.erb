@@ -2,7 +2,7 @@
 <% url_string = "/pcomments/create"  -%>
 <% complete_string = "denote_comments('comment_block_#{@pcomment.paragraph_id}')" -%>
 <% update_string = "comment_block_#{@pcomment.paragraph_id}" -%>
-<% form_remote_tag :update => update_string , :url => url_string , :complete => complete_string do -%>
+<%= form_for @pcomment, remote_form_attrs(:update => update_string , :url => url_string , :complete => complete_string) do -%>
   <%= partial :form %>
   <%= submit_tag "Create" %>
-<% end %>
+<% end =%>
