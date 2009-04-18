@@ -14,7 +14,6 @@ require 'spec/expectations'
 #require 'spec/example'
 #require 'spec/version'
 #require 'spec/dsl'
-require "merb_cucumber/world/webrat"
 require "merb_cucumber/helpers/activerecord"
 
 # Uncomment if you want transactional fixtures
@@ -36,7 +35,6 @@ module MiscHelpers
   end
 end
 
-World do |world|
-  world.extend MiscHelpers
-  world
-end
+
+World(MiscHelpers)
+
