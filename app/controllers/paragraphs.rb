@@ -42,10 +42,12 @@ class Paragraphs < Application
   def edit
     @paragraphs = Paragraph.find(params[:id])
     if request.xml_http_request?
+      Merb.logger.debug "QQQ35: xhr request!"
       @editbody = @paragraphs.body_raw
       partial 'paraedit'
+    else
+      render :edit
     end
-    render :edit
   end
 
   def update
@@ -107,8 +109,9 @@ class Paragraphs < Application
   def confirm_delete
     if request.xml_http_request?
       partial :confirm_delete
+    else
+      render :confirm_delete
     end
-    render :confirm_delete
   end
 
   def destroy

@@ -73,8 +73,9 @@ class Pcomments < Application
     if request.xml_http_request?
       @chapter = @paragraph.chapter
       partial 'new_comment'
+    else
+      render :new
     end
-    render :new
   end
 
   def create
