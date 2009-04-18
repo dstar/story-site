@@ -3,20 +3,28 @@ Feature: Comments
   Users should be able to comment on paragraphs
   So that the quality of the stories can be improved.
 
-  Scenario: Adding a comment as the author
+  Scenario: Seeing the comment form
     Given I am logged in as "dstar" with password "test password"
     And I have a story "Test Story 2"
     And the story "Test Story 2" has a chapter with the text in the file at "features/test_files/test_chapter_1.txt"
-    When I go to http://playground.playground.pele.cx/stories/show/102
+    When I go to http://playground.test.pele.cx:4000/stories/show/102
     And I follow "chapter_1_draft"
     And I follow "Comment on this paragraph"
-    Then I should see "Create"
+    Then I should see a submit button labeled "Create"
+
+  Scenario: Identifying a paragraph
+    Given I am logged in as "dstar" with password "test password"
+    And I have a story "Test Story 2"
+    And the story "Test Story 2" has a chapter with the text in the file at "features/test_files/test_chapter_1.txt"
+    When I go to http://playground.test.pele.cx:4000/stories/show/102
+    And I follow "chapter_1_draft"
+    Then I should see a comment link for the 1st paragraph
 
   Scenario: Adding a comment as the author
     Given I am logged in as "dstar" with password "test password"
     And I have a story "Test Story 2"
     And the story "Test Story 2" has a chapter with the text in the file at "features/test_files/test_chapter_1.txt"
-    When I go to http://playground.playground.pele.cx/stories/show/102
+    When I go to http://playground.test.pele.cx:4000/stories/show/102
     And I follow "chapter_1_draft"
     And I comment on the 1st paragraph
     And I fill in "Comment" with "Test comment"
@@ -34,7 +42,7 @@ Feature: Comments
     Given I am logged in as "dstar" with password "test password"
     And I have a story "Test Story 2"
     And the story "Test Story 2" has a chapter with the text in the file at "features/test_files/test_chapter_1.txt"
-    When I go to http://playground.playground.pele.cx/stories/show/102
+    When I go to http://playground.test.pele.cx:4000/stories/show/102
     And I follow "chapter_1_draft"
     And I comment on the 1st paragraph
     And I fill in "Comment" with "Test comment"
@@ -52,7 +60,7 @@ Feature: Comments
     Given I am logged in as "dstar" with password "test password"
     And I have a story "Test Story 2"
     And the story "Test Story 2" has a chapter with the text in the file at "features/test_files/test_chapter_1.txt"
-    When I go to http://playground.playground.pele.cx/stories/show/102
+    When I go to http://playground.test.pele.cx:4000/stories/show/102
     And I follow "chapter_1_draft"
     And I comment on the 1st paragraph
     And I fill in "Comment" with "Test comment"
@@ -71,7 +79,7 @@ Feature: Comments
     Given I am logged in as "dstar" with password "test password"
     And I have a story "Test Story 2"
     And the story "Test Story 2" has a chapter with the text in the file at "features/test_files/test_chapter_1.txt"
-    When I go to http://playground.playground.pele.cx/stories/show/102
+    When I go to http://playground.test.pele.cx:4000/stories/show/102
     And I follow "chapter_1_draft"
     And I comment on the 1st paragraph
     And I fill in "Comment" with "Test comment"
@@ -89,7 +97,7 @@ Feature: Comments
     Given I am logged in as "dstar" with password "test password"
     And I have a story "Test Story 2"
     And the story "Test Story 2" has a chapter with the text in the file at "features/test_files/test_chapter_1.txt"
-    When I go to http://playground.playground.pele.cx/stories/show/102
+    When I go to http://playground.test.pele.cx:4000/stories/show/102
     And I follow "chapter_1_draft"
     And I comment on the 1st paragraph
     And I fill in "Comment" with "Test comment"
