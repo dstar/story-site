@@ -1,6 +1,6 @@
 <%= partial 'chapters/parabody', :with => @paragraph %>
 
-<% form_tag :action => 'destroy', :id => @paragraph do %>
+<%= form_for @paragraph, :action => "/paragraphs/destroy/#{ @paragraph}" do %>
     <p><strong>Are you sure you want to delete this paragraph?</strong></p>
     <p><%= submit_tag "Yes" %> <%= link_to "NO", "/chapters/show_draft/#{@paragraph.chapter.id}#p#{@paragraph.id}" %></p>
-<% end %>
+<% end =%>
