@@ -61,9 +61,9 @@ Merb::Router.prepare do |r|
   r.resources :chapters
   r.resources :stories
   r.resources :universes
-  r.resources :blogposts
   r.resources :paragraphs
   r.resources :pcomments
+  r.resources :blogposts
   r.resources :users
 
   # Change this for your home page to be available at /
