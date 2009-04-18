@@ -6,12 +6,12 @@ Feature: Site Main Page
     Given I am not authenticated
     And I have a story "Test Story 1"
     And I have a universe "Test Universe 1"
-    When I go to http://playground.playground.pele.cx/
+    When I go to http://playground.test.pele.cx:4000/
     Then I should see a link named "Test Universe 1" which points to "/universes/show/100"
 
   Scenario: Finding Universes from the Main Page as an admin
     Given I am logged in as "dstar" with password "test password"
     And I have a story "Test Story 1"
     And I have a universe "Test Universe 1"
-    When I go to http://playground.playground.pele.cx/
+    When I go to http://playground.test.pele.cx:4000/
     Then I should see a link named "Test Universe 1" which points to "/universes/show/100"
