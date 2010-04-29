@@ -1,12 +1,12 @@
 <div id="<%= "edit_#{edit_theme_style.element}_div" %>">
 <p>
-<% form_remote_tag :update => "edit_#{edit_theme_style.element}_div", :url => "/style/save_theme_style/1"  do -%>
+<%= form_for edit_theme_style, remote_form_attrs(:update => "edit_#{edit_theme_style.element}_div", :url => "/style/save_theme_style/1")  do -%>
 Element:
 <input type="text" id="edit_theme_style_element" name="element" value="<%= edit_theme_style.element %>">
 Style:
 <input type="text" id="edit_theme_style_definition" name="definition" value="<%= edit_theme_style.definition %>">
 <%= submit_tag("Save element", :onClick => "Element.remove('save result')") %>
-<% end -%>
+<% end =%>
 <%= %Q|<span style="color:red" id="save result">#{@result}</div>| if @result -%>
 </p>
 </div>

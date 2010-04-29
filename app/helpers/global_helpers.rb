@@ -75,7 +75,7 @@ EOS
 
     def submit_tag(text, attrs ={ })
       txt = submit(text, attrs)
-      Merb.logger.debug "QQQ36: submit button code is |#{txt}"
+#      Merb.logger.debug "QQQ36: submit button code is |#{txt}"
       txt
     end
 

@@ -20,8 +20,8 @@ Feature: Chapter Uploads
     Examples:
       |               file                    |type|
       |features/test_files/test_chapter_1.txt |Text|
-      |features/test_files/test_chapter_1.rtf |RTF |
       |features/test_files/test_chapter_1.html|HTML|
+      |features/test_files/test_chapter_1.doc |Word|
 
   Scenario Outline: Verifying the uploaded file was converted correctly
     Given I am logged in as "dstar" with password "test password"
@@ -36,15 +36,17 @@ Feature: Chapter Uploads
     Then I should see "This is test paragraph 1" in the 1st paragraph's text
     And "test paragraph 2" in the 2nd paragraph's text should be emphasized
     And "test paragraph 3" in the 3rd paragraph's text should be emphasized
-    And "test paragraph 4" in the 4th paragraph's text should be bolded
-    And "test paragraph 5" in the 5th paragraph's text should be bolded
-    And "test paragraph 6" in the 6th paragraph's text should be bolded
+    And "test " in the 4th paragraph's text should be emphasized
+    And "paragraph" in the 4th paragraph's text should not be emphasized
+    And " 4" in the 4th paragraph's text should be emphasized
+    And "test paragraph 5" in the 5th paragraph's text should be strong
+    And "test paragraph 6" in the 6th paragraph's text should be strong
 
     Examples:
       |link        |               file                    |type|
       |reading link|features/test_files/test_chapter_1.txt |Text|
-      |reading link|features/test_files/test_chapter_1.rtf |RTF |
       |reading link|features/test_files/test_chapter_1.html|HTML|
+      |reading link|features/test_files/test_chapter_1.doc |Word|
       | draft link |features/test_files/test_chapter_1.txt |Text|
-      | draft link |features/test_files/test_chapter_1.rtf |RTF |
       | draft link |features/test_files/test_chapter_1.html|HTML|
+      | draft link |features/test_files/test_chapter_1.doc |Word|

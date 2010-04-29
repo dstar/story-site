@@ -1,4 +1,4 @@
 default: --no-source -r features/steps -r features/support/env.rb -r features/support/plain.rb -t ~@javascript --format pretty features/plain
 autotest: --color --no-source -r features/steps -r features/support/env.rb -r features/support/plain.rb -t ~@javascript --format pretty features/plain
-enhanced: --no-source -r features/support/env.rb -r features/support/enhanced.rb -r features/steps -t ~@no-javascript --format pretty features/enhanced
+enhanced: --no-source -r features/support/env.rb -r features/support/enhanced.rb -r features/steps -t ~@no-javascript --format pretty features
 plain: --no-source -r features/steps -r features/support/env.rb -r features/support/plain.rb -t ~@javascript --format pretty

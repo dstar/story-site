@@ -25,20 +25,20 @@ def self.use_transactional_fixtures
 end
 
 def authed_action(controller, action, id, methd = "GET", params = { })
-  request("http://playground.playground.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
-  request("http://playground.playground.pele.cx/#{controller}/#{action}/#{id}", :method => methd, :params => params)
+  request("http://playground.test.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
+  request("http://playground.test.pele.cx/#{controller}/#{action}/#{id}", :method => methd, :params => params)
 end
 
 def unauthed_action(controller, action, id, methd = "GET", params = { })
-  request("http://playground.playground.pele.cx/logout", :method => "GET")
-  request("http://playground.playground.pele.cx/#{controller}/#{action}/#{id}", :method => methd, :params => params)
+  request("http://playground.test.pele.cx/logout", :method => "GET")
+  request("http://playground.test.pele.cx/#{controller}/#{action}/#{id}", :method => methd, :params => params)
 end
 
 # Specs for edit action
 def edit_specs(controller, update_params)
   describe "#edit" do
     it "should not allow unauthed edits" do
-      #      unauthed_action(controller, :edit, update_params ,@env).should redirect_to("http://playground.pele.cx/blogposts/show")
+      #      unauthed_action(controller, :edit, update_params ,@env).should redirect_to("http://test.pele.cx/blogposts/show")
       unauthed_action(controller, :edit, update_params[:id], "GET", update_params).should redirect
     end
 
@@ -52,13 +52,13 @@ end
 def update_specs(controller, update_params, update_redir)
   describe "#update" do
     it "should not allow unauthed updates" do
-      unauthed_action(controller, :update, update_params[:id], "POST", update_params).should redirect_to("http://playground.playground.pele.cx/")
-      #      unauthed_action(controller, :update, update_params, @env).should redirect_to("http://playground.pele.cx/blogposts/show")
+      unauthed_action(controller, :update, update_params[:id], "POST", update_params).should redirect_to("http://playground.test.pele.cx/")
+      #      unauthed_action(controller, :update, update_params, @env).should redirect_to("http://test.pele.cx/blogposts/show")
 
     end
 
     it "should allow authed updates" do
-      authed_action(controller, :update, update_params[:id], "POST", update_params).should_not redirect_to("http://playground.playground.pele.cx/")
+      authed_action(controller, :update, update_params[:id], "POST", update_params).should_not redirect_to("http://playground.test.pele.cx/")
       #authed_action(controller, :update, update_params, @env).should redirect_to(update_redir)
     end
 
@@ -82,13 +82,13 @@ end
 def create_specs(controller, create_params, model)
   describe "#create" do
     it "should not allow unauthed creates" do
-      request("http://playground.playground.pele.cx/logout", :method => "GET")
-      lambda { request("http://playground.playground.pele.cx/#{controller}/create/", :method => "POST", :params => create_params)}.should_not change(model,:count)
+      request("http://playground.test.pele.cx/logout", :method => "GET")
+      lambda { request("http://playground.test.pele.cx/#{controller}/create/", :method => "POST", :params => create_params)}.should_not change(model,:count)
     end
 
     it "should allow authed creates" do
-      request("http://playground.playground.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
-      lambda { request("http://playground.playground.pele.cx/#{controller}/create/", :method => "POST", :params => create_params) }.should change(model,:count)
+      request("http://playground.test.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
+      lambda { request("http://playground.test.pele.cx/#{controller}/create/", :method => "POST", :params => create_params) }.should change(model,:count)
     end
   end
 end

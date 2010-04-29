@@ -50,6 +50,10 @@ Merb::Router.prepare do |r|
 
   end
 
+  r.match('/blogposts/archive/:page').to(:controller => :blogposts, :action => 'archive')
+
+  r.resources :blogposts
+
   # This is the default route for /:controller/:action/:id
   # This is fine for most cases.  If you're heavily using resource-based
   # routes, you may want to comment/remove this line to prevent
@@ -63,7 +67,6 @@ Merb::Router.prepare do |r|
   r.resources :universes
   r.resources :paragraphs
   r.resources :pcomments
-  r.resources :blogposts
   r.resources :users
 
   # Change this for your home page to be available at /

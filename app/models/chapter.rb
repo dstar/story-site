@@ -113,36 +113,132 @@ class Chapter < ActiveRecord::Base
 
   end
 
-  def process_file(file)
-#    Merb.logger.debug "QQQ27: file field is #{file_parameter.inspect}"
-    paragraph_buffer = String.new
+  def process_file(upload_hash)
+    file = upload_hash[:tempfile]
+    Merb.logger.debug "QQQ27: file field is #{upload_hash.inspect}"
+    Merb.logger.debug "QQQ27: content_type is #{upload_hash['content_type'].inspect}"
+    case upload_hash[:content_type]
+    when "text/plain": process_text_file(file)
+    when "text/html": process_html_file(file)
+    when %r{^application/msword}: process_word_file(file)
+    end
+  end
+
+  def process_word_file(file)
     para_count = 1
     word_count = 0
-    file_string = file.read
-    file_string.gsub!(/\r/,'')
-    lines = file_string.split(/\n\n/)
-    lines.each { |line|
-      line.gsub!(/^\n/,' ')
-      line.gsub!(/(\w)\n(\w)/,'\1 \2')
-      line.gsub!(/\n/,' ')
-      line.gsub!(/^\s*|\s*$/,'')
-      line.gsub!(/#/,'***') if line == "#"
-      line.gsub!(/\s+--/, "--")
-      word_count += line.scan(/\w+/).length
 
-      para = Paragraph.new()
-      para.body_raw = line
-      para.position = para_count
-      para.chapter_id = self.id
+    xml = `/usr/bin/antiword -x db #{file.path}`
+    doc = Hpricot.parse(xml)
 
-      para.save
+    doc.search('para').each do |para|
+      para.inner_html.gsub!(/\n/,' ') #Make sure each paragraph is a single line
+      next if para.inner_html.blank?
+      elements = { 'emphasis[@role="bold"]' => '**', 'emphasis' => '_'}
 
+      element_list = para.search('emphasis[@role="bold"]')
+      while element_list.length > 0
+          element_list.each do |b|
+            b.before("**")
+            b.after("**")
+            b.swap(b.inner_html)
+          end
+          element_list = para.search('emphasis[@role="bold"]')
+      end
+
+      element_list = para.search("emphasis")
+      while element_list.length > 0
+        element_list.each do |b|
+          b.before("_")
+          b.after("_")
+          b.swap(b.inner_html)
+        end
+        element_list = para.search("emphasis")
+      end
+
+      word_count += para.inner_text.scan(/\w+/).length
+
+      paragraph = Paragraph.new()
+      paragraph.body_raw = para.inner_html
+      paragraph.position = para_count
+      paragraph.chapter_id = self.id
+
+      paragraph.save
       para_count += 1
-    }
+    end
 
     self.words = word_count
     self.save
     dump_to_file
+
+  end
+
+  def process_html_file(file)
+    para_count = 1
+    word_count = 0
+    sanitized = Sanitize.clean(file.read, { :elements => [ 'b', 'em', 'i', 'p', 'q', 'small', 'strike', 'strong', 'sub', 'sup'], :attributes => {} })
+    doc = Hpricot.parse(sanitized, :fixup_tags => true)
+    doc.search('p').each do |para|
+      para.inner_html.gsub!(/\n/,' ') #Make sure each paragraph is a single line
+      elements = { 'b' => '**', 'strong' => '**', 'em' => '_', 'i' => '_'}
+
+      elements.each do |element, markup|
+        element_list = para.search(element)
+        while element_list.length > 0
+          element_list.each do |b|
+            b.before(markup)
+            b.after(markup)
+            b.swap(b.inner_html)
+          end
+          element_list = para.search(element)
+        end
+      end
+
+      word_count += para.inner_text.scan(/\w+/).length
+
+      paragraph = Paragraph.new()
+      paragraph.body_raw = para.inner_html
+      paragraph.position = para_count
+      paragraph.chapter_id = self.id
+
+      paragraph.save
+      para_count += 1
+    end
+
+    self.words = word_count
+    self.save
+    dump_to_file
+  end
+
+  def process_text_file(file)
+      paragraph_buffer = String.new
+      para_count = 1
+      word_count = 0
+      file_string = file.read
+      file_string.gsub!(/\r/,'')
+      lines = file_string.split(/\n\n/)
+      lines.each { |line|
+        line.gsub!(/^\n/,' ')
+        line.gsub!(/(\w)\n(\w)/,'\1 \2')
+        line.gsub!(/\n/,' ')
+        line.gsub!(/^\s*|\s*$/,'')
+        line.gsub!(/#/,'***') if line == "#"
+        line.gsub!(/\s+--/, "--")
+        word_count += line.scan(/\w+/).length
+
+        para = Paragraph.new()
+        para.body_raw = line
+        para.position = para_count
+        para.chapter_id = self.id
+
+        para.save
+
+        para_count += 1
+      }
+
+      self.words = word_count
+      self.save
+      dump_to_file
   end
 
   def cache_key

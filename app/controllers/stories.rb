@@ -81,7 +81,7 @@ class Stories < Application
     @chapter.date_uploaded = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless @chapter.date_uploaded
     @chapter.file = "#{@chapter.story.short_title}_#{@chapter.number}.html"
     if @chapter.save
-      @chapter.process_file(params[:file][:tempfile]) unless params[:file].blank?
+      @chapter.process_file(params[:file]) unless params[:file].blank?
       redirect "/stories/show/#{@chapter.story_id}", :message => { :notice => 'Chapter was successfully created.'}
     else
       render :new_chapter

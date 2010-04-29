@@ -14,3 +14,6 @@ dependency "teamon-merb-flash", :require_as => "merb-flash"
 dependency 'merb-auth-core'
 dependency 'merb-auth-more'
 dependency 'merb-auth-slice-password'
+dependency 'hpricot'
+dependency 'htmlentities'
+dependency 'sanitize'

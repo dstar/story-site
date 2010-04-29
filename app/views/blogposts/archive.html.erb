@@ -1,13 +1,9 @@
-<h1>Listing blogposts</h1>
+<h1>News Archive</h1>
 
-<%= link_to 'Previous page', "/blogposts/page/#{@blogpost_pages.current.previous}" if @blogpost_pages.current.previous %>
-<%= link_to 'Next page', "/blogposts/page/#{@blogpost_pages.current.next}" if @blogpost_pages.current.next %>
+<%= link_to 'Previous page', "/blogposts/page/#{@previous_page}" if @previous_page %>
+<%= link_to 'Next page', "/blogposts/page/#{@next_page}" if @next_page %>
 
-<%= partial :entry, :with => @blogposts %>
+<%= partial :entry, :with => @blogposts_to_show %>
 
-<%= link_to 'Previous page', "/blogposts/page/#{@blogpost_pages.current.previous}" if @blogpost_pages.current.previous %>
-<%= link_to 'Next page', "/blogposts/page/#{@blogpost_pages.current.next}" if @blogpost_pages.current.next %>
-
-<br />
-
-<%= link_to 'New blogpost', '/blogposts/new' %>
+<%= link_to 'Previous page', "/blogposts/page/#{@previous_page}" if @previous_page %>
+<%= link_to 'Next page', "/blogposts/page/#{@next_page}" if @next_page %>

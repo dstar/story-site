@@ -67,12 +67,19 @@ When /I follow the (.*) link to the chapter I just uploaded/ do |link_type|
   end
 end
 
-Then /^"([^\"]*)" in the (\d+)(?:st|nd|rd|th) paragraph's text should be (.*)$/ do |text,paragraph_number,markup_id|#'
+Then /^"([^\"]*)" in the (\d+)(?:st|nd|rd|th) paragraph's text should (?:(.*) )?be (.*)$/ do |text,paragraph_number,negated,markup_id|#'
+  Merb.logger.debug "QQQ48: negated is #{negated}, markup_id is #{markup_id}"
   tag = case markup_id
-          when "bolded": "b"
-          when "bolded": "b"
+          when "strong": "strong"
+          when "emphasized": "em"
         end
   paragraph_id = get_current_chapter.paragraphs[paragraph_number.to_i - 1].id
-  p_xpath = "//div[@id='parabody#{paragraph_id}']/p//#{tag}[contains(text(),'#{text}')]"
-  @response.should(have_xpath(p_xpath))
+  p_xpath = "//div[@id='parabody#{paragraph_id}']/p/descendant-or-self::#{tag}[contains(text(),'#{text}')]"
+#  Merb.logger.debug "QQQ48: xpath is #{p_xpath}"
+  if negated
+    @response.should_not(have_xpath(p_xpath))
+  else
+    @response.should(have_xpath(p_xpath))
+  end
+
 end

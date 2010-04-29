@@ -8,7 +8,7 @@ describe Blogposts do
   end
 
   before(:each) do
-    @env = { :http_referer => "http://playground.pele.cx/blogposts/show"}
+    @env = { :http_referer => "http://test.pele.cx/blogposts/show"}
     Blogpost.connection.begin_db_transaction
   end
 
@@ -22,7 +22,7 @@ describe Blogposts do
   describe "#show" do
 
     it "should respond correctly" do
-      response = request("http://playground.playground.pele.cx/blogposts/show/1", :method => "GET")
+      response = request("http://playground.test.pele.cx/blogposts/show/1", :method => "GET")
       response.should be_successful
 #      Merb.logger.debug "QQQ17: #{response.body.inspect}"
       response.should have_xpath("//div[@id='entry1'][@class='news']")
@@ -35,7 +35,7 @@ describe Blogposts do
     response = nil
 
     it "should respond correctly" do
-      response = request("http://playground.playground.pele.cx/blogposts/index/", :method => "GET")
+      response = request("http://playground.test.pele.cx/blogposts/index/", :method => "GET")
       response.should be_successful
     end
 
@@ -47,7 +47,7 @@ describe Blogposts do
   describe "#list" do
 
     it "should respond correctly" do
-      response = request("http://playground.playground.pele.cx/blogposts/list/", :method => "GET")
+      response = request("http://playground.test.pele.cx/blogposts/list/", :method => "GET")
       response.should be_successful
       response.should have_xpath("//h1[text()='Listing blogposts']")
 
@@ -63,13 +63,13 @@ describe Blogposts do
 describe "#new" do
 
   it "Should not allow unauthed requests" do
-    response = request("http://playground.playground.pele.cx/blogposts/new/", :method => "GET")
-    response.should redirect_to("http://playground.playground.pele.cx/")
+    response = request("http://playground.test.pele.cx/blogposts/new/", :method => "GET")
+    response.should redirect_to("http://playground.test.pele.cx/")
   end
 
   it "should allow authenticated requests" do
-    request("http://playground.playground.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
-    response = request("http://playground.playground.pele.cx/blogposts/new/", :method => "GET")
+    request("http://playground.test.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
+    response = request("http://playground.test.pele.cx/blogposts/new/", :method => "GET")
     response.should be_successful
   end
 end

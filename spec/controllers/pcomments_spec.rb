@@ -7,8 +7,8 @@ describe "Pcomments" do
   end
 
   before(:each) do
-    @env = { :http_referer => "http://playground.pele.cx/blogposts/show",
-      :http_host => "jaknis.playground.pele.cx"
+    @env = { :http_referer => "http://test.pele.cx/blogposts/show",
+      :http_host => "jaknis.test.pele.cx"
     }
   end
 
@@ -16,16 +16,16 @@ describe "Pcomments" do
 
   describe "#move_prev" do
     it "should not allow unauthed moves" do
-      response = request("http://playground.playground.pele.cx/pcomments/move_prev/1", :method => "POST")
-      response.should redirect_to("http://playground.playground.pele.cx/")
+      response = request("http://playground.test.pele.cx/pcomments/move_prev/1", :method => "POST")
+      response.should redirect_to("http://playground.test.pele.cx/")
 
     end
 
     it "should allow authed moves" do
       Pcomment.find(1).paragraph.id.should == 4
 
-      request("http://playground.playground.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
-      response = request("http://playground.playground.pele.cx/pcomments/move_prev/1", :method => "POST")
+      request("http://playground.test.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
+      response = request("http://playground.test.pele.cx/pcomments/move_prev/1", :method => "POST")
       response.should redirect_to("/chapters/show_draft/17#pcomment3")
 
       Pcomment.find(1).paragraph.id.should == 3
@@ -34,16 +34,16 @@ describe "Pcomments" do
 
   describe "#move_next" do
     it "should not allow unauthed moves" do
-      response = request("http://playground.playground.pele.cx/pcomments/move_next/1", :method => "POST")
-      response.should redirect_to("http://playground.playground.pele.cx/")
+      response = request("http://playground.test.pele.cx/pcomments/move_next/1", :method => "POST")
+      response.should redirect_to("http://playground.test.pele.cx/")
 
     end
 
     it "should allow authed moves" do
       Pcomment.find(1).paragraph.id.should == 3
 
-      request("http://playground.playground.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
-      response = request("http://playground.playground.pele.cx/pcomments/move_next/1", :method => "POST")
+      request("http://playground.test.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
+      response = request("http://playground.test.pele.cx/pcomments/move_next/1", :method => "POST")
       response.should redirect_to("/chapters/show_draft/17#pcomment4")
 
       Pcomment.find(1).paragraph.id.should == 4
@@ -52,16 +52,16 @@ describe "Pcomments" do
 
   describe "#mark_unread" do
     it "should not allow unauthed marks" do
-      response = request("http://playground.playground.pele.cx/pcomments/markread/1", :method => "POST")
-      response.should redirect_to("http://playground.playground.pele.cx/")
+      response = request("http://playground.test.pele.cx/pcomments/markread/1", :method => "POST")
+      response.should redirect_to("http://playground.test.pele.cx/")
     end
 
     it "should allow authed marks" do
       user = User.find(3)
       Pcomment.find(1).readers.include?(user).should be_true
 
-      request("http://playground.playground.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
-      response = request("http://playground.playground.pele.cx/pcomments/markunread/1", :method => "POST")
+      request("http://playground.test.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
+      response = request("http://playground.test.pele.cx/pcomments/markunread/1", :method => "POST")
       response.should redirect_to("/chapters/show_draft/17#pcomment4")
 
       Pcomment.find(1).readers.include?(user).should be_false
@@ -70,16 +70,16 @@ describe "Pcomments" do
 
   describe "#markread" do
     it "should not allow unauthed marks" do
-      response = request("http://playground.playground.pele.cx/pcomments/markunread/1", :method => "POST")
-      response.should redirect_to("http://playground.playground.pele.cx/")
+      response = request("http://playground.test.pele.cx/pcomments/markunread/1", :method => "POST")
+      response.should redirect_to("http://playground.test.pele.cx/")
     end
 
     it "should allow authed marks" do
       user = User.find(3)
       Pcomment.find(1).readers.include?(user).should be_false
 
-      request("http://playground.playground.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
-      response = request("http://playground.playground.pele.cx/pcomments/markread/1", :method => "POST")
+      request("http://playground.test.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
+      response = request("http://playground.test.pele.cx/pcomments/markread/1", :method => "POST")
       response.should redirect_to("/chapters/show_draft/17#pcomment4")
 
 
@@ -89,15 +89,15 @@ describe "Pcomments" do
 
   describe "#acknowledge" do
     it "should not allow unauthed acknowledgement" do
-      response = request("http://playground.playground.pele.cx/pcomments/acknowledge/1", :method => "POST")
-      response.should redirect_to("http://playground.playground.pele.cx/")
+      response = request("http://playground.test.pele.cx/pcomments/acknowledge/1", :method => "POST")
+      response.should redirect_to("http://playground.test.pele.cx/")
     end
 
     it "should allow authed acknowledgement" do
       Pcomment.find(1).acknowledged.should be_nil
 
-      request("http://playground.playground.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
-      response = request("http://playground.playground.pele.cx/pcomments/acknowledge/1", :method => "POST")
+      request("http://playground.test.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
+      response = request("http://playground.test.pele.cx/pcomments/acknowledge/1", :method => "POST")
       response.should redirect_to("/chapters/show_draft/17#pcomment4")
 
       Pcomment.find(1).acknowledged.should_not be_nil
@@ -106,21 +106,21 @@ describe "Pcomments" do
 
   describe "#unacknowledge" do
     it "should not allow unauthed unacknowledgement" do
-      response = request("http://playground.playground.pele.cx/pcomments/unacknowledge/1", :method => "POST")
-      response.should redirect_to("http://playground.playground.pele.cx/")
+      response = request("http://playground.test.pele.cx/pcomments/unacknowledge/1", :method => "POST")
+      response.should redirect_to("http://playground.test.pele.cx/")
     end
 
     it "should allow authed unacknowledgement" do
       Pcomment.find(1).acknowledged.should_not be_nil
 
-      request("http://playground.playground.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
-      response = request("http://playground.playground.pele.cx/pcomments/unacknowledge/1", :method => "POST")
+      request("http://playground.test.pele.cx/login", :method => "PUT", :params => { :username => 'dstar', :password => 'test password' })
+      response = request("http://playground.test.pele.cx/pcomments/unacknowledge/1", :method => "POST")
       response.should redirect_to("/chapters/show_draft/17#pcomment4")
 
       Pcomment.find(1).acknowledged.should be_nil
 
       # Mark it read, so that we're in the state expected by the pcomment spec. Ugly hack -- need transactional tests.
-      response = request("http://playground.playground.pele.cx/pcomments/markread/1", :method => "POST")
+      response = request("http://playground.test.pele.cx/pcomments/markread/1", :method => "POST")
 
     end
   end

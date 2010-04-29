@@ -9,8 +9,8 @@
   <% end -%>
     <% if @authinfo[:user] and @authinfo[:user].has_site_permission('blogger')  -%>
       <% cache "blogpost_admin_links_for_#{entry.id}" do -%>
-                  <%= link_to 'edit', "/blogposts/edit/#{entry.id}" %> |
-                  <%= link_to 'delete', "/blogposts/delete_post/#{entry.id}" %>
+                  <%= link_to 'Edit Blogpost', "/blogposts/edit/#{entry.id}" %> |
+                  <%= link_to 'Delete Blogpost', "/blogposts/delete_post/#{entry.id}" %>
       <% end -%>
     <% end -%>
 </div>

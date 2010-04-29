@@ -8,8 +8,8 @@ describe "Universes" do
   end
 
   before(:each) do
-    @env = { :http_referer => "http://playground.pele.cx/blogposts/show",
-      :http_host => "jaknis.playground.pele.cx"
+    @env = { :http_referer => "http://test.pele.cx/blogposts/show",
+      :http_host => "jaknis.test.pele.cx"
     }
   end
 

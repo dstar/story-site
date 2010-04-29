@@ -73,7 +73,7 @@ class Blogposts < Application
     @blogpost = Blogpost.new(params[:blogpost])
     @blogpost.user = @authinfo[:user].username
     if @blogpost.save
-      redirect "/blogposts/list", :message => {:notice => 'Blogpost was successfully created.' }
+      redirect "/", :message => {:notice => 'Blogpost was successfully created.' }
     else
       render :action => 'new'
     end
@@ -96,7 +96,17 @@ class Blogposts < Application
 
   def destroy
     Blogpost.find(params[:id]).destroy
-    redirect '/list'
+    redirect '/'
+  end
+
+  def archive
+    limit = 10
+    page = params[:page].to_i
+    offset = ((page - 1) * 10) + 1
+    @blogposts_to_show = Blogpost.find(:all, :offset => offset, :limit => limit, :order => 'created_on desc')
+    @previous_page = page - 1 if page > 1
+    @next_page = page + 1 if Blogpost.count > (offset + limit)
+    render :archive
   end
 
 end

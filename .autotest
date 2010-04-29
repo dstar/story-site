@@ -2,4 +2,5 @@ Autotest.add_hook :initialize do |at|
   %w{.svn .hg .git vendor log text_files}.each {|exception| at.add_exception(exception)}
   at.add_exception(/text_files.*/)
 #  at.add_exception("log.*")
+  at.sleep = 10
 end

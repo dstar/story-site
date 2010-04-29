@@ -11,7 +11,8 @@ Webrat.configure do |config|
   config.application_framework = :merb
   config.application_port = 4000
   config.application_address = 'playground.test.pele.cx'
-  config.selenium_browser_key = '*firefox3 /usr/lib/firefox-3.0.8/firefox'
+  config.selenium_browser_key = '*firefox3 /usr/lib/firefox-3.0.10/firefox'
+  config.selenium_server_address = 'localhost'
   #  config.selenium_server_port = 4444
 end
 

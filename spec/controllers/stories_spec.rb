@@ -8,8 +8,8 @@ describe "Stories" do
   end
 
   before(:each) do
-    @env = { :http_referer => "http://playground.pele.cx/blogposts/show",
-      :http_host => "jaknis.playground.pele.cx"
+    @env = { :http_referer => "http://test.pele.cx/blogposts/show",
+      :http_host => "jaknis.test.pele.cx"
     }
     begin
       Story.find(1)
@@ -26,13 +26,13 @@ describe "Stories" do
   describe "#show" do
 
     it "should respond correctly" do
-      response = request("http://playground.playground.pele.cx/stories/show/7", :method => "GET")
+      response = request("http://playground.test.pele.cx/stories/show/7", :method => "GET")
       response.should have_xpath("//h1[text()='Jason and Kylie, Naked in School Web Archive']")
     end
 
     it "should should have a link for each chapter in the story" do
       num_chapters = Story.find(7).chapters.length
-      response = request("http://playground.playground.pele.cx/stories/show/7", :method => "GET")
+      response = request("http://playground.test.pele.cx/stories/show/7", :method => "GET")
       response.should have_xpath("//div[@class='chaptercolumn']/a[position()=#{num_chapters}]")
     end
   end

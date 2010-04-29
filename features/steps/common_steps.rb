@@ -75,7 +75,8 @@ Given /the story "(.*)" has a chapter with the text in the file at "(.*)"/ do |t
   chapter.file = "#{chapter.story.short_title}_#{chapter.number}.html"
   chapter.date_uploaded = Time.now.strftime('%Y-%m-%d %H:%M:%S') unless chapter.date_uploaded
   chapter.save
-  chapter.process_file(File.new(filename,"r"))
+  file_hash = { :tempfile => File.new(filename,"r"), :content_type => "text/plain"}
+  chapter.process_file(file_hash)
 end
 
 
@@ -150,6 +151,7 @@ Then /^I should see a link named "(.*)" which points to "(.*)"/ do |name,href|
 
 end
 
+
 Then /^I should see comment links for "(.*)"/ do |name|
 
   chapter = Chapter.find_by_file(name)
@@ -160,11 +162,17 @@ Then /^I should see comment links for "(.*)"/ do |name|
 
 end
 
-Then /^I should not see a link named "(.*)" which points to "(.*)"/ do |name,href|
+Then /^I should not see a link named "(.*)"( which points to "(.*)")?/ do |name,dummy,href|
+  if href
+    xpath = "//a[text()='#{name}'][@href='#{href}']"
+  else
+    xpath = "//a[text()='#{name}']"
+  end
+
   begin
-    @response.should_not(have_xpath("//a[text()='#{name}'][@href='#{href}']"))
+    @response.should_not(have_xpath(xpath))
   rescue Spec::Expectations::ExpectationNotMetError
-    @response.should_not(have_xpath("//a[@id='#{name}'][@href='#{href}']"))
+    @response.should_not(have_xpath(xpath))
   end
 end
 

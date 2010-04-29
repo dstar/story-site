@@ -7,8 +7,8 @@ describe "Styles" do
   end
 
   before(:each) do
-    @env = { :http_referer => "http://playground.pele.cx/blogposts/show",
-      :http_host => "jaknis.playground.pele.cx"
+    @env = { :http_referer => "http://test.pele.cx/blogposts/show",
+      :http_host => "jaknis.test.pele.cx"
     }
   end
 
@@ -44,45 +44,45 @@ describe "Styles" do
 
   describe "#edit_theme" do
     it "should not allow unauthed access" do
-      unauthed_action(Styles, :edit_theme, nil).should redirect_to("http://playground.playground.pele.cx/")
+      unauthed_action("styles", :edit_theme, nil).should redirect_to("http://playground.test.pele.cx/")
 
     end
 
     it "should allow authed access" do
-      authed_action(Styles, :edit_theme, nil).should respond_successfully
+      authed_action("styles", :edit_theme, nil).should respond_successfully
     end
   end
 
   describe "#customize" do
     it "should not allow unauthed access" do
-      unauthed_action(Styles, :customize, nil).should redirect_to("http://playground.playground.pele.cx/")
+      unauthed_action("styles", :customize, nil).should redirect_to("http://playground.test.pele.cx/")
 
     end
 
     it "should allow authed access" do
-      authed_action(Styles, :customize, nil).should respond_successfully
+      authed_action("styles", :customize, nil).should respond_successfully
     end
   end
 
   describe "#save_style" do
     it "should not allow unauthed access" do
-      unauthed_action(Styles, :save_style, nil).should redirect_to("http://playground.playground.pele.cx/")
+      unauthed_action("styles", :save_style, nil).should redirect_to("http://playground.test.pele.cx/")
 
     end
 
     it "should allow authed access" do
-      authed_action(Styles, :save_style, nil, "POST").should respond_successfully
+      authed_action("styles", :save_style, nil, "POST").should respond_successfully
     end
   end
 
   describe "#save_theme_style" do
     it "should not allow unauthed access" do
-      unauthed_action(Styles, :save_theme_style, nil).should redirect_to("http://playground.playground.pele.cx/")
+      unauthed_action("styles", :save_theme_style, nil).should redirect_to("http://playground.test.pele.cx/")
 
     end
 
     it "should allow authed access" do
-      authed_action(Styles, :save_theme_style, nil, "POST").should respond_successfully
+      authed_action("styles", :save_theme_style, nil, "POST").should respond_successfully
     end
   end
 

@@ -22,11 +22,13 @@ class Paragraph < ActiveRecord::Base
   end
 
   def format_body
-    self.body = self.body_raw.dup
+    self.body = BlueCloth.new(self.body_raw, :smartypants => true).to_html
+    self.body.gsub!(/^<p>/,'')
+    self.body.gsub!(/<\/p>$/,'')
 #    self.body.gsub!(/_(\w+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"}
-    self.body.gsub!(/_([-\\{}?*A-Za-z0-9 .,;#&:`'!\/"()]+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"}
-    self.body.gsub!(/--/,"&mdash;")
-    self.body.gsub!(/^\*\*\*$/, '<hr/>')
+#    self.body.gsub!(/_([-\\{}?*A-Za-z0-9 .,;#&:`'!\/"()]+)_/) { |m| m.gsub!(/_/,''); "<em>#{m}<\/em>"}
+#    self.body.gsub!(/--/,"&mdash;")
+#    self.body.gsub!(/^\*\*\*$/, '<hr/>')
   end
 
   def cache_key
